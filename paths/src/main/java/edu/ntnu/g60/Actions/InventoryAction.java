@@ -1,12 +1,13 @@
 package edu.ntnu.g60.Actions;
 
 import edu.ntnu.g60.Player;
+import java.util.List;
 
 
 public class InventoryAction implements Action{
-    int inventory;
+    List<String> inventory;
 
-    public InventoryAction(int invntory){
+    public InventoryAction(List<String>  inventory){
         this.inventory = inventory;
     }
 
