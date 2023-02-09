@@ -1,10 +1,13 @@
+import java.util.List;
+import Goals.Goal;
+
 public class Game {
 
     String player; //Todo: Endre til Player objekt
     Story story;
   
-    // Todo; lag en Goal klasse
-    // List<Goal> goals;
+    
+    List<Goal> goals;
   
     public Game(String player, Story story) {
       this.player = player;
@@ -19,11 +22,10 @@ public class Game {
       return this.story;
     }
   
-      /* Todo: Fjern comment, og lag en Goal klasse
-      public List<Goal> getGoals() {
-          return this.goals;
-      }
-      */
+
+    public List<Goal> getGoals() {
+        return this.goals;
+    }
   
     public Passage begin() {
       return this.story.getOpeningPassage();

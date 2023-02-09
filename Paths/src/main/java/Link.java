@@ -5,7 +5,7 @@ public class Link {
 
   private String text;
   private String reference;
-  List<Action> actions; // TODO: Implement actions
+  List<Action> actions; 
 
 
   public Link(String text, String reference) {
@@ -32,6 +32,5 @@ public class Link {
   public String toString() {
     return "text: " + text + ", reference: " + reference;
   }
-
 
 }
