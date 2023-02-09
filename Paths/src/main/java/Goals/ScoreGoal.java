@@ -1,12 +1,17 @@
 
 public class ScoreGoal implements Goal{
+    int minimumPoints;
 
     ScoreGoal(int minimumPoints){
-
+        this.minimumPoints = minimumPoints;
     }
 
-    public void isFulfilled(Player player){
-        
+    public boolean isFulfilled(Player player){
+        if (player.getScore >= this.minimumPoints){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

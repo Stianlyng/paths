@@ -1,7 +1,7 @@
 
 public class Goal{
 
-    public void isFulfilled(Player player){
+    public boolean isFulfilled(Player player){
 
     }
 }

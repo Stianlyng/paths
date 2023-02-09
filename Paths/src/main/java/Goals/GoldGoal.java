@@ -1,12 +1,17 @@
 
 public class GoldGoal implements Goal{
+    int minimumGold;
 
     GoldGoal(int minimumGold){
-
+        this.minimumGold = minimumGold;
     }
 
-    public void isFulfilled(Player player){
-        
+    public boolean isFulfilled(Player player){
+        if(player.getGold >= this.minimumGold){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
