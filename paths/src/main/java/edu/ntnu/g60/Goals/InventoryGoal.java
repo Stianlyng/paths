@@ -5,20 +5,20 @@ import java.util.List;
 public class InventoryGoal implements Goal{
     List<String> mandatoryItems;
 
-    InventoryGoal(List<String> mandatoryItems){
+    public InventoryGoal(List<String> mandatoryItems){
         this.mandatoryItems = mandatoryItems;
     }
 
     public boolean isFulfilled(Player player){
-        
+        boolean fulfilled = false;
         for (String item : mandatoryItems){
             if(player.getInventory().contains(item)){
-                return true;
+                fulfilled = true;
             }else{
-                return false;
+                fulfilled = false;
             }
         }
+        return fulfilled;
     }
 }
 
-//for each greia er litt usikker

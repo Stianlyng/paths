@@ -4,7 +4,7 @@ import edu.ntnu.g60.Player;
 public class ScoreGoal implements Goal{
     int minimumPoints;
 
-    ScoreGoal(int minimumPoints){
+    public ScoreGoal(int minimumPoints){
         this.minimumPoints = minimumPoints;
     }
 

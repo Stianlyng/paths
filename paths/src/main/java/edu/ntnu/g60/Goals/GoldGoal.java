@@ -8,7 +8,7 @@ public class GoldGoal implements Goal{
     
     int minimumGold;
     
-    GoldGoal(int minimumGold){
+    public GoldGoal(int minimumGold){
         this.minimumGold = minimumGold;
     }
     

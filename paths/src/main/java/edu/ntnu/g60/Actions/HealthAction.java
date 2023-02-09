@@ -5,7 +5,7 @@ import edu.ntnu.g60.Player;
 public class HealthAction implements Action{
     int health;
 
-    HealthAction(int health){
+    public HealthAction(int health){
         this.health = health;
     }
 

@@ -5,7 +5,7 @@ import edu.ntnu.g60.Player;
 public class HealthGoal implements Goal{
     int minimumHealth;
 
-    HealthGoal(int minimumHealth){
+    public HealthGoal(int minimumHealth){
         this.minimumHealth = minimumHealth;
     }
 

@@ -6,7 +6,7 @@ import edu.ntnu.g60.Player;
 public class InventoryAction implements Action{
     int inventory;
 
-    InventoryAction(int invntory){
+    public InventoryAction(int invntory){
         this.inventory = inventory;
     }
 

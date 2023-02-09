@@ -5,7 +5,7 @@ import edu.ntnu.g60.Player;
 public class GoldAction implements Action{
     int gold;
 
-    GoldAction(int gold){
+    public GoldAction(int gold){
         this.gold = gold;
     }
 
