@@ -24,6 +24,9 @@ public class TestPlayer {
 
 
     InventoryGoal invGoal1 = new InventoryGoal(list);
+    if(invGoal1.isFulfilled(player1)){
+      System.out.println("inv is fulfilled");
+    }
   }
 
 }
