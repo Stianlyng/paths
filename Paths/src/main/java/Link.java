@@ -1,9 +1,11 @@
 import java.util.List;
+import Actions.Action;
+
 public class Link {
 
   private String text;
   private String reference;
-  // List<Action> actions; TODO: Implement actions
+  List<Action> actions; // TODO: Implement actions
 
 
   public Link(String text, String reference) {
@@ -11,7 +13,13 @@ public class Link {
     this.reference = reference;
   }
 
-  // setters and getters
+  public void addAction(Action action) {
+    this.actions.add(action);
+  }
+
+  public List<Action> getActions() {
+    return this.actions;
+  }
 
   public String getText() {
     return this.text;
@@ -25,6 +33,5 @@ public class Link {
     return "text: " + text + ", reference: " + reference;
   }
 
-  // TODO: Implement equals and hashCode
 
 }
