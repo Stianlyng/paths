@@ -1,4 +1,4 @@
-package edu.ntnu.g60.Actions;
+package edu.ntnu.g60.actions;
 
 import edu.ntnu.g60.Player;
 import java.util.List;
@@ -12,7 +12,7 @@ public class InventoryAction implements Action{
     }
 
     public void execute(Player player){
-        
+        //something player add to inventory
     }
 
 }

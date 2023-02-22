@@ -1,4 +1,4 @@
-package edu.ntnu.g60.Goals;
+package edu.ntnu.g60.goals;
 
 import edu.ntnu.g60.Player;
 
@@ -13,11 +13,7 @@ public class GoldGoal implements Goal{
     }
     
     public boolean isFulfilled(Player player){
-        if(player.getGold() >= this.minimumGold){
-            return true;
-        }else{
-            return false;
-        }
+        return player.getGold() >= this.minimumGold;
     }
     
 }

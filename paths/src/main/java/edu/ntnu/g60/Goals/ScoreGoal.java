@@ -1,4 +1,4 @@
-package edu.ntnu.g60.Goals;
+package edu.ntnu.g60.goals;
 import edu.ntnu.g60.Player;
 
 public class ScoreGoal implements Goal{

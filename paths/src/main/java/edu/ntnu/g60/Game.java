@@ -1,23 +1,22 @@
 package edu.ntnu.g60;
-//import java.util.List;
-
-//import edu.ntnu.g60.Goals.Goal;
+import java.util.List;
+import edu.ntnu.g60.goals.Goal;
 
 
 public class Game {
 
-    String player; //Todo: Endre til Player objekt
-    Story story;
+    private Player player; //Todo: Endre til Player objekt
+    private Story story;
   
     
-    //List<Goal> goals;
+    List<Goal> goals;
   
-    public Game(String player, Story story) {
+    public Game(Player player, Story story) {
       this.player = player;
       this.story = story;
     }
   
-    public String getPlayer() {
+    public Player getPlayer() {
       return this.player;
     }
   
@@ -25,12 +24,10 @@ public class Game {
       return this.story;
     }
   
-    
-  /*
-  public List<Goal> getGoals() {
-    return this.goals;
-  }
-  */
+    public List<Goal> getGoals() {
+      return this.goals;
+    }
+  
 
 public Passage begin() {
   return this.story.getOpeningPassage();

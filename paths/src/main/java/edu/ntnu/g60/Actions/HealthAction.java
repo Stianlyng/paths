@@ -1,4 +1,4 @@
-package edu.ntnu.g60.Actions;
+package edu.ntnu.g60.actions;
 
 import edu.ntnu.g60.Player;
 
@@ -10,7 +10,7 @@ public class HealthAction implements Action{
     }
 
     public void execute(Player player){
-        
+        player.addHealth(health);
     }
 
 }

@@ -1,9 +1,9 @@
-package edu.ntnu.g60.Goals;
+package edu.ntnu.g60.goals;
 
 import edu.ntnu.g60.Player;
 
 @FunctionalInterface
-interface Goal{
+public interface Goal{
   public boolean isFulfilled(Player player);
 }
 
