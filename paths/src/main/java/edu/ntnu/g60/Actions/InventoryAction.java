@@ -5,14 +5,14 @@ import java.util.List;
 
 
 public class InventoryAction implements Action{
-    List<String> inventory;
+    String inventory;
 
-    public InventoryAction(List<String>  inventory){
+    public InventoryAction(String  inventory){
         this.inventory = inventory;
     }
 
     public void execute(Player player){
-        //something player add to inventory
+        player.addToInventory(inventory);
     }
 
 }

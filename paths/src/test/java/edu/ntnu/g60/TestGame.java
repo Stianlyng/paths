@@ -6,7 +6,7 @@ public class TestGame {
     // main method
     public static void main(String[] args) {
   
-      String player = "Player1";
+      Player player = new Player("Bobby", 10, 10, 10);
       Passage openingPassage = new Passage("Level 1", "You are in a dark room.");
       Story story = new Story("The Dark World", openingPassage);
   
