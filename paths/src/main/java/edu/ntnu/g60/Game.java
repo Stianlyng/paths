@@ -5,7 +5,7 @@ import edu.ntnu.g60.goals.Goal;
 
 public class Game {
 
-    private Player player; //Todo: Endre til Player objekt
+    private Player player;
     private Story story;
   
     

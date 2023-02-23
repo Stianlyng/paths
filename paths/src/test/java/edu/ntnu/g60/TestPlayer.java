@@ -3,7 +3,7 @@ package edu.ntnu.g60;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.ntnu.g60.Goals.*;
+import edu.ntnu.g60.goals.*;
 
 
 public class TestPlayer {
@@ -28,5 +28,4 @@ public class TestPlayer {
       System.out.println("inv is fulfilled");
     }
   }
-
 }
