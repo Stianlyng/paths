@@ -79,11 +79,19 @@ public class ApplicationFront extends Application {
         return scene;
     }
 
+    public Scene deathScene(){
+        Text deathText = newText("YOU DIED", 40, false, 508-193, 349-71);
+
+        Group root = new Group(deathText);
+        Scene scene = new Scene(root, 800, 600, Color.WHITE);
+        return scene;
+    }
+
     public Scene firstScene(){
         //TODO: set lvl x to variable based on the lvl the player is on
-        Text loadingText = newText("LVL X", 40, false, 541-193, 349-71);
+        Text lvlText = newText("LVL X", 40, false, 541-193, 349-71);
 
-        Group root = new Group(loadingText);
+        Group root = new Group(lvlText);
         Scene scene = new Scene(root, 800, 600, Color.WHITE);
         return scene;
     }
