@@ -152,10 +152,10 @@ public class ApplicationFront extends Application {
         FileInputStream inputStream = new FileInputStream("src/main/java/edu/ntnu/g60/resources/textFiles/images/icons/coin.png");
         Image coinIcon = new Image(inputStream);
         imageviewCoinIcon.setImage(coinIcon);
-        imageviewCoinIcon.setLayoutX(200);
-        imageviewCoinIcon.setLayoutY(200);
-        imageviewCoinIcon.setStyle("-fx-pref-width: 24;" +
-        "-fx-pref-height: 24;");
+        imageviewCoinIcon.setX(200);
+        imageviewCoinIcon.setY(200);
+        imageviewCoinIcon.setFitHeight(24);
+        imageviewCoinIcon.setFitWidth(24);
 
         String score = "1234";
         String gold = "4321";
