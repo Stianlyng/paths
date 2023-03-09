@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -33,6 +34,7 @@ import javafx.stage.Stage;
 public class ApplicationFront extends Application {
     
     private Stage stage;
+    Player player; //TODO make variable
 
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
@@ -175,16 +177,20 @@ public class ApplicationFront extends Application {
         ImageView coinIcon = newImage("icons", "coin.png", 209-193, 86-71, 24, 24);
         ImageView scoreIcon = newImage("icons", "star.png", 289-193, 86-71, 24, 24);
 
-        String score = "1234";
-        String gold = "4321";
+        int score = player.getScore();
+        int gold = player.getGold();
+        double playerHealth = player.getHealth()/100;
+        double enemyHealth = 0; //make health variable
         Group root = new Group(newRectangle(203-193, 79-71, 200, 38),
-        newHealthBar(259-193, 306-71, 0.5), 
-        newHealthBar(789-193, 137-71, 0.2),
-        newText(score, 18, false, 242-193, 105-71),
-        newText(gold, 18, false, 322-193, 105-71),
+        newHealthBar(259-193, 306-71, playerHealth), 
+        newHealthBar(789-193, 137-71, enemyHealth),
+        newText("" + score, 18, false, 242-193, 105-71),
+        newText("" + gold, 18, false, 322-193, 105-71),
         fightButton, healButton, inventoryButton, escapeButton,
         scoreIcon, coinIcon);
         
+        //TODO:add functionality and variables to buttons
+
         fightButton.setOnAction(e -> {
             root.getChildren().removeAll(fightButton, healButton, inventoryButton, escapeButton);
             Button ability1Button = newButton("Ability 1", 209-193, 484-71, "black", "#e87dd1", 373, 55, 40);
@@ -212,6 +218,8 @@ public class ApplicationFront extends Application {
 
         inventoryButton.setOnAction(e -> {
             root.getChildren().removeAll(fightButton, healButton, inventoryButton, escapeButton);
+            
+            List<String> list = player.getInventory(); //TODO: add til de under
             Button item1Button = newButton("Item 1", 209-193, 484-71, "black", "#e0a84c", 373, 55, 40);
             Button item2Button = newButton("Item 2", 604-193, 484-71, "black", "#e0a84c", 373, 55, 40);
             Button item3Button = newButton("Item 3", 209-193, 575-71, "black", "#e0a84c", 373, 55, 40);
