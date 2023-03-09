@@ -149,7 +149,7 @@ public class ApplicationFront extends Application {
         Text textLineFour = newText("", 30, false, 233-193, 575-71);
         
         ImageView imageviewCoinIcon = new ImageView();
-        FileInputStream inputStream = new FileInputStream("src/main/java/edu/ntnu/g60/resources/textFiles/images/icons/coin.png");
+        FileInputStream inputStream = new FileInputStream("src/main/java/edu/ntnu/g60/resources/images/icons/coin.png");
         Image coinIcon = new Image(inputStream);
         imageviewCoinIcon.setImage(coinIcon);
         imageviewCoinIcon.setX(200);
