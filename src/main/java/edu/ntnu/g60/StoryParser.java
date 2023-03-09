@@ -3,12 +3,16 @@ package edu.ntnu.g60;
 import edu.ntnu.g60.Game;
 import edu.ntnu.g60.Player;
 import edu.ntnu.g60.Story;
+import edu.ntnu.g60.goals.Goal;
+import edu.ntnu.g60.goals.HealthGoal;
 import edu.ntnu.g60.Passage;
 import edu.ntnu.g60.Link;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,6 +88,12 @@ public class StoryParser {
 
         Passage passage = new Passage(title, content);
 
+        // TODO; Slå sammen med while-løkka under...
+        if (line.matches("\\[.+?\\]\\(.+?\\)")) {
+            Link link = parseLink(line.trim());
+            passage.addLink(link);
+        }
+
         while ((line = reader.readLine()) != null && !line.trim().isEmpty()) {
             if (line.matches("\\[.+?\\]\\(.+?\\)")) {
                 Link link = parseLink(line.trim());
@@ -107,24 +117,6 @@ public class StoryParser {
         return new Link(linkText, linkReference);
     }
 
-
-    /*
-     * Main method for testing the parser
-     */
-    public static void main( String[] args ) {
-        try {
-            Story story = StoryParser.parse("haunted_house");
-            Game game = new Game(new Player("Alice", 100, 0, 0), story);
-            Passage currentPassage = game.begin();
-            System.out.println(story.getTitle());
-            System.out.println(story.getPassages());
-            System.out.println(currentPassage.getTitle());
-            System.out.println(currentPassage.getContent());
-            // ... your game loop goes here
-        } catch (IOException e) {
-            System.out.println("Failed to parse the story: " + e.getMessage());
-        }
-    }
     
 }
 
