@@ -1,5 +1,8 @@
 package edu.ntnu.g60;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 //TODO: make sure the mouse does not start in the textfield, this makes the prompt text unreadable
 //TODO: make it so the user can input the email key with spaces or without. take input and remove spaces
 
@@ -18,6 +21,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -136,7 +140,7 @@ public class ApplicationFront extends Application {
         return scene;
     }
     
-    public Scene newTalkingScene(boolean leftRight, Image player, Image Enemy){
+    public Scene newTalkingScene(boolean leftRight, Image player, Image Enemy) throws FileNotFoundException{
         //TODO: make one image bigger than other and add.
         //TODO: add triangle from rectangle
         Text textLineOne = newText("Test tekst", 30, false, 233-193, 470-71);
@@ -144,6 +148,15 @@ public class ApplicationFront extends Application {
         Text textLineThree = newText("Enda mere av det", 30, false, 233-193, 540-71);
         Text textLineFour = newText("", 30, false, 233-193, 575-71);
         
+        ImageView imageviewCoinIcon = new ImageView();
+        FileInputStream inputStream = new FileInputStream("src/main/java/edu/ntnu/g60/resources/textFiles/images/icons/coin.png");
+        Image coinIcon = new Image(inputStream);
+        imageviewCoinIcon.setImage(coinIcon);
+        imageviewCoinIcon.setLayoutX(200);
+        imageviewCoinIcon.setLayoutY(200);
+        imageviewCoinIcon.setStyle("-fx-pref-width: 24;" +
+        "-fx-pref-height: 24;");
+
         String score = "1234";
         String gold = "4321";
         String health = "70%";
