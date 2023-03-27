@@ -29,6 +29,23 @@ public class Passage{
     this.links = new ArrayList<>();
   }
 
+  //disse må lagess--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  public static String getTypeOfTextAtLineNumber(int number){
+    //TODO: make return the type of passage talking text at spesicified line number
+    return "{P}";
+  }
+
+  public static int getAmountOfTextLines(){
+    //TODO: make return amount of lines of text
+    return 4;
+  }
+
+  public static boolean passageHasFightScene(){
+    //TODO: make return false or true if passage has fight scene
+    return false;
+  }
+  //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
   public String getTitle() {
     return this.title;
   }

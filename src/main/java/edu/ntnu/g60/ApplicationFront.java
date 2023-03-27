@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Supplier;
 
 import javafx.application.Application;
 import javafx.concurrent.Task;
@@ -242,19 +243,17 @@ public class ApplicationFront extends Application {
         return scene;
     }
     
-    public Scene newTalkingScene(String type) throws FileNotFoundException{
+    public Scene newTalkingScene(String type, int lvl) throws FileNotFoundException{
         //Group sceneInfo = Passage.getSceneInfo(gameSavelvl); //noe sånt
         //ImageView enemyImage = sceneInfo.enemy
         //ImageView background = sceneInfo.background
         //ImageView playerImage.. hentes direkte og er altid samme
         //Inventory Item... hentes fra inventory som tilsier at inventory må ha bilde param
-        boolean moreLinesleft = true;
-        lineNumber++;
-        String typeNext = typeatlinenumber(lineNumber);
-        if(lineNumber >= amountoflines){
-            moreLinesleft = false;
-        }
+        
+        String typeNext = Passage.getTypeOfTextAtLineNumber(lineNumber);
+        Supplier<Boolean> moreLinesLeft = () -> lineNumber < amountoflines;
 
+        //hent tekst fra passage
         Text textLineOne = newText("Test tekst", 30, false, 233-193, 470-71);
         Text textLineTwo = newText("Mere av det", 30, false, 233-193, 505-71);
         Text textLineThree = newText("Enda mere av det", 30, false, 233-193, 540-71);
@@ -300,7 +299,51 @@ public class ApplicationFront extends Application {
             playerHeight = 175;
             enemyWidth = 125;
             enemyHeight = 125;
+        } else if(type == "{C}"){
+            ImageView neutralBubble = newImage("animations", "neutralbubble.png", 227-193, 390-71, 793, 211+511);
+            Button choice1 = newButton("choice 1", 264, 283, "black", "white", 306, 85, 22);
+            Button choice2 = newButton("choice 2", 613, 283, "black", "white", 306, 85, 22);
+            root.getChildren().addAll(neutralBubble, choice1, choice2);
+            neutralBubble.toBack();
+            //TODO: add diffrent choices under
+            choice1.setOnAction(e -> {
+                if(moreLinesLeft.get()){
+                    try {
+                        stage.setScene(newTalkingScene(typeNext, lvl));
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    } 
+                } else if (Passage.passageHasFightScene() == true){ //lag metode som sier om det eksisterer en fight scene på dette levelet eller ikke
+                    try {
+                        stage.setScene(newFightScene(lvl));
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                } else {
+                    lvlScene(lvl + 1);
+                }
+            });
+
+            choice2.setOnAction(e -> {
+                if(moreLinesLeft.get()){
+                    try {
+                        stage.setScene(newTalkingScene(typeNext, lvl));
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                } else if (Passage.passageHasFightScene() == true){
+                    try {
+                        stage.setScene(newFightScene(lvl));
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+                } else {
+                    lvlScene(lvl + 1);
+                }
+            });
         }
+
+
         //background.toBack
         //root.getChildren().addAll(enemyImage, playerImage);
 
@@ -308,46 +351,54 @@ public class ApplicationFront extends Application {
         
 
         scene.setOnMouseClicked(e -> {
-            if(moreLinesLeft){ 
-                newTalkingScene(typeNext); //make type here be type off plus one line to the one type over
-            } else if (fightscene = true){
-                stage.setScene(newFightScene());
-            } else {
-                lvlScene();
-            }
-        });
-
-
+            if(moreLinesLeft.get()){
+                try {
+                    stage.setScene(newTalkingScene(typeNext, lvl));
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } 
+            } else if (Passage.passageHasFightScene() == true){
+                try {
+                    stage.setScene(newFightScene(lvl));
+                } catch (FileNotFoundException e1){
+                    e1.printStackTrace();
+                }  
+                } else {
+                lvlScene(lvl + 1);
+            }});
 
         return scene;
     }
+
+
+
 
     public void lvlScene(int lvl){
         try {
             stage.setScene(loadingScene());
         } catch (FileNotFoundException e1) {
-            // TODO Auto-generated catch block
+            
             e1.printStackTrace();
         }
         
         delay(2000, () -> {
             try {
-                stage.setScene(firstScene(lvl)); //make variable
+                stage.setScene(firstScene(lvl));
             } catch (FileNotFoundException e1) {
-                // TODO Auto-generated catch block
+                
                 e1.printStackTrace();
             }
         });
 
         lineNumber = 1;
-        String type = typeatlinenumber(linenumber);
-        amountoflines = ;
+        String type = Passage.getTypeOfTextAtLineNumber(lineNumber);
+        amountoflines = Passage.getAmountOfTextLines();
 
         delay(2000, () -> {
             try {
-                stage.setScene(newTalkingScene(STYLESHEET_CASPIAN, lvl)); //make variable
+                stage.setScene(newTalkingScene(type, lvl));
             } catch (FileNotFoundException e1) {
-                // TODO Auto-generated catch block
+                
                 e1.printStackTrace();
             }
         });
