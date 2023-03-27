@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.ntnu.g60.TestTemplate" time="0.001" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.ntnu.g60.TestTemplate" time="0" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="19"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="NO"/>
     <property name="sun.boot.library.path" value="C:\Program Files\BellSoft\LibericaJDK-19\bin"/>
-    <property name="sun.java.command" value="C:\Users\Olav\AppData\Local\Temp\surefire18045480179418280295\surefirebooter8033646160569907978.jar C:\Users\Olav\AppData\Local\Temp\surefire18045480179418280295 2023-03-27T16-45-07_375-jvmRun1 surefire9525503404022416493tmp surefire_013776439767882458822tmp"/>
+    <property name="sun.java.command" value="C:\Users\Olav\AppData\Local\Temp\surefire5826589472632277335\surefirebooter4833704514106312738.jar C:\Users\Olav\AppData\Local\Temp\surefire5826589472632277335 2023-03-27T17-42-20_090-jvmRun1 surefire1364110209929032829tmp surefire_03474290327667551552tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="c:\Users\Olav\Desktop\gitlabRepo\paths\target\test-classes;c:\Users\Olav\Desktop\gitlabRepo\paths\target\classes;C:\Users\Olav\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Olav\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Olav\.m2\repository\org\openjfx\javafx-controls\21-ea+5\javafx-controls-21-ea+5.jar;C:\Users\Olav\.m2\repository\org\openjfx\javafx-controls\21-ea+5\javafx-controls-21-ea+5-win.jar;C:\Users\Olav\.m2\repository\org\openjfx\javafx-graphics\21-ea+5\javafx-graphics-21-ea+5.jar;C:\Users\Olav\.m2\repository\org\openjfx\javafx-graphics\21-ea+5\javafx-graphics-21-ea+5-win.jar;C:\Users\Olav\.m2\repository\org\openjfx\javafx-base\21-ea+5\javafx-base-21-ea+5.jar;C:\Users\Olav\.m2\repository\org\openjfx\javafx-base\21-ea+5\javafx-base-21-ea+5-win.jar;C:\Users\Olav\.m2\repository\org\openjfx\javafx-fxml\21-ea+5\javafx-fxml-21-ea+5.jar;C:\Users\Olav\.m2\repository\org\openjfx\javafx-fxml\21-ea+5\javafx-fxml-21-ea+5-win.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Olav\AppData\Local\Temp\surefire18045480179418280295\surefirebooter8033646160569907978.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Olav\AppData\Local\Temp\surefire5826589472632277335\surefirebooter4833704514106312738.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="19.0.2+9"/>
@@ -58,5 +58,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="63.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="edu.ntnu.g60.TestTemplate" time="0.001"/>
+  <testcase name="shouldAnswerWithTrue" classname="edu.ntnu.g60.TestTemplate" time="0"/>
 </testsuite>
