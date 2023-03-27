@@ -25,7 +25,8 @@ public class NewTalkingScene {
         //Inventory Item... hentes fra inventory som tilsier at inventory må ha bilde param
         MediaPlayer mumble = ApplicationObjects.newSound("mumble");
         String typeNext = Passage.getTypeOfTextAtLineNumber(ApplicationFront.getLineNumber());
-        Supplier<Boolean> moreLinesLeft = () -> ApplicationFront.getLineNumber() < ApplicationFront.getAmountOfLines();
+        Supplier<Boolean> moreLinesLeft = () -> ApplicationFront.getLineNumber() < ApplicationFront.getAmountOfLines() + 1;
+        ApplicationFront.setLineNumber(ApplicationFront.getLineNumber() + 1);
 
         //hent tekst fra passage
         Text textLineOne = ApplicationObjects.newText("Test tekst", 30, false, 233-193, 470-71);
