@@ -1,4 +1,4 @@
-package edu.ntnu.g60.Frontend;
+package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
 import java.util.List;

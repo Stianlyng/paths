@@ -91,7 +91,7 @@
           <execution>
             <id>default-cli</id>
             <configuration>
-              <mainClass>edu.ntnu.g60.Frontend.ApplicationFront</mainClass>
+              <mainClass>edu.ntnu.g60.frontend.ApplicationFront</mainClass>
             </configuration>
           </execution>
         </executions>
