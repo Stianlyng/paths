@@ -40,7 +40,7 @@ public class StoryParser {
      * @throws IOException If the file cannot be read
      */
     public static Story parse(String filename) throws IOException {
-        String path = "src/main/java/edu/ntnu/g60/resources/textFiles/";
+        String path = "src/main/resources/textFiles/";
         BufferedReader reader = new BufferedReader(new FileReader(path + filename + ".txt"));
 
         // Read the title
