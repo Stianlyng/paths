@@ -1,15 +1,19 @@
 package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+
 import edu.ntnu.g60.Passage;
 import javafx.concurrent.Task;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 
 public class LvlScene {
     static Stage stage = ApplicationFront.getStage();
 
-    public static void scene(int lvl){
+    public static void scene(int lvl) throws MalformedURLException{
+        MediaPlayer mumble = ApplicationObjects.newSound("mumble");
         try {
             stage.setScene(LoadingScene.scene());
         } catch (FileNotFoundException e1) {
@@ -26,7 +30,8 @@ public class LvlScene {
                 delay(2000, () -> {
                     try {
                         stage.setScene(NewTalkingScene.scene(type, lvl));
-                    } catch (FileNotFoundException e1) {
+                        mumble.play();
+                    } catch (FileNotFoundException | MalformedURLException e1) {
                         
                         e1.printStackTrace();
                     }

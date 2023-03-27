@@ -1,6 +1,8 @@
 package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +20,11 @@ public class NewGameScene {
         startButton.setOnAction(e -> {
             //add overwrite om det er for mange saves
             //lag ny save file
-            LvlScene.scene(0); //hent lvl fra ny save file
+            try {
+                LvlScene.scene(0);
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            } //hent lvl fra ny save file
         });    
             //TODO: add samme som over bare til riktig scene
         

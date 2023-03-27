@@ -1,6 +1,8 @@
 package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,15 +17,27 @@ public class ContinueScene {
         //TODO: set name of buttons to variabel names based on savefile names
         Button save1Button = ApplicationObjects.newButton("Save 1", 514-193, 278-71, "black", "#32a8a2", 158, 51, 24);
         save1Button.setOnAction(e -> {
-            LvlScene.scene(0); //hent lvl fra save1
+            try {
+                LvlScene.scene(0);
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            } //hent lvl fra save1
         });
         Button save2Button = ApplicationObjects.newButton("Save 2", 514-193, 345-71, "black", "#32a8a2", 158, 51, 24);
         save2Button.setOnAction(e -> {
-            LvlScene.scene(0); //hent lvl fra save2
+            try {
+                LvlScene.scene(0);
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            } //hent lvl fra save2
         });
         Button save3Button = ApplicationObjects.newButton("Save 3", 514-193, 412-71, "black", "#32a8a2", 158, 51, 24);
         save3Button.setOnAction(e -> {
-            LvlScene.scene(0); //hent lvl fra save3
+            try {
+                LvlScene.scene(0);
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            } //hent lvl fra save3
         });
 
         Button backButton = ApplicationObjects.newButton("Back", 903-193, 595-71, "black", "#32a8a2", 74, 35, 15);

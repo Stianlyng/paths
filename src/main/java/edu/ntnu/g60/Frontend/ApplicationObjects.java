@@ -1,7 +1,9 @@
 package edu.ntnu.g60.frontend;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
@@ -12,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -31,6 +35,13 @@ public class ApplicationObjects {
         imageview.setFitWidth(height);
         imageview.setPreserveRatio(true);
         return imageview;
+    }
+    //"sounds/" + soundName + ".mp3"
+    public static MediaPlayer newSound(String soundName) throws MalformedURLException{
+        File mediaFile = new File("src/main/resources/sounds/" + soundName + ".mp3");
+        Media media = new Media(mediaFile.toURI().toURL().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        return player;
     }
 
     public static ProgressBar newHealthBar(int x, int y, double amount){

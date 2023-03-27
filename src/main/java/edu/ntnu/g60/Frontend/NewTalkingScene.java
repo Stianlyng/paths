@@ -1,12 +1,14 @@
 package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.util.function.Supplier;
 import edu.ntnu.g60.Passage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -15,13 +17,13 @@ import javafx.stage.Stage;
 public class NewTalkingScene {
     static Stage stage = ApplicationFront.getStage();
 
-    public static Scene scene(String type, int lvl) throws FileNotFoundException{
+    public static Scene scene(String type, int lvl) throws FileNotFoundException, MalformedURLException{
         //Group sceneInfo = Passage.getSceneInfo(gameSavelvl); //noe sånt
         //ImageView enemyImage = sceneInfo.enemy
         //ImageView background = sceneInfo.background
         //ImageView playerImage.. hentes direkte og er altid samme
         //Inventory Item... hentes fra inventory som tilsier at inventory må ha bilde param
-        
+        MediaPlayer mumble = ApplicationObjects.newSound("mumble");
         String typeNext = Passage.getTypeOfTextAtLineNumber(ApplicationFront.getLineNumber());
         Supplier<Boolean> moreLinesLeft = () -> ApplicationFront.getLineNumber() < ApplicationFront.getAmountOfLines();
 
@@ -82,7 +84,8 @@ public class NewTalkingScene {
                 if(moreLinesLeft.get()){
                     try {
                         stage.setScene(scene(typeNext, lvl));
-                    } catch (FileNotFoundException e1) {
+                        mumble.play();
+                    } catch (FileNotFoundException | MalformedURLException e1) {
                         e1.printStackTrace();
                     } 
                 } else if (Passage.passageHasFightScene() == true){ //lag metode som sier om det eksisterer en fight scene på dette levelet eller ikke
@@ -92,7 +95,11 @@ public class NewTalkingScene {
                         e1.printStackTrace();
                     }
                 } else {
-                    LvlScene.scene(lvl + 1);
+                    try {
+                        LvlScene.scene(lvl + 1);
+                    } catch (MalformedURLException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             });
 
@@ -100,7 +107,8 @@ public class NewTalkingScene {
                 if(moreLinesLeft.get()){
                     try {
                         stage.setScene(scene(typeNext, lvl));
-                    } catch (FileNotFoundException e1) {
+                        mumble.play();
+                    } catch (FileNotFoundException | MalformedURLException e1) {
                         e1.printStackTrace();
                     }
                 } else if (Passage.passageHasFightScene() == true){
@@ -110,7 +118,11 @@ public class NewTalkingScene {
                         e1.printStackTrace();
                     }
                 } else {
-                    LvlScene.scene(lvl + 1);
+                    try {
+                        LvlScene.scene(lvl + 1);
+                    } catch (MalformedURLException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             });
         }
@@ -126,7 +138,8 @@ public class NewTalkingScene {
             if(moreLinesLeft.get()){
                 try {
                     stage.setScene(scene(typeNext, lvl));
-                } catch (FileNotFoundException e1) {
+                    mumble.play();
+                } catch (FileNotFoundException | MalformedURLException e1) {
                     e1.printStackTrace();
                 } 
             } else if (Passage.passageHasFightScene() == true){
@@ -136,7 +149,11 @@ public class NewTalkingScene {
                     e1.printStackTrace();
                 }  
                 } else {
-                    LvlScene.scene(lvl + 1);
+                    try {
+                        LvlScene.scene(lvl + 1);
+                    } catch (MalformedURLException e1) {
+                        e1.printStackTrace();
+                    }
             }});
 
         return scene;
