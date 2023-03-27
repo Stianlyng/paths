@@ -66,5 +66,4 @@ public class Link {
             Objects.equals(this.actions, link.actions);
 
   }
-
 }

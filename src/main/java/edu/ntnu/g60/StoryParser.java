@@ -116,7 +116,7 @@ public class StoryParser {
         String linkReference = linkParts[1].substring(0, linkParts[1].length() - 1);
         return new Link(linkText, linkReference);
     }
-
+    
     
 }
 

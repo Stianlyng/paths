@@ -2,15 +2,9 @@ package edu.ntnu.g60;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-//TODO: make sure the mouse does not start in the textfield, this makes the prompt text unreadable
-//TODO: make it so the user can input the email key with spaces or without. take input and remove spaces
-
 import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
 
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.scene.Group;
@@ -24,7 +18,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -34,13 +27,15 @@ import javafx.stage.Stage;
 public class ApplicationFront extends Application {
     
     private Stage stage;
-    Player player; //TODO make variable
+    Player player = new Player("Bjørn", 54, 0, 0); //TODO make variable
+    int amountoflines;
+    int lineNumber;
 
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
         this.stage = stage;
         stage.setTitle("Half life 3");
-        stage.setScene(newFightScene(0));
+        stage.setScene(openingScene());
         stage.setResizable(false);
         stage.show();
     }
@@ -219,7 +214,7 @@ public class ApplicationFront extends Application {
         inventoryButton.setOnAction(e -> {
             root.getChildren().removeAll(fightButton, healButton, inventoryButton, escapeButton);
             
-            List<String> list = player.getInventory(); //TODO: add til de under
+            List<String> inventoryList = player.getInventory(); //TODO: add til de under
             Button item1Button = newButton("Item 1", 209-193, 484-71, "black", "#e0a84c", 373, 55, 40);
             Button item2Button = newButton("Item 2", 604-193, 484-71, "black", "#e0a84c", 373, 55, 40);
             Button item3Button = newButton("Item 3", 209-193, 575-71, "black", "#e0a84c", 373, 55, 40);
@@ -253,6 +248,12 @@ public class ApplicationFront extends Application {
         //ImageView background = sceneInfo.background
         //ImageView playerImage.. hentes direkte og er altid samme
         //Inventory Item... hentes fra inventory som tilsier at inventory må ha bilde param
+        boolean moreLinesleft = true;
+        lineNumber++;
+        String typeNext = typeatlinenumber(lineNumber);
+        if(lineNumber >= amountoflines){
+            moreLinesleft = false;
+        }
 
         Text textLineOne = newText("Test tekst", 30, false, 233-193, 470-71);
         Text textLineTwo = newText("Mere av det", 30, false, 233-193, 505-71);
@@ -304,6 +305,20 @@ public class ApplicationFront extends Application {
         //root.getChildren().addAll(enemyImage, playerImage);
 
         Scene scene = new Scene(root, 800, 600, Color.WHITE);
+        
+
+        scene.setOnMouseClicked(e -> {
+            if(moreLinesLeft){ 
+                newTalkingScene(typeNext); //make type here be type off plus one line to the one type over
+            } else if (fightscene = true){
+                stage.setScene(newFightScene());
+            } else {
+                lvlScene();
+            }
+        });
+
+
+
         return scene;
     }
 
@@ -314,20 +329,27 @@ public class ApplicationFront extends Application {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
+        
         delay(2000, () -> {
             try {
-                stage.setScene(firstScene(lvl));
+                stage.setScene(firstScene(lvl)); //make variable
             } catch (FileNotFoundException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         });
 
+        lineNumber = 1;
+        String type = typeatlinenumber(linenumber);
+        amountoflines = ;
+
         delay(2000, () -> {
-            
-
-
-
+            try {
+                stage.setScene(newTalkingScene(STYLESHEET_CASPIAN, lvl)); //make variable
+            } catch (FileNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
     }
 
