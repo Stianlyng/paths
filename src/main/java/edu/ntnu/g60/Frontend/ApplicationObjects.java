@@ -42,15 +42,11 @@ public class ApplicationObjects {
         return player;
     }
 
-    public static ProgressBar newHealthBar(int x, int y, double amount){
+    public static ProgressBar newHealthBar(int x, int y, double amount, String id){
         ProgressBar health = new ProgressBar();
         health.setLayoutX(x);
         health.setLayoutY(y);
-        health.setStyle("-fx-border-color: black;" + 
-        "-fx-background-color: white;" +
-        "-fx-pref-width: 100;" +
-        "-fx-pref-height: 20;" +
-        "-fx-accent: red;");
+        health.setId(id);
         health.setProgress(amount);
         return health;
     }
