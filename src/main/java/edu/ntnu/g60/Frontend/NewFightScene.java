@@ -18,10 +18,10 @@ public class NewFightScene {
     public static Scene scene(int lvl) throws FileNotFoundException{
         //TODO: add images like done on talking scene
         
-        Button fightButton = ApplicationObjects.newButton("Fight", 209-193, 484-71, "black", "#e87dd1", 373, 55, 40);
-        Button healButton = ApplicationObjects.newButton("Heal", 604-193, 484-71, "black", "#83dea4", 373, 55, 40);
-        Button inventoryButton = ApplicationObjects.newButton("Inventory", 209-193, 575-71, "black", "#e0a84c", 373, 55, 40);
-        Button escapeButton = ApplicationObjects.newButton("Escape", 604-193, 575-71, "black", "#4c8ce0", 373, 55, 40);
+        Button fightButton = ApplicationObjects.newButton("Fight", 209-193, 484-71, "fight_button");
+        Button healButton = ApplicationObjects.newButton("Heal", 604-193, 484-71, "fight_button");
+        Button inventoryButton = ApplicationObjects.newButton("Inventory", 209-193, 575-71, "fight_button");
+        Button escapeButton = ApplicationObjects.newButton("Escape", 604-193, 575-71, "fight_button");
 
         ImageView coinIcon = ApplicationObjects.newImage("icons", "coin.png", 209-193, 86-71, 24, 24);
         ImageView scoreIcon = ApplicationObjects.newImage("icons", "star.png", 289-193, 86-71, 24, 24);
@@ -31,8 +31,8 @@ public class NewFightScene {
         double playerHealth = player.getHealth()/100;
         double enemyHealth = 0; //make health variable
         Group root = new Group(ApplicationObjects.newRectangle(203-193, 79-71, 200, 38),
-        ApplicationObjects.newHealthBar(259-193, 306-71, playerHealth), 
-        ApplicationObjects.newHealthBar(789-193, 137-71, enemyHealth),
+        ApplicationObjects.newHealthBar(259-193, 306-71, playerHealth, "progress_bar"), 
+        ApplicationObjects.newHealthBar(789-193, 137-71, enemyHealth, "progress_bar"),
         ApplicationObjects.newText("" + score, 18, false, 242-193, 105-71),
         ApplicationObjects.newText("" + gold, 18, false, 322-193, 105-71),
         fightButton, healButton, inventoryButton, escapeButton,
@@ -42,10 +42,10 @@ public class NewFightScene {
 
         fightButton.setOnAction(e -> {
             root.getChildren().removeAll(fightButton, healButton, inventoryButton, escapeButton);
-            Button ability1Button = ApplicationObjects.newButton("Ability 1", 209-193, 484-71, "black", "#e87dd1", 373, 55, 40);
-            Button ability2Button = ApplicationObjects.newButton("Ability 2", 604-193, 484-71, "black", "#e87dd1", 373, 55, 40);
-            Button ability3Button = ApplicationObjects.newButton("Ability 3", 209-193, 575-71, "black", "#e87dd1", 373, 55, 40);
-            Button backButton = ApplicationObjects.newButton("Back", 604-193, 575-71, "black", "#e87dd1", 373, 55, 40);
+            Button ability1Button = ApplicationObjects.newButton("Ability 1", 209-193, 484-71, "fight_button");
+            Button ability2Button = ApplicationObjects.newButton("Ability 2", 604-193, 484-71, "fight_button");
+            Button ability3Button = ApplicationObjects.newButton("Ability 3", 209-193, 575-71, "fight_button");
+            Button backButton = ApplicationObjects.newButton("Back", 604-193, 575-71, "fight_button");
             backButton.setOnAction(b -> {
                 root.getChildren().removeAll(ability1Button, ability2Button, ability3Button, backButton);
                 root.getChildren().addAll(fightButton, healButton, inventoryButton, escapeButton);
@@ -55,9 +55,9 @@ public class NewFightScene {
 
         healButton.setOnAction(e -> {
             root.getChildren().removeAll(fightButton, healButton, inventoryButton, escapeButton);
-            Button heal1Button = ApplicationObjects.newButton("Heal 1", 209-193, 484-71, "black", "#83dea4", 373, 55, 40);
-            Button heal2Button = ApplicationObjects.newButton("Heal 2", 604-193, 484-71, "black", "#83dea4", 373, 55, 40);
-            Button backButton = ApplicationObjects.newButton("Back", 604-193, 575-71, "black", "#83dea4", 373, 55, 40);
+            Button heal1Button = ApplicationObjects.newButton("Heal 1", 209-193, 484-71, "fight_button");
+            Button heal2Button = ApplicationObjects.newButton("Heal 2", 604-193, 484-71, "fight_button");
+            Button backButton = ApplicationObjects.newButton("Back", 604-193, 575-71, "fight_button");
             backButton.setOnAction(b -> {
                 root.getChildren().removeAll(heal1Button, heal2Button, backButton);
                 root.getChildren().addAll(fightButton, healButton, inventoryButton, escapeButton);
@@ -69,10 +69,10 @@ public class NewFightScene {
             root.getChildren().removeAll(fightButton, healButton, inventoryButton, escapeButton);
             
             List<String> inventoryList = player.getInventory(); //TODO: add til de under
-            Button item1Button = ApplicationObjects.newButton("Item 1", 209-193, 484-71, "black", "#e0a84c", 373, 55, 40);
-            Button item2Button = ApplicationObjects.newButton("Item 2", 604-193, 484-71, "black", "#e0a84c", 373, 55, 40);
-            Button item3Button = ApplicationObjects.newButton("Item 3", 209-193, 575-71, "black", "#e0a84c", 373, 55, 40);
-            Button backButton = ApplicationObjects.newButton("Back", 604-193, 575-71, "black", "#e0a84c", 373, 55, 40);
+            Button item1Button = ApplicationObjects.newButton("Item 1", 209-193, 484-71, "fight_button");
+            Button item2Button = ApplicationObjects.newButton("Item 2", 604-193, 484-71, "fight_button");
+            Button item3Button = ApplicationObjects.newButton("Item 3", 209-193, 575-71, "fight_button");
+            Button backButton = ApplicationObjects.newButton("Back", 604-193, 575-71, "fight_button");
             backButton.setOnAction(b -> {
                 root.getChildren().removeAll(item1Button, item2Button, item3Button, backButton);
                 root.getChildren().addAll(fightButton, healButton, inventoryButton, escapeButton);
@@ -82,8 +82,8 @@ public class NewFightScene {
 
         escapeButton.setOnAction(e -> {
             root.getChildren().removeAll(fightButton, healButton, inventoryButton, escapeButton);
-            Button continueButton = ApplicationObjects.newButton("ESCAPE!", 209-193, 484-71, "black", "#4c8ce0", 373, 55, 40);
-            Button backButton = ApplicationObjects.newButton("Go back", 604-193, 484-71, "black", "#4c8ce0", 373, 55, 40);
+            Button continueButton = ApplicationObjects.newButton("ESCAPE!", 209-193, 484-71, "fight_button");
+            Button backButton = ApplicationObjects.newButton("Go back", 604-193, 484-71, "fight_button");
             backButton.setOnAction(b -> {
                 root.getChildren().removeAll(continueButton, backButton);
                 root.getChildren().addAll(fightButton, healButton, inventoryButton, escapeButton);
@@ -91,7 +91,7 @@ public class NewFightScene {
             root.getChildren().addAll(continueButton, backButton);
         });
 
-
+        root.getStylesheets().add("StyleSheet.css"); 
         Scene scene = new Scene(root, 800, 600, Color.WHITE);
         return scene;
     }

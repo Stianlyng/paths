@@ -66,24 +66,20 @@ public class ApplicationObjects {
         return rectangle;
     }
 
-    public static Button newButton(String text, int x, int y, String borderColor,
-    String backgroundColor, int width, int height, int fontSize){
+    public static Button newButton(String text, int x, int y, String id){
         Button button = new Button(text);
+        button.setId(id);
         button.setLayoutX(x);
         button.setLayoutY(y);
-        button.setStyle(setStyleString(borderColor, backgroundColor, width, height, fontSize));
-        button.setOnMouseEntered(e -> button.setStyle(setStyleString(borderColor, "grey", width, height, fontSize)));
-        button.setOnMouseExited(e -> button.setStyle(setStyleString(borderColor, backgroundColor, width, height, fontSize)));
         return button;
     }
 
-    public static TextField newTextField(String promptText, int x, int y, String borderColor,
-    String backgroundColor, int width, int height, int fontSize){
+    public static TextField newTextField(String promptText, int x, int y, String id){
         TextField textField = new TextField ();
         textField.setPromptText(promptText);
         textField.setLayoutX(x);
         textField.setLayoutY(y);
-        textField.setStyle(setStyleString(borderColor, backgroundColor, width, height, fontSize));
+        textField.setId(id);
         return textField;
     }
 
@@ -96,11 +92,10 @@ public class ApplicationObjects {
         return text;
     }
 
-    public static ChoiceBox<String> newChoiceBox(String[] choices, String borderColor,
-    String backgroundColor, int width, int height, int fontSize, int x, int y){
+    public static ChoiceBox<String> newChoiceBox(String[] choices, int x, int y, String id){
         ChoiceBox<String> choiceBox = new ChoiceBox();
         choiceBox.getItems().addAll(choices);
-        choiceBox.setStyle(setStyleString(borderColor, backgroundColor, width, height, fontSize));
+        choiceBox.setId(id);
         choiceBox.setLayoutX(x);
         choiceBox.setLayoutY(y);
         return choiceBox;
@@ -113,15 +108,4 @@ public class ApplicationObjects {
             alert.setContentText(content);
             alert.showAndWait();
     }
-
-    public static String setStyleString(String borderColor,
-    String backgroundColor, int width, int height, int fontSize){
-        return "-fx-border-color: " + borderColor + ";" + 
-        "-fx-background-color: " + backgroundColor + ";" +
-        "-fx-pref-width: " + width + ";" +
-        "-fx-pref-height: " + height + ";" +
-        "-fx-font-size: " + fontSize + "px;";
-    }
-    
-
 }

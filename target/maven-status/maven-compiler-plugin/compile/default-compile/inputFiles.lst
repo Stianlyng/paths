@@ -1,27 +1,28 @@
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\Player.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\Passage.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\OpeningScene.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\goals\ScoreGoal.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\goals\GoldGoal.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\actions\InventoryAction.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\ApplicationObjects.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\LoadingScene.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\DeathScene.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\NewFightScene.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\Game.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\FirstScene.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\goals\InventoryGoal.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\Story.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\ApplicationFront.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\actions\Action.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\ContinueScene.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\goals\Goal.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\LvlScene.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\NewTalkingScene.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\Link.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\actions\GoldAction.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\actions\ScoreAction.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\frontend\NewGameScene.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\goals\HealthGoal.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\actions\HealthAction.java
-c:\Users\Olav\Desktop\gitlabRepo\paths\src\main\java\edu\ntnu\g60\StoryParser.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\ApplicationObjects.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\Player.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\actions\InventoryAction.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\StoryParser.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\NewGameScene.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\goals\Goal.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\module-info.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\Passage.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\DeathScene.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\actions\HealthAction.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\goals\InventoryGoal.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\ApplicationFront.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\goals\HealthGoal.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\actions\ScoreAction.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\NewTalkingScene.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\goals\GoldGoal.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\NewFightScene.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\LvlScene.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\actions\GoldAction.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\ContinueScene.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\Game.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\Story.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\goals\ScoreGoal.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\FirstScene.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\actions\Action.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\LoadingScene.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\Link.java
+c:\Users\Olav Sie Rotvær\Desktop\GitLabRepo\paths\src\main\java\edu\ntnu\g60\frontend\OpeningScene.java

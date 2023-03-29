@@ -76,8 +76,8 @@ public class NewTalkingScene {
             enemyHeight = 125;
         } else if(type == "{C}"){
             ImageView neutralBubble = ApplicationObjects.newImage("animations", "neutralbubble.png", 227-193, 390-71, 793, 211+511);
-            Button choice1 = ApplicationObjects.newButton("choice 1", 264, 283, "black", "white", 306, 85, 22);
-            Button choice2 = ApplicationObjects.newButton("choice 2", 613, 283, "black", "white", 306, 85, 22);
+            Button choice1 = ApplicationObjects.newButton("choice 1", 264, 283, "talk_button");
+            Button choice2 = ApplicationObjects.newButton("choice 2", 613, 283, "talk_button");
             root.getChildren().addAll(neutralBubble, choice1, choice2);
             neutralBubble.toBack();
             //TODO: add diffrent choices under
@@ -131,7 +131,7 @@ public class NewTalkingScene {
 
         //background.toBack
         //root.getChildren().addAll(enemyImage, playerImage);
-
+        root.getStylesheets().add("StyleSheet.css"); 
         Scene scene = new Scene(root, 800, 600, Color.WHITE);
         
 
@@ -156,7 +156,7 @@ public class NewTalkingScene {
                         e1.printStackTrace();
                     }
             }});
-
+        
         return scene;
     }
 

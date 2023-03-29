@@ -16,7 +16,7 @@ public class NewGameScene {
     static Stage stage = ApplicationFront.getStage();
 
     public static Scene scene() throws FileNotFoundException{
-        Button startButton = ApplicationObjects.newButton("Start", 514-193, 370-71, "black", "#32a8a2", 158, 51, 24);
+        Button startButton = ApplicationObjects.newButton("Start", 514-193, 370-71, "launch_button");
         startButton.setOnAction(e -> {
             //add overwrite om det er for mange saves
             //lag ny save file
@@ -29,7 +29,7 @@ public class NewGameScene {
             //TODO: add samme som over bare til riktig scene
         
 
-        Button backButton = ApplicationObjects.newButton("Back", 903-193, 595-71, "black", "#32a8a2", 74, 35, 15);
+        Button backButton = ApplicationObjects.newButton("Back", 903-193, 595-71, "back_button");
         backButton.setOnAction(e -> {
             try {
                 stage.setScene(OpeningScene.scene());
@@ -38,11 +38,11 @@ public class NewGameScene {
             }
         });
 
-        TextField saveNameTextField = ApplicationObjects.newTextField("Savename..", 514-193, 327-71, "black", "#32a8a2", 158, 27, 13);
-        ImageView background = ApplicationObjects.newImage("backgrounds", "background2.jpg", 100 ,-195 ,1003 ,606);
-        background.setRotate(270);
+        TextField saveNameTextField = ApplicationObjects.newTextField("Savename..", 514-193, 327-71, "text_field");
+        ImageView background = ApplicationObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
 
         Group root = new Group(background, backButton, startButton, saveNameTextField);
+        root.getStylesheets().add("StyleSheet.css"); 
         Scene scene = new Scene(root, 800, 600, Color.WHITE);
         return scene;
     }

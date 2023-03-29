@@ -12,7 +12,7 @@ public class OpeningScene {
     static Stage stage = ApplicationFront.getStage();
 
     public static Scene scene() throws FileNotFoundException{
-        Button continueButton = ApplicationObjects.newButton("Continue", 514-193, 314-71, "black", "#32a8a2", 158, 51, 24);
+        Button continueButton = ApplicationObjects.newButton("Continue", 514-193, 314-71, "launch_button");
         continueButton.setOnAction(e -> {
             try {
                 stage.setScene(ContinueScene.scene());
@@ -21,7 +21,7 @@ public class OpeningScene {
             }
         });
         
-        Button newGameButton = ApplicationObjects.newButton("New game", 514-193, 396-71, "black", "#32a8a2", 158, 51, 24);
+        Button newGameButton = ApplicationObjects.newButton("New game", 514-193, 396-71, "launch_button");
         newGameButton.setOnAction(e -> {
             try {
                 stage.setScene(NewGameScene.scene());
@@ -30,10 +30,10 @@ public class OpeningScene {
             }
         });
 
-        ImageView background = ApplicationObjects.newImage("backgrounds", "background2.jpg", 100 ,-195 ,1003 ,606);
-        background.setRotate(270);
+        ImageView background = ApplicationObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
         Group root = new Group(background, continueButton, newGameButton);
-        Scene scene = new Scene(root, 800, 600, Color.WHITE);
+        root.getStylesheets().add("StyleSheet.css"); 
+        Scene scene = new Scene(root, 800, 600, Color.WHITE); 
         return scene;
 
     }
