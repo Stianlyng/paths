@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import edu.ntnu.g60.Game;
+import edu.ntnu.g60.Link;
 import edu.ntnu.g60.Passage;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ import javafx.stage.Stage;
 public class NewTalkingScene {
     static Stage stage = ApplicationFront.getStage();
 
-    public static Scene scene(String[] types, String[] passageContent, Game game) throws FileNotFoundException, MalformedURLException{
+    public static Scene scene(String[] types, String[] passageContent, Game game, Passage passage) throws FileNotFoundException, MalformedURLException{
         //Group sceneInfo = Passage.getSceneInfo(gameSavelvl); //noe sånt
         //ImageView enemyImage = sceneInfo.enemy
         //ImageView background = sceneInfo.background
@@ -127,59 +128,7 @@ public class NewTalkingScene {
             playerHeight = 175;
             enemyWidth = 125;
             enemyHeight = 125;
-        } else if(type.equals("{C}")){
-            ImageView neutralBubble = ApplicationObjects.newImage("animations", "neutralbubble.png", 227-193, 390-71, 793, 211+511);
-            Button choice1 = ApplicationObjects.newButton("choice 1", 264, 283, "talk_button");
-            Button choice2 = ApplicationObjects.newButton("choice 2", 613, 283, "talk_button");
-            root.getChildren().addAll(neutralBubble, choice1, choice2);
-            neutralBubble.toBack();
-            //TODO: add diffrent choices under
-            choice1.setOnAction(e -> {
-                if(moreLinesLeft){
-                    try {
-                        stage.setScene(scene(types, passageContent, game));
-                        mumble.play();
-                    } catch (FileNotFoundException | MalformedURLException e1) {
-                        e1.printStackTrace();
-                    } 
-                } else if (moreLinesLeft){ //Passage.passageHasFightScene() == true
-                    try {
-                        stage.setScene(NewFightScene.scene(game));
-                    } catch (FileNotFoundException e1) {
-                        e1.printStackTrace();
-                    }
-                } else {
-                    try {
-                        LvlScene.scene(game);
-                    } catch (MalformedURLException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-
-            choice2.setOnAction(e -> {
-                if(moreLinesLeft){
-                    try {
-                        stage.setScene(scene(types, passageContent, game));
-                        mumble.play();
-                    } catch (FileNotFoundException | MalformedURLException e1) {
-                        e1.printStackTrace();
-                    }
-                } else if (moreLinesLeft){ //Passage.passageHasFightScene() == true
-                    try {
-                        stage.setScene(NewFightScene.scene(game));
-                    } catch (FileNotFoundException e1) {
-                        e1.printStackTrace();
-                    }
-                } else {
-                    try {
-                        LvlScene.scene(game);
-                    } catch (MalformedURLException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-        }
+        } 
 
 
         //background.toBack
@@ -190,7 +139,7 @@ public class NewTalkingScene {
         scene.setOnMouseClicked(e -> {
             if(moreLinesLeft){
                 try {
-                    stage.setScene(scene(types, passageContent, game));
+                    stage.setScene(scene(types, passageContent, game, passage));
                     mumble.play();
                 } catch (FileNotFoundException | MalformedURLException e1) {
                     e1.printStackTrace();
@@ -201,13 +150,39 @@ public class NewTalkingScene {
                 } catch (FileNotFoundException e1){
                     e1.printStackTrace();
                 }  
-                } else {
-                    try {
-                        LvlScene.scene(game);
-                    } catch (MalformedURLException e1) {
+            } else {
+                Link link1 = passage.getLinks().get(0);
+                Link link2 = passage.getLinks().get(1);
+                    
+                ImageView neutralBubble;
+                try {
+                    neutralBubble = ApplicationObjects.newImage("animations", "neutralbubble.png", 227-193, 390-71, 793, 211+511);
+                    Button choice1 = ApplicationObjects.newButton(link1.getText(), 264-193, 283-71, "talk_button");
+                    Button choice2 = ApplicationObjects.newButton(link2.getText(), 613-193, 283-71, "talk_button");
+                    root.getChildren().addAll(neutralBubble, choice1, choice2);
+                    neutralBubble.toBack();
+                    //TODO: add diffrent choices under
+                    choice1.setOnAction(p -> {
+                        try {
+                            LvlScene.scene(game, game.go(link1));
+                        } catch (MalformedURLException e1) {
+                            e1.printStackTrace();
+                        }
+                    });
+
+                    choice2.setOnAction(p -> {
+                        try {
+                            LvlScene.scene(game, game.go(link2));
+                        } catch (MalformedURLException e1) {
+                            e1.printStackTrace();
+                        }
+                    });
+                    } catch (FileNotFoundException e1) {
+                        // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
-            }});
+                
+                }});
         
         return scene;
     }

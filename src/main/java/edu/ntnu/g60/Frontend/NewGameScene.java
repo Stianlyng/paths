@@ -30,12 +30,13 @@ public class NewGameScene {
         
             try {
                 Story story = StoryParser.parse("haunted_house");
+                
                 List<Goal> goals = new ArrayList<Goal>();
                 goals.add(new HealthGoal(4));
 
                 Game game = new Game(new Player("Alice"), story, goals);
                 try {
-                    LvlScene.scene(game);
+                    LvlScene.scene(game, game.begin());
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
                 }

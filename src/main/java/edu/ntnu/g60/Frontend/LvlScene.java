@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 public class LvlScene {
     static Stage stage = ApplicationFront.getStage();
 
-    public static void scene(Game game) throws MalformedURLException{
+    public static void scene(Game game, Passage passage) throws MalformedURLException{
         MediaPlayer mumble = ApplicationObjects.newSound("mumble");
         try {
             stage.setScene(LoadingScene.scene());
@@ -25,7 +25,7 @@ public class LvlScene {
             e1.printStackTrace();
         }
         
-        String text = game.getCurrentPassage().getContent();
+        String text = passage.getContent();
         int braceIndexx = text.indexOf('{');
         String output = text.substring(braceIndexx);
 
@@ -44,11 +44,11 @@ public class LvlScene {
 
         delay(2000, () -> {
             try {
-                stage.setScene(FirstScene.scene(game.getCurrentPassage().getTitle()));
+                stage.setScene(FirstScene.scene(passage.getTitle()));
                 delay(2000, () -> {
                     try {
                         ApplicationFront.setTextLine(0);
-                        stage.setScene(NewTalkingScene.scene(types, contents, game));
+                        stage.setScene(NewTalkingScene.scene(types, contents, game, passage));
                         mumble.play();
                     } catch (FileNotFoundException | MalformedURLException e1) {
                         

@@ -11,7 +11,6 @@ public class Game {
   private final Player player;
   private final Story story;
   private final List<Goal> goals;
-  Passage currentPassage;
 
   /**
    * Constructor for the Game class.
@@ -26,15 +25,6 @@ public class Game {
     this.player = player;
     this.story = story;
     this.goals = goals;
-    currentPassage = begin();
-  }
-
-  public Passage getCurrentPassage(){
-    return this.currentPassage;
-  }
-
-  public void setCurrentPassage(Passage passage){
-    this.currentPassage = passage;
   }
 
   public Player getPlayer() {
