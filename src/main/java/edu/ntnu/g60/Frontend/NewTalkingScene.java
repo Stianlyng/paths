@@ -58,14 +58,23 @@ public class NewTalkingScene {
             }
         }
 
-        String[] result = new String[numGroups];
-        for (int i = 0; i < result.length; i++) {
-            StringBuilder sb = new StringBuilder();
-            for (String word : wordGroups.get(i)) {
-                sb.append(word).append(" ");
+        String[] result = new String[4];
+        if (numGroups == 0) {
+            Arrays.fill(result, "");
+        } else {
+            int i = 0;
+            for (; i < numGroups && i < 4; i++) {
+                StringBuilder sb = new StringBuilder();
+                for (String word : wordGroups.get(i)) {
+                    sb.append(word).append(" ");
+                }
+                result[i] = sb.toString().trim();
             }
-            result[i] = sb.toString().trim();
+            for (; i < 4; i++) {
+                result[i] = "";
+            }
         }
+
 
 		
         
