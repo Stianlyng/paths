@@ -34,19 +34,19 @@ public class Passage{
   
     int playerStartIndex = getContent().indexOf("#player:") + 8;
     int playerEndIndex = getContent().indexOf("#", playerStartIndex);
-    player = getContent().substring(playerStartIndex, playerEndIndex);
+    player = getContent().substring(playerStartIndex, playerEndIndex).replace("\n", "");
 
-    int enemyStartIndex = getContent().indexOf("#enemy:") + 8;
+    int enemyStartIndex = getContent().indexOf("#enemy:") + 7;
     int enemyEndIndex = getContent().indexOf("#", enemyStartIndex);
-    enemy = getContent().substring(enemyStartIndex, enemyEndIndex);
+    enemy = getContent().substring(enemyStartIndex, enemyEndIndex).replace("\n", "");
 
-    int backgroundStartIndex = getContent().indexOf("#background:") + 8;
+    int backgroundStartIndex = getContent().indexOf("#background:") + 12;
     int backgroundEndIndex = getContent().indexOf("#", backgroundStartIndex);
-    background = getContent().substring(backgroundStartIndex, backgroundEndIndex);
+    background = getContent().substring(backgroundStartIndex, backgroundEndIndex).replace("\n", "");
 
-    int fightStartIndex = getContent().indexOf("#fight:") + 8;
-    int fightEndIndex = getContent().indexOf("#", fightStartIndex);
-    if(getContent().substring(fightStartIndex, fightEndIndex).equals("yes")){
+    int fightStartIndex = getContent().indexOf("#fight:") + 7;
+    int fightEndIndex = getContent().indexOf("{", fightStartIndex);
+    if(getContent().substring(fightStartIndex, fightEndIndex).replace("\n", "").equals("yes")){
       fightScene = true;
     } else{
       fightScene = false;

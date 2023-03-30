@@ -27,9 +27,9 @@ public class NewTalkingScene {
 
     public static Scene scene(String[] types, String[] passageContent, Game game, Passage passage) throws FileNotFoundException, MalformedURLException{
         
-        ImageView enemyImage = ApplicationObjects.newImage("characters", passage.getEnemy(), 0, 0, 150, 150);
-        ImageView playerImage = ApplicationObjects.newImage("characters", passage.getPlayer(), 0, 100, 150, 150);
-        ImageView backgroundImage = ApplicationObjects.newImage("backgrounds", passage.getBackground(), 0, 0, 0, 0);
+        ImageView enemyImage = ApplicationObjects.newImage("characters", passage.getEnemy(), 50, 150, 150, 150);
+        ImageView playerImage = ApplicationObjects.newImage("characters", passage.getPlayer(), 600, 150, 150, 150);
+        ImageView backgroundImage = ApplicationObjects.newImage("backgrounds", passage.getBackground(), 0, 0, 1650, 1000);
 
         MediaPlayer mumble = ApplicationObjects.newSound("mumble");
         boolean moreLinesLeft = (ApplicationFront.getTextLine() + 1 == types.length) ? false : true;
@@ -110,23 +110,20 @@ public class NewTalkingScene {
             ImageView rightBubble = ApplicationObjects.newImage("animations", "righttalkingbubble.png", 227-193, 390-71,793, 211+511);
             root.getChildren().add(rightBubble);
             rightBubble.toBack();
-            playerImage.setFitWidth(125);
-            playerImage.setFitHeight(125);
-            enemyImage.setFitWidth(175);
-            enemyImage.setFitHeight(175);
-        } else if(type.equals("{P}")){
-            ImageView leftBubble = ApplicationObjects.newImage("animations", "lefttalkingbubble.png", 227-193, 390-71, 793, 211+511);
-            root.getChildren().add(leftBubble);
-            leftBubble.toBack();
             playerImage.setFitWidth(175);
             playerImage.setFitHeight(175);
             enemyImage.setFitWidth(125);
             enemyImage.setFitHeight(125);
+        } else if(type.equals("{P}")){
+            ImageView leftBubble = ApplicationObjects.newImage("animations", "lefttalkingbubble.png", 227-193, 390-71, 793, 211+511);
+            root.getChildren().add(leftBubble);
+            leftBubble.toBack();
+            playerImage.setFitWidth(125);
+            playerImage.setFitHeight(125);
+            enemyImage.setFitWidth(175);
+            enemyImage.setFitHeight(175);
         } 
-
-
-        //background.toBack
-        //root.getChildren().addAll(enemyImage, playerImage);
+        backgroundImage.toBack();
         root.getStylesheets().add("StyleSheet.css"); 
         Scene scene = new Scene(root, 800, 600, Color.WHITE);
         
@@ -155,7 +152,6 @@ public class NewTalkingScene {
                     Button choice2 = ApplicationObjects.newButton(link2.getText(), 613-193, 283-71, "talk_button");
                     root.getChildren().addAll(neutralBubble, choice1, choice2);
                     neutralBubble.toBack();
-                    //TODO: add diffrent choices under
                     choice1.setOnAction(p -> {
                         try {
                             LvlScene.scene(game, game.go(link1));
@@ -172,12 +168,9 @@ public class NewTalkingScene {
                         }
                     });
                     } catch (FileNotFoundException e1) {
-                        // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
-                
                 }});
-        
         return scene;
     }
 

@@ -1,9 +1,9 @@
 Haunted House
 
 ::Beginnings
-#background:Background1
-#enemy:troll
-#player:dude
+#background:Background1.png
+#enemy:troll.png
+#player:dude.png
 #fight:no
 {E}You are in a small, dimly lit room. There is a door in front of you. You hear a faint voice coming from the other side of the door. damn that crazy wow
 {P}You are now a fish
