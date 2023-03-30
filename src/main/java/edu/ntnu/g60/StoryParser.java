@@ -116,7 +116,13 @@ public class StoryParser {
         String linkReference = linkParts[1].substring(0, linkParts[1].length() - 1);
         return new Link(linkText, linkReference);
     }
-    
+
+    private static Link parseAction(String actionString) {
+        String[] actionParts = actionString.split("\\]\\(");
+        String actionText = actionParts[0].substring(1);
+        String actionReference = actionParts[1].substring(0, actionParts[1].length() - 1);
+        return new Link(actionText, actionReference);
+    }
     
 }
 
