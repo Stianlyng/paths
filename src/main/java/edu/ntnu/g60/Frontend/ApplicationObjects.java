@@ -58,7 +58,8 @@ public class ApplicationObjects {
         rectangle.setWidth(width);
         rectangle.setHeight(height);
         rectangle.setStroke(Color.BLACK);
-        rectangle.setFill(Color.WHITE);
+        rectangle.setFill(Color.rgb(150, 111, 51));
+        rectangle.setOpacity(30);
         return rectangle;
     }
 
