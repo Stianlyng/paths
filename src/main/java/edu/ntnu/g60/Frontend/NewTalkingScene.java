@@ -107,11 +107,11 @@ public class NewTalkingScene {
 
 
         ApplicationFront.setTextLine(ApplicationFront.getTextLine() + 1);
-        if(type == "{N}"){
+        if(type.equals("{N}")){
             ImageView neutralBubble = ApplicationObjects.newImage("animations", "neutralbubble.png", 227-193, 390-71, 793, 211+511);
             root.getChildren().add(neutralBubble);
             neutralBubble.toBack();
-        } else if(type == "{E}"){
+        } else if(type.equals("{E}")){
             ImageView rightBubble = ApplicationObjects.newImage("animations", "righttalkingbubble.png", 227-193, 390-71,793, 211+511);
             root.getChildren().add(rightBubble);
             rightBubble.toBack();
@@ -119,7 +119,7 @@ public class NewTalkingScene {
             playerHeight = 125;
             enemyWidth = 175;
             enemyHeight = 175;
-        } else if(type == "{P}"){
+        } else if(type.equals("{P}")){
             ImageView leftBubble = ApplicationObjects.newImage("animations", "lefttalkingbubble.png", 227-193, 390-71, 793, 211+511);
             root.getChildren().add(leftBubble);
             leftBubble.toBack();
@@ -127,7 +127,7 @@ public class NewTalkingScene {
             playerHeight = 175;
             enemyWidth = 125;
             enemyHeight = 125;
-        } else if(type == "{C}"){
+        } else if(type.equals("{C}")){
             ImageView neutralBubble = ApplicationObjects.newImage("animations", "neutralbubble.png", 227-193, 390-71, 793, 211+511);
             Button choice1 = ApplicationObjects.newButton("choice 1", 264, 283, "talk_button");
             Button choice2 = ApplicationObjects.newButton("choice 2", 613, 283, "talk_button");
