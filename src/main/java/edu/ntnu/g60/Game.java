@@ -8,10 +8,9 @@ import edu.ntnu.g60.goals.Goal;
  */
 public class Game {
 
-  // TODO: skal de være final?
-  private Player player;
-  private Story story;
-  private List<Goal> goals;
+  private final Player player;
+  private final Story story;
+  private final List<Goal> goals;
   Passage currentPassage;
 
   /**
@@ -50,7 +49,6 @@ public class Game {
     return this.goals;
   }
 
-
   /**
    * Starts the game by returning the first passage of the story.
    * @return The first passage of the story.
@@ -68,5 +66,3 @@ public class Game {
     return this.story.getPassage(link);
   }
 }
-
-  
