@@ -1,8 +1,14 @@
 package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import edu.ntnu.g60.*;
+import edu.ntnu.g60.goals.Goal;
+import edu.ntnu.g60.goals.HealthGoal;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,12 +19,20 @@ import javafx.stage.Stage;
 
 public class ContinueScene {
     static Stage stage = ApplicationFront.getStage();
-    public static Scene scene() throws FileNotFoundException {
+    public static Scene scene() throws IOException {
         //TODO: set name of buttons to variabel names based on savefile names
+        
+        
+        Story story = StoryParser.parse("haunted_house");
+                List<Goal> goals = new ArrayList<Goal>();
+                goals.add(new HealthGoal(4));
+
+                Game game = new Game(new Player("Alice"), story, goals);
+
         Button save1Button = ApplicationObjects.newButton("Save 1", 514-193, 278-71, "launch_button");
         save1Button.setOnAction(e -> {
             try {
-                LvlScene.scene(0);
+                LvlScene.scene(game);
             } catch (MalformedURLException e1) {
                 e1.printStackTrace();
             } //hent lvl fra save1
@@ -26,7 +40,7 @@ public class ContinueScene {
         Button save2Button = ApplicationObjects.newButton("Save 2", 514-193, 345-71, "launch_button");
         save2Button.setOnAction(e -> {
             try {
-                LvlScene.scene(0);
+                LvlScene.scene(game);
             } catch (MalformedURLException e1) {
                 e1.printStackTrace();
             } //hent lvl fra save2
@@ -34,7 +48,7 @@ public class ContinueScene {
         Button save3Button = ApplicationObjects.newButton("Save 3", 514-193, 412-71, "launch_button");
         save3Button.setOnAction(e -> {
             try {
-                LvlScene.scene(0);
+                LvlScene.scene(game);
             } catch (MalformedURLException e1) {
                 e1.printStackTrace();
             } //hent lvl fra save3

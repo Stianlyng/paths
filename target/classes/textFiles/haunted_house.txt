@@ -1,11 +1,25 @@
 Haunted House
 
 ::Beginnings
-You are in a small, dimly lit room. There is a door in front of you. You hear a faint voice coming from the other side of the door. It says, "I am the ghost of the house. I will grant you one wish. What is your wish?"
+# NightTime
+{E}You are in a small, dimly lit room. There is a door in front of you. You hear a faint voice coming from the other side of the door. damn that crazy wow
+{P}You are now a fish
 [Try to open the door](Another room)
 
 
+
 ::Another room
-The door opens to another room. You see a desk with a large, dusty book.
+#background:Forest
+#enemy:invoice
+#player:teenager
+#fight:yes
+{T}The door opens to another room. You see a desk with a large, dusty book.
+{P}You are now a fish
 [Open the book](The book of spells)
 [Go back](Beginnings)
+
+
+// This is a comment.
+// {P} is player
+// {N} is neutral
+// {E} enemy

@@ -28,16 +28,16 @@ public class Player {
    * @throws IllegalArgumentException if gold is less than 0
    * @throws IllegalArgumentException if inventory is null
    */
-  public Player(String name, int health, int score, int gold, List<String> inventory) throws IllegalArgumentException {
+  public Player(String name, List<String> inventory) throws IllegalArgumentException {
     if (name == null || name.isBlank()) throw new IllegalArgumentException("Name cannot be null or blank.");
     if (health < 0) throw new IllegalArgumentException("Health cannot be less than 0.");  
     if (score < 0) throw new IllegalArgumentException("Score cannot be less than 0.");
     if (gold < 0) throw new IllegalArgumentException("Gold cannot be less than 0.");
     if (inventory == null) throw new IllegalArgumentException("Inventory cannot be null.");
     this.name = name;
-    this.health = health;
-    this.score = score;
-    this.gold = gold;
+    this.health = 100;
+    this.score = 0;
+    this.gold = 0;
     this.inventory = inventory;
   }
 
@@ -49,8 +49,8 @@ public class Player {
    * @throws IllegalArgumentException if score is less than 0
    * @throws IllegalArgumentException if gold is less than 0
    */
-  public Player(String name, int health, int score, int gold) throws IllegalArgumentException {
-    this(name, health, score, gold, new ArrayList<>());
+  public Player(String name) throws IllegalArgumentException {
+    this(name, new ArrayList<>());
   }
 
   public String getName(){

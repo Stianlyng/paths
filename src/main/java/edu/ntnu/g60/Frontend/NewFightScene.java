@@ -2,6 +2,8 @@ package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+
+import edu.ntnu.g60.Game;
 import edu.ntnu.g60.Player;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -13,11 +15,10 @@ import javafx.stage.Stage;
 
 public class NewFightScene {
     static Stage stage = ApplicationFront.getStage();
-    static Player player = ApplicationFront.getPlayer();
 
-    public static Scene scene(int lvl) throws FileNotFoundException{
+    public static Scene scene(Game game) throws FileNotFoundException{
         //TODO: add images like done on talking scene
-        
+        Player player = game.getPlayer();
         Button fightButton = ApplicationObjects.newButton("Fight", 209-193, 484-71, "fight_button");
         Button healButton = ApplicationObjects.newButton("Heal", 604-193, 484-71, "fight_button");
         Button inventoryButton = ApplicationObjects.newButton("Inventory", 209-193, 575-71, "fight_button");

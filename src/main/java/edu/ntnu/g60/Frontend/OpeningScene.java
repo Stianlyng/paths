@@ -1,6 +1,8 @@
 package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +19,8 @@ public class OpeningScene {
             try {
                 stage.setScene(ContinueScene.scene());
             } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });

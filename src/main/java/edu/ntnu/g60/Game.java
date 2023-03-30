@@ -12,6 +12,7 @@ public class Game {
   private Player player;
   private Story story;
   private List<Goal> goals;
+  Passage currentPassage;
 
   /**
    * Constructor for the Game class.
@@ -26,9 +27,17 @@ public class Game {
     this.player = player;
     this.story = story;
     this.goals = goals;
+    currentPassage = begin();
   }
-  
-  
+
+  public Passage getCurrentPassage(){
+    return this.currentPassage;
+  }
+
+  public void setCurrentPassage(Passage passage){
+    this.currentPassage = passage;
+  }
+
   public Player getPlayer() {
     return this.player;
   }
@@ -40,6 +49,7 @@ public class Game {
   public List<Goal> getGoals() {
     return this.goals;
   }
+
 
   /**
    * Starts the game by returning the first passage of the story.

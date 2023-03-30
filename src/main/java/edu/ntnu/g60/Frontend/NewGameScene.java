@@ -1,8 +1,14 @@
 package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import edu.ntnu.g60.*;
+import edu.ntnu.g60.goals.Goal;
+import edu.ntnu.g60.goals.HealthGoal;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,14 +26,23 @@ public class NewGameScene {
         startButton.setOnAction(e -> {
             //add overwrite om det er for mange saves
             //lag ny save file
-            try {
-                LvlScene.scene(0);
-            } catch (MalformedURLException e1) {
-                e1.printStackTrace();
-            } //hent lvl fra ny save file
-        });    
-            //TODO: add samme som over bare til riktig scene
+
         
+            try {
+                Story story = StoryParser.parse("haunted_house");
+                List<Goal> goals = new ArrayList<Goal>();
+                goals.add(new HealthGoal(4));
+
+                Game game = new Game(new Player("Alice"), story, goals);
+                try {
+                    LvlScene.scene(game);
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });        
 
         Button backButton = ApplicationObjects.newButton("Back", 903-193, 595-71, "back_button");
         backButton.setOnAction(e -> {
