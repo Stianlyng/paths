@@ -26,11 +26,11 @@ public class NewTalkingScene {
     static Stage stage = ApplicationFront.getStage();
 
     public static Scene scene(String[] types, String[] passageContent, Game game, Passage passage) throws FileNotFoundException, MalformedURLException{
-        //Group sceneInfo = Passage.getSceneInfo(gameSavelvl); //noe sånt
-        //ImageView enemyImage = sceneInfo.enemy
-        //ImageView background = sceneInfo.background
-        //ImageView playerImage.. hentes direkte og er altid samme
-        //Inventory Item... hentes fra inventory som tilsier at inventory må ha bilde param
+        
+        ImageView enemyImage = ApplicationObjects.newImage("characters", passage.getEnemy(), 0, 0, 150, 150);
+        ImageView playerImage = ApplicationObjects.newImage("characters", passage.getPlayer(), 0, 100, 150, 150);
+        ImageView backgroundImage = ApplicationObjects.newImage("backgrounds", passage.getBackground(), 0, 0, 0, 0);
+
         MediaPlayer mumble = ApplicationObjects.newSound("mumble");
         boolean moreLinesLeft = (ApplicationFront.getTextLine() + 1 == types.length) ? false : true;
 
@@ -93,18 +93,12 @@ public class NewTalkingScene {
         String score = "" + game.getPlayer().getScore();
         String gold = "" + game.getPlayer().getGold();
         String health = "" + game.getPlayer().getHealth();
-        Group root = new Group(ApplicationObjects.newRectangle(203-193, 79-71, 293, 38),
+        Group root = new Group(backgroundImage, ApplicationObjects.newRectangle(203-193, 79-71, 293, 38),
         ApplicationObjects.newText(score, 18, false, 242-193, 105-71),
         ApplicationObjects.newText(gold, 18, false, 322-193, 105-71),
         ApplicationObjects.newText(health, 18, false, 420-193, 105-71),
         textLineOne, textLineTwo, textLineThree, textLineFour,
-        coinIcon, healthIcon, scoreIcon);
-
-
-        int playerWidth = 150;
-        int playerHeight = 150;
-        int enemyWidth = 150;
-        int enemyHeight = 150;
+        coinIcon, healthIcon, scoreIcon, playerImage, enemyImage);
 
 
         ApplicationFront.setTextLine(ApplicationFront.getTextLine() + 1);
@@ -116,18 +110,18 @@ public class NewTalkingScene {
             ImageView rightBubble = ApplicationObjects.newImage("animations", "righttalkingbubble.png", 227-193, 390-71,793, 211+511);
             root.getChildren().add(rightBubble);
             rightBubble.toBack();
-            playerWidth = 125;
-            playerHeight = 125;
-            enemyWidth = 175;
-            enemyHeight = 175;
+            playerImage.setFitWidth(125);
+            playerImage.setFitHeight(125);
+            enemyImage.setFitWidth(175);
+            enemyImage.setFitHeight(175);
         } else if(type.equals("{P}")){
             ImageView leftBubble = ApplicationObjects.newImage("animations", "lefttalkingbubble.png", 227-193, 390-71, 793, 211+511);
             root.getChildren().add(leftBubble);
             leftBubble.toBack();
-            playerWidth = 175;
-            playerHeight = 175;
-            enemyWidth = 125;
-            enemyHeight = 125;
+            playerImage.setFitWidth(175);
+            playerImage.setFitHeight(175);
+            enemyImage.setFitWidth(125);
+            enemyImage.setFitHeight(125);
         } 
 
 
@@ -144,9 +138,9 @@ public class NewTalkingScene {
                 } catch (FileNotFoundException | MalformedURLException e1) {
                     e1.printStackTrace();
                 } 
-            } else if (moreLinesLeft){ //Passage.passageHasFightScene() == true
+            } else if (passage.hasFightScene()){
                 try {
-                    stage.setScene(NewFightScene.scene(game));
+                    stage.setScene(NewFightScene.scene(game, passage));
                 } catch (FileNotFoundException e1){
                     e1.printStackTrace();
                 }  

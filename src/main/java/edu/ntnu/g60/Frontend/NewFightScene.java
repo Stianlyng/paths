@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import edu.ntnu.g60.Game;
+import edu.ntnu.g60.Passage;
 import edu.ntnu.g60.Player;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 public class NewFightScene {
     static Stage stage = ApplicationFront.getStage();
 
-    public static Scene scene(Game game) throws FileNotFoundException{
+    public static Scene scene(Game game, Passage passage) throws FileNotFoundException{
         //TODO: add images like done on talking scene
         Player player = game.getPlayer();
         Button fightButton = ApplicationObjects.newButton("Fight", 209-193, 484-71, "fight_button");

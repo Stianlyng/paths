@@ -15,7 +15,7 @@ public class Passage{
   private String player;
   private String enemy;
   private String background;
-  private boolean hasFightScene;
+  private boolean fightScene;
   // TODO: legg til params slik som background etc...
 
   /**
@@ -31,8 +31,44 @@ public class Passage{
     this.title = title;
     this.content = content;
     this.links = new ArrayList<>();
+  
+    int playerStartIndex = getContent().indexOf("#player:") + 8;
+    int playerEndIndex = getContent().indexOf("#", playerStartIndex);
+    player = getContent().substring(playerStartIndex, playerEndIndex);
+
+    int enemyStartIndex = getContent().indexOf("#enemy:") + 8;
+    int enemyEndIndex = getContent().indexOf("#", enemyStartIndex);
+    enemy = getContent().substring(enemyStartIndex, enemyEndIndex);
+
+    int backgroundStartIndex = getContent().indexOf("#background:") + 8;
+    int backgroundEndIndex = getContent().indexOf("#", backgroundStartIndex);
+    background = getContent().substring(backgroundStartIndex, backgroundEndIndex);
+
+    int fightStartIndex = getContent().indexOf("#fight:") + 8;
+    int fightEndIndex = getContent().indexOf("#", fightStartIndex);
+    if(getContent().substring(fightStartIndex, fightEndIndex).equals("yes")){
+      fightScene = true;
+    } else{
+      fightScene = false;
+    }
+    
   }
 
+  public String getPlayer(){
+    return player;
+  }
+
+  public String getEnemy(){
+    return enemy;
+  }
+
+  public String getBackground(){
+    return background;
+  }
+
+  public boolean hasFightScene(){
+    return fightScene;
+  }
 
   public String getTitle() {
     return this.title;
