@@ -27,7 +27,7 @@ public class ContinueScene {
         List<Goal> goals = new ArrayList<Goal>();
         goals.add(new HealthGoal(4));
 
-        Game game = new Game(new Player("Alice"), story, goals); //les fra fil
+        Game game; //les fra fil
         Passage passage; //les fra save
 
         Button save1Button = ApplicationObjects.newButton("Save 1", 514-193, 278-71, "launch_button");

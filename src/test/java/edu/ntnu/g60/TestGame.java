@@ -27,7 +27,7 @@ public class TestGame {
     goals = new ArrayList<>();
     goals.add(new HealthGoal(4));
     
-    player = new Player("Elon", 10, 10, 10);
+    player = new Player("Elon");
     Passage openingPassage = new Passage("Level 1", "You are in a dark room.");
     story = new Story("The Dark World", openingPassage);
   }

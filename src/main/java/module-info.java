@@ -1,6 +1,5 @@
 module edu.ntnu.g60 {
     requires transitive javafx.controls;
-    requires transitive javafx.fxml;
     requires transitive javafx.graphics;
     requires transitive javafx.media;
     
