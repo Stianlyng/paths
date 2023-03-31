@@ -27,30 +27,29 @@ public class ContinueScene {
         List<Goal> goals = new ArrayList<Goal>();
         goals.add(new HealthGoal(4));
 
-        Game game; //les fra fil
-        Passage passage; //les fra save
+        Game game = new Game(new Player("Alice"), story, goals); //les fra fil
 
         Button save1Button = ApplicationObjects.newButton("Save 1", 514-193, 278-71, "launch_button");
         save1Button.setOnAction(e -> {
             try {
-                LvlScene.scene(game, passage);
-            } catch (MalformedURLException e1) {
+                LvlScene.scene(game, game.go(SaveParser.getSaveFile(1)));
+            } catch (IOException e1) {
                 e1.printStackTrace();
             }
         });
         Button save2Button = ApplicationObjects.newButton("Save 2", 514-193, 345-71, "launch_button");
         save2Button.setOnAction(e -> {
             try {
-                LvlScene.scene(game, passage);
-            } catch (MalformedURLException e1) {
+                LvlScene.scene(game, game.go(SaveParser.getSaveFile(2)));
+            } catch (IOException e1) {
                 e1.printStackTrace();
             } //hent lvl fra save2
         });
         Button save3Button = ApplicationObjects.newButton("Save 3", 514-193, 412-71, "launch_button");
         save3Button.setOnAction(e -> {
             try {
-                LvlScene.scene(game, passage);
-            } catch (MalformedURLException e1) {
+                LvlScene.scene(game, game.go(SaveParser.getSaveFile(3)));
+            } catch (IOException e1) {
                 e1.printStackTrace();
             } //hent lvl fra save3
         });
