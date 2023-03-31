@@ -1,4 +1,4 @@
 #save number, link reference
-1, 
-2, 
-3, 
+1, Another room
+2, Another room
+3, Beginnings
