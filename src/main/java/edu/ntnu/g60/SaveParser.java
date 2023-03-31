@@ -41,4 +41,8 @@ public class SaveParser {
         reader.close();
         return link;
     }
+
+    public static void overwriteLine(Link link){
+        
+    }
 }
