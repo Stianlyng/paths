@@ -26,9 +26,11 @@ public class ContinueScene {
         Story story = StoryParser.parse("haunted_house");
         List<Goal> goals = new ArrayList<Goal>();
         goals.add(new HealthGoal(4));
+        Game game = new Game(new Player("Alice"), story, goals);
 
-        Game game = new Game(new Player("Alice"), story, goals); //les fra fil
 
+
+        
         Button save1Button = ApplicationObjects.newButton("Save 1", 514-193, 278-71, "launch_button");
         save1Button.setOnAction(e -> {
             try {

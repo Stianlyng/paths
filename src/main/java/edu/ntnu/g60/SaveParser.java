@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 public class SaveParser {
     
     
@@ -12,21 +13,31 @@ public class SaveParser {
         BufferedReader reader = new BufferedReader(new FileReader(path + "saves" + ".txt"));
         String line = "";
         reader.readLine();
+        String[] parts = new String[3];
+        String text = "";
+        String refrence = "";
         
         switch (number){
             case 1:
-                line = reader.readLine().trim().replace("1, ", "");
+                parts = line.split(",");    
+                text = parts[1];
+                refrence = parts[2];
+       
             case 2:
                 reader.readLine();
-                line = reader.readLine().trim().replace("2, ", "");
+                parts = line.split(",");    
+                text = parts[1];
+                refrence = parts[2];
             case 3:
                 reader.readLine();
                 reader.readLine();
-                line = reader.readLine().trim().replace("3, ", "");
+                parts = line.split(",");    
+                text = parts[1];
+                refrence = parts[2];
             default:
         }
         
-        Link link = new Link("", line);
+        Link link = new Link(text, refrence);
         reader.close();
         return link;
     }
