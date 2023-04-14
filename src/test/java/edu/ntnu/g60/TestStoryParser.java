@@ -1,23 +1,18 @@
 package edu.ntnu.g60;
 
-import edu.ntnu.g60.goals.*;
-import edu.ntnu.g60.actions.*;
+import edu.ntnu.g60.models.actions.*;
+import edu.ntnu.g60.models.goals.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
-import org.junit.Before;
 
 public class TestStoryParser {
 
-    @Before
+    @BeforeEach
     public void setUp() {
     /*
         * Noen ting som kan være greit å ha med i setUp:
