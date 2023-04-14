@@ -1,4 +1,0 @@
-#save number, link reference
-1,Try to open the door,Another room
-2,Try to open the door,Another room
-3,Try to open the door,Another room

@@ -1,6 +1,7 @@
 package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +13,9 @@ import java.util.stream.IntStream;
 import edu.ntnu.g60.Game;
 import edu.ntnu.g60.Link;
 import edu.ntnu.g60.Passage;
+import edu.ntnu.g60.Save;
+import edu.ntnu.g60.SaveRegister;
+import edu.ntnu.g60.Story;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -155,7 +159,9 @@ public class NewTalkingScene {
                     choice1.setOnAction(p -> {
                         try {
                             LvlScene.scene(game, game.go(link1));
-                        } catch (MalformedURLException e1) {
+                            SaveRegister.setSave(new Save(game.go(link1), Story.getCurrentSave().getSaveName(),
+                            Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
+                        } catch (IOException e1) {
                             e1.printStackTrace();
                         }
                     });
@@ -163,7 +169,9 @@ public class NewTalkingScene {
                     choice2.setOnAction(p -> {
                         try {
                             LvlScene.scene(game, game.go(link2));
-                        } catch (MalformedURLException e1) {
+                            SaveRegister.setSave(new Save(game.go(link2), Story.getCurrentSave().getSaveName(),
+                            Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
+                        } catch (IOException e1) {
                             e1.printStackTrace();
                         }
                     });

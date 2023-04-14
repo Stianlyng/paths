@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class OpeningScene {
     static Stage stage = ApplicationFront.getStage();
 
-    public static Scene scene() throws FileNotFoundException{
+    public static Scene scene() throws FileNotFoundException, IOException{
         Button continueButton = ApplicationObjects.newButton("Continue", 514-193, 314-71, "launch_button");
         continueButton.setOnAction(e -> {
             try {
@@ -22,6 +22,8 @@ public class OpeningScene {
                 e1.printStackTrace();
             } catch (IOException e1) {
                 e1.printStackTrace();
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
             }
         });
         
@@ -29,7 +31,7 @@ public class OpeningScene {
         newGameButton.setOnAction(e -> {
             try {
                 stage.setScene(NewGameScene.scene());
-            } catch (FileNotFoundException e1) {
+            } catch (ClassNotFoundException | IOException e1) {
                 e1.printStackTrace();
             }
         });

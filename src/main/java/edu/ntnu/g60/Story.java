@@ -12,6 +12,7 @@ public class Story {
   private String title;
   private Map<Link, Passage> passages;
   private Passage openingPassage;
+  private static Save currentSave;
 
   /**
    * Constructor for the Story class.
@@ -26,6 +27,14 @@ public class Story {
     this.title = title;
     this.openingPassage = openingPassage;
     this.passages = new HashMap<Link, Passage>();
+  }
+
+  public static void setCurrentSave(Save save){
+    currentSave = save;
+  }
+
+  public static Save getCurrentSave(){
+    return currentSave;
   }
 
   
