@@ -1,6 +1,6 @@
-package edu.ntnu.g60.actions;
+package edu.ntnu.g60.models.actions;
 
-import edu.ntnu.g60.Player;
+import edu.ntnu.g60.models.Player;
 
 public class GoldAction implements Action{
     int gold;

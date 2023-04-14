@@ -1,6 +1,7 @@
-package edu.ntnu.g60;
+package edu.ntnu.g60.models;
 import java.util.List;
-import edu.ntnu.g60.goals.Goal;
+
+import edu.ntnu.g60.models.goals.Goal;
 
 /**
  * The Game class is the main class of the game. 

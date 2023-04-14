@@ -1,7 +1,8 @@
-package edu.ntnu.g60;
+package edu.ntnu.g60.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The Passage class represents a passage in the story.
@@ -12,11 +13,6 @@ public class Passage{
   private String title;
   private String content;
   private List<Link> links;
-  private String player;
-  private String enemy;
-  private String background;
-  private boolean fightScene;
-  // TODO: legg til params slik som background etc...
 
   /**
    * Constructor for the Passage class.
@@ -26,48 +22,13 @@ public class Passage{
    * @throws IllegalArgumentException if title or content is null or blank.
    */
   public Passage(String title, String content) throws IllegalArgumentException {
+
     if (title == null || title.isBlank()) throw new IllegalArgumentException("Title cannot be null or blank.");
     if (content == null || content.isBlank()) throw new IllegalArgumentException("Content cannot be null or blank.");
     this.title = title;
     this.content = content;
     this.links = new ArrayList<>();
-  
-    int playerStartIndex = getContent().indexOf("#player:") + 8;
-    int playerEndIndex = getContent().indexOf("#", playerStartIndex);
-    player = getContent().substring(playerStartIndex, playerEndIndex).replace("\n", "");
 
-    int enemyStartIndex = getContent().indexOf("#enemy:") + 7;
-    int enemyEndIndex = getContent().indexOf("#", enemyStartIndex);
-    enemy = getContent().substring(enemyStartIndex, enemyEndIndex).replace("\n", "");
-
-    int backgroundStartIndex = getContent().indexOf("#background:") + 12;
-    int backgroundEndIndex = getContent().indexOf("#", backgroundStartIndex);
-    background = getContent().substring(backgroundStartIndex, backgroundEndIndex).replace("\n", "");
-
-    int fightStartIndex = getContent().indexOf("#fight:") + 7;
-    int fightEndIndex = getContent().indexOf("{", fightStartIndex);
-    if(getContent().substring(fightStartIndex, fightEndIndex).replace("\n", "").equals("yes")){
-      fightScene = true;
-    } else{
-      fightScene = false;
-    }
-    
-  }
-
-  public String getPlayer(){
-    return player;
-  }
-
-  public String getEnemy(){
-    return enemy;
-  }
-
-  public String getBackground(){
-    return background;
-  }
-
-  public boolean hasFightScene(){
-    return fightScene;
   }
 
   public String getTitle() {
@@ -87,6 +48,9 @@ public class Passage{
    * @param link The link to add.
    * @return True if the link was added, false otherwise.
    * @throws IllegalArgumentException if link is null.
+   * todo: check if link is already in list
+   * todo: check if link is null
+   * todo: check if link is to self
    */
   public boolean addLink(Link link) throws IllegalArgumentException {
     if (link == null) throw new IllegalArgumentException("Link cannot be null.");
@@ -108,9 +72,18 @@ public class Passage{
    */
   @Override
   public String toString() {
-    return "Passage: " + title + ", Content: " + content + ", Links to: " + links.size() + " passages.";
+      return "Passage{" +
+              "title='" + title + '\'' +
+              ", content='" + content + '\'' +
+              ", links=" + links +
+              '}';
   }
-
+  /*
+  @Override
+  public String toString() {
+    return "Passage: " + title + ", Content: " + content + ",\nLinks to: " + links.size() + " passages.";
+  }
+   */
 
   /**
    * Compares this passage to another object.
@@ -125,4 +98,12 @@ public class Passage{
     // TODO: sjekk om disse er riktige
     return passage.getTitle().equals(this.title) && passage.getContent().equals(this.content) && passage.getLinks().equals(this.links);
   }
+  
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(title, content, links);
+  }
+
+  
 }

@@ -1,5 +1,6 @@
-package edu.ntnu.g60;
+package edu.ntnu.g60.models;
 import java.util.Map;
+import java.util.Objects;
 import java.util.HashMap;
 import java.util.Collection;
 
@@ -28,6 +29,7 @@ public class Story {
     this.passages = new HashMap<Link, Passage>();
   }
 
+  //todo: add constructor with list of passages
   
   /**
    * Adds a passage to the story.
@@ -39,7 +41,7 @@ public class Story {
     Link link = new Link(passage.getTitle(), passage.getContent());
     this.passages.put(link, passage);
   }
-  
+
   public String getTitle() {
     return this.title;
   }
@@ -47,13 +49,22 @@ public class Story {
   public Passage getOpeningPassage() {
     return this.openingPassage;
   }
-  
+
   public Passage getPassage(Link link) {
-    return this.passages.get(link);
+      return this.passages.get(link);
   }
 
   public Collection<Passage> getPassages() {
     return this.passages.values();
+  }
+
+  @Override
+  public String toString() {
+    return "Story{" +
+      " title='" + getTitle() + "'" +
+      ", openingPassage='" + getOpeningPassage() + "'" +
+      ", passages='" + getPassages() + "'" +
+      "}";
   }
 
 }

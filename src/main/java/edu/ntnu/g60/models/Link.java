@@ -1,10 +1,10 @@
-package edu.ntnu.g60;
+package edu.ntnu.g60.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
-import edu.ntnu.g60.actions.Action;
+import edu.ntnu.g60.models.actions.Action;
 
 /**
  * The Link class represents a link between two passages.
@@ -27,6 +27,8 @@ public class Link {
     // TODO: sjekk om det skal legges til en sjekk for om reference er en gyldig passage
     this.text = text;
     this.reference = reference;
+    this.actions = new ArrayList<>();
+    
   }
 
   public void addAction(Action action) {
@@ -55,15 +57,36 @@ public class Link {
    * Compares this link to another object.
    * @param obj The object to compare with this link.
    * @return True if the object is equal to this link, false otherwise.
-   */
   @Override
   public boolean equals(Object obj) {
     if (obj == this) return true;
     if (obj == null || this.getClass() != obj.getClass()) return false;
     Link link = (Link) obj;
     return  Objects.equals(this.text, link.text) && 
-            Objects.equals(this.reference, link.reference) &&
-            Objects.equals(this.actions, link.actions);
+            Objects.equals(this.reference, link.reference);// &&
+           // Objects.equals(this.actions, link.actions);
 
   }
+   */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Link)) return false;
+    Link link = (Link) o;
+    return getText().equals(link.getText()) && Objects.equals(getReference(), link.getReference());
+  }
+  
+  /*
+  @Override
+  public int hashCode() {
+    //return Objects.hash(text, reference, actions);
+    return Objects.hash(text, reference);
+  }
+  */
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getText(), getReference());
+  }
+
 }
