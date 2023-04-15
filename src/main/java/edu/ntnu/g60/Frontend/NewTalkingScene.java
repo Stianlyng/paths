@@ -28,8 +28,8 @@ public class NewTalkingScene {
 
     public static Scene scene(String[] types, String[] passageContent, Game game, Passage passage) throws FileNotFoundException, MalformedURLException{
         
-        ImageView enemyImage = ApplicationObjects.newImage("characters", passage.getEnemy(), 50, 150, 150, 150);
-        ImageView playerImage = ApplicationObjects.newImage("characters", passage.getPlayer(), 600, 150, 150, 150);
+        ImageView enemyImage = ApplicationObjects.newImage("characters", passage.getPlayer(), 50, 150, 150, 150);
+        ImageView playerImage = ApplicationObjects.newImage("characters", passage.getEnemy(), 600, 150, 150, 150);
         ImageView backgroundImage = ApplicationObjects.newImage("backgrounds", passage.getBackground(), 0, 0, 1650, 1000);
 
         MediaPlayer mumble = ApplicationObjects.newSound("mumble");

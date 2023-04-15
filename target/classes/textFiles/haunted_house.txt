@@ -2,13 +2,13 @@ Haunted House
 
 ::Beginnings
 #background:Background1.png
-#enemy:troll.png
-#player:dude.png
-#fight:yes
-{E}You are in a small, dimly lit room. There is a door in front of you. You hear a faint voice coming from the other side of the door. damn that crazy wow
-{P}You are now a fish
-[Try to open the door](Another room)
-[Run](Another another room)
+#enemy:gender.png
+#player:baby.png
+#fight:no
+{E}Hello newborn. Welcome to life. Your first task in life will be to choose what gender you want to be!
+{P}Oh no. So scary woOoOooO!
+[Woman](Another room)
+[Man](Another another room)
 
 
 
