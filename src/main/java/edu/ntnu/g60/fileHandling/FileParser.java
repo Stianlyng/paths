@@ -11,6 +11,7 @@ import edu.ntnu.g60.models.Passage;
 import edu.ntnu.g60.models.Story;
 
 public class FileParser {
+
     private String storyTitle;
     private String filePath;
     private List<textBlock> textBlocks;

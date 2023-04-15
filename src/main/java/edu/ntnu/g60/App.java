@@ -2,7 +2,6 @@ package edu.ntnu.g60;
 
 import java.util.List;
 
-import edu.ntnu.g60.fileHandling.FileParser;
 import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Link;
 import edu.ntnu.g60.models.Passage;
@@ -18,7 +17,7 @@ public class App {
     public static void main(String[] args) {
         
         Passage openingPassage = new Passage("Opening Passage", "This is the opening passage");
-        Link link = new Link("forward", "goto: 0");
+        Link link = new Link("forward", "passage0");
         openingPassage.addLink(link);
 
         Story story = new Story("Haunted House", openingPassage);
@@ -26,8 +25,8 @@ public class App {
         for (int i = 0; i < 10;i++) {
             Passage p = new Passage("passage" + i, "content" + i);
             story.addPassage(p);
-            Link linkForward = new Link("forward", "goto: " + (i+1));
-            Link linkBack = new Link("backwards", "goto: " + (i-1));
+            Link linkForward = new Link("forward", "passage" + (i+1));
+            Link linkBack = new Link("backwards", "passage" + (i-1));
             p.addLink(linkForward);
             p.addLink(linkBack);
         }   
@@ -46,6 +45,13 @@ public class App {
         game.begin();
 
         System.out.println(game.getStory().getOpeningPassage().toString());
+        System.out.println(game.getStory().getOpeningPassage().getLinks().get(0));
+
+        Link nextLink = game.getStory().getOpeningPassage().getLinks().get(0);
+
+        Passage pas = game.go(nextLink);
+
+        System.out.println(pas);
 
         /*
         System.out.println("Story title: " + story.getTitle());
