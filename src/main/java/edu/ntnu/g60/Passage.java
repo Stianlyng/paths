@@ -16,7 +16,6 @@ public class Passage{
   private String enemy;
   private String background;
   private boolean fightScene;
-  // TODO: legg til params slik som background etc...
 
   /**
    * Constructor for the Passage class.
@@ -47,9 +46,9 @@ public class Passage{
     int fightStartIndex = getContent().indexOf("#fight:") + 7;
     int fightEndIndex = getContent().indexOf("{", fightStartIndex);
     if(getContent().substring(fightStartIndex, fightEndIndex).replace("\n", "").equals("yes")){
-      fightScene = true;
+      this.fightScene = true;
     } else{
-      fightScene = false;
+      this.fightScene = false;
     }
     
   }

@@ -2,10 +2,9 @@ package edu.ntnu.g60.frontend;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import edu.ntnu.g60.Player;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class ApplicationFront extends Application {
@@ -24,10 +23,6 @@ public class ApplicationFront extends Application {
         stage.setResizable(false);
         stage.show();
     }
-    
-    public static Stage getStage(){
-        return stage;
-    }
 
     public static int getTextLine(){
         return textLine;
@@ -38,7 +33,13 @@ public class ApplicationFront extends Application {
         textLine = amount;
     }
 
-    
+    public static void switchToScene(Scene scene) {
+        try {
+            stage.setScene(scene);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
 
     public static void main(String[] args){launch();}

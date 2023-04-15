@@ -11,7 +11,8 @@ public class SaveRegister {
         return getSaves[number - 1];
     }
 
-    public static void setSave(Save newSave, int number) throws IOException{
+    public static void setSave(Save newSave, int number) throws IOException, ClassNotFoundException{
+        saves = (Save[]) SerializationUtils.deserializeFromFile(PATH);
         saves[number - 1] = newSave;
         SerializationUtils.serializeToFile(saves, PATH);
     }

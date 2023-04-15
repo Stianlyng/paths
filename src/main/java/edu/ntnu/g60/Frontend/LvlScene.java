@@ -2,24 +2,19 @@ package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import edu.ntnu.g60.Game;
 import edu.ntnu.g60.Passage;
 import javafx.concurrent.Task;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
 
 
+//DOES STUFF in between lvl's
 public class LvlScene {
-    static Stage stage = ApplicationFront.getStage();
 
     public static void scene(Game game, Passage passage) throws MalformedURLException{
         MediaPlayer mumble = ApplicationObjects.newSound("mumble");
         try {
-            stage.setScene(LoadingScene.scene());
+            ApplicationFront.switchToScene(LoadingScene.scene());
         } catch (FileNotFoundException e1) {
             
             e1.printStackTrace();
@@ -28,12 +23,9 @@ public class LvlScene {
         String text = passage.getContent();
         int braceIndexx = text.indexOf('{');
         String output = text.substring(braceIndexx);
-
         String[] passages = output.split("\\n");
-
         String[] types = new String[passages.length];
         String[] contents = new String[passages.length];
-
         for (int i = 0; i < passages.length; i++) {
             int braceIndex = passages[i].indexOf('{');
             if (braceIndex >= 0) {
@@ -44,11 +36,11 @@ public class LvlScene {
 
         delay(2000, () -> {
             try {
-                stage.setScene(FirstScene.scene(passage.getTitle()));
+                ApplicationFront.switchToScene(FirstScene.scene(passage.getTitle()));
                 delay(2000, () -> {
                     try {
                         ApplicationFront.setTextLine(0);
-                        stage.setScene(NewTalkingScene.scene(types, contents, game, passage));
+                        ApplicationFront.switchToScene(NewTalkingScene.scene(types, contents, game, passage));
                         mumble.play();
                     } catch (FileNotFoundException | MalformedURLException e1) {
                         
@@ -56,7 +48,6 @@ public class LvlScene {
                     }
                 });
             } catch (FileNotFoundException e1) {
-                
                 e1.printStackTrace();
             }
         });
@@ -70,6 +61,7 @@ public class LvlScene {
                 try {
                     Thread.sleep(millis);
                 } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
                 return null;
             }

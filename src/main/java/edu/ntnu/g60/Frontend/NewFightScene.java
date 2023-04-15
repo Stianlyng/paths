@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 
 public class NewFightScene {
-    static Stage stage = ApplicationFront.getStage();
 
     public static Scene scene(Game game, Passage passage) throws FileNotFoundException{
         //TODO: add images like done on talking scene

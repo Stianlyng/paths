@@ -6,7 +6,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,11 +22,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 
 public class NewTalkingScene {
-    static Stage stage = ApplicationFront.getStage();
 
     public static Scene scene(String[] types, String[] passageContent, Game game, Passage passage) throws FileNotFoundException, MalformedURLException{
         
@@ -43,11 +40,11 @@ public class NewTalkingScene {
         
         String[] words = line.split("\\s+");
         int numGroups = (int) Math.ceil(words.length / 10.0);
-        List<String[]> wordGroups = new ArrayList<>();
-        for (int i = 0; i < numGroups; i++) {
-            int startIndex = i * 10;
-            int endIndex = Math.min(startIndex + 10, words.length);
-            if (startIndex < words.length) { 
+        
+        List<String[]> wordGroups = IntStream.range(0, numGroups)
+            .mapToObj(i -> {
+                int startIndex = i * 10;
+                int endIndex = Math.min(startIndex + 10, words.length);
                 String[] group = Arrays.copyOfRange(words, startIndex, endIndex);
                 if (group.length < 10) {
                     String[] paddedGroup = new String[10];
@@ -55,36 +52,25 @@ public class NewTalkingScene {
                     System.arraycopy(group, 0, paddedGroup, 0, group.length);
                     group = paddedGroup;
                 }
-                wordGroups.add(group);
-            } else { 
-                String[] paddedGroup = new String[10];
-                Arrays.fill(paddedGroup, "");
-                wordGroups.add(paddedGroup);
-            }
-        }
-
-        String[] result = new String[4];
-        if (numGroups == 0) {
-            Arrays.fill(result, "");
-        } else {
-            int i = 0;
-            for (; i < numGroups && i < 4; i++) {
-                StringBuilder sb = new StringBuilder();
-                for (String word : wordGroups.get(i)) {
-                    sb.append(word).append(" ");
-                }
-                result[i] = sb.toString().trim();
-            }
-            for (; i < 4; i++) {
-                result[i] = "";
-            }
-        }
-
-
-		
+                return group;
+            })
+            .collect(Collectors.toList());
         
+        String[] result = IntStream.range(0, Math.min(numGroups, 4))
+            .mapToObj(i -> {
+                StringBuilder sb = new StringBuilder();
+                Arrays.stream(wordGroups.get(i)).forEach(word -> sb.append(word).append(" "));
+                return sb.toString().trim();
+            })
+            .toArray(String[]::new);
+        
+        if (result.length < 4) {
+            String[] paddedResult = new String[4];
+            Arrays.fill(paddedResult, "");
+            System.arraycopy(result, 0, paddedResult, 0, result.length);
+            result = paddedResult;
+        }
 
-        //hent tekst fra passage
         Text textLineOne = ApplicationObjects.newText(result[0], 30, false, 233-193, 470-71);
         Text textLineTwo = ApplicationObjects.newText(result[1], 30, false, 233-193, 505-71);
         Text textLineThree = ApplicationObjects.newText(result[2], 30, false, 233-193, 540-71);
@@ -134,14 +120,14 @@ public class NewTalkingScene {
         scene.setOnMouseClicked(e -> {
             if(moreLinesLeft){
                 try {
-                    stage.setScene(scene(types, passageContent, game, passage));
+                    ApplicationFront.switchToScene(scene(types, passageContent, game, passage));
                     mumble.play();
                 } catch (FileNotFoundException | MalformedURLException e1) {
                     e1.printStackTrace();
                 } 
             } else if (passage.hasFightScene()){
                 try {
-                    stage.setScene(NewFightScene.scene(game, passage));
+                    ApplicationFront.switchToScene(NewFightScene.scene(game, passage));
                 } catch (FileNotFoundException e1){
                     e1.printStackTrace();
                 }  
@@ -161,7 +147,7 @@ public class NewTalkingScene {
                             LvlScene.scene(game, game.go(link1));
                             SaveRegister.setSave(new Save(game.go(link1), Story.getCurrentSave().getSaveName(),
                             Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
-                        } catch (IOException e1) {
+                        } catch (IOException | ClassNotFoundException e1) {
                             e1.printStackTrace();
                         }
                     });
@@ -171,7 +157,7 @@ public class NewTalkingScene {
                             LvlScene.scene(game, game.go(link2));
                             SaveRegister.setSave(new Save(game.go(link2), Story.getCurrentSave().getSaveName(),
                             Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
-                        } catch (IOException e1) {
+                        } catch (IOException | ClassNotFoundException e1) {
                             e1.printStackTrace();
                         }
                     });
