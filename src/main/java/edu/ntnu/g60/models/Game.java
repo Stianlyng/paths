@@ -54,6 +54,6 @@ public class Game {
    * @return The passage that the link points to.
    */
   public Passage go(Link link) {
-    return this.story.getPassage(link);
+    return this.story.getPassage(link.getReference());
   }
 }

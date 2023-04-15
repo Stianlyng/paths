@@ -11,7 +11,7 @@ import java.util.Collection;
 public class Story {
 
   private String title;
-  private Map<Link, Passage> passages;
+  private Map<String, Passage> passages;
   private Passage openingPassage;
 
   /**
@@ -26,7 +26,7 @@ public class Story {
     if (openingPassage == null) throw new IllegalArgumentException("Opening passage cannot be null.");
     this.title = title;
     this.openingPassage = openingPassage;
-    this.passages = new HashMap<Link, Passage>();
+    this.passages = new HashMap<String, Passage>();
   }
 
   //todo: add constructor with list of passages
@@ -36,12 +36,14 @@ public class Story {
    * @param passage The passage to add.
    * @throws IllegalArgumentException if passage is null.
    */
+
   public void addPassage(Passage passage) throws IllegalArgumentException {
     if (passage == null) throw new IllegalArgumentException("Passage cannot be null.");
-    Link link = new Link(passage.getTitle(), passage.getContent());
-    this.passages.put(link, passage);
+    String passageTitle = passage.getTitle();
+    this.passages.put(passageTitle, passage);
   }
 
+ 
   public String getTitle() {
     return this.title;
   }
@@ -50,8 +52,14 @@ public class Story {
     return this.openingPassage;
   }
 
+  /*
   public Passage getPassage(Link link) {
       return this.passages.get(link);
+  }
+   */
+
+ public Passage getPassage(String title) {
+      return this.passages.get(title);
   }
 
   public Collection<Passage> getPassages() {
@@ -65,6 +73,26 @@ public class Story {
       ", openingPassage='" + getOpeningPassage() + "'" +
       ", passages='" + getPassages() + "'" +
       "}";
+  }
+  
+   public static void main(String[] args) {
+
+    Passage p1 = new Passage("Test", "Test");
+    Link link = new Link("Go to test1", "Test1");
+    p1.addLink(link);
+
+    Story story = new Story("test", p1);
+
+    Passage p2 = new Passage("Test1", "Test1");
+    Link link2 = new Link("Go to test2", "Test2");
+    p2.addLink(link2);
+
+    story.addPassage(p2);
+
+    System.out.println(story);
+
+    System.out.println(story.getPassage(link.getReference()));
+
   }
 
 }

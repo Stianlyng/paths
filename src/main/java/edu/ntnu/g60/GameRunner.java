@@ -56,7 +56,7 @@ public class GameRunner {
                                     "Ref: " + chosenLink.getReference());
 
                 System.out.println("cpach: " + currentPassage.getTitle());
-                System.out.println("netite: " + story.getPassage(chosenLink).getTitle());
+                //System.out.println("netite: " + story.getPassage(chosenLink).getTitle());
                 currentPassage = game.go(chosenLink);
             } else {
                 playing = false;
