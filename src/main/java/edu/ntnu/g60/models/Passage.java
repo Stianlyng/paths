@@ -39,6 +39,26 @@ public class Passage{
     this.links = new ArrayList<>();
   }
 
+  /**
+   * Constructor for the Passage class.
+   * @param title The title of the passage.
+   * @param content The content of the passage.
+   * @param links The links to other passages from this passage.
+   * @throws IllegalArgumentException if title or content is null or blank.
+   */
+  public Passage(String title, String content) throws IllegalArgumentException {
+
+    if (title == null || title.isBlank()) throw new IllegalArgumentException("Title cannot be null or blank.");
+    if (content == null || content.isBlank()) throw new IllegalArgumentException("Content cannot be null or blank.");
+    this.title = title;
+    this.content = content;
+    this.player = "beer.png";
+    this.enemy = "beer.png";
+    this.background = "background1.png";
+    this.fightScene = false;
+    this.links = new ArrayList<>();
+  }
+
   public String getPlayer(){
     return player;
   }
