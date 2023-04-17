@@ -31,7 +31,7 @@ public class textBlock {
         } else if (line.startsWith("[")) {
             addLink(line);
         } else if (line.startsWith("#background:")) {
-            setBackgroundImg(line.replace("#enemy:", ""));
+            setBackgroundImg(line.replace("#background:", ""));
         } else if (line.startsWith("#enemy:")) {
             setEnemyImg(line.replace("#enemy:", ""));
         } else if (line.startsWith("#player:")) {
