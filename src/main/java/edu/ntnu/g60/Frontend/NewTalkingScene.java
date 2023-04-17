@@ -144,9 +144,13 @@ public class NewTalkingScene {
                     neutralBubble.toBack();
                     choice1.setOnAction(p -> {
                         try {
-                            LvlScene.scene(game, game.go(link1));
-                            SaveRegister.setSave(new Save(game.go(link1), Story.getCurrentSave().getSaveName(),
-                            Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
+                            if(link1.getReference().equals("game over")){
+                                //death, delete save, back to start
+                            } else{
+                                LvlScene.scene(game, game.go(link1));
+                                SaveRegister.setSave(new Save(game.go(link1), Story.getCurrentSave().getSaveName(),
+                                Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
+                            }
                         } catch (IOException | ClassNotFoundException e1) {
                             e1.printStackTrace();
                         }
@@ -154,9 +158,13 @@ public class NewTalkingScene {
 
                     choice2.setOnAction(p -> {
                         try {
-                            LvlScene.scene(game, game.go(link2));
-                            SaveRegister.setSave(new Save(game.go(link2), Story.getCurrentSave().getSaveName(),
-                            Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
+                            if(link2.getReference().equals("game over")){
+                                //death, delete save, back to start
+                            } else{
+                                LvlScene.scene(game, game.go(link2));
+                                SaveRegister.setSave(new Save(game.go(link2), Story.getCurrentSave().getSaveName(),
+                                Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
+                            }
                         } catch (IOException | ClassNotFoundException e1) {
                             e1.printStackTrace();
                         }
