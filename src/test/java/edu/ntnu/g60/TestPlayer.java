@@ -3,7 +3,8 @@ package edu.ntnu.g60;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.ntnu.g60.goals.*;
+import edu.ntnu.g60.models.Player;
+import edu.ntnu.g60.models.goals.*;
 
 
 public class TestPlayer {

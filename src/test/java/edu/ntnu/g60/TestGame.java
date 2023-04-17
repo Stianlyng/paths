@@ -1,20 +1,17 @@
 package edu.ntnu.g60;
 
 
-import edu.ntnu.g60.goals.*;
-import edu.ntnu.g60.actions.*;
+import edu.ntnu.g60.models.Passage;
+import edu.ntnu.g60.models.Player;
+import edu.ntnu.g60.models.Story;
+import edu.ntnu.g60.models.actions.*;
+import edu.ntnu.g60.models.goals.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import org.junit.Test;
-import org.junit.Before;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestGame {
 
@@ -22,7 +19,7 @@ public class TestGame {
   private Story story;
   private List<Goal> goals;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     goals = new ArrayList<>();
     goals.add(new HealthGoal(4));
