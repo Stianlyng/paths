@@ -145,7 +145,14 @@ public class NewTalkingScene {
                     choice1.setOnAction(p -> {
                         try {
                             if(link1.getReference().equals("game over")){
-                                //death, delete save, back to start
+                                ApplicationFront.switchToScene(DeathScene.scene());
+                                LvlScene.delay(3000, () -> {
+                                    try {
+                                        ApplicationFront.switchToScene(OpeningScene.scene());
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                });
                             } else{
                                 LvlScene.scene(game, game.go(link1));
                                 SaveRegister.setSave(new Save(game.go(link1), Story.getCurrentSave().getSaveName(),
@@ -159,7 +166,14 @@ public class NewTalkingScene {
                     choice2.setOnAction(p -> {
                         try {
                             if(link2.getReference().equals("game over")){
-                                //death, delete save, back to start
+                                ApplicationFront.switchToScene(DeathScene.scene());
+                                LvlScene.delay(3000, () -> {
+                                    try {
+                                        ApplicationFront.switchToScene(OpeningScene.scene());
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                });
                             } else{
                                 LvlScene.scene(game, game.go(link2));
                                 SaveRegister.setSave(new Save(game.go(link2), Story.getCurrentSave().getSaveName(),
