@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import edu.ntnu.g60.*;
+import edu.ntnu.g60.fileHandling.FileParser;
 import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Player;
 import edu.ntnu.g60.models.Story;
@@ -22,7 +23,9 @@ import javafx.scene.paint.Color;
 public class ContinueScene {
     public static Scene scene() throws IOException, ClassNotFoundException {
        
-        Story story = StoryParser.parse("haunted_house");
+        FileParser fileParser = new FileParser("src/main/resources/textFiles/haunted_house.txt");
+        Story story = fileParser.buildStory();
+
         List<Goal> goals = new ArrayList<Goal>();
         goals.add(new HealthGoal(4));
         Game game = new Game(new Player("Alice"), story, goals);
