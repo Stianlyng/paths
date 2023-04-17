@@ -42,12 +42,21 @@ public class Save implements Externalizable{
     public void writeExternal(ObjectOutput out) throws IOException {
         String title = passage.getTitle();
         String contect = passage.getContent();
+        String player = passage.getPlayer();
+        String enemy = passage.getEnemy();
+        String background = passage.getBackground();
+        boolean fightScene = passage.hasFightScene();
+
+  
         List<Link> links = passage.getLinks();
         String linkRef1 = links.get(0).getReference();
         String linkRef2 = links.get(1).getReference();
         String linkTxt1 = links.get(0).getText();
         String linkTxt2 = links.get(1).getText();
-
+        out.writeUTF(player);
+        out.writeUTF(enemy);
+        out.writeUTF(background);
+        out.writeBoolean(fightScene);
         out.writeUTF(title);
         out.writeUTF(contect);
         out.writeUTF(saveName);
@@ -59,11 +68,15 @@ public class Save implements Externalizable{
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        String player = in.readUTF();
+        String enemy = in.readUTF();
+        String background = in.readUTF();
+        boolean fightscene = in.readBoolean();
         String title = in.readUTF();
         String content = in.readUTF();
         saveName = in.readUTF();
-        passage = new Passage(title, content);
-
+        passage = new Passage(title, content, player, enemy, background, fightscene);
+        
         String linkRef1 = in.readUTF();
         String linkRef2 = in.readUTF();
         String linkTxt1 = in.readUTF();
