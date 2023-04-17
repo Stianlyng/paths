@@ -17,7 +17,7 @@ public class Passage{
   private String enemy;
   private String background;
   private boolean fightScene;
-
+  
 
   /**
    * Constructor for the Passage class.
@@ -26,33 +26,17 @@ public class Passage{
    * @param links The links to other passages from this passage.
    * @throws IllegalArgumentException if title or content is null or blank.
    */
-  public Passage(String title, String content) throws IllegalArgumentException {
+  public Passage(String title, String content, String player, String enemy, String background, boolean isFightScene) throws IllegalArgumentException {
 
     if (title == null || title.isBlank()) throw new IllegalArgumentException("Title cannot be null or blank.");
     if (content == null || content.isBlank()) throw new IllegalArgumentException("Content cannot be null or blank.");
     this.title = title;
     this.content = content;
+    this.player = player;
+    this.enemy = enemy;
+    this.background = background;
+    this.fightScene = isFightScene;
     this.links = new ArrayList<>();
-    int playerStartIndex = getContent().indexOf("#player:") + 8;
-    int playerEndIndex = getContent().indexOf("#", playerStartIndex);
-    player = getContent().substring(playerStartIndex, playerEndIndex).replace("\n", "");
-
-    int enemyStartIndex = getContent().indexOf("#enemy:") + 7;
-    int enemyEndIndex = getContent().indexOf("#", enemyStartIndex);
-    enemy = getContent().substring(enemyStartIndex, enemyEndIndex).replace("\n", "");
-
-    int backgroundStartIndex = getContent().indexOf("#background:") + 12;
-    int backgroundEndIndex = getContent().indexOf("#", backgroundStartIndex);
-    background = getContent().substring(backgroundStartIndex, backgroundEndIndex).replace("\n", "");
-
-    int fightStartIndex = getContent().indexOf("#fight:") + 7;
-    int fightEndIndex = getContent().indexOf("{", fightStartIndex);
-    if(getContent().substring(fightStartIndex, fightEndIndex).replace("\n", "").equals("yes")){
-      this.fightScene = true;
-    } else{
-      this.fightScene = false;
-    }
-    
   }
 
   public String getPlayer(){

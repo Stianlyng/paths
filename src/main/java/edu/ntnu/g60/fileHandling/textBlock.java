@@ -8,6 +8,11 @@ import java.util.regex.Pattern;
 public class textBlock {
     private String title;
     private String content;
+    private String playerImg;
+    private String enemyImg;
+    private String backgroundImg;
+    private boolean isFightScene;
+
     private Map<String, String> links;
 
     public textBlock() {
@@ -25,6 +30,19 @@ public class textBlock {
             setTitle(line);
         } else if (line.startsWith("[")) {
             addLink(line);
+        } else if (line.startsWith("#background:")) {
+            setBackgroundImg(line.replace("#enemy:", ""));
+        } else if (line.startsWith("#enemy:")) {
+            setEnemyImg(line.replace("#enemy:", ""));
+        } else if (line.startsWith("#player:")) {
+            setPlayerImg(line.replace("#player:", ""));
+        } else if (line.startsWith("#isFight:")) {
+            //todo; this needs a better solution
+            if (line.endsWith("true")) {
+                isFightScene(true);
+            } else {
+                isFightScene(false);
+            }
         } else {
             setContent(line);
         }
@@ -57,8 +75,40 @@ public class textBlock {
         return content;
     }
 
+    public String getPlayerImg(){
+        return playerImg;
+    }
+
+    public String getEnemyImg(){
+        return enemyImg;
+    }   
+
+    public String getBackgroundImg() {
+        return backgroundImg;
+    }
+    
+    public boolean isFightScene() {
+        return isFightScene;
+    }
+
+    public void setPlayerImg(String path){
+        this.playerImg = path;
+    }
+
+    public void setEnemyImg(String path){
+        this.enemyImg = path;
+    }   
+
+    public void setBackgroundImg(String path) {
+        this.backgroundImg = path;
+    }
+    
+    public void isFightScene(boolean fightScene) {
+        this.isFightScene = fightScene;
+    }
+
     public void setContent(String content) {
-        this.content = content;
+        this.content += content;
     }
 
     public Map<String, String> getLinks() {

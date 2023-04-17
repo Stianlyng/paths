@@ -4,7 +4,7 @@ Haunted House
 #background:Background1.png
 #enemy:gender.png
 #player:baby.png
-#fight:no
+#isFight:false
 {E}Hello newborn. Welcome to life. Your first task in life will be to choose what gender you want to be!
 {P}Oh no. So scary woOoOooO!
 [Woman](Another room)
@@ -16,7 +16,7 @@ Haunted House
 #background:Forest
 #enemy:invo
 #player:teenager
-#fight:no
+#isFight:false
 {E}The door opens to another room. You see a desk with a large, dusty book.
 {P}You are now a fish
 [Open the book](The book of spells)

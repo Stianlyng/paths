@@ -66,7 +66,12 @@ public class FileParser {
     public Story buildStory() {
         FileParser parser = this;
         textBlock openingBlock = parser.getTextBlocks().get(0);
-        Passage openingPassage = new Passage(openingBlock.getTitle(), openingBlock.getContent());
+        Passage openingPassage = new Passage(openingBlock.getTitle(),
+                                    openingBlock.getContent(),
+                                    openingBlock.getPlayerImg(),
+                                    openingBlock.getEnemyImg(),
+                                    openingBlock.getBackgroundImg(),
+                                    openingBlock.isFightScene());
 
         openingBlock.getLinks().forEach((key, value) -> {
             Link link = new Link(key, value);
@@ -78,7 +83,13 @@ public class FileParser {
         Story story = new Story(parser.getStoryTitle(), openingPassage);
 
         parser.getTextBlocks().forEach((block) -> {
-            Passage passage = new Passage(block.getTitle(), block.getContent());
+            Passage passage = new Passage(block.getTitle(),
+                                     block.getContent(),
+                                     block.getPlayerImg(),
+                                     block.getEnemyImg(),
+                                     block.getBackgroundImg(),
+                                     block.isFightScene());
+
             block.getLinks().forEach((key, value) -> {
                 passage.addLink(new Link(key, value));
             });
@@ -88,8 +99,7 @@ public class FileParser {
     }
     public static void main(String[] args) {
 
-/*
-        FileParser story = new FileParser("src/main/resources/textFiles/story.txt");
+        FileParser story = new FileParser("src/main/resources/textFiles/haunted_house.txt");
         Story s = story.buildStory();
         s.getPassages().forEach((passage) -> {
             System.out.println(passage.getTitle());
@@ -106,6 +116,5 @@ public class FileParser {
             System.out.println("Content: " + block.getContent());
             System.out.println("Links: " + block.getLinks());
         }
- */
     }
 }
