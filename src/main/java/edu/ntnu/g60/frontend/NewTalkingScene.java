@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import edu.ntnu.g60.Game;
-import edu.ntnu.g60.Link;
-import edu.ntnu.g60.Passage;
+import edu.ntnu.g60.models.Game;
+import edu.ntnu.g60.models.Link;
+import edu.ntnu.g60.models.Passage;
 import edu.ntnu.g60.Save;
 import edu.ntnu.g60.SaveRegister;
-import edu.ntnu.g60.Story;
+import edu.ntnu.g60.models.Story;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

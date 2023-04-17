@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import edu.ntnu.g60.*;
-import edu.ntnu.g60.goals.Goal;
-import edu.ntnu.g60.goals.HealthGoal;
+import edu.ntnu.g60.models.Game;
+import edu.ntnu.g60.models.Player;
+import edu.ntnu.g60.models.Story;
+import edu.ntnu.g60.models.goals.Goal;
+import edu.ntnu.g60.models.goals.HealthGoal;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

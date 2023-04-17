@@ -3,9 +3,9 @@ package edu.ntnu.g60.frontend;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import edu.ntnu.g60.Game;
-import edu.ntnu.g60.Passage;
-import edu.ntnu.g60.Player;
+import edu.ntnu.g60.models.Game;
+import edu.ntnu.g60.models.Passage;
+import edu.ntnu.g60.models.Player;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

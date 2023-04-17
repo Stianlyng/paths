@@ -2,8 +2,8 @@ package edu.ntnu.g60.frontend;
 
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import edu.ntnu.g60.Game;
-import edu.ntnu.g60.Passage;
+import edu.ntnu.g60.models.Game;
+import edu.ntnu.g60.models.Passage;
 import javafx.concurrent.Task;
 import javafx.scene.media.MediaPlayer;
 
