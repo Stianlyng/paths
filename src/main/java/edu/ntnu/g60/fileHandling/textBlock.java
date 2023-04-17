@@ -108,7 +108,7 @@ public class textBlock {
     }
 
     public void setContent(String content) {
-        this.content += content;
+        this.content += content + "\n";
     }
 
     public Map<String, String> getLinks() {

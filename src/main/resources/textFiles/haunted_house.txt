@@ -13,9 +13,9 @@ Haunted House
 
 
 ::Another room
-#background:Forest
-#enemy:invo
-#player:teenager
+#background:Background1.png
+#enemy:gender.png
+#player:baby.png
 #isFight:false
 {E}The door opens to another room. You see a desk with a large, dusty book.
 {P}You are now a fish
