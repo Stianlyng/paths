@@ -13,6 +13,11 @@ public class Passage{
   private String title;
   private String content;
   private List<Link> links;
+  private String player;
+  private String enemy;
+  private String background;
+  private boolean fightScene;
+
 
   /**
    * Constructor for the Passage class.
@@ -28,7 +33,42 @@ public class Passage{
     this.title = title;
     this.content = content;
     this.links = new ArrayList<>();
+    int playerStartIndex = getContent().indexOf("#player:") + 8;
+    int playerEndIndex = getContent().indexOf("#", playerStartIndex);
+    player = getContent().substring(playerStartIndex, playerEndIndex).replace("\n", "");
 
+    int enemyStartIndex = getContent().indexOf("#enemy:") + 7;
+    int enemyEndIndex = getContent().indexOf("#", enemyStartIndex);
+    enemy = getContent().substring(enemyStartIndex, enemyEndIndex).replace("\n", "");
+
+    int backgroundStartIndex = getContent().indexOf("#background:") + 12;
+    int backgroundEndIndex = getContent().indexOf("#", backgroundStartIndex);
+    background = getContent().substring(backgroundStartIndex, backgroundEndIndex).replace("\n", "");
+
+    int fightStartIndex = getContent().indexOf("#fight:") + 7;
+    int fightEndIndex = getContent().indexOf("{", fightStartIndex);
+    if(getContent().substring(fightStartIndex, fightEndIndex).replace("\n", "").equals("yes")){
+      this.fightScene = true;
+    } else{
+      this.fightScene = false;
+    }
+    
+  }
+
+  public String getPlayer(){
+    return player;
+  }
+
+  public String getEnemy(){
+    return enemy;
+  }
+
+  public String getBackground(){
+    return background;
+  }
+
+  public boolean hasFightScene(){
+    return fightScene;
   }
 
   public String getTitle() {

@@ -1,6 +1,9 @@
 package edu.ntnu.g60.models;
 import java.util.Map;
 import java.util.Objects;
+
+import edu.ntnu.g60.Save;
+
 import java.util.HashMap;
 import java.util.Collection;
 
@@ -13,6 +16,7 @@ public class Story {
   private String title;
   private Map<String, Passage> passages;
   private Passage openingPassage;
+  private static Save currentSave;
 
   /**
    * Constructor for the Story class.
@@ -28,6 +32,15 @@ public class Story {
     this.openingPassage = openingPassage;
     this.passages = new HashMap<String, Passage>();
   }
+
+  public static void setCurrentSave(Save save){
+    currentSave = save;
+  }
+
+  public static Save getCurrentSave(){
+    return currentSave;
+  }
+
 
   //todo: add constructor with list of passages
   
