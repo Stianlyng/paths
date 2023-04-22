@@ -25,7 +25,7 @@ import javafx.scene.text.Text;
 
 
 public class NewTalkingScene {
-
+//stop mumble
     public static Scene scene(String[] types, String[] passageContent, Game game, Passage passage) throws FileNotFoundException, MalformedURLException{
         
         ImageView enemyImage = ApplicationObjects.newImage("characters", passage.getPlayer(), 50, 150, 150, 150);
@@ -33,6 +33,7 @@ public class NewTalkingScene {
         ImageView backgroundImage = ApplicationObjects.newImage("backgrounds", passage.getBackground(), 0, 0, 1650, 1000);
 
         MediaPlayer mumble = ApplicationObjects.newSound("mumble");
+        mumble.play();
         boolean moreLinesLeft = (ApplicationFront.getTextLine() + 1 == types.length) ? false : true;
 
         String type = types[ApplicationFront.getTextLine()];
@@ -121,17 +122,19 @@ public class NewTalkingScene {
             if(moreLinesLeft){
                 try {
                     ApplicationFront.switchToScene(scene(types, passageContent, game, passage));
-                    mumble.play();
+                    mumble.stop();
                 } catch (FileNotFoundException | MalformedURLException e1) {
                     e1.printStackTrace();
                 } 
             } else if (passage.hasFightScene()){
                 try {
+                    mumble.stop();
                     ApplicationFront.switchToScene(NewFightScene.scene(game, passage));
                 } catch (FileNotFoundException e1){
                     e1.printStackTrace();
                 }  
             } else {
+                mumble.stop();
                 Link link1 = passage.getLinks().get(0);
                 Link link2 = passage.getLinks().get(1);
                     

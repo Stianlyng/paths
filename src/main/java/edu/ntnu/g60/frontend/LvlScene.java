@@ -12,7 +12,6 @@ import javafx.scene.media.MediaPlayer;
 public class LvlScene {
 
     public static void scene(Game game, Passage passage) throws MalformedURLException{
-        MediaPlayer mumble = ApplicationObjects.newSound("mumble");
         try {
             ApplicationFront.switchToScene(LoadingScene.scene());
         } catch (FileNotFoundException e1) {
@@ -41,7 +40,7 @@ public class LvlScene {
                     try {
                         ApplicationFront.setTextLine(0);
                         ApplicationFront.switchToScene(NewTalkingScene.scene(types, contents, game, passage));
-                        mumble.play();
+                        
                     } catch (FileNotFoundException | MalformedURLException e1) {
                         
                         e1.printStackTrace();

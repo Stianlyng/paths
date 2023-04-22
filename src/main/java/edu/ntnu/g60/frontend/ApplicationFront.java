@@ -14,8 +14,6 @@ public class ApplicationFront extends Application {
 
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
-        
-        
         ApplicationFront.stage = stage;
         stage.setTitle("Half life 3");
         stage.setScene(OpeningScene.scene());
