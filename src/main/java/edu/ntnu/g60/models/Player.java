@@ -47,7 +47,7 @@ public class Player {
   }
 
   public void addHealth(int health){
-    this.health =+ health;
+    this.health += health;
   }
 
   public int getHealth(){
@@ -55,7 +55,7 @@ public class Player {
   }
 
   public void addScore(int points){
-    this.score =+ score;
+    this.score += points;
   }
 
   public int getScore(){
@@ -63,7 +63,7 @@ public class Player {
   }
 
   public void addGold(int gold){
-    this.gold =+ gold;
+    this.gold += gold;
   }
 
   public int getGold(){
