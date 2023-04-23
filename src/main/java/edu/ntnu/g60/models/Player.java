@@ -28,7 +28,7 @@ public class Player {
    * @throws IllegalArgumentException if gold is less than 0
    * @throws IllegalArgumentException if inventory is null
    */
-  public Player(String name, List<String> inventory) throws IllegalArgumentException {
+  private Player(String name, List<String> inventory) throws IllegalArgumentException {
     if (name == null || name.isBlank()) throw new IllegalArgumentException("Name cannot be null or blank.");
     if (health < 0) throw new IllegalArgumentException("Health cannot be less than 0.");  
     if (score < 0) throw new IllegalArgumentException("Score cannot be less than 0.");
