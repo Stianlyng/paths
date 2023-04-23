@@ -9,6 +9,7 @@ import java.util.List;
 import edu.ntnu.g60.*;
 import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Player;
+import edu.ntnu.g60.models.PlayerBuilder;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.HealthGoal;
@@ -21,8 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-
-
 
 public class NewGameScene {
 
@@ -46,7 +45,13 @@ public class NewGameScene {
 
                     List<Goal> goals = new ArrayList<Goal>();
                     goals.add(new HealthGoal(4));
-                    Game game = new Game(new Player("Alice"), story, goals);
+
+                    Player player = new PlayerBuilder()
+                            .setName("Alice")
+                            .build();
+
+
+                    Game game = new Game(player, story, goals);
                     
                     int saveNumber = 1;
                     if (SaveRegister.saveExists(1)) {
