@@ -1,6 +1,4 @@
-package edu.ntnu.g60.builders;
-
-import edu.ntnu.g60.models.Player;
+package edu.ntnu.g60.models;
 
 import java.util.ArrayList;
 import java.util.List;
