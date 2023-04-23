@@ -9,6 +9,7 @@ import edu.ntnu.g60.models.PassageBuilder;
 import edu.ntnu.g60.models.Player;
 import edu.ntnu.g60.models.PlayerBuilder;
 import edu.ntnu.g60.models.Story;
+import edu.ntnu.g60.models.StoryBuilder;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
@@ -23,7 +24,10 @@ public class App {
             .withContent("This is the opening passage")
             .build();
         
-        Story story = new Story("Haunted House", openingPassage);
+        Story story = new StoryBuilder()
+            .setTitle("Haunted House")
+            .setOpeningPassage(openingPassage)
+            .build();
         
         Passage firstPassage = new PassageBuilder()
             .withTitle("passage0")
