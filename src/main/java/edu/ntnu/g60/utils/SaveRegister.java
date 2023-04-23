@@ -1,6 +1,8 @@
-package edu.ntnu.g60;
+package edu.ntnu.g60.utils;
 
 import java.io.IOException;
+
+import edu.ntnu.g60.utils.serialization.SerializationUtils;
 
 public class SaveRegister {
     private static final String PATH = "src/main/resources/textFiles/saves.ser";

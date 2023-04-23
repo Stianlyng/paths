@@ -1,4 +1,4 @@
-package edu.ntnu.g60.fileHandling;
+package edu.ntnu.g60.utils.fileParser;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package edu.ntnu.g60;
+package edu.ntnu.g60.utils;
 
 import java.io.Externalizable;
 import java.io.IOException;

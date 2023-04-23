@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
-import edu.ntnu.g60.Save;
-import edu.ntnu.g60.SaveRegister;
 import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Link;
 import edu.ntnu.g60.models.Passage;
 import edu.ntnu.g60.models.Player;
 import edu.ntnu.g60.models.Story;
+import edu.ntnu.g60.utils.Save;
+import edu.ntnu.g60.utils.SaveRegister;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

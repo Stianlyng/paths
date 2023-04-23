@@ -1,4 +1,4 @@
-package edu.ntnu.g60.fileHandling;
+package edu.ntnu.g60.utils.fileParser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

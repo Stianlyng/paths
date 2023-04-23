@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.ntnu.g60.*;
-import edu.ntnu.g60.fileHandling.FileParser;
 import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Player;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.HealthGoal;
+import edu.ntnu.g60.utils.Save;
+import edu.ntnu.g60.utils.SaveRegister;
+import edu.ntnu.g60.utils.fileParser.FileParser;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

@@ -2,7 +2,7 @@ package edu.ntnu.g60.models;
 import java.util.Map;
 import java.util.Objects;
 
-import edu.ntnu.g60.Save;
+import edu.ntnu.g60.utils.Save;
 
 import java.util.HashMap;
 import java.util.Collection;
