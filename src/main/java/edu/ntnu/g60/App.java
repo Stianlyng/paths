@@ -6,6 +6,7 @@ import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Link;
 import edu.ntnu.g60.models.Passage;
 import edu.ntnu.g60.models.Player;
+import edu.ntnu.g60.models.PlayerBuilder;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.GoldGoal;
@@ -41,8 +42,11 @@ public class App {
                     new ScoreGoal(100)
                     );
 
+        Player player = new PlayerBuilder()
+                        .withName("Stian")
+                        .build();
             
-        Game game = new Game(new Player("Stian"), story, goals);
+        Game game = new Game(player, story, goals);
        
         game.begin();
 

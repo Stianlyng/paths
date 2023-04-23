@@ -18,7 +18,9 @@ public class GameRunner {
 
         FileParser parser = new FileParser(filePath);
         Story story = parser.buildStory();
-        Player player = new Player("PlayerName");
+        Player player = new PlayerBuilder()
+                .withName("Stian")
+                .build();
 
         List<Goal> goals = List.of( 
                     new HealthGoal(0), 
