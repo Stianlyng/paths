@@ -2,6 +2,7 @@ package edu.ntnu.g60;
 
 
 import edu.ntnu.g60.models.Passage;
+import edu.ntnu.g60.models.PassageBuilder;
 import edu.ntnu.g60.models.Player;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.models.actions.*;
@@ -25,7 +26,11 @@ public class TestGame {
     goals.add(new HealthGoal(4));
     
     player = new Player("Elon");
-    Passage openingPassage = new Passage("Level 1", "You are in a dark room.");
+    Passage openingPassage = new PassageBuilder()
+            .withTitle("Level 1")
+            .withContent("You are in a dark room.")
+            .build();
+
     story = new Story("The Dark World", openingPassage);
   }
 
