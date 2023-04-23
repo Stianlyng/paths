@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 import edu.ntnu.g60.*;
 import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Player;
+import edu.ntnu.g60.models.PlayerBuilder;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.HealthGoal;
@@ -29,7 +30,12 @@ public class ContinueScene {
 
         List<Goal> goals = new ArrayList<Goal>();
         goals.add(new HealthGoal(4));
-        Game game = new Game(new Player("Alice"), story, goals);
+        
+        Player player = new PlayerBuilder()
+                .setName("Alice")
+                .build();
+
+        Game game = new Game(player, story, goals);
 
         Button save1Button = ApplicationObjects.newButton("", 514-193, 278-71, "launch_button");
         Button save2Button = ApplicationObjects.newButton("", 514-193, 345-71, "launch_button");
