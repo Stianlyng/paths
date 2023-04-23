@@ -49,10 +49,7 @@ public class PlayerBuilder {
     }
 
     public Player build() {
-        Player player = new Player(name, inventory);
-        player.addHealth(health - 100); // Subtract 100 as it is set in the constructor
-        player.addScore(score);
-        player.addGold(gold);
+        Player player = new Player(name, health, score, gold, inventory);
         return player;
     }
 
