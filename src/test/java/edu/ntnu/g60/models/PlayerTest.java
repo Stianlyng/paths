@@ -13,24 +13,24 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player = new PlayerBuilder().withName("John").build();
+        player = new PlayerBuilder().setName("John").build();
     }
 
     @Test
-    void testConstructorWithInventory() {
+    void testConstructorsetInventory() {
         List<String> inventory = Arrays.asList("sword", "shield");
-        Player playerWithInventory = new PlayerBuilder()
-            .withName("Alice")
-            .withHealth(100)
-            .withScore(0)
-            .withGold(0)
-            .withInventory(inventory)
+        Player playersetInventory = new PlayerBuilder()
+            .setName("Alice")
+            .setHealth(100)
+            .setScore(0)
+            .setGold(0)
+            .setInventory(inventory)
             .build();
-        assertEquals("Alice", playerWithInventory.getName());
-        assertEquals(100, playerWithInventory.getHealth());
-        assertEquals(0, playerWithInventory.getScore());
-        assertEquals(0, playerWithInventory.getGold());
-        assertEquals(inventory, playerWithInventory.getInventory());
+        assertEquals("Alice", playersetInventory.getName());
+        assertEquals(100, playersetInventory.getHealth());
+        assertEquals(0, playersetInventory.getScore());
+        assertEquals(0, playersetInventory.getGold());
+        assertEquals(inventory, playersetInventory.getInventory());
     }
 
     @Test

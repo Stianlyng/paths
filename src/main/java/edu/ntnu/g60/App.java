@@ -57,7 +57,7 @@ public class App {
                     );
 
         Player player = new PlayerBuilder()
-                        .withName("Stian")
+                        .setName("Stian")
                         .build();
             
         Game game = new Game(player, story, goals);

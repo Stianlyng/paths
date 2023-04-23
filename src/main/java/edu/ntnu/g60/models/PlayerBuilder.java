@@ -18,27 +18,27 @@ public class PlayerBuilder {
         this.inventory = new ArrayList<>();
     }
 
-    public PlayerBuilder withName(String name) {
+    public PlayerBuilder setName(String name) {
         this.name = name;
         return this;
     }
 
-    public PlayerBuilder withHealth(int health) {
+    public PlayerBuilder setHealth(int health) {
         this.health = health;
         return this;
     }
 
-    public PlayerBuilder withScore(int score) {
+    public PlayerBuilder setScore(int score) {
         this.score = score;
         return this;
     }
 
-    public PlayerBuilder withGold(int gold) {
+    public PlayerBuilder setGold(int gold) {
         this.gold = gold;
         return this;
     }
 
-    public PlayerBuilder withInventory(List<String> inventory) {
+    public PlayerBuilder setInventory(List<String> inventory) {
         this.inventory = inventory;
         return this;
     }
@@ -56,10 +56,10 @@ public class PlayerBuilder {
     /*
     public static void main(String[] args) {
         Player player = new PlayerBuilder()
-            .withName("John Doe")
-            .withHealth(100)
-            .withScore(0)
-            .withGold(50)
+            .setName("John Doe")
+            .setHealth(100)
+            .setScore(0)
+            .setGold(50)
             .addItemToInventory("Sword")
             .addItemToInventory("Shield")
             .build();
