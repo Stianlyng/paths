@@ -8,6 +8,7 @@ import java.util.List;
 
 import edu.ntnu.g60.models.Link;
 import edu.ntnu.g60.models.Passage;
+import edu.ntnu.g60.models.PassageBuilder;
 
 public class Save implements Externalizable{
     public Passage passage;
@@ -75,8 +76,14 @@ public class Save implements Externalizable{
         String title = in.readUTF();
         String content = in.readUTF();
         saveName = in.readUTF();
-        passage = new Passage(title, content, player, enemy, background, fightscene);
-        
+        passage = new PassageBuilder()
+                .withTitle(title)
+                .withContent(content)
+                .withPlayer(player)
+                .withEnemy(enemy)
+                .withBackground(background)
+                .isFightScene(fightscene)
+                .build();       
         String linkRef1 = in.readUTF();
         String linkRef2 = in.readUTF();
         String linkTxt1 = in.readUTF();

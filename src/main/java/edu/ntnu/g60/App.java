@@ -5,6 +5,7 @@ import java.util.List;
 import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Link;
 import edu.ntnu.g60.models.Passage;
+import edu.ntnu.g60.models.PassageBuilder;
 import edu.ntnu.g60.models.Player;
 import edu.ntnu.g60.models.PlayerBuilder;
 import edu.ntnu.g60.models.Story;
@@ -17,17 +18,26 @@ import edu.ntnu.g60.models.goals.ScoreGoal;
 public class App {
     public static void main(String[] args) {
         
-        Passage openingPassage = new Passage("Opening Passage", "This is the opening passage");
+        Passage openingPassage = new PassageBuilder()
+            .withTitle("Opening Passage")
+            .withContent("This is the opening passage")
+            .build();
         
         Story story = new Story("Haunted House", openingPassage);
         
-        Passage firstPassage = new Passage("passage0", "content0");
+        Passage firstPassage = new PassageBuilder()
+            .withTitle("passage0")
+            .withContent("content0")
+            .build();
         story.addPassage(firstPassage);
         Link link = new Link("forward", "passage0");
         openingPassage.addLink(link);
 
         for (int i = 1; i < 10; i++) {
-            Passage p = new Passage("passage" + i, "content" + i);
+            Passage p = new PassageBuilder()
+                .withTitle("passage" + i)
+                .withContent("content" + i)
+                .build();
             story.addPassage(p);
             Link linkForward = new Link("forward", "passage" + (i + 1));
             Link linkBack = new Link("backwards", "passage" + (i - 1));

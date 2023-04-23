@@ -26,7 +26,7 @@ public class Passage{
    * @param links The links to other passages from this passage.
    * @throws IllegalArgumentException if title or content is null or blank.
    */
-  public Passage(String title, String content, String player, String enemy, String background, boolean isFightScene) throws IllegalArgumentException {
+  Passage(String title, String content, String player, String enemy, String background, boolean isFightScene) throws IllegalArgumentException {
 
     if (title == null || title.isBlank()) throw new IllegalArgumentException("Title cannot be null or blank.");
     if (content == null || content.isBlank()) throw new IllegalArgumentException("Content cannot be null or blank.");
@@ -46,7 +46,7 @@ public class Passage{
    * @param links The links to other passages from this passage.
    * @throws IllegalArgumentException if title or content is null or blank.
    */
-  public Passage(String title, String content) throws IllegalArgumentException {
+  Passage(String title, String content) throws IllegalArgumentException {
 
     if (title == null || title.isBlank()) throw new IllegalArgumentException("Title cannot be null or blank.");
     if (content == null || content.isBlank()) throw new IllegalArgumentException("Content cannot be null or blank.");
@@ -148,6 +148,19 @@ public class Passage{
   public int hashCode() {
     return Objects.hash(title, content, links);
   }
+  
+  /*
+  public static void main(String[] args) {
+    Passage passage = new PassageBuilder()
+                    .withTitle("Opening Passage")
+                    .withContent("This is the opening passage")
+                    .withPlayer("player1.png")
+                    .withEnemy("enemy1.png")
+                    .withBackground("background2.png")
+                    .isFightScene(true)
+                    .build();
 
+  }
+  */
   
 }

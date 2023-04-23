@@ -8,6 +8,7 @@ import java.util.List;
 
 import edu.ntnu.g60.models.Link;
 import edu.ntnu.g60.models.Passage;
+import edu.ntnu.g60.models.PassageBuilder;
 import edu.ntnu.g60.models.Story;
 
 public class FileParser {
@@ -66,13 +67,14 @@ public class FileParser {
     public Story buildStory() {
         FileParser parser = this;
         textBlock openingBlock = parser.getTextBlocks().get(0);
-        Passage openingPassage = new Passage(openingBlock.getTitle(),
-                                    openingBlock.getContent(),
-                                    openingBlock.getPlayerImg(),
-                                    openingBlock.getEnemyImg(),
-                                    openingBlock.getBackgroundImg(),
-                                    openingBlock.isFightScene());
-
+        Passage openingPassage = new PassageBuilder()
+                                .withTitle(openingBlock.getTitle())
+                                .withContent(openingBlock.getContent())
+                                .withPlayer(openingBlock.getPlayerImg())
+                                .withEnemy(openingBlock.getEnemyImg())
+                                .withBackground(openingBlock.getBackgroundImg())
+                                .isFightScene(openingBlock.isFightScene())
+                                .build();
         openingBlock.getLinks().forEach((key, value) -> {
             Link link = new Link(key, value);
             //HealthAction action = new HealthAction(10);
@@ -83,12 +85,14 @@ public class FileParser {
         Story story = new Story(parser.getStoryTitle(), openingPassage);
 
         parser.getTextBlocks().forEach((block) -> {
-            Passage passage = new Passage(block.getTitle(),
-                                     block.getContent(),
-                                     block.getPlayerImg(),
-                                     block.getEnemyImg(),
-                                     block.getBackgroundImg(),
-                                     block.isFightScene());
+        Passage passage = new PassageBuilder()
+                                     .withTitle(block.getTitle())
+                                     .withContent(block.getContent())
+                                     .withPlayer(block.getPlayerImg())
+                                     .withEnemy(block.getEnemyImg())
+                                     .withBackground(block.getBackgroundImg())
+                                     .isFightScene(block.isFightScene())
+                                     .build();
 
             block.getLinks().forEach((key, value) -> {
                 passage.addLink(new Link(key, value));
