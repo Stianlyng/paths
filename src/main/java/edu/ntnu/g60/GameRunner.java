@@ -1,12 +1,12 @@
 package edu.ntnu.g60;
 
-import edu.ntnu.g60.fileHandling.FileParser;
 import edu.ntnu.g60.models.*;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.goals.InventoryGoal;
 import edu.ntnu.g60.models.goals.ScoreGoal;
+import edu.ntnu.g60.utils.fileParser.FileParser;
 
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +18,9 @@ public class GameRunner {
 
         FileParser parser = new FileParser(filePath);
         Story story = parser.buildStory();
-        Player player = new Player("PlayerName");
+        Player player = new PlayerBuilder()
+                .setName("Stian")
+                .build();
 
         List<Goal> goals = List.of( 
                     new HealthGoal(0), 

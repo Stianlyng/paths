@@ -28,37 +28,26 @@ public class Player {
    * @throws IllegalArgumentException if gold is less than 0
    * @throws IllegalArgumentException if inventory is null
    */
-  public Player(String name, List<String> inventory) throws IllegalArgumentException {
+  Player(String name, int health, int score, int gold, List<String> inventory) throws IllegalArgumentException {
     if (name == null || name.isBlank()) throw new IllegalArgumentException("Name cannot be null or blank.");
-    if (health < 0) throw new IllegalArgumentException("Health cannot be less than 0.");  
+    if (health < 0) throw new IllegalArgumentException("Health cannot be less than 0.");
     if (score < 0) throw new IllegalArgumentException("Score cannot be less than 0.");
     if (gold < 0) throw new IllegalArgumentException("Gold cannot be less than 0.");
     if (inventory == null) throw new IllegalArgumentException("Inventory cannot be null.");
     this.name = name;
-    this.health = 100;
-    this.score = 0;
-    this.gold = 0;
+    this.health = health;
+    this.score = score;
+    this.gold = gold;
     this.inventory = inventory;
-  }
+}
 
-  /**
-   * Constructor for the Player class.
-   * @param name The name of the player.
-   * @throws IllegalArgumentException if name is null or blank
-   * @throws IllegalArgumentException if health is less than 0
-   * @throws IllegalArgumentException if score is less than 0
-   * @throws IllegalArgumentException if gold is less than 0
-   */
-  public Player(String name) throws IllegalArgumentException {
-    this(name, new ArrayList<>());
-  }
 
   public String getName(){
     return this.name;
   }
 
   public void addHealth(int health){
-    this.health =+ health;
+    this.health += health;
   }
 
   public int getHealth(){
@@ -66,7 +55,7 @@ public class Player {
   }
 
   public void addScore(int points){
-    this.score =+ score;
+    this.score += points;
   }
 
   public int getScore(){
@@ -74,7 +63,7 @@ public class Player {
   }
 
   public void addGold(int gold){
-    this.gold =+ gold;
+    this.gold += gold;
   }
 
   public int getGold(){

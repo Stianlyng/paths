@@ -1,11 +1,11 @@
-package edu.ntnu.g60.fileHandling;
+package edu.ntnu.g60.utils.fileParser;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class textBlock {
+public class TextBlock {
     private String title;
     private String content;
     private String playerImg;
@@ -15,11 +15,11 @@ public class textBlock {
 
     private Map<String, String> links;
 
-    public textBlock() {
+    public TextBlock() {
         this("", "", new HashMap<>());
     }
 
-    public textBlock(String title, String content, Map<String, String> links) {
+    public TextBlock(String title, String content, Map<String, String> links) {
         this.title = title;
         this.content = content;
         this.links = links;
@@ -120,7 +120,7 @@ public class textBlock {
     }
 
     public static void main(String[] args) {
-        textBlock block = new textBlock();
+        TextBlock block = new TextBlock();
         block.setLine("::My Block");
         block.setLine("This is some content");
         block.setLine("[Google](https://www.google.com)");
