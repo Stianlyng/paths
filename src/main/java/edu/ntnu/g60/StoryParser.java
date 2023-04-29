@@ -2,6 +2,7 @@ package edu.ntnu.g60;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,20 +22,55 @@ import edu.ntnu.g60.models.PassageBuilder;
  */
 public class StoryParser {
 
-    private String jsonFilePath;
+    /**
+     * The JSON file to be parsed.
+     */
+    private final File jsonFile;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    /**
+     * The ObjectMapper used to parse the JSON file.
+     */
+    private final ObjectMapper objectMapper;
 
+    /**
+     * Constructs a StoryParser object.
+     * 
+     * @param jsonFilePath the path to the JSON file to be parsed.
+     */
     public StoryParser(String jsonFilePath) {
-        this.jsonFilePath = jsonFilePath;
+        this.jsonFile = Paths.get(jsonFilePath).toFile();
+        this.objectMapper = new ObjectMapper();
     }
 
+    /**
+     * Builds a Passage object from a PassageEntity object.
+     *
+     * @param passageEntity the PassageEntity object to be parsed.
+     * @return a Passage object.
+     */
+    private Passage buildPassage(PassageEntity passageEntity) {
+        Passage passage = new PassageBuilder()
+            .setTitle(passageEntity.getTitle())
+            .setContent(passageEntity.getContent())
+            .build();
+
+        passageEntity.getLinks().forEach(link -> {
+            passage.addLink(new Link(link.getText(), link.getReference()));
+        });
+
+        return passage;
+    }
+
+
+    /**
+     * Builds the Story object from the JSON file.
+     *
+     * @return a Story object.
+     */
     public Story build() {
         try {
-            StoryEntity storyMap = objectMapper.readValue(new File(jsonFilePath), StoryEntity.class);
-
-            StoryBuilder storyBuilder = new StoryBuilder()
-                .setTitle(storyMap.getTitle());
+            StoryEntity storyMap = objectMapper.readValue(jsonFile, StoryEntity.class);
+            StoryBuilder storyBuilder = new StoryBuilder().setTitle(storyMap.getTitle());
 
             storyMap.getPassages().forEach(passageEntity -> {
                 Passage passage = buildPassage(passageEntity);
@@ -51,16 +87,4 @@ public class StoryParser {
         }
     }
 
-    private Passage buildPassage(PassageEntity passageEntity) {
-        Passage passage = new PassageBuilder()
-            .setTitle(passageEntity.getTitle())
-            .setContent(passageEntity.getContent())
-            .build();
-
-        passageEntity.getLinks().forEach(link -> {
-            passage.addLink(new Link(link.getText(), link.getReference()));
-        });
-
-        return passage;
-    }
 }
