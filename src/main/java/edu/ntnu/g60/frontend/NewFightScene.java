@@ -12,6 +12,7 @@ import edu.ntnu.g60.models.Player;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;
+import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -146,7 +147,7 @@ public class NewFightScene {
             GameApp.switchToScene(DeathScene.scene());
             GameApp.delay(3000, () -> {
                 try {
-                    GameApp.switchToScene(OpeningScene.scene());
+                    GameApp.switchToScene(OpeningPane.scene());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -168,7 +169,7 @@ public class NewFightScene {
             GameApp.switchToScene(DeathScene.scene());
             GameApp.delay(3000, () -> {
                 try {
-                    GameApp.switchToScene(OpeningScene.scene());
+                    GameApp.switchToScene(OpeningPane.scene());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -184,6 +185,7 @@ public class NewFightScene {
         }
     }
 
+    //todo: implenment actions
     public static void enemyAction(float damageAmount, float healAmount, Game game, Passage passage){
         GameApp.delay(2000, () -> {
             playerHealth = playerHealth - damageAmount;

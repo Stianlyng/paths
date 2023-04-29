@@ -1,5 +1,8 @@
 package edu.ntnu.g60.frontend;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,6 +37,7 @@ public class ApplicationObjects {
         imageview.setPreserveRatio(true);
         return imageview;
     }
+    
     //"sounds/" + soundName + ".mp3"
     public static MediaPlayer newSound(String soundName) throws MalformedURLException{
         File mediaFile = new File("src/main/resources/sounds/" + soundName + ".mp3");
@@ -63,11 +67,12 @@ public class ApplicationObjects {
         return rectangle;
     }
 
-    public static Button newButton(String text, int x, int y, String id){
+    public static Button newButton(String text, int x, int y, String id, EventHandler<ActionEvent> action){
         Button button = new Button(text);
         button.setId(id);
         button.setLayoutX(x);
         button.setLayoutY(y);
+        button.setOnAction(action);
         return button;
     }
 
