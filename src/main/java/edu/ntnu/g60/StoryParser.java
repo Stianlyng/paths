@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.ntnu.g60.entities.ActionEntity;
 import edu.ntnu.g60.entities.LinkEntity;
 import edu.ntnu.g60.entities.PassageEntity;
 import edu.ntnu.g60.entities.StoryEntity;
@@ -63,13 +64,32 @@ public class StoryParser {
         return passage;
     }
 
+    /**
+     * Builds a Link object from a LinkEntity object.
+     *
+     * @param linkEntity the LinkEntity object to be parsed.
+     * @return a Link object.
+     */
     private Link buildLink(LinkEntity linkEntity) {
         Link link = new Link(linkEntity.getText(), linkEntity.getReference());
+
         linkEntity.getActions().forEach(actionEntity -> {
-            Action action = ActionFactory.createAction(actionEntity);
+            Action action = buildAction(actionEntity);
             link.addAction(action);
         });
+
         return link;
+    }
+
+    /**
+     * Builds an Action object from an ActionEntity object.
+     *
+     * @param actionEntity the ActionEntity object to be parsed.
+     * @return an Action object.
+     */
+    private Action buildAction(ActionEntity actionEntity) {
+        Action action = ActionFactory.createAction(actionEntity);
+        return action;
     }
 
     /**
