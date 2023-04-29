@@ -25,37 +25,21 @@ import javafx.scene.paint.Color;
 public class ContinueScene {
     public static Scene scene() throws IOException, ClassNotFoundException {
        
-        FileParser fileParser = new FileParser("src/main/resources/textFiles/haunted_house.txt");
-        Story story = fileParser.buildStory();
-
-        List<Goal> goals = new ArrayList<Goal>();
-        goals.add(new HealthGoal(4));
-        
-        Player player = new PlayerBuilder()
-                .setName("Alice")
-                .build();
-
-        Game game = new Game(player, story, goals);
-
         Button save1Button = ApplicationObjects.newButton("", 514-193, 278-71, "launch_button");
         Button save2Button = ApplicationObjects.newButton("", 514-193, 345-71, "launch_button");
         Button save3Button = ApplicationObjects.newButton("", 514-193, 412-71, "launch_button");
         
-        IntStream.rangeClosed(1, 3).forEach(i -> {
+        IntStream.rangeClosed(1, 3).forEach(buttonNumber -> {
             try {
-                if (SaveRegister.saveExists(i)) {
-                    Story.setCurrentSave(SaveRegister.getSave(i));
-                    Button saveButton = i == 1 ? save1Button : i == 2 ? save2Button : save3Button;
-                    saveButton.setText(SaveRegister.getSave(i).getSaveName());
+                if (SaveRegister.saveExists(buttonNumber)) {
+                    Story.setCurrentSave(SaveRegister.getSave(buttonNumber));
+                    Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
+                    saveButton.setText(SaveRegister.getSave(buttonNumber).getSaveName());
                     saveButton.setOnAction(e -> {
-                        try {
-                            LvlScene.scene(game, SaveRegister.getSave(i).getPassage());
-                        } catch (IOException | ClassNotFoundException e1) {
-                            e1.printStackTrace();
-                        }
+                        saveAction(buttonNumber);
                     });
                 } else {
-                    Button saveButton = i == 1 ? save1Button : i == 2 ? save2Button : save3Button;
+                    Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
                     saveButton.setText("Empty");
                 }
             } catch (ClassNotFoundException | IOException e) {
@@ -65,11 +49,7 @@ public class ContinueScene {
 
         Button backButton = ApplicationObjects.newButton("Back", 903-193, 595-71, "back_button");
         backButton.setOnAction(e -> {
-            try {
-                ApplicationFront.switchToScene(OpeningScene.scene());
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+            backAction();
         });
 
         ImageView background = ApplicationObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
@@ -77,6 +57,22 @@ public class ContinueScene {
         root.getStylesheets().add("StyleSheet.css"); 
         Scene scene = new Scene(root, 800, 600, Color.WHITE);
         return scene;
-
     }
+
+    public static void saveAction(int buttonNumber){
+        try {
+            LvlSwitchAnimation.animation(GameApp.getGame(), SaveRegister.getSave(buttonNumber).getPassage());
+        } catch (IOException | ClassNotFoundException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public static void backAction(){
+        try {
+            GameApp.switchToScene(OpeningScene.scene());
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
 }
