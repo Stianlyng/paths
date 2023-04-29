@@ -48,6 +48,12 @@ public class GameRunner {
         while (playing) {
             clearScreen();
             System.out.println("\n" + player.getName() + " has " + player.getHealth() + " health and " + player.getGold() + " gold.");
+
+            System.out.println( "Background: " + currentPassage.getBackground() + 
+                                " Player: " + currentPassage.getPlayer() + 
+                                " Enemy: " + currentPassage.getEnemy() + 
+                                " isFight: " + currentPassage.hasFightScene());
+
             System.out.println("\n" + currentPassage.getTitle());
             System.out.println(currentPassage.getContent());
 

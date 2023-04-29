@@ -53,16 +53,35 @@ public class StoryParser {
      * @return a Passage object.
      */
     private Passage buildPassage(PassageEntity passageEntity) {
-        Passage passage = new PassageBuilder()
+        PassageBuilder passageBuilder = new PassageBuilder()
             .setTitle(passageEntity.getTitle())
-            .setContent(passageEntity.getContent())
-            .build();
-
+            .setContent(passageEntity.getContent());
+    
+        if (passageEntity.getBackground() != null) {
+            passageBuilder.setBackground(passageEntity.getBackground());
+        }
+    
+        if (passageEntity.getPlayer() != null) {
+            passageBuilder.setPlayer(passageEntity.getPlayer());
+        }
+    
+        if (passageEntity.getEnemy() != null) {
+            passageBuilder.setEnemy(passageEntity.getEnemy());
+        }
+    
+        if (passageEntity.getIsFight() != null) {
+            passageBuilder.isFightScene(passageEntity.getIsFight());
+        }
+    
+        Passage passage = passageBuilder.build();
+    
         passageEntity.getLinks().forEach(linkEntity -> {
             passage.addLink(buildLink(linkEntity));
-        });   
+        });
+    
         return passage;
     }
+
 
     /**
      * Builds a Link object from a LinkEntity object.
