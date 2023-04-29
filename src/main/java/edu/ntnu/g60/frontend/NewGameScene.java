@@ -29,51 +29,12 @@ public class NewGameScene {
         Button startButton = ApplicationObjects.newButton("Start", 514-193, 370-71, "launch_button");
         Button backButton = ApplicationObjects.newButton("Back", 903-193, 595-71, "back_button");
         backButton.setOnAction(e -> {
-            try {
-                ApplicationFront.switchToScene(OpeningScene.scene());
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+            backAction();
         });
 
         TextField saveNameTextField = ApplicationObjects.newTextField("Savename..", 514-193, 327-71, "text_field");
         startButton.setOnAction(e -> {
-            if(saveNameTextField.getText() != null && !saveNameTextField.getText().equals("")){
-                try {
-                    FileParser fileParser = new FileParser("src/main/resources/textFiles/haunted_house.txt");
-                    Story story = fileParser.buildStory();
-
-                    List<Goal> goals = new ArrayList<Goal>();
-                    goals.add(new HealthGoal(4));
-
-                    Player player = new PlayerBuilder()
-                            .setName("Alice")
-                            .build();
-
-
-                    Game game = new Game(player, story, goals);
-                    
-                    int saveNumber = 1;
-                    if (SaveRegister.saveExists(1)) {
-                        saveNumber = 2;
-                        if (SaveRegister.saveExists(2)) {
-                            saveNumber = 3;
-                        }
-                    }
-                    
-                    Save save = new Save(game.getStory().getOpeningPassage(), saveNameTextField.getText(), saveNumber);
-                    SaveRegister.setSave(save, saveNumber);
-                    Story.setCurrentSave(save);
-                    
-                    try {
-                        LvlScene.scene(game, game.begin());
-                    } catch (MalformedURLException e1) {
-                        e1.printStackTrace();
-                    }
-                } catch (IOException | ClassNotFoundException e1) {
-                    e1.printStackTrace();
-                }
-            }       
+            startAction(saveNameTextField.getText());
         }); 
 
         ImageView background = ApplicationObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
@@ -83,4 +44,39 @@ public class NewGameScene {
         return scene;
     }
 
+    public static void backAction(){
+        try {
+            GameApp.switchToScene(OpeningScene.scene());
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public static void startAction(String saveName){
+        if(saveName != null && !saveName.equals("")){
+            try {
+                Game game = GameApp.getGame();
+                
+                int saveNumber = 1;
+                if (SaveRegister.saveExists(1)) {
+                    saveNumber = 2;
+                    if (SaveRegister.saveExists(2)) {
+                        saveNumber = 3;
+                    }
+                }
+                
+                Save save = new Save(game.getStory().getOpeningPassage(), saveName, saveNumber);
+                SaveRegister.setSave(save, saveNumber);
+                Story.setCurrentSave(save);
+                
+                try {
+                    LvlSwitchAnimation.animation(game, game.begin());
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                }
+            } catch (IOException | ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
+        } 
+    }
 }
