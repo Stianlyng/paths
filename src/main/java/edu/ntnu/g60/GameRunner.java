@@ -40,7 +40,7 @@ public class GameRunner {
                     );
 
         Game game = new Game(player, story, goals);
-
+        
         Scanner scanner = new Scanner(System.in);
         Passage currentPassage = game.begin();
         boolean playing = true;

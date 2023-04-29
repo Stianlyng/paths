@@ -7,7 +7,13 @@
       "links": [
         {
           "text": "Try to open the door",
-          "reference": "Another room"
+          "reference": "Another room",
+          "actions": [
+            {
+              "type": "gold",
+              "value": 20
+            }
+          ]
         }
       ]
     },
