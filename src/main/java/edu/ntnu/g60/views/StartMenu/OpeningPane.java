@@ -20,10 +20,10 @@ public class OpeningPane extends StackPane{
     }
 
     private static Group getStartMenuObjects() throws FileNotFoundException{
-        Button continueButton = ViewObjects.newButton("Continue", 514-193, 314-71, "launch_button", controller::continueAction);
-        Button newGameButton = ViewObjects.newButton("New game", 514-193, 396-71, "launch_button", controller::newGameAction);
+        Button continueButton = ViewObjects.newButton("Continue", 614-193, 314-71, "launch_button", controller::continueAction);
+        Button newGameButton = ViewObjects.newButton("New game", 614-193, 396-71, "launch_button", controller::newGameAction);
         ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
-        return new Group(continueButton, newGameButton, background);
+        return new Group(background, continueButton, newGameButton);
     }
 
 }

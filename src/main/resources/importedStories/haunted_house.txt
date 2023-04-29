@@ -7,8 +7,8 @@ Haunted House
 #isFight:false
 {E}Hello newborn. Welcome to life. Your first task in life will be to choose what gender you want to be!
 {P}Oh no. So scary woOoOooO!
-[Woman](Woman)
-[Man](Breast milk)
+[Man](Woman)
+[Woman](Breast milk)
 
 
 

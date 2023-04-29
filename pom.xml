@@ -67,7 +67,7 @@
               <execution>
                 <id>default-cli</id>
                 <configuration>
-                  <mainClass>edu.ntnu.g60.frontend.ApplicationFront</mainClass>
+                  <mainClass>edu.ntnu.g60.GameAppLauncher</mainClass>
                 </configuration>
               </execution>
             </executions>
