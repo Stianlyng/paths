@@ -36,10 +36,10 @@ public class StoryParser {
             StoryBuilder storyBuilder = new StoryBuilder()
                 .setTitle(storyMap.getTitle());
 
-            storyMap.getPassages().forEach(passageMap -> {
-                Passage passage = buildPassage(passageMap);
+            storyMap.getPassages().forEach(passageEntity -> {
+                Passage passage = buildPassage(passageEntity);
                 storyBuilder.addPassage(passage);
-                if (storyMap.getPassages().indexOf(passageMap) == 0) {
+                if (storyMap.getPassages().indexOf(passageEntity) == 0) {
                     storyBuilder.setOpeningPassage(passage);
                 }
             });
@@ -51,13 +51,13 @@ public class StoryParser {
         }
     }
 
-    private Passage buildPassage(PassageEntity passageMap) {
+    private Passage buildPassage(PassageEntity passageEntity) {
         Passage passage = new PassageBuilder()
-            .setTitle(passageMap.getTitle())
-            .setContent(passageMap.getContent())
+            .setTitle(passageEntity.getTitle())
+            .setContent(passageEntity.getContent())
             .build();
 
-        passageMap.getLinks().forEach(link -> {
+        passageEntity.getLinks().forEach(link -> {
             passage.addLink(new Link(link.getText(), link.getReference()));
         });
 
