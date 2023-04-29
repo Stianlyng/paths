@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 public class ViewObjects {
     public static Button newButton(String text, int x, int y, String id, EventHandler<ActionEvent> action){
@@ -47,5 +50,14 @@ public class ViewObjects {
         textField.setLayoutY(y);
         textField.setId(id);
         return textField;
+    }
+
+    public static Text newText(String title, int size, boolean underline, int x, int y){
+        Text text = new Text(title);
+        text.setFont(Font.font("Times New Roman", FontWeight.BOLD, size));
+        text.setUnderline(underline);
+        text.setX(x);
+        text.setY(y);
+        return text;
     }
 }
