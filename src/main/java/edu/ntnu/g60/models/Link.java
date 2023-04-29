@@ -24,7 +24,6 @@ public class Link {
   public Link(String text, String reference) throws IllegalArgumentException {
     if (text == null) throw new IllegalArgumentException("Text cannot be null.");
     if (reference == null) throw new IllegalArgumentException("Reference cannot be null.");
-    // TODO: sjekk om det skal legges til en sjekk for om reference er en gyldig passage
     this.text = text;
     this.reference = reference;
     this.actions = new ArrayList<>();
