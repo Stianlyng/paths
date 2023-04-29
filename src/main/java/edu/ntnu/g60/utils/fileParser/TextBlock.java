@@ -119,21 +119,4 @@ public class TextBlock {
         this.links = new HashMap<>(links);
     }
 
-    public static void main(String[] args) {
-        TextBlock block = new TextBlock();
-        block.setLine("::My Block");
-        block.setLine("This is some content");
-        block.setLine("[Google](https://www.google.com)");
-        block.setLine("[Wikipedia](https://www.wikipedia.org)");
-
-        System.out.println("Block title: " + block.getTitle());
-        System.out.println("Block content: " + block.getContent());
-        System.out.println("Block links: " + block.getLinks());
-        
-        // print each link
-        block.getLinks().forEach((key, value) -> {
-            System.out.println("Link: " + key + " -> " + value);
-        });
-
-    }
 }

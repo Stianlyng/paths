@@ -6,6 +6,3 @@ import edu.ntnu.g60.models.Player;
 public interface Action {
     public void execute(Player player);
 }
-
-
-

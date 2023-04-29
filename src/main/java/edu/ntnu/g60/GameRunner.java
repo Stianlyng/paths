@@ -1,6 +1,7 @@
 package edu.ntnu.g60;
 
 import edu.ntnu.g60.models.*;
+import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
@@ -36,6 +37,7 @@ public class GameRunner {
         boolean playing = true;
 
         while (playing) {
+            System.out.println("\n" + player.getName() + " has " + player.getHealth() + " health and " + player.getGold() + " gold.");
             System.out.println("\n" + currentPassage.getTitle());
             System.out.println(currentPassage.getContent());
 
@@ -50,10 +52,10 @@ public class GameRunner {
                 Link chosenLink = links.get(choice - 1);
                 System.out.println("rap: " + chosenLink);
 
-                // Execute actions associated with the chosen link
-                //for (Action action : chosenLink.getActions()) {
-                //    action.execute(player);
-                //}
+                //Execute actions associated with the chosen link
+                for (Action action : chosenLink.getActions()) {
+                    action.execute(player);
+                }
                 System.out.println("text: " + chosenLink.getText() +
                                     "Ref: " + chosenLink.getReference());
 
