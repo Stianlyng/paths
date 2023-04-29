@@ -1,79 +1,119 @@
 #launch_button {
-    -fx-padding: 8 15 15 15;
-    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
-    -fx-background-radius: 8;
     -fx-background-color: 
-        linear-gradient(from 0% 93% to 0% 100%, #32a8a2 0%, #177974 100%),
         #000000,
-        #000000,
-        radial-gradient(center 50% 50%, radius 100%, #2dbbb4, #064744);
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
     -fx-pref-width: 158;
     -fx-pref-height: 51;
-    -fx-font-size: 24;
+    -fx-font-size: 18;
 }
 #back_button {
-    -fx-padding: 8 15 15 15;
-    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
-    -fx-background-radius: 8;
     -fx-background-color: 
-        linear-gradient(from 0% 93% to 0% 100%, #32a8a2 0%, #177974 100%),
         #000000,
-        #000000,
-        radial-gradient(center 50% 50%, radius 100%, #2dbbb4, #064744);
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
-    -fx-pref-width: 74;
+    -fx-pref-width: 100;
     -fx-pref-height: 35;
     -fx-font-size: 15;
 }
 #fight_button {
-    -fx-padding: 8 15 15 15;
-    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
-    -fx-background-radius: 8;
     -fx-background-color: 
-        linear-gradient(from 0% 93% to 0% 100%, #32a8a2 0%, #177974 100%),
         #000000,
-        #000000,
-        radial-gradient(center 50% 50%, radius 100%, #2dbbb4, #064744);
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
     -fx-pref-width: 373;
     -fx-pref-height: 55;
-    -fx-font-size: 40;
+    -fx-font-size: 25;
+}
+#heal_button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 373;
+    -fx-pref-height: 55;
+    -fx-font-size: 25;
+}
+#inventory_button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 373;
+    -fx-pref-height: 55;
+    -fx-font-size: 25;
+}
+#escape_button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 373;
+    -fx-pref-height: 55;
+    -fx-font-size: 25;
 }
 #talk_button {
-    -fx-padding: 8 15 15 15;
-    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
-    -fx-background-radius: 8;
     -fx-background-color: 
-        linear-gradient(from 0% 93% to 0% 100%, #32a8a2 0%, #177974 100%),
         #000000,
-        #000000,
-        radial-gradient(center 50% 50%, radius 100%, #2dbbb4, #064744);
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
     -fx-pref-width: 306;
     -fx-pref-height: 85;
-    -fx-font-size: 22;
+    -fx-font-size: 18;
 }
 #text_field {
-    -fx-padding: 8 15 15 15;
-    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
-    -fx-background-radius: 8;
     -fx-background-color: 
-        linear-gradient(from 0% 93% to 0% 100%, #32a8a2 0%, #177974 100%),
         #000000,
-        #000000,
-        radial-gradient(center 50% 50%, radius 100%, #2dbbb4, #064744);
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
     -fx-pref-width: 158;
     -fx-pref-height: 27;
     -fx-font-size: 13;

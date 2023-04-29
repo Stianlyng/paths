@@ -113,7 +113,7 @@ public class FightPaneController {
 
     public void backAction(ActionEvent event){
         try {
-            FightPane.addFightPaneObjects(getCurrentFightPane());
+            FightPane.addFightPaneObjects();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
