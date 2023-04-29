@@ -71,11 +71,11 @@ public class FileParser {
         FileParser parser = this;
         TextBlock openingBlock = parser.getTextBlocks().get(0);
         Passage openingPassage = new PassageBuilder()
-                .withTitle(openingBlock.getTitle())
-                .withContent(openingBlock.getContent())
-                .withPlayer(openingBlock.getPlayerImg())
-                .withEnemy(openingBlock.getEnemyImg())
-                .withBackground(openingBlock.getBackgroundImg())
+                .setTitle(openingBlock.getTitle())
+                .setContent(openingBlock.getContent())
+                .setPlayer(openingBlock.getPlayerImg())
+                .setEnemy(openingBlock.getEnemyImg())
+                .setBackground(openingBlock.getBackgroundImg())
                 .isFightScene(openingBlock.isFightScene())
                 .build();
         openingBlock.getLinks().forEach((key, value) -> {
@@ -90,11 +90,11 @@ public class FileParser {
 
         parser.getTextBlocks().forEach((block) -> {
             Passage passage = new PassageBuilder()
-                    .withTitle(block.getTitle())
-                    .withContent(block.getContent())
-                    .withPlayer(block.getPlayerImg())
-                    .withEnemy(block.getEnemyImg())
-                    .withBackground(block.getBackgroundImg())
+                    .setTitle(block.getTitle())
+                    .setContent(block.getContent())
+                    .setPlayer(block.getPlayerImg())
+                    .setEnemy(block.getEnemyImg())
+                    .setBackground(block.getBackgroundImg())
                     .isFightScene(block.isFightScene())
                     .build();
 
