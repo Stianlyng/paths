@@ -143,16 +143,16 @@ public class NewFightScene {
     public static void winFight(Game game, Passage passage) throws MalformedURLException, FileNotFoundException{
         Link link2 = passage.getLinks().get(1);
         if(link2.getReference().equals("game over")){
-            ApplicationFront.switchToScene(DeathScene.scene());
-            LvlScene.delay(3000, () -> {
+            GameApp.switchToScene(DeathScene.scene());
+            GameApp.delay(3000, () -> {
                 try {
-                    ApplicationFront.switchToScene(OpeningScene.scene());
+                    GameApp.switchToScene(OpeningScene.scene());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             });
         } else { 
-            LvlScene.scene(game, game.go(link2));
+            LvlSwitchAnimation.animation(game, game.go(link2));
             try {
                 SaveRegister.setSave(new Save(game.go(link2), Story.getCurrentSave().getSaveName(),
                 Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
@@ -165,16 +165,16 @@ public class NewFightScene {
     public static void looseFight(Game game, Passage passage) throws MalformedURLException, FileNotFoundException{
         Link link1 = passage.getLinks().get(0);
         if(link1.getReference().equals("game over")){
-            ApplicationFront.switchToScene(DeathScene.scene());
-            LvlScene.delay(3000, () -> {
+            GameApp.switchToScene(DeathScene.scene());
+            GameApp.delay(3000, () -> {
                 try {
-                    ApplicationFront.switchToScene(OpeningScene.scene());
+                    GameApp.switchToScene(OpeningScene.scene());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             });
         } else { 
-            LvlScene.scene(game, game.go(link1));
+            LvlSwitchAnimation.animation(game, game.go(link1));
             try {
                 SaveRegister.setSave(new Save(game.go(link1), Story.getCurrentSave().getSaveName(),
                 Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
@@ -185,7 +185,7 @@ public class NewFightScene {
     }
 
     public static void enemyAction(float damageAmount, float healAmount, Game game, Passage passage){
-        LvlScene.delay(2000, () -> {
+        GameApp.delay(2000, () -> {
             playerHealth = playerHealth - damageAmount;
             enemyHealth = enemyHealth + healAmount;
             playerBar.setProgress(playerHealth);

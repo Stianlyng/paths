@@ -34,10 +34,10 @@ public class NewTalkingScene {
 
         MediaPlayer mumble = ApplicationObjects.newSound("mumble");
         mumble.play();
-        boolean moreLinesLeft = (ApplicationFront.getTextLine() + 1 == types.length) ? false : true;
+        boolean moreLinesLeft = (GameApp.getTextLine() + 1 == types.length) ? false : true;
 
-        String type = types[ApplicationFront.getTextLine()];
-        String line = passageContent[ApplicationFront.getTextLine()];
+        String type = types[GameApp.getTextLine()];
+        String line = passageContent[GameApp.getTextLine()];
         
         String[] words = line.split("\\s+");
         int numGroups = (int) Math.ceil(words.length / 10.0);
@@ -92,7 +92,7 @@ public class NewTalkingScene {
         coinIcon, healthIcon, scoreIcon, playerImage, enemyImage);
 
 
-        ApplicationFront.setTextLine(ApplicationFront.getTextLine() + 1);
+        GameApp.setTextLine(GameApp.getTextLine() + 1);
         if(type.equals("{N}")){
             ImageView neutralBubble = ApplicationObjects.newImage("animations", "neutralbubble.png", 227-193, 390-71, 793, 211+511);
             root.getChildren().add(neutralBubble);
@@ -121,7 +121,7 @@ public class NewTalkingScene {
         scene.setOnMouseClicked(e -> {
             if(moreLinesLeft){
                 try {
-                    ApplicationFront.switchToScene(scene(types, passageContent, game, passage));
+                    GameApp.switchToScene(scene(types, passageContent, game, passage));
                     mumble.stop();
                 } catch (FileNotFoundException | MalformedURLException e1) {
                     e1.printStackTrace();
@@ -129,7 +129,7 @@ public class NewTalkingScene {
             } else if (passage.hasFightScene()){
                 try {
                     mumble.stop();
-                    ApplicationFront.switchToScene(NewFightScene.scene(game, passage));
+                    GameApp.switchToScene(NewFightScene.scene(game, passage));
                 } catch (FileNotFoundException e1){
                     e1.printStackTrace();
                 }  
@@ -148,16 +148,16 @@ public class NewTalkingScene {
                     choice1.setOnAction(p -> {
                         try {
                             if(link1.getReference().equals("game over")){
-                                ApplicationFront.switchToScene(DeathScene.scene());
-                                LvlScene.delay(3000, () -> {
+                                GameApp.switchToScene(DeathScene.scene());
+                                GameApp.delay(3000, () -> {
                                     try {
-                                        ApplicationFront.switchToScene(OpeningScene.scene());
+                                        GameApp.switchToScene(OpeningScene.scene());
                                     } catch (IOException e1) {
                                         e1.printStackTrace();
                                     }
                                 });
                             } else{
-                                LvlScene.scene(game, game.go(link1));
+                                LvlSwitchAnimation.animation(game, game.go(link1));
                                 SaveRegister.setSave(new Save(game.go(link1), Story.getCurrentSave().getSaveName(),
                                 Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
                             }
@@ -169,16 +169,16 @@ public class NewTalkingScene {
                     choice2.setOnAction(p -> {
                         try {
                             if(link2.getReference().equals("game over")){
-                                ApplicationFront.switchToScene(DeathScene.scene());
-                                LvlScene.delay(3000, () -> {
+                                GameApp.switchToScene(DeathScene.scene());
+                                GameApp.delay(3000, () -> {
                                     try {
-                                        ApplicationFront.switchToScene(OpeningScene.scene());
+                                        GameApp.switchToScene(OpeningScene.scene());
                                     } catch (IOException e1) {
                                         e1.printStackTrace();
                                     }
                                 });
                             } else{
-                                LvlScene.scene(game, game.go(link2));
+                                LvlSwitchAnimation.animation(game, game.go(link2));
                                 SaveRegister.setSave(new Save(game.go(link2), Story.getCurrentSave().getSaveName(),
                                 Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
                             }
