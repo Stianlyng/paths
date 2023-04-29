@@ -3,12 +3,12 @@ package edu.ntnu.g60.controllers;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import edu.ntnu.g60.frontend.GameApp;
 import edu.ntnu.g60.frontend.LvlSwitchAnimation;
 import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;
+import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.StartMenu.ContinuePane;
 import edu.ntnu.g60.views.StartMenu.NewGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
