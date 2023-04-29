@@ -7,12 +7,16 @@ import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.goals.InventoryGoal;
 import edu.ntnu.g60.models.goals.ScoreGoal;
-import edu.ntnu.g60.utils.fileParser.FileParser;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class GameRunner {
+
+    private static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
     public static void main(String[] args) {
 
@@ -42,6 +46,7 @@ public class GameRunner {
         boolean playing = true;
 
         while (playing) {
+            clearScreen();
             System.out.println("\n" + player.getName() + " has " + player.getHealth() + " health and " + player.getGold() + " gold.");
             System.out.println("\n" + currentPassage.getTitle());
             System.out.println(currentPassage.getContent());
@@ -55,12 +60,13 @@ public class GameRunner {
 
                 int choice = scanner.nextInt();
                 Link chosenLink = links.get(choice - 1);
+
                 //Execute actions associated with the chosen link
-                //for (Action action : chosenLink.getActions()) {
-                //    action.execute(player);
-                //}
-                //System.out.println("text: " + chosenLink.getText() +
-                //                    "Ref: " + chosenLink.getReference());
+                for (Action action : chosenLink.getActions()) {
+                    action.execute(player);
+                }
+                System.out.println("text: " + chosenLink.getText() +
+                                    "Ref: " + chosenLink.getReference());
 
                 //System.out.println("netite: " + story.getPassage(chosenLink).getTitle());
                 currentPassage = game.go(chosenLink);
