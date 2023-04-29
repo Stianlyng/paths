@@ -1,4 +1,4 @@
-package edu.ntnu.g60.utils.fileParser;
+package edu.ntnu.g60.utils;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

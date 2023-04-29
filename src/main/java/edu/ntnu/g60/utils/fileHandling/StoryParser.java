@@ -1,4 +1,4 @@
-package edu.ntnu.g60;
+package edu.ntnu.g60.utils.fileHandling;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class StoryParser {
      * @param jsonFilePath the path to the JSON file to be parsed.
      */
     public StoryParser(String jsonFilePath) {
-        this.jsonFile = Paths.get(jsonFilePath).toFile();
+        this.jsonFile = Paths.get("src/main/resources/stories/" + jsonFilePath + ".json").toFile();
         this.objectMapper = new ObjectMapper();
     }
     
@@ -53,27 +53,14 @@ public class StoryParser {
      * @return a Passage object.
      */
     private Passage buildPassage(PassageEntity passageEntity) {
-        PassageBuilder passageBuilder = new PassageBuilder()
+        Passage passage = new PassageBuilder()
             .setTitle(passageEntity.getTitle())
-            .setContent(passageEntity.getContent());
-    
-        if (passageEntity.getBackground() != null) {
-            passageBuilder.setBackground(passageEntity.getBackground());
-        }
-    
-        if (passageEntity.getPlayer() != null) {
-            passageBuilder.setPlayer(passageEntity.getPlayer());
-        }
-    
-        if (passageEntity.getEnemy() != null) {
-            passageBuilder.setEnemy(passageEntity.getEnemy());
-        }
-    
-        if (passageEntity.getIsFight() != null) {
-            passageBuilder.isFightScene(passageEntity.getIsFight());
-        }
-    
-        Passage passage = passageBuilder.build();
+            .setContent(passageEntity.getContent())
+            .setBackground(passageEntity.getBackground())
+            .setPlayer(passageEntity.getPlayer())
+            .setEnemy(passageEntity.getEnemy())
+            .isFightScene(passageEntity.getIsFight())
+            .build();
     
         passageEntity.getLinks().forEach(linkEntity -> {
             passage.addLink(buildLink(linkEntity));

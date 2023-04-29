@@ -7,6 +7,7 @@ import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.goals.InventoryGoal;
 import edu.ntnu.g60.models.goals.ScoreGoal;
+import edu.ntnu.g60.utils.fileHandling.StoryParser;
 
 import java.util.List;
 import java.util.Scanner;
@@ -20,7 +21,7 @@ public class GameRunner {
 
     public static void main(String[] args) {
 
-        StoryParser parser = new StoryParser("src/main/resources/textFiles/story.json");
+        StoryParser parser = new StoryParser("haunted_house");
         Story story = parser.build();
 
         Player player = new PlayerBuilder()
