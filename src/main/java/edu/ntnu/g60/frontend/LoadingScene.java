@@ -30,7 +30,7 @@ public class LoadingScene {
         rad2.setAlignment(Pos.CENTER);         
         rad3.setAlignment(Pos.CENTER);         
         layout.getChildren().addAll(rad1, rad2, rad3);
-        Text loadingText = new Text("Loading...");
+        Text loadingText = new Text("Continueing");
         loadingText.setFont(Font.font("Times New Roman", FontWeight.BOLD, 40));
         Text placeHolder = new Text(" ");
         Text placeHolder2 = new Text(" ");
