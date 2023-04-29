@@ -2,16 +2,6 @@ package edu.ntnu.g60.views;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import edu.ntnu.g60.models.Game;
-import edu.ntnu.g60.models.Player;
-import edu.ntnu.g60.models.PlayerBuilder;
-import edu.ntnu.g60.models.Story;
-import edu.ntnu.g60.models.goals.Goal;
-import edu.ntnu.g60.models.goals.HealthGoal;
-import edu.ntnu.g60.utils.fileParser.FileParser;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.application.Application;
 import javafx.concurrent.Task;
@@ -32,31 +22,17 @@ public class GameApp extends Application {
 
     private static Stage stage;
     
-    //move
-    static int textLine;
-
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
         GameApp.stage = stage;
         stage.setTitle(TITLE);
         stage.getIcons().add(new Image(new FileInputStream(ICON_PATH)));
         stage.setResizable(false);
-
         OpeningPane startMenu = new OpeningPane();
         Scene scene = new Scene(startMenu, HEIGHT, WIDTH, backgound);
         stage.setScene(scene);
         scene.getStylesheets().add(STYLESHEET);
         stage.show();
-    }
-
-    //TODO: move
-    public static int getTextLine(){
-        return textLine;
-    }
-
-    //move
-    public static void setTextLine(int amount){
-        textLine = amount;
     }
 
     public static void changeRootPane(Pane pane) {
@@ -67,22 +43,6 @@ public class GameApp extends Application {
         }
     }
 
-    //TODO: move
-    private static final String GAME_PATH = "src/main/resources/textFiles/haunted_house.txt";
-    public static Game getGame(){
-        FileParser fileParser = new FileParser(GAME_PATH);
-        Story story = fileParser.buildStory();
-
-        List<Goal> goals = new ArrayList<Goal>();
-        goals.add(new HealthGoal(4));
-        
-        Player player = new PlayerBuilder()
-                .setName("Alice")
-                .build();
-
-        Game game = new Game(player, story, goals);
-        return game;
-    }
 
     //move maybe?
     public static void delay(long millis, Runnable continuation){

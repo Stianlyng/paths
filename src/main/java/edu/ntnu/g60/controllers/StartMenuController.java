@@ -3,12 +3,12 @@ package edu.ntnu.g60.controllers;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import edu.ntnu.g60.frontend.LvlSwitchAnimation;
 import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.views.GameApp;
+import edu.ntnu.g60.views.Animations.LvlSwitchAnimation;
 import edu.ntnu.g60.views.StartMenu.ContinuePane;
 import edu.ntnu.g60.views.StartMenu.NewGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
@@ -33,14 +33,6 @@ public class StartMenuController {
         }
     }
 
-    public void saveAction(ActionEvent event, int buttonNumber){
-        try {
-            LvlSwitchAnimation.animation(GameApp.getGame(), SaveRegister.getSave(buttonNumber).getPassage());
-        } catch (IOException | ClassNotFoundException e1) {
-            e1.printStackTrace();
-        }
-    }
-
     public void backAction(ActionEvent event){
         try {
             GameApp.changeRootPane(new OpeningPane());
@@ -50,9 +42,10 @@ public class StartMenuController {
     }
 
     public void startAction(ActionEvent event){
+        NewGamePane.updateSaveName();
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
             try {
-                Game game = GameApp.getGame();
+                Game game = GameController.getNewGame();
                 
                 int saveNumber = 1;
                 if (SaveRegister.saveExists(1)) {
@@ -67,7 +60,9 @@ public class StartMenuController {
                 Story.setCurrentSave(save);
                 
                 try {
-                    LvlSwitchAnimation.animation(game, game.begin());
+                    GameController.setCurrentGame(game);
+                    GameController.setCurrentPassage(game.begin());
+                    LvlSwitchAnimation.animation();
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
                 }

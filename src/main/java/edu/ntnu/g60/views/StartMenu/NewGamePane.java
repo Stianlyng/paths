@@ -14,18 +14,23 @@ public class NewGamePane extends StackPane{
 
     private static StartMenuController controller;
     public static String saveName;
+    static TextField saveNameTextField;
     
     public NewGamePane() throws FileNotFoundException{
         NewGamePane.controller = new StartMenuController();
         getChildren().addAll(getNewGameObjects());
     }
 
+
     private static Group getNewGameObjects() throws FileNotFoundException{
         Button startButton = ViewObjects.newButton("Start", 514-193, 370-71, "launch_button", controller::startAction);
         Button backButton = ViewObjects.newButton("Back", 903-193, 595-71, "back_button", controller::backAction);
         ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
-        TextField saveNameTextField = ViewObjects.newTextField("Savename..", 514-193, 327-71, "text_field");
+        saveNameTextField = ViewObjects.newTextField("Savename..", 514-193, 327-71, "text_field");
+        return new Group(background, startButton, backButton, saveNameTextField);
+    }
+
+    public static void updateSaveName(){
         saveName = saveNameTextField.getText();
-        return new Group(startButton, backButton, saveNameTextField, background);
     }
 }
