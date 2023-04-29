@@ -152,11 +152,11 @@ public class Passage{
   /*
   public static void main(String[] args) {
     Passage passage = new PassageBuilder()
-                    .withTitle("Opening Passage")
-                    .withContent("This is the opening passage")
-                    .withPlayer("player1.png")
-                    .withEnemy("enemy1.png")
-                    .withBackground("background2.png")
+                    .setTitle("Opening Passage")
+                    .setContent("This is the opening passage")
+                    .setPlayer("player1.png")
+                    .setEnemy("enemy1.png")
+                    .setBackground("background2.png")
                     .isFightScene(true)
                     .build();
 

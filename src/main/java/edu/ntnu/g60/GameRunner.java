@@ -7,21 +7,31 @@ import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.goals.InventoryGoal;
 import edu.ntnu.g60.models.goals.ScoreGoal;
-import edu.ntnu.g60.utils.fileParser.FileParser;
+import edu.ntnu.g60.utils.fileHandling.StoryParser;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class GameRunner {
 
-    public static void main(String[] args) {
-        String filePath = "src/main/resources/textFiles/story.txt";
+    private static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
-        FileParser parser = new FileParser(filePath);
-        Story story = parser.buildStory();
+    public static void main(String[] args) {
+
+        StoryParser parser = new StoryParser("haunted_house");
+        Story story = parser.build();
+
         Player player = new PlayerBuilder()
-                .setName("Stian")
-                .build();
+            .setName("John Doe")
+            .setHealth(100)
+            .setScore(0)
+            .setGold(50)
+            .addItemToInventory("Sword")
+            .addItemToInventory("Shield")
+            .build();
 
         List<Goal> goals = List.of( 
                     new HealthGoal(0), 
@@ -31,13 +41,20 @@ public class GameRunner {
                     );
 
         Game game = new Game(player, story, goals);
-
+        
         Scanner scanner = new Scanner(System.in);
         Passage currentPassage = game.begin();
         boolean playing = true;
 
         while (playing) {
+            clearScreen();
             System.out.println("\n" + player.getName() + " has " + player.getHealth() + " health and " + player.getGold() + " gold.");
+
+            System.out.println( "Background: " + currentPassage.getBackground() + 
+                                " Player: " + currentPassage.getPlayer() + 
+                                " Enemy: " + currentPassage.getEnemy() + 
+                                " isFight: " + currentPassage.hasFightScene());
+
             System.out.println("\n" + currentPassage.getTitle());
             System.out.println(currentPassage.getContent());
 
@@ -50,7 +67,6 @@ public class GameRunner {
 
                 int choice = scanner.nextInt();
                 Link chosenLink = links.get(choice - 1);
-                System.out.println("rap: " + chosenLink);
 
                 //Execute actions associated with the chosen link
                 for (Action action : chosenLink.getActions()) {
@@ -59,7 +75,6 @@ public class GameRunner {
                 System.out.println("text: " + chosenLink.getText() +
                                     "Ref: " + chosenLink.getReference());
 
-                System.out.println("cpach: " + currentPassage.getTitle());
                 //System.out.println("netite: " + story.getPassage(chosenLink).getTitle());
                 currentPassage = game.go(chosenLink);
             } else {

@@ -11,11 +11,11 @@ class PassageTest {
     @Test
     void testPassageBuilder() {
         Passage passage = new PassageBuilder()
-                .withTitle("Opening Passage")
-                .withContent("This is the opening passage")
-                .withPlayer("player1.png")
-                .withEnemy("enemy1.png")
-                .withBackground("background2.png")
+                .setTitle("Opening Passage")
+                .setContent("This is the opening passage")
+                .setPlayer("player1.png")
+                .setEnemy("enemy1.png")
+                .setBackground("background2.png")
                 .isFightScene(true)
                 .build();
 
@@ -31,17 +31,17 @@ class PassageTest {
 
     @Test
     void testPassageBuilderWithInvalidArguments() {
-        assertThrows(IllegalArgumentException.class, () -> new PassageBuilder().withTitle("").build());
-        assertThrows(IllegalArgumentException.class, () -> new PassageBuilder().withContent("").build());
-        assertThrows(IllegalArgumentException.class, () -> new PassageBuilder().withTitle(null).build());
-        assertThrows(IllegalArgumentException.class, () -> new PassageBuilder().withContent(null).build());
+        assertThrows(IllegalArgumentException.class, () -> new PassageBuilder().setTitle("").build());
+        assertThrows(IllegalArgumentException.class, () -> new PassageBuilder().setContent("").build());
+        assertThrows(IllegalArgumentException.class, () -> new PassageBuilder().setTitle(null).build());
+        assertThrows(IllegalArgumentException.class, () -> new PassageBuilder().setContent(null).build());
     }
 
     @Test
     void testAddLink() {
         Passage passage = new PassageBuilder()
-                .withTitle("Opening Passage")
-                .withContent("This is the opening passage")
+                .setTitle("Opening Passage")
+                .setContent("This is the opening passage")
                 .build();
 
         Link link = new Link("Next Passage", "next");
@@ -53,8 +53,8 @@ class PassageTest {
     @Test
     void testAddLinkWithInvalidArguments() {
         Passage passage = new PassageBuilder()
-                .withTitle("Opening Passage")
-                .withContent("This is the opening passage")
+                .setTitle("Opening Passage")
+                .setContent("This is the opening passage")
                 .build();
 
         assertThrows(IllegalArgumentException.class, () -> passage.addLink(null));

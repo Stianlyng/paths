@@ -20,8 +20,8 @@ public class App {
     public static void main(String[] args) {
         
         Passage openingPassage = new PassageBuilder()
-            .withTitle("Opening Passage")
-            .withContent("This is the opening passage")
+            .setTitle("Opening Passage")
+            .setContent("This is the opening passage")
             .build();
         
         Story story = new StoryBuilder()
@@ -30,8 +30,8 @@ public class App {
             .build();
         
         Passage firstPassage = new PassageBuilder()
-            .withTitle("passage0")
-            .withContent("content0")
+            .setTitle("passage0")
+            .setContent("content0")
             .build();
         story.addPassage(firstPassage);
         Link link = new Link("forward", "passage0");
@@ -39,8 +39,8 @@ public class App {
 
         for (int i = 1; i < 10; i++) {
             Passage p = new PassageBuilder()
-                .withTitle("passage" + i)
-                .withContent("content" + i)
+                .setTitle("passage" + i)
+                .setContent("content" + i)
                 .build();
             story.addPassage(p);
             Link linkForward = new Link("forward", "passage" + (i + 1));

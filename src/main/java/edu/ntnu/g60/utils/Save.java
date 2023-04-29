@@ -77,11 +77,11 @@ public class Save implements Externalizable{
         String content = in.readUTF();
         saveName = in.readUTF();
         passage = new PassageBuilder()
-                .withTitle(title)
-                .withContent(content)
-                .withPlayer(player)
-                .withEnemy(enemy)
-                .withBackground(background)
+                .setTitle(title)
+                .setContent(content)
+                .setPlayer(player)
+                .setEnemy(enemy)
+                .setBackground(background)
                 .isFightScene(fightscene)
                 .build();       
         String linkRef1 = in.readUTF();

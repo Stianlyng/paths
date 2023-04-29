@@ -1,0 +1,100 @@
+{
+  "title": "Haunted House",
+  "passages": [
+    {
+      "title": "Beginnings",
+      "content": "You are in a small, dimly lit room. There is a door in front of you. You hear a faint voice coming from the other side of the door. It says, \"I am the ghost of the house. I will grant you one wish. What is your wish?\"\n",
+      "background": "Background1.png",
+      "player": "baby.png",
+      "enemy": "gender.png",
+      "isFight": true,
+      "links": [
+        {
+          "text": "Try to open the door",
+          "reference": "Another room",
+          "actions": [
+            {
+              "type": "gold",
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Another room",
+      "content": "You find yourself in a larger room, filled with dusty furniture and cobwebs. There's an old, worn-out book lying on a table in the corner of the room.\n",
+      "links": [
+        {
+          "text": "Open the book",
+          "reference": "The book of spells"
+        },
+        {
+          "text": "Go back",
+          "reference": "Beginnings"
+        }
+      ]
+    },
+    {
+      "title": "The book of spells",
+      "content": "As you open the book, you discover it's full of ancient spells and enchantments. You can feel the power emanating from the pages.\n",
+      "links": [
+        {
+          "text": "Read a random spell",
+          "reference": "Random spell"
+        },
+        {
+          "text": "Close the book and go back",
+          "reference": "Another room"
+        }
+      ]
+    },
+    {
+      "title": "Random spell",
+      "content": "You read a random spell out loud, and suddenly the room is filled with bright light! When the light fades, you find yourself back in the small, dimly lit room where you started.\n",
+      "links": [
+        {
+          "text": "Explore the house more",
+          "reference": "More exploration"
+        },
+        {
+          "text": "Leave the house",
+          "reference": "Leave"
+        }
+      ]
+    },
+    {
+      "title": "More exploration",
+      "content": "You decide to explore the house further and find a hidden door that leads to a secret chamber. Inside, you discover a treasure chest!\n",
+      "links": [
+        {
+          "text": "Open the treasure chest",
+          "reference": "Treasure chest"
+        },
+        {
+          "text": "Go back to the small, dimly lit room",
+          "reference": "Beginnings"
+        }
+      ]
+    },
+    {
+      "title": "Treasure chest",
+      "content": "You open the treasure chest, and inside you find a pile of gold coins and precious gems. You've found the hidden treasure of the haunted house!\n",
+      "links": [
+        {
+          "text": "Take the treasure and leave the house",
+          "reference": "Leave"
+        },
+        {
+          "text": "Keep exploring",
+          "reference": "More exploration"
+        }
+      ]
+    },
+    {
+      "title": "Leave",
+      "content": "Having seen enough of the haunted house, you decide to leave. You exit the house and never look back.\n",
+      "links": []
+    }
+  ]
+}
