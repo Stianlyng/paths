@@ -15,31 +15,31 @@ public class PassageBuilder {
     public PassageBuilder() {
     }
 
-    public PassageBuilder withTitle(String title) {
+    public PassageBuilder setTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public PassageBuilder withContent(String content) {
+    public PassageBuilder setContent(String content) {
         this.content = content;
         return this;
     }
 
-    public PassageBuilder withPlayer(String player) {
+    public PassageBuilder setPlayer(String player) {
         if (player != null) {
             this.player = player;
         }
         return this;
     }
 
-    public PassageBuilder withEnemy(String enemy) {
+    public PassageBuilder setEnemy(String enemy) {
         if (enemy != null) {
             this.enemy = enemy;
         }
         return this;
     }
 
-    public PassageBuilder withBackground(String background) {
+    public PassageBuilder setBackground(String background) {
         if (background != null) {
             this.background = background;
         }
