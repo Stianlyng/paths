@@ -15,13 +15,18 @@ import java.util.Scanner;
 public class GameRunner {
 
     public static void main(String[] args) {
-        String filePath = "src/main/resources/textFiles/story.txt";
 
-        FileParser parser = new FileParser(filePath);
-        Story story = parser.buildStory();
+        StoryParser parser = new StoryParser("src/main/resources/textFiles/story.json");
+        Story story = parser.build();
+
         Player player = new PlayerBuilder()
-                .setName("Stian")
-                .build();
+            .setName("John Doe")
+            .setHealth(100)
+            .setScore(0)
+            .setGold(50)
+            .addItemToInventory("Sword")
+            .addItemToInventory("Shield")
+            .build();
 
         List<Goal> goals = List.of( 
                     new HealthGoal(0), 
@@ -50,16 +55,13 @@ public class GameRunner {
 
                 int choice = scanner.nextInt();
                 Link chosenLink = links.get(choice - 1);
-                System.out.println("rap: " + chosenLink);
-
                 //Execute actions associated with the chosen link
-                for (Action action : chosenLink.getActions()) {
-                    action.execute(player);
-                }
-                System.out.println("text: " + chosenLink.getText() +
-                                    "Ref: " + chosenLink.getReference());
+                //for (Action action : chosenLink.getActions()) {
+                //    action.execute(player);
+                //}
+                //System.out.println("text: " + chosenLink.getText() +
+                //                    "Ref: " + chosenLink.getReference());
 
-                System.out.println("cpach: " + currentPassage.getTitle());
                 //System.out.println("netite: " + story.getPassage(chosenLink).getTitle());
                 currentPassage = game.go(chosenLink);
             } else {
