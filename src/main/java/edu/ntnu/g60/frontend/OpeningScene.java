@@ -14,25 +14,33 @@ public class OpeningScene {
     public static Scene scene() throws FileNotFoundException, IOException {
         Button continueButton = ApplicationObjects.newButton("Continue", 514-193, 314-71, "launch_button");
         continueButton.setOnAction(e -> {
-            try {
-                ApplicationFront.switchToScene(ContinueScene.scene());
-            } catch (ClassNotFoundException | IOException e1) {
-                e1.printStackTrace();
-            }
+            continueAction();
         });
         
         Button newGameButton = ApplicationObjects.newButton("New game", 514-193, 396-71, "launch_button");
         newGameButton.setOnAction(e -> {
-            try {
-                ApplicationFront.switchToScene(NewGameScene.scene());
-            } catch (ClassNotFoundException | IOException e1) {
-                e1.printStackTrace();
-            }
+            newGameAction();
         });
 
         ImageView background = ApplicationObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
         Group root = new Group(background, continueButton, newGameButton);
         root.getStylesheets().add("StyleSheet.css"); 
         return new Scene(root, 800, 600, Color.WHITE); 
+    }
+
+    public static void continueAction(){
+        try {
+            GameApp.switchToScene(ContinueScene.scene());
+        } catch (ClassNotFoundException | IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public static void newGameAction(){
+        try {
+            GameApp.switchToScene(NewGameScene.scene());
+        } catch (ClassNotFoundException | IOException e1) {
+            e1.printStackTrace();
+        }
     }
 }
