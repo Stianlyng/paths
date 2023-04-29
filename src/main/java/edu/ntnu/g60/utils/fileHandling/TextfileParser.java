@@ -19,19 +19,19 @@ import java.util.regex.Pattern;
  * @version 1.0
  * @author Stian Lyng
  */
-public class TextStoryParser {
+public class TextfileParser {
 
     private static final Pattern LINK_PATTERN = Pattern.compile("\\[(.+?)\\]\\((.+?)\\)");
 
     /**
      * Private constructor to prevent instantiation.
      */
-    private TextStoryParser() {
+    private TextfileParser() {
     }
 
     public static void main(String[] args) {
         try {
-            TextStoryParser.parseStory("demo_story");
+            TextfileParser.parseStory("demo_story");
         } catch (IOException e) {
             // Log the error or handle it as appropriate
             e.printStackTrace();
