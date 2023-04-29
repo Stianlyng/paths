@@ -10,7 +10,7 @@ import edu.ntnu.g60.models.PlayerBuilder;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.HealthGoal;
-import edu.ntnu.g60.utils.fileParser.FileParser;
+import edu.ntnu.g60.utils.fileHandling.StoryParser;
 
 public class GameController {
     public static Game currentGame;
@@ -32,11 +32,13 @@ public class GameController {
         return currentPassage;
     }
 
-    private static final String GAME_PATH = "src/main/resources/textFiles/haunted_house.txt";
 
     public static Game getNewGame(){
-        FileParser fileParser = new FileParser(GAME_PATH);
-        Story story = fileParser.buildStory();
+
+        StoryParser parser = new StoryParser("haunted_house");
+        Story story = parser.build();
+
+
 
         List<Goal> goals = new ArrayList<Goal>();
         goals.add(new HealthGoal(4));

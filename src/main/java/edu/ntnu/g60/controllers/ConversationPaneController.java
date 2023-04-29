@@ -16,8 +16,6 @@ import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.LvlSwitchAnimation;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.GamePanes.FightPane;
-import edu.ntnu.g60.views.StartMenu.OpeningPane;
-import edu.ntnu.g60.views.TitlePanes.DeathPane;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 

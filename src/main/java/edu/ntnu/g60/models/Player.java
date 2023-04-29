@@ -1,6 +1,5 @@
 package edu.ntnu.g60.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
