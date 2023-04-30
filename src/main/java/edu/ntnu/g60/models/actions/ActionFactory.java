@@ -55,7 +55,7 @@ public class ActionFactory {
                     new InventoryAction((String) value));
                 break;
             default:
-                return Optional.empty();
+                break;
         }
         return Optional.empty();
     }
