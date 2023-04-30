@@ -6,9 +6,9 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.List;
 
-import edu.ntnu.g60.models.Link;
-import edu.ntnu.g60.models.Passage;
-import edu.ntnu.g60.models.PassageBuilder;
+import edu.ntnu.g60.models.passage.Link;
+import edu.ntnu.g60.models.passage.Passage;
+import edu.ntnu.g60.models.passage.PassageBuilder;
 
 public class Save implements Externalizable{
     public Passage passage;

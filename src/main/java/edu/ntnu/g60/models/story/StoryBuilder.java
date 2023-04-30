@@ -1,7 +1,9 @@
-package edu.ntnu.g60.models;
+package edu.ntnu.g60.models.story;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import edu.ntnu.g60.models.passage.Passage;
 
 public class StoryBuilder {
     

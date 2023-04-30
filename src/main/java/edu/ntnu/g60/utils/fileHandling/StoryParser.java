@@ -10,13 +10,13 @@ import edu.ntnu.g60.entities.ActionEntity;
 import edu.ntnu.g60.entities.LinkEntity;
 import edu.ntnu.g60.entities.PassageEntity;
 import edu.ntnu.g60.entities.StoryEntity;
-import edu.ntnu.g60.models.Link;
-import edu.ntnu.g60.models.Passage;
-import edu.ntnu.g60.models.Story;
-import edu.ntnu.g60.models.StoryBuilder;
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.actions.ActionFactory;
-import edu.ntnu.g60.models.PassageBuilder;
+import edu.ntnu.g60.models.passage.Link;
+import edu.ntnu.g60.models.passage.Passage;
+import edu.ntnu.g60.models.passage.PassageBuilder;
+import edu.ntnu.g60.models.story.Story;
+import edu.ntnu.g60.models.story.StoryBuilder;
 
 /**
  * StoryParser is a class that parses a JSON file into a Story object.

@@ -1,6 +1,7 @@
-package edu.ntnu.g60.models;
+package edu.ntnu.g60.models.story;
 import java.util.Map;
 
+import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.utils.Save;
 
 import java.util.HashMap;

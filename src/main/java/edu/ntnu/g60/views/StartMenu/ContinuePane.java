@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 import edu.ntnu.g60.controllers.GameController;
 import edu.ntnu.g60.controllers.StartMenuController;
-import edu.ntnu.g60.models.Story;
+import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.views.ViewObjects;
 import edu.ntnu.g60.views.Animations.LvlSwitchAnimation;

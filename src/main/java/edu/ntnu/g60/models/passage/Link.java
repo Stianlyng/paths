@@ -1,4 +1,4 @@
-package edu.ntnu.g60.models;
+package edu.ntnu.g60.models.passage;
 
 import java.util.ArrayList;
 import java.util.List;

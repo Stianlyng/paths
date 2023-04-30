@@ -7,8 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import edu.ntnu.g60.models.Link;
-import edu.ntnu.g60.models.Story;
+
+import edu.ntnu.g60.models.passage.Link;
+import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.views.GameApp;

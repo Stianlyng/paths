@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.ntnu.g60.models.Game;
-import edu.ntnu.g60.models.Passage;
-import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.HealthGoal;
+import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
+import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.fileHandling.StoryParser;
 import javafx.concurrent.Task;
 

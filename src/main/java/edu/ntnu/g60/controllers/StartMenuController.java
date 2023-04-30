@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import edu.ntnu.g60.models.Game;
-import edu.ntnu.g60.models.Story;
+import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.views.GameApp;
