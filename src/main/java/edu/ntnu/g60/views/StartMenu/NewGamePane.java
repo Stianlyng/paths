@@ -23,8 +23,8 @@ public class NewGamePane extends StackPane{
 
 
     private static Group getNewGameObjects() throws FileNotFoundException{
-        Button startButton = ViewObjects.newButton("Start", 614-193, 370-71, "launch_button", controller::startAction);
-        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, "back_button", controller::backAction);
+        Button startButton = ViewObjects.newButton("Start", 614-193, 375-71, "launch_button", "launch_hover", controller::startAction);
+        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, "back_button", "back_hover", controller::backAction);
         ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
         saveNameTextField = ViewObjects.newTextField("Savename..", 614-193, 327-71, "text_field");
         return new Group(background, startButton, backButton, saveNameTextField);

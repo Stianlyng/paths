@@ -27,9 +27,9 @@ public class ContinuePane extends StackPane{
     }
 
     private static Group getContinueSceneObjects() throws FileNotFoundException{
-        Button save1Button = ViewObjects.newBlankButton("", 614-193, 278-71, "launch_button");
-        Button save2Button = ViewObjects.newBlankButton("", 614-193, 345-71, "launch_button");
-        Button save3Button = ViewObjects.newBlankButton("", 614-193, 412-71, "launch_button");
+        Button save1Button = ViewObjects.newBlankButton("", 614-193, 278-71, "launch_button", "launch_hover");
+        Button save2Button = ViewObjects.newBlankButton("", 614-193, 345-71, "launch_button", "launch_hover");
+        Button save3Button = ViewObjects.newBlankButton("", 614-193, 412-71, "launch_button", "launch_hover");
         
         //TODO: move to controller
         IntStream.rangeClosed(1, 3).forEach(buttonNumber -> {
@@ -57,7 +57,7 @@ public class ContinuePane extends StackPane{
             }
         });
 
-        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, "back_button", controller::backAction);
+        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, "back_button", "back_hover", controller::backAction);
         ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
         return new Group(background, save1Button, save2Button, save3Button, backButton);
     }

@@ -6,6 +6,8 @@ import edu.ntnu.g60.controllers.ConversationPaneController;
 import edu.ntnu.g60.controllers.GameController;
 import edu.ntnu.g60.controllers.SoundController;
 import edu.ntnu.g60.views.ViewObjects;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -26,9 +28,12 @@ public class ConversationPane extends StackPane{
 
 
     public static void addChoiceObjects(ConversationPane pane) throws FileNotFoundException, MalformedURLException{
-        Button choiceOne = ViewObjects.newButton(GameController.getCurrentPassage().getLinks().get(0).getText(), 71, 212, "talk_button", controller::choiceOneAction);
-        Button choiceTwo = ViewObjects.newButton(GameController.getCurrentPassage().getLinks().get(1).getText(), 0, 0, "talk_button", controller::choiceTwoAction);
-        choiceTwo.setLayoutX(0);
+        Button choiceOne = ViewObjects.newButton(GameController.getCurrentPassage().getLinks().get(0).getText(), 71, 212, "talk_button", "talk_hover", controller::choiceOneAction);
+        Button choiceTwo = ViewObjects.newButton(GameController.getCurrentPassage().getLinks().get(1).getText(), 318, 212, "talk_button", "talk_hover", controller::choiceTwoAction);
+        StackPane.setAlignment(choiceOne, Pos.CENTER_LEFT);
+        StackPane.setMargin(choiceOne, new Insets(50, 50, 50, 50)); 
+        StackPane.setAlignment(choiceTwo, Pos.CENTER_RIGHT);
+        StackPane.setMargin(choiceTwo, new Insets(50, 50, 50, 50)); 
         pane.getChildren().addAll(choiceOne, choiceTwo);
     }
 

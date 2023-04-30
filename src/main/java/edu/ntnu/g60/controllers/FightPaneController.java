@@ -61,28 +61,28 @@ public class FightPaneController {
 
 
     public void abilityOneAction(ActionEvent event){
-        playerAction(0.15F, 0);
-        enemyAction(0.4F, 0);
+        playerAction(0.15F, 0.0F);
+        enemyAction(0.4F, 0.0F);
     }
 
     public void abilityTwoAction(ActionEvent event){
-        playerAction(0.1F, 0);
-        enemyAction(0.2F, 0);
+        playerAction(0.1F, 0.0F);
+        enemyAction(0.2F, 0.0F);
     }
 
     public void abilityThreeAction(ActionEvent event){
-        playerAction(0.65F, 0);
-        enemyAction(0.25F, 0);
+        playerAction(0.65F, 0.0F);
+        enemyAction(0.25F, 0.0F);
     }
 
     public void healOneAction(ActionEvent event){
         playerAction(0.0F, 0.01F);
-        enemyAction(0.2F, 0);
+        enemyAction(0.2F, 0.0F);
     }
 
     public void healTwoAction(ActionEvent event){
         playerAction(0.0F, (1.0F - playerHealth));
-        enemyAction(0.1F, 0);
+        enemyAction(0.1F, 0.0F);
     }
 
     public void inventoryOneAction(ActionEvent event){
@@ -109,11 +109,7 @@ public class FightPaneController {
 
 
     public void backAction(ActionEvent event){
-        try {
-            FightPane.addFightPaneObjects();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        FightPane.addDefaultObjects(getCurrentFightPane());
     }
 
     public static void winFight() throws MalformedURLException, FileNotFoundException{
@@ -151,7 +147,6 @@ public class FightPaneController {
         }
     }
 
-    //todo: implenment actions
     public static void enemyAction(float damageAmount, float healAmount){
         GameController.delay(2000, () -> {
             playerHealth = playerHealth - damageAmount;

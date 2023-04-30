@@ -12,7 +12,7 @@ public class TitlePaneObjects {
     private static final int TEXT_SIZE = 40;
     private static final boolean TEXT_UNDERLINE = false;
     private static final int X_POSITION = 415;
-    private static final int Y_POSTION = 278;
+    private static final int Y_POSTION = 328;
     private static final String BACKGROUND_FOLDERNAME = "backgrounds";
     private static final String BACKGROUND_FILENAME = "Background1.png";
     private static final int BACKGROUND_WIDTH = 1643;

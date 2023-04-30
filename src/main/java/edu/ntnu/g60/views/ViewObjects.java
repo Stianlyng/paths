@@ -21,12 +21,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class ViewObjects {
-    public static Button newButton(String text, int x, int y, String id, EventHandler<ActionEvent> action){
+    public static Button newButton(String text, int x, int y, String id, String hover, EventHandler<ActionEvent> action){
         Button button = new Button(text);
         button.setId(id);
         button.setLayoutX(x);
         button.setLayoutY(y);
         button.setOnAction(action);
+        button.setOnMouseEntered(e -> button.setId(hover));
+        button.setOnMouseExited(e -> button.setId(id));
         return button;
     }
 
@@ -57,11 +59,13 @@ public class ViewObjects {
        return imageview;
     }
 
-    public static Button newBlankButton(String text, int x, int y, String id){
+    public static Button newBlankButton(String text, int x, int y, String id, String hover){
         Button button = new Button(text);
         button.setId(id);
         button.setLayoutX(x);
         button.setLayoutY(y);
+        button.setOnMouseEntered(e -> button.setId(hover));
+        button.setOnMouseExited(e -> button.setId(id));
         return button;
     }
 
