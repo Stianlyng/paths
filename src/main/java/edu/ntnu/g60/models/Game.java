@@ -2,6 +2,7 @@ package edu.ntnu.g60.models;
 import java.util.List;
 
 import edu.ntnu.g60.models.goals.Goal;
+import edu.ntnu.g60.models.player.Player;
 
 /**
  * The Game class is the main class of the game. 
