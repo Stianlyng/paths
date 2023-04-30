@@ -1,5 +1,6 @@
 package edu.ntnu.g60.models.actions;
 
+import edu.ntnu.g60.exceptions.model.actions.InvalidActionTypeException;
 
 enum ActionTypeEnum {
     HEALTH("health"),
@@ -13,12 +14,12 @@ enum ActionTypeEnum {
         this.type = type;
     }
 
-    public static ActionTypeEnum fromString(String type) {
+    public static ActionTypeEnum fromString(String type) throws InvalidActionTypeException {
         for (ActionTypeEnum actionType : ActionTypeEnum.values()) {
             if (actionType.type.equalsIgnoreCase(type)) {
                 return actionType;
             }
         }
-        throw new IllegalArgumentException("Invalid action type: " + type);
+        throw new InvalidActionTypeException("Invalid action type: " + type);
     }
 }
