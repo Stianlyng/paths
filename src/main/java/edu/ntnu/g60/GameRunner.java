@@ -10,8 +10,14 @@ import edu.ntnu.g60.models.goals.ScoreGoal;
 import edu.ntnu.g60.utils.fileHandling.PlayerParser;
 import edu.ntnu.g60.utils.fileHandling.StoryParser;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class GameRunner {
 
@@ -20,13 +26,17 @@ public class GameRunner {
         System.out.flush();
     }
 
-    private static Player choosePlayer(List<Player> players, Scanner scanner) {
+    private static Player choosePlayer(Scanner scanner) {
         clearScreen();
+
+        PlayerParser playerParser = new PlayerParser("player");
+        List<Player> players = playerParser.parse();
+
         System.out.println("Please choose a player:");
         for (int i = 0; i < players.size(); i++) {
             System.out.println((i + 1) + ": " + players.get(i).getName());
         }
-
+        
         int choice = scanner.nextInt();
         return players.get(choice - 1);
     }
@@ -49,18 +59,43 @@ public class GameRunner {
         }
         return scanner.nextInt();
     }
+    
+    private static Story chooseStory(Scanner scanner) {
+        clearScreen();
+        System.out.println("Please choose a story:");
+        List<String> names = listFilesInFolder();
+        for (int i = 0; i < names.size(); i++) {
+            System.out.println((i + 1) + ": " + names.get(i));
+        }
+        int choice = scanner.nextInt();
+        System.out.println(choice);
+        StoryParser parser = new StoryParser(names.get(choice - 1));
+        return parser.build();
+    }
+   
+    private static List<String> listFilesInFolder() {
+        Path folderPath = Paths.get("src/main/resources/stories");
 
+        try (Stream<Path> paths = Files.list(folderPath)) {
+            return paths.filter(Files::isRegularFile)
+                        .map(Path::getFileName)
+                        .map(Path::toString)
+                        .map(name -> name.substring(0, name.lastIndexOf('.')))
+                        .collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public static void main(String[] args) {
 
-        StoryParser parser = new StoryParser("haunted_house");
-        Story story = parser.build();
-
-        PlayerParser playerParser = new PlayerParser("player");
-        List<Player> players = playerParser.parse();
 
         Scanner scanner = new Scanner(System.in);
 
-        Player player = choosePlayer(players, scanner);
+        Player player = choosePlayer(scanner);
+
+        
+        Story story = chooseStory(scanner);
 
         List<Goal> goals = List.of(
                 new HealthGoal(0),
