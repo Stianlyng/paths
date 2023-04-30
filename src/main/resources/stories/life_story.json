@@ -1,159 +1,203 @@
- {
-    "title":"Life Choices",
-    "passages":[
-       {
-          "title":"Beginnings",
-          "content":"{P}Hello newborn. Welcome to life. Let's explore your new world together!\n{N}Oh no. So scary woOoOooO!",
-          "background":"Background1.png",
-          "player":"baby.png",
-          "enemy":"gender.png",
-          "isFight":false,
-          "links":[
-             {
-                "text":"Explore the world",
-                "reference":"Explore"
-             },
-             {
-                "text":"Band",
-                "reference":"Band"
-             }
-          ]
-       },
-       {
-          "title":"Explore",
-          "content":"As you grow, you'll have various experiences and make choices that shape your identity. Life is full of opportunities!",
-          "links":[
-             {
-                "text":"Next",
-                "reference":"ChooseYourPath"
-             }
-          ]
-       },
-       {
-          "title":"ChooseYourPath",
-          "content":"You've grown up and now have the chance to choose your interests. What will you pursue?",
-          "links":[
-             {
-                "text":"Football",
-                "reference":"Football"
-             },
-             {
-                "text":"Band",
-                "reference":"Band"
-             }
-          ]
-       },
-       {
-          "title":"Band",
-          "content":"You join the band and meet your friend Peter. Peter is a lovely guy who loves to play.",
-          "links":[
-             {
-                "text":"Do homework",
-                "reference":"Homework"
-             },
-             {
-                "text":"Play with Peter",
-                "reference":"Peter"
-             }
-          ]
-       },
-       {
-          "title":"Football",
-          "content":"You start playing football and make friends with your teammates.",
-          "links":[
-             {
-                "text":"Play football",
-                "reference":"Play football"
-             },
-             {
-                "text":"Do homework",
-                "reference":"Do homework"
-             }
-          ]
-       },
-       {
-          "title":"Homework",
-          "content":"You decide to focus on your homework, which leads you to discover your interest in a particular subject.\nWhat subject should I explore further?",
-          "links":[
-             {
-                "text":"Open the book",
-                "reference":"The book of spells"
-             },
-             {
-                "text":"Go back",
-                "reference":"ChooseYourPath"
-             }
-          ]
-       },
-       {
-          "title":"Peter",
-          "content":"Playing with Peter helps you bond and create lasting memories.\nThis is so much fun!",
-          "links":[
-             {
-                "text":"Open the book",
-                "reference":"The book of spells"
-             },
-             {
-                "text":"Go back",
-                "reference":"ChooseYourPath"
-             }
-          ]
-       },
-       {
-          "title":"Play football",
-          "content":"You join your friends for a fun game of football, strengthening your friendships and enjoying some exercise.\nLet's play!",
-          "links":[
-             {
-                "text":"Open the book",
-                "reference":"The book of spells"
-             },
-             {
-                "text":"Go back",
-                "reference":"ChooseYourPath"
-             }
-          ]
-       },
-       {
-          "title":"Do homework",
-          "content":"Focusing on your homework helps you excel in your chosen subject and achieve your goals.\nI'm learning so much!",
-          "links":[
-             {
-                "text":"Open the book",
-                "reference":"The book of spells"
-             },
-             {
-                "text":"Go back",
-                "reference":"ChooseYourPath"
-             }
-          ]
-       },
-       {
-          "title":"The book of spells",
-          "content":"As you delve deeper into your chosen subject, you discover a fascinating world of knowledge and possibilities.",
-          "links":[
-             {
-                "text":"Read a random chapter",
-                "reference":"Random chapter"
-             },
-             {
-                "text":"Close the book and go back",
-                "reference":"ChooseYourPath"
-             }
-          ]
-       },
-       {
-          "title":"Random chapter",
-          "content":"You read a random chapter and learn something new and intriguing about your chosen subject.",
-          "links":[
-             {
-                "text":"Keep exploring the book",
-                "reference":"The book of spells"
-             },
-             {
-                "text":"Go back to choosing your path",
-                "reference":"ChooseYourHuman Story"
-             }
-          ]
-       }
-    ]
- }
+{
+   "title":"Human Story",
+   "passages":[
+      {
+         "title":"Beginnings",
+         "content":"{E}Hello newborn. Welcome to life. Your first task in life will be to choose what gender you want to be!\n{P}Oh no. So scary woOoOooO!",
+         "background":"Background1.png",
+         "player":"baby.png",
+         "enemy":"gender.png",
+         "isFight":false,
+         "links":[
+            {
+               "text":"Man",
+               "reference":"Woman"
+            },
+            {
+               "text":"Woman",
+               "reference":"Breast milk"
+            }
+         ]
+      },
+      {
+         "title":"Woman",
+         "content":"{E}This was not a wise choice. Your life just became 1.89* harder. To be able to live your life, you must defeat me in combat.",
+         "background":"Background1.png",
+         "player":"baby.png",
+         "enemy":"gender.png",
+         "isFight":true,
+         "links":[
+            {
+               "text":"ggez",
+               "reference":"game over"
+            },
+            {
+               "text":"ezgg",
+               "reference":"Overgame"
+            }
+         ]
+      },
+      {
+         "title":"Overgame",
+         "content":"{E}I'm sorry, but the world does not currently accept women. Please try again at a later time.",
+         "background":"Background1.png",
+         "player":"baby.png",
+         "enemy":"gender.png",
+         "isFight":false,
+         "links":[
+            {
+               "text":"Restart",
+               "reference":"game over"
+            },
+            {
+               "text":"Start over",
+               "reference":"game over"
+            }
+         ]
+      },
+      {
+         "title":"Breast milk",
+         "content":"{N}Congratulations, you were born.\n{N}You must choose whether to drink breast milk or not.",
+         "background":"Background1.png",
+         "player":"baby.png",
+         "enemy":"milk.png",
+         "isFight":false,
+         "links":[
+            {
+               "text":"Yes",
+               "reference":"Football"
+            },
+            {
+               "text":"No",
+               "reference":"Band"
+            }
+         ]
+      },
+      {
+         "title":"Band",
+         "content":"{N}You lose strength points. Because of this you get bullied at school.\n{N}Because of this you are forced to start playing in a band. Here you meet your one friend Peter. Peter is a lovely guy who loves to play.\n{E}I know you have homework, but do you want to play Dungeons & Dragons?",
+         "background":"Background1.png",
+         "player":"korpskid.png",
+         "enemy":"peter.png",
+         "isFight":true,
+         "links":[
+            {
+               "text":"Do homework",
+               "reference":"Homework"
+            },
+            {
+               "text":"Play with Peter",
+               "reference":"Peter"
+            }
+         ]
+      },
+      {
+         "title":"Football",
+         "content":"{N}You gain strength points. Because of this you get really popular at school.\n{N}You start playing football and get a ton of friends.\n{E}I know you have homework, but do you want to come join us play football?",
+         "background":"Background1.png",
+         "player":"footballkid.png",
+         "enemy":"kids.png",
+         "isFight":false,
+         "links":[
+            {
+               "text":"Play football",
+               "reference":"Play football"
+            },
+            {
+               "text":"Do homework",
+               "reference":"Homework"
+            }
+         ]
+      },
+      {
+         "title":"Homework",
+         "content":"{E}The door opens to another room. You see a desk with a large, dusty book.\n{P}You are now a fish",
+         "background":"Background1.png",
+         "player":"baby.png",
+         "enemy":"gender.png",
+         "isFight":false,
+         "links":[
+            {
+               "text":"Open the book",
+               "reference":"The book of spells"
+            },
+            {
+               "text":"Go back",
+               "reference":"Beginnings"
+            }
+         ]
+      },
+      {
+         "title":"Peter",
+         "content":"{E}The door opens to another room. You see a desk with a large, dusty book.\n{P}You are now a fish",
+         "background":"Background1.png",
+         "player":"baby.png",
+         "enemy":"gender.png",
+         "isFight":true,
+         "links":[
+            {
+               "text":"Open the book",
+               "reference":"The book of spells"
+            },
+            {
+               "text":"Go back",
+               "reference":"Beginnings"
+            }
+         ]
+      },
+      {
+         "title":"Play football",
+         "content":"{E}The door opens to another room. You see a desk with a large, dusty book.\n{P}You are now a fish",
+         "background":"Background1.png",
+         "player":"baby.png",
+         "enemy":"gender.png",
+         "isFight":false,
+         "links":[
+            {
+               "text":"Open the book",
+               "reference":"The book of spells"
+            },
+            {
+               "text":"Go back",
+               "reference":"Beginnings"
+            }
+         ]
+      },
+      {
+         "title":"Do homework",
+         "content":"{E}The door opens to another room. You see a desk with a large, dusty book.\n{P}You are now a fish",
+         "background":"Background1.png",
+         "player":"baby.png",
+         "enemy":"gender.png",
+         "isFight":false,
+         "links":[
+            {
+               "text":"Open the book",
+               "reference":"The book of spells"
+            },
+            {
+               "text":"Go back",
+               "reference":"Beginnings"
+            }
+         ]
+      },
+      {
+         "title":"The book of spells",
+         "content":"{E}As you open the book, you discover it's full of ancient spells and enchantments. You can feel the power emanating from the pages.",
+         "background":"Background1.png",
+         "player":"baby.png",
+         "enemy":"gender.png",
+         "isFight":false,
+         "links":[
+            {
+               "text":"Read a random spell",
+               "reference":"Random spell"
+            },
+            {
+               "text":"Close the book and go back",
+               "reference":"Beginnings"
+            }
+         ]
+      }
+   ]
+}
