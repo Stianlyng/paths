@@ -7,8 +7,9 @@ import edu.ntnu.g60.exceptions.model.actions.InvalidActionTypeException;
 
 /**
  * The ActionFactory class is responsible for creating Action objects.
- * Used when parsing JSON files.
+ * Used when parsing JSON files in the story parser.
  * 
+ * @see StoryParser
  * @author Stian Lyng
  * @version 1.0
  */
