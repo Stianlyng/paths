@@ -1,4 +1,4 @@
-package edu.ntnu.g60.models;
+package edu.ntnu.g60.models.passage;
 
 public class PassageBuilder {
     
