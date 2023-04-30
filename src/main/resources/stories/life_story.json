@@ -1,0 +1,155 @@
+{
+    "title":"Life Choices",
+    "passages":[
+       {
+          "title":"Beginnings",
+          "content":"Hello newborn. Welcome to life. Let's explore your new world together!\nOh no. So scary woOoOooO!",
+          "background":"Background1.png",
+          "player":"baby.png",
+          "enemy":"gender.png",
+          "isFight":false,
+          "links":[
+             {
+                "text":"Explore the world",
+                "reference":"Explore"
+             }
+          ]
+       },
+       {
+          "title":"Explore",
+          "content":"As you grow, you'll have various experiences and make choices that shape your identity. Life is full of opportunities!",
+          "links":[
+             {
+                "text":"Next",
+                "reference":"ChooseYourPath"
+             }
+          ]
+       },
+       {
+          "title":"ChooseYourPath",
+          "content":"You've grown up and now have the chance to choose your interests. What will you pursue?",
+          "links":[
+             {
+                "text":"Football",
+                "reference":"Football"
+             },
+             {
+                "text":"Band",
+                "reference":"Band"
+             }
+          ]
+       },
+       {
+          "title":"Band",
+          "content":"You join the band and meet your friend Peter. Peter is a lovely guy who loves to play.",
+          "links":[
+             {
+                "text":"Do homework",
+                "reference":"Homework"
+             },
+             {
+                "text":"Play with Peter",
+                "reference":"Peter"
+             }
+          ]
+       },
+       {
+          "title":"Football",
+          "content":"You start playing football and make friends with your teammates.",
+          "links":[
+             {
+                "text":"Play football",
+                "reference":"Play football"
+             },
+             {
+                "text":"Do homework",
+                "reference":"Do homework"
+             }
+          ]
+       },
+       {
+          "title":"Homework",
+          "content":"You decide to focus on your homework, which leads you to discover your interest in a particular subject.\nWhat subject should I explore further?",
+          "links":[
+             {
+                "text":"Open the book",
+                "reference":"The book of spells"
+             },
+             {
+                "text":"Go back",
+                "reference":"ChooseYourPath"
+             }
+          ]
+       },
+       {
+          "title":"Peter",
+          "content":"Playing with Peter helps you bond and create lasting memories.\nThis is so much fun!",
+          "links":[
+             {
+                "text":"Open the book",
+                "reference":"The book of spells"
+             },
+             {
+                "text":"Go back",
+                "reference":"ChooseYourPath"
+             }
+          ]
+       },
+       {
+          "title":"Play football",
+          "content":"You join your friends for a fun game of football, strengthening your friendships and enjoying some exercise.\nLet's play!",
+          "links":[
+             {
+                "text":"Open the book",
+                "reference":"The book of spells"
+             },
+             {
+                "text":"Go back",
+                "reference":"ChooseYourPath"
+             }
+          ]
+       },
+       {
+          "title":"Do homework",
+          "content":"Focusing on your homework helps you excel in your chosen subject and achieve your goals.\nI'm learning so much!",
+          "links":[
+             {
+                "text":"Open the book",
+                "reference":"The book of spells"
+             },
+             {
+                "text":"Go back",
+                "reference":"ChooseYourPath"
+             }
+          ]
+       },
+       {
+          "title":"The book of spells",
+          "content":"As you delve deeper into your chosen subject, you discover a fascinating world of knowledge and possibilities.",
+          "links":[
+             {
+                "text":"Read a random chapter",
+                "reference":"Random chapter"
+             },
+             {
+                "text":"Close the book and go back",
+                "reference":"ChooseYourPath"
+             }
+          ]
+       },
+       {
+          "title":"Random chapter",
+          "content":"You read a random chapter and learn something new and intriguing about your chosen subject.",
+          "links":[
+             {
+                "text":"Keep exploring the book",
+                "reference":"The book of spells"
+             },
+             {
+                "text":"Go back to choosing your path",
+                "reference":"ChooseYourHuman Story"
+             }
+          ]
+       }
+    ]
+ } 
