@@ -1,13 +1,13 @@
 #launch_button {
     -fx-background-color: 
         #000000,
-        linear-gradient(#7ebcea, #2f4b8f),
-        linear-gradient(#426ab7, #263e75),
-        linear-gradient(#395cab, #223768);
+        linear-gradient(#7c04d2, #68057e),
+        linear-gradient(#3f0452, #4a045f),
+        linear-gradient(#370449, #22012c);
     -fx-background-insets: 0,1,2,3;
     -fx-background-radius: 3,2,2,2;
     -fx-padding: 12 30 12 30;
-    -fx-text-fill: white;
+    -fx-text-fill: rgb(255, 255, 255);
     -fx-font-weight: bold;
     -fx-pref-width: 158;
     -fx-pref-height: 51;

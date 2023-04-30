@@ -5,7 +5,7 @@ import java.io.IOException;
 import edu.ntnu.g60.utils.serialization.SerializationUtils;
 
 public class SaveRegister {
-    private static final String PATH = "src/main/resources/textFiles/saves.ser";
+    private static final String PATH = "src/main/resources/saves/saves.ser";
     public static Save[] saves = new Save[3];
 
     public static Save getSave(int number) throws ClassNotFoundException, IOException{

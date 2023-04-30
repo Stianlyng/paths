@@ -86,8 +86,6 @@ public class ConversationPaneController {
                 }
             }
         }
-        
-        
     }
     
     public void choiceOneAction(ActionEvent event){
@@ -194,4 +192,5 @@ public class ConversationPaneController {
         }
         return contents;
     }
+
 }

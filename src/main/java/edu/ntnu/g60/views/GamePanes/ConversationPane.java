@@ -28,6 +28,7 @@ public class ConversationPane extends StackPane{
     public static void addChoiceObjects(ConversationPane pane) throws FileNotFoundException, MalformedURLException{
         Button choiceOne = ViewObjects.newButton(GameController.getCurrentPassage().getLinks().get(0).getText(), 71, 212, "talk_button", controller::choiceOneAction);
         Button choiceTwo = ViewObjects.newButton(GameController.getCurrentPassage().getLinks().get(1).getText(), 0, 0, "talk_button", controller::choiceTwoAction);
+        choiceTwo.setLayoutX(0);
         pane.getChildren().addAll(choiceOne, choiceTwo);
     }
 

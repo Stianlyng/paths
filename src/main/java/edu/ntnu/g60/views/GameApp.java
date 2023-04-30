@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.application.Application;
-import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -41,24 +40,6 @@ public class GameApp extends Application {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-
-    //move maybe?
-    public static void delay(long millis, Runnable continuation){
-        Task<Void> sleeper = new Task<Void>(){
-            @Override
-            protected Void call() throws Exception {
-                try {
-                    Thread.sleep(millis);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        };
-        sleeper.setOnSucceeded(event -> continuation.run());
-        new Thread(sleeper).start();
     }
 
     public static void main(String[] args){launch();}

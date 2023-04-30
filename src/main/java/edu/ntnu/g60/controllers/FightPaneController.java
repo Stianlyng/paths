@@ -8,7 +8,6 @@ import edu.ntnu.g60.models.Link;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;
-import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.LvlSwitchAnimation;
 import edu.ntnu.g60.views.GamePanes.FightPane;
@@ -154,7 +153,7 @@ public class FightPaneController {
 
     //todo: implenment actions
     public static void enemyAction(float damageAmount, float healAmount){
-        GameApp.delay(2000, () -> {
+        GameController.delay(2000, () -> {
             playerHealth = playerHealth - damageAmount;
             enemyHealth = enemyHealth + healAmount;
             FightPane.updateHealthEnemy(enemyHealth);

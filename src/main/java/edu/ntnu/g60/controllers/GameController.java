@@ -11,10 +11,12 @@ import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.utils.fileHandling.StoryParser;
+import javafx.concurrent.Task;
 
 public class GameController {
     public static Game currentGame;
     public static Passage currentPassage;
+    private static final String GAME_FILE = "life_story";
 
     public static void setCurrentGame(Game game){
         currentGame = game;
@@ -34,11 +36,8 @@ public class GameController {
 
 
     public static Game getNewGame(){
-
-        StoryParser parser = new StoryParser("haunted_house");
+        StoryParser parser = new StoryParser(GAME_FILE);
         Story story = parser.build();
-
-
 
         List<Goal> goals = new ArrayList<Goal>();
         goals.add(new HealthGoal(4));
@@ -49,5 +48,21 @@ public class GameController {
 
         Game game = new Game(player, story, goals);
         return game;
+    }
+
+    public static void delay(long millis, Runnable continuation){
+        Task<Void> sleeper = new Task<Void>(){
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(millis);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(event -> continuation.run());
+        new Thread(sleeper).start();
     }
 }

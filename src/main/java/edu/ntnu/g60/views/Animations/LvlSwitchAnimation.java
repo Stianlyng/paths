@@ -15,9 +15,9 @@ public class LvlSwitchAnimation {
 
     public static void animation() throws MalformedURLException{
         firstFrame();
-        GameApp.delay(2000, () -> {
+        GameController.delay(2000, () -> {
             secondFrame(GameController.getCurrentPassage().getTitle());
-            GameApp.delay(2000, () -> {
+            GameController.delay(2000, () -> {
                 thirdFrame();
             });
         });

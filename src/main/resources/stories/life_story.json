@@ -3,7 +3,7 @@
     "passages":[
        {
           "title":"Beginnings",
-          "content":"Hello newborn. Welcome to life. Let's explore your new world together!\nOh no. So scary woOoOooO!",
+          "content":"{P}Hello newborn. Welcome to life. Let's explore your new world together!\n{N}Oh no. So scary woOoOooO!",
           "background":"Background1.png",
           "player":"baby.png",
           "enemy":"gender.png",
@@ -12,6 +12,10 @@
              {
                 "text":"Explore the world",
                 "reference":"Explore"
+             },
+             {
+                "text":"Band",
+                "reference":"Band"
              }
           ]
        },
