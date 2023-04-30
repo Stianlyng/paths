@@ -1,4 +1,4 @@
-package edu.ntnu.g60.models;
+package edu.ntnu.g60.models.player;
 
 import java.util.List;
 

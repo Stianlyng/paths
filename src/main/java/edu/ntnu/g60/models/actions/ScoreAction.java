@@ -1,6 +1,6 @@
 package edu.ntnu.g60.models.actions;
 
-import edu.ntnu.g60.models.Player;
+import edu.ntnu.g60.models.player.Player;
 
 public class ScoreAction implements Action{
     int score;

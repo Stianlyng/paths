@@ -1,6 +1,6 @@
 package edu.ntnu.g60.models.goals;
 
-import edu.ntnu.g60.models.Player;
+import edu.ntnu.g60.models.player.Player;
 
 public class HealthGoal implements Goal{
     int minimumHealth;

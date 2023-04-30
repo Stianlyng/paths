@@ -3,6 +3,9 @@ package edu.ntnu.g60.models;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.ntnu.g60.models.player.Player;
+import edu.ntnu.g60.models.player.PlayerBuilder;
+
 import java.util.Arrays;
 import java.util.List;
 
