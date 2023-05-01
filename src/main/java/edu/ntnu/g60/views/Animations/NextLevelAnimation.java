@@ -11,7 +11,7 @@ import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.TitlePanes.AdvancePane;
 
 //TODO: passer det å ha animations i views da det egt er mer controller?
-public class LvlSwitchAnimation {
+public class NextLevelAnimation {
 
     public static void animation() throws MalformedURLException{
         firstFrame();

@@ -8,7 +8,7 @@ import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.views.GameApp;
-import edu.ntnu.g60.views.Animations.LvlSwitchAnimation;
+import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.StartMenu.ContinuePane;
 import edu.ntnu.g60.views.StartMenu.CustomGamePane;
 import edu.ntnu.g60.views.StartMenu.NewGamePane;
@@ -118,7 +118,7 @@ public class StartMenuController {
                 try {
                     GameController.setCurrentGame(game);
                     GameController.setCurrentPassage(game.begin());
-                    LvlSwitchAnimation.animation();
+                    NextLevelAnimation.animation();
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
                 }

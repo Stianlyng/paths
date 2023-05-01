@@ -9,7 +9,7 @@ import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
-import edu.ntnu.g60.views.Animations.LvlSwitchAnimation;
+import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.GamePanes.FightPane;
 import javafx.event.ActionEvent;
 
@@ -24,10 +24,6 @@ public class FightPaneController {
         playerHealth = 1.00F;
     }
 
-    public static String printHealthAmounts(){
-        return "player: " + playerHealth + "\n" +
-        "enemy: " + enemyHealth;
-    }
 
     public static FightPane getCurrentFightPane(){
         return currentFightPane;
@@ -129,7 +125,7 @@ public class FightPaneController {
         } else { 
             GameController.setCurrentGame(GameController.getCurrentGame());
             GameController.setCurrentPassage(GameController.getCurrentGame().go(link2));
-            LvlSwitchAnimation.animation();
+            NextLevelAnimation.animation();
             try {
                 SaveRegister.setSave(new Save(GameController.getCurrentGame().go(link2), Story.getCurrentSave().getSaveName(),
                 Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
@@ -146,7 +142,7 @@ public class FightPaneController {
         } else { 
             GameController.setCurrentGame(GameController.getCurrentGame());
             GameController.setCurrentPassage(GameController.getCurrentGame().go(link1));
-            LvlSwitchAnimation.animation();
+            NextLevelAnimation.animation();
             try {
                 SaveRegister.setSave(new Save(GameController.getCurrentGame().go(link1), Story.getCurrentSave().getSaveName(),
                 Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
@@ -158,29 +154,39 @@ public class FightPaneController {
 
     public static void enemyAction(float damageAmount, float healAmount){
         GameController.delay(2000, () -> {
-            System.out.println(printHealthAmounts());
             playerHealth = playerHealth - damageAmount;
             enemyHealth = enemyHealth + healAmount;
-            System.out.println(printHealthAmounts());
             FightPane.updateHealthEnemy(enemyHealth);
             FightPane.updateHealthPlayer(playerHealth);
             if(enemyHealth < 0.00){
-                try {
-                    winFight();
-                    //add animation for win. 
-                } catch (MalformedURLException | FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                FightPane.updateHealthEnemy(0.00F);
+                GameController.delay(1000, () -> {
+                    FightPane.addWinText(getCurrentFightPane());
+                    GameController.delay(3000, () -> {
+                        try {
+                            winFight();
+                        } catch (MalformedURLException | FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }); 
+                
             } else if(playerHealth < 0.00){
-                try {
-                    looseFight();
-                    //add animation for loosing.
-                } catch (MalformedURLException | FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                FightPane.updateHealthPlayer(0.00F);
+                GameController.delay(1000, () -> {
+                    FightPane.addLooseText(getCurrentFightPane());
+                    GameController.delay(3000, () -> {
+                        try {
+                            looseFight();
+                        } catch (MalformedURLException | FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                });
             }   
         });
     }
+ 
 
     public static void playerAction(float damageAmount, float healAmount){
         

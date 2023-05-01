@@ -53,6 +53,16 @@ public class FightPane extends StackPane{
         inventoryButton, escapeButton, coinIcon, scoreIcon, scoreText, goldText, playerBar, enemyBar);
     }
 
+    public static void addWinText(FightPane pane){
+        Text winText = ViewObjects.newText("You won!", 50, false, 0, 0);
+        pane.getChildren().addAll(winText);
+    }
+
+    public static void addLooseText(FightPane pane){
+        Text looseText = ViewObjects.newText("You lost!", 50, false, 0, 0);
+        pane.getChildren().addAll(looseText);
+    }
+
     public static void addDefaultObjects(FightPane pane){
         Button fightButton = ViewObjects.newButton("Fight", 309-193, 534-71, "fight_button", "fight_hover", controller::fightAction);
         Button healButton = ViewObjects.newButton("Heal", 704-193, 534-71, "heal_button", "heal_hover",  controller::healAction);

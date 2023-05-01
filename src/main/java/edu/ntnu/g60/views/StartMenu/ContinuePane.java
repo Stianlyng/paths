@@ -10,7 +10,7 @@ import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.views.Values;
 import edu.ntnu.g60.views.ViewObjects;
-import edu.ntnu.g60.views.Animations.LvlSwitchAnimation;
+import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -44,7 +44,7 @@ public class ContinuePane extends StackPane{
                         try {
                             GameController.setCurrentGame(GameController.getNewGame());
                             GameController.setCurrentPassage(SaveRegister.getSave(buttonNumber).getPassage());
-                            LvlSwitchAnimation.animation();
+                            NextLevelAnimation.animation();
                         } catch (IOException | ClassNotFoundException e1) {
                             e1.printStackTrace();
                         }
