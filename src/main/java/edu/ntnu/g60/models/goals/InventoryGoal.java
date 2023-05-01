@@ -1,7 +1,7 @@
 package edu.ntnu.g60.models.goals;
 import java.util.List;
 
-import edu.ntnu.g60.models.Player;
+import edu.ntnu.g60.models.player.Player;
 
 public class InventoryGoal implements Goal{
     List<String> mandatoryItems;

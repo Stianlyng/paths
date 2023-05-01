@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import edu.ntnu.g60.entities.PlayerEntity;
-import edu.ntnu.g60.models.Player;
-import edu.ntnu.g60.models.PlayerBuilder;
+import edu.ntnu.g60.models.player.Player;
+import edu.ntnu.g60.models.player.PlayerBuilder;
 
 public class PlayerParser {
     

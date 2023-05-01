@@ -2,6 +2,10 @@ package edu.ntnu.g60.models;
 
 import org.junit.jupiter.api.Test;
 
+import edu.ntnu.g60.models.passage.Link;
+import edu.ntnu.g60.models.passage.Passage;
+import edu.ntnu.g60.models.passage.PassageBuilder;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;

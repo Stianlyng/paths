@@ -7,6 +7,10 @@ import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.goals.InventoryGoal;
 import edu.ntnu.g60.models.goals.ScoreGoal;
+import edu.ntnu.g60.models.passage.Link;
+import edu.ntnu.g60.models.passage.Passage;
+import edu.ntnu.g60.models.player.Player;
+import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.fileHandling.PlayerParser;
 import edu.ntnu.g60.utils.fileHandling.StoryParser;
 

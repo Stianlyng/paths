@@ -3,18 +3,18 @@ package edu.ntnu.g60;
 import java.util.List;
 
 import edu.ntnu.g60.models.Game;
-import edu.ntnu.g60.models.Link;
-import edu.ntnu.g60.models.Passage;
-import edu.ntnu.g60.models.PassageBuilder;
-import edu.ntnu.g60.models.Player;
-import edu.ntnu.g60.models.PlayerBuilder;
-import edu.ntnu.g60.models.Story;
-import edu.ntnu.g60.models.StoryBuilder;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.goals.InventoryGoal;
 import edu.ntnu.g60.models.goals.ScoreGoal;
+import edu.ntnu.g60.models.passage.Link;
+import edu.ntnu.g60.models.passage.Passage;
+import edu.ntnu.g60.models.passage.PassageBuilder;
+import edu.ntnu.g60.models.player.Player;
+import edu.ntnu.g60.models.player.PlayerBuilder;
+import edu.ntnu.g60.models.story.Story;
+import edu.ntnu.g60.models.story.StoryBuilder;
 
 public class App {
     public static void main(String[] args) {
