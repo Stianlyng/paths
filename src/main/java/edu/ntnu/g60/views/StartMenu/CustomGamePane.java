@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import edu.ntnu.g60.controllers.StartMenuController;
+import edu.ntnu.g60.views.Values;
 import edu.ntnu.g60.views.ViewObjects;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -19,10 +20,10 @@ public class CustomGamePane extends StackPane{
     }
     
     private static Group getCustomGameObjects() throws FileNotFoundException{
-        Button startButton = ViewObjects.newButton("Start", 614-193, 385-71, "launch_button", "launch_hover", controller::startAction);
-        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, "back_button", "back_hover", controller::backAction);
-        Button importButton = ViewObjects.newButton("Import", 614-193, 327-71, "launch_button", "launch_hover", controller::importFile);
-        ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
+        Button startButton = ViewObjects.newButton("Start", 614-193, 385-71, Values.MENU_BUTTON_ID, Values.MENU_BUTTON_HOVER_ID, controller::startAction);
+        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, Values.BACK_BUTTON_ID, Values.BACK_BUTTON_HOVER_ID, controller::backAction);
+        Button importButton = ViewObjects.newButton("Import", 614-193, 327-71, Values.MENU_BUTTON_ID, Values.MENU_BUTTON_HOVER_ID, controller::importFile);
+        ImageView background = ViewObjects.newImage(Values.MENU_BACKGROUND_FOLDERNAME, Values.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,Values.BACKGROUND_WIDTH ,Values.BACKGROUND_HEIGHT);
         return new Group(background, startButton, backButton, importButton);
     }
 }

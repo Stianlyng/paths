@@ -3,7 +3,6 @@ package edu.ntnu.g60.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-
 import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.Story;
 import edu.ntnu.g60.utils.Save;
@@ -15,18 +14,27 @@ import edu.ntnu.g60.views.StartMenu.CustomGamePane;
 import edu.ntnu.g60.views.StartMenu.NewGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import edu.ntnu.g60.views.settings.InformationPane;
+import edu.ntnu.g60.views.settings.ProjectPane;
 import edu.ntnu.g60.views.settings.SettingsPane;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
+
 public class StartMenuController {
-    
 
     public void continueAction(ActionEvent event){
         try {
             GameApp.changeRootPane(new ContinuePane());
         } catch (ClassNotFoundException | IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void linkAction(MouseEvent event){
+        try {
+            GameApp.changeRootPane(new ProjectPane());
+        } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
@@ -75,9 +83,9 @@ public class StartMenuController {
         if (file != null) {
             String filePath = file.getAbsolutePath();
             // Add the file to PATH
-            // For example, you can use the following code:
+            // For example
             // System.setProperty("PATH", System.getProperty("PATH") + File.pathSeparator + filePath);
-            //add melding om att det er i orden
+            //save file in imported stories. set game to this file. use start game method from new game
         }
     }
 
