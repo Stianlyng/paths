@@ -15,9 +15,19 @@ import javafx.event.ActionEvent;
 
 public class FightPaneController {
     
-    static float enemyHealth;
-    static float playerHealth;
-    static FightPane currentFightPane;
+    public static float enemyHealth;
+    public static float playerHealth;
+    public static FightPane currentFightPane;
+
+    public static void setDefaultHealthValues(){
+        enemyHealth = 1.00F;
+        playerHealth = 1.00F;
+    }
+
+    public static String printHealthAmounts(){
+        return "player: " + playerHealth + "\n" +
+        "enemy: " + enemyHealth;
+    }
 
     public static FightPane getCurrentFightPane(){
         return currentFightPane;
@@ -129,7 +139,6 @@ public class FightPaneController {
         }
     }
     
-    //TODO: move death to animations
     public static void looseFight() throws MalformedURLException, FileNotFoundException{
         Link link1 = GameController.getCurrentPassage().getLinks().get(0);
         if(link1.getReference().equals("game over")){
@@ -149,20 +158,23 @@ public class FightPaneController {
 
     public static void enemyAction(float damageAmount, float healAmount){
         GameController.delay(2000, () -> {
+            System.out.println(printHealthAmounts());
             playerHealth = playerHealth - damageAmount;
             enemyHealth = enemyHealth + healAmount;
+            System.out.println(printHealthAmounts());
             FightPane.updateHealthEnemy(enemyHealth);
             FightPane.updateHealthPlayer(playerHealth);
-            if(enemyHealth < 0.00F){
+            if(enemyHealth < 0.00){
                 try {
                     winFight();
+                    //add animation for win. 
                 } catch (MalformedURLException | FileNotFoundException e) {
                     e.printStackTrace();
                 }
-            }
-            if(playerHealth < 0.00F){
+            } else if(playerHealth < 0.00){
                 try {
                     looseFight();
+                    //add animation for loosing.
                 } catch (MalformedURLException | FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -176,19 +188,10 @@ public class FightPaneController {
         playerHealth = playerHealth + healAmount;
         FightPane.updateHealthEnemy(enemyHealth);
         FightPane.updateHealthPlayer(playerHealth);
-        if(enemyHealth < 0.00F){
-            try {
-                winFight();
-            } catch (MalformedURLException | FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-        if(playerHealth < 0.00F){
-            try {
-                looseFight();
-            } catch (MalformedURLException | FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        if(enemyHealth < 0.00){
+            FightPane.updateHealthEnemy(0.00F);
+        } else if(playerHealth < 0.00){
+            FightPane.updateHealthPlayer(0.00F);
+        }  
     }
 }

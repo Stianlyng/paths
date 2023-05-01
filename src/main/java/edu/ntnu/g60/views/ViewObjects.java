@@ -2,8 +2,12 @@ package edu.ntnu.g60.views;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -14,13 +18,18 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import java.io.File;
 import java.net.MalformedURLException;
+
+import edu.ntnu.g60.controllers.SoundController;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class ViewObjects {
+
     public static Button newButton(String text, int x, int y, String id, String hover, EventHandler<ActionEvent> action){
         Button button = new Button(text);
         button.setId(id);
@@ -30,6 +39,21 @@ public class ViewObjects {
         button.setOnMouseEntered(e -> button.setId(hover));
         button.setOnMouseExited(e -> button.setId(id));
         return button;
+    }
+
+    public static Slider newSlider(int x, int y){
+        Slider volumeSlider = new Slider(0, 100, 100);
+        volumeSlider.setId("slider");
+        volumeSlider.setLayoutX(x);
+        volumeSlider.setLayoutY(y);
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double newVolume = newValue.doubleValue() / 100.0;
+                SoundController.setApplicationVolume(newVolume);
+            }
+        });
+        return volumeSlider;
     }
 
     public static ImageView newImage(String foldername, String imagename,
@@ -105,18 +129,7 @@ public class ViewObjects {
         return player;
     }
 
-    public static ProgressBar newHealthBar(int x, int y, double amount, String id,
-    EventHandler<MouseEvent> action){
-        ProgressBar health = new ProgressBar();
-        health.setOnMouseClicked(action);
-        health.setLayoutX(x);
-        health.setLayoutY(y);
-        health.setId(id);
-        health.setProgress(amount);
-        return health;
-    }
-
-    public static ProgressBar newHealthBar(int x, int y, double amount, String id){
+    public static ProgressBar newHealthBar(int x, int y, float amount, String id){
         ProgressBar health = new ProgressBar();
         health.setLayoutX(x);
         health.setLayoutY(y);

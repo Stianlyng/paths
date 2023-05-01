@@ -38,7 +38,7 @@ public class ConversationPane extends StackPane{
     }
 
     public static Group getConversationPaneObjects() throws FileNotFoundException{
-        ImageView enemyImage = ViewObjects.newImage("characters", GameController.getCurrentPassage().getPlayer(), 50, 200, 150, 150, controller::sceneClickedAction);
+        ImageView enemyImage = ViewObjects.newImage("characters", GameController.getCurrentPassage().getPlayer(), 150, 200, 150, 150, controller::sceneClickedAction);
         ImageView playerImage = ViewObjects.newImage("characters", GameController.getCurrentPassage().getEnemy(), 700, 200, 150, 150, controller::sceneClickedAction);
         ImageView backgroundImage = ViewObjects.newImage("backgrounds", GameController.getCurrentPassage().getBackground(), 0, 0, 1650, 1000, controller::sceneClickedAction);
         ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 309-193, 136-71, 24, 24, controller::sceneClickedAction);
@@ -52,10 +52,10 @@ public class ConversationPane extends StackPane{
 
         Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 293, 38, controller::sceneClickedAction);
         String[] textline = ConversationPaneController.getTextLines();
-        Text textLineOne = ViewObjects.newText(textline[0], 30, false, 333-193, 520-71, controller::sceneClickedAction);
-        Text textLineTwo = ViewObjects.newText(textline[1], 30, false, 333-193, 555-71, controller::sceneClickedAction);
-        Text textLineThree = ViewObjects.newText(textline[2], 30, false, 333-193, 590-71, controller::sceneClickedAction);
-        Text textLineFour = ViewObjects.newText(textline[3], 30, false, 333-193, 425-71, controller::sceneClickedAction);
+        Text textLineOne = ViewObjects.newText(textline[0], 27, false, 333-193, 520-71, controller::sceneClickedAction);
+        Text textLineTwo = ViewObjects.newText(textline[1], 27, false, 333-193, 555-71, controller::sceneClickedAction);
+        Text textLineThree = ViewObjects.newText(textline[2], 27, false, 333-193, 590-71, controller::sceneClickedAction);
+        Text textLineFour = ViewObjects.newText(textline[3], 27, false, 333-193, 425-71, controller::sceneClickedAction);
 
         Group root = new Group(backgroundImage, infoBoard, enemyImage, playerImage, coinIcon,
         healthIcon, scoreIcon, scoreText, goldText, healthText,

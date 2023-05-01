@@ -195,9 +195,9 @@
     -fx-font-size: 13;
 }
 #progress_bar {
-    -fx-border-color: black;
-    -fx-background-color: rgb(189, 178, 178);
-    -fx-pref-width: 100;
+    -fx-border-color: rgb(0, 0, 0);
+    -fx-background-color: rgb(103, 100, 100);
+    -fx-pref-width: 373;
     -fx-pref-height: 20;
     -fx-accent: red;
 }

@@ -16,7 +16,7 @@ public class LvlSwitchAnimation {
     public static void animation() throws MalformedURLException{
         firstFrame();
         GameController.delay(2000, () -> {
-            secondFrame(GameController.getCurrentPassage().getTitle());
+            secondFrame();
             GameController.delay(2000, () -> {
                 thirdFrame();
             });
@@ -32,9 +32,9 @@ public class LvlSwitchAnimation {
         }
     }
 
-    public static void secondFrame(String passageTitle){
+    public static void secondFrame(){
         try {
-            GameApp.changeRootPane(new LvlPane(passageTitle));
+            GameApp.changeRootPane(new LvlPane(GameController.getCurrentPassage().getTitle()));
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         }

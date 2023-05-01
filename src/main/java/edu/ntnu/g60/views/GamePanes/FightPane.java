@@ -23,13 +23,7 @@ public class FightPane extends StackPane{
 
     public FightPane() throws FileNotFoundException{
         FightPane.controller = new FightPaneController();
-        getChildren().addAll(addFightPaneObjects(), addHealthBars());
-    }
-
-    public Group addHealthBars(){
-        playerBar =  ViewObjects.newHealthBar(259-193, 306-71, (GameController.getCurrentGame().getPlayer().getHealth()/100), "progress_bar"); 
-        enemyBar = ViewObjects.newHealthBar(789-193, 137-71, 1.00F, "progress_bar");
-        return new Group(playerBar, enemyBar);
+        getChildren().addAll(addFightPaneObjects());
     }
 
     public static void updateHealthPlayer(float playerHealth){
@@ -52,9 +46,11 @@ public class FightPane extends StackPane{
         ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24);
         Text scoreText = ViewObjects.newText("" + GameController.getCurrentGame().getPlayer().getScore(), 18, false, 342-193, 155-71);
         Text goldText = ViewObjects.newText("" + GameController.getCurrentGame().getPlayer().getGold(), 18, false, 422-193, 155-71);
-        Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 133, 38);
+        Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 163, 38);
+        playerBar =  ViewObjects.newHealthBar(309-193, 504-71, 1.00F, "progress_bar"); 
+        enemyBar = ViewObjects.newHealthBar(704-193, 504-71, 1.00F, "progress_bar");
         return new Group(backgroundImage, infoBoard, enemyImage, playerImage, fightButton, healButton,
-        inventoryButton, escapeButton, coinIcon, scoreIcon, scoreText, goldText);
+        inventoryButton, escapeButton, coinIcon, scoreIcon, scoreText, goldText, playerBar, enemyBar);
     }
 
     public static void addDefaultObjects(FightPane pane){

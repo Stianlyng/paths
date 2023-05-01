@@ -67,6 +67,7 @@ public class ConversationPaneController {
                 try {
                     SoundController.stopSound();
                     FightPane pane = new FightPane();
+                    FightPaneController.setDefaultHealthValues();
                     FightPaneController.setCurrentFightPane(pane);
                     GameApp.changeRootPane(pane);
                 } catch (MalformedURLException | FileNotFoundException e1){

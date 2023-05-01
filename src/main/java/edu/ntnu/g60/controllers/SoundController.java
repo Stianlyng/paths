@@ -8,10 +8,12 @@ import javafx.scene.media.MediaPlayer;
 public class SoundController {
     
     public static MediaPlayer sound;
+    public static double volume;
     
 
     public static void playSound(String soundName) throws MalformedURLException{
         setSound(ViewObjects.newSound(soundName));
+        sound.setVolume(volume);
         sound.play();
     }
 
@@ -25,7 +27,12 @@ public class SoundController {
 
     //TODO: make this connected to sound over //no work
     public static void stopSound() throws MalformedURLException{
-    getSound().stop();
+        getSound().stop();
+    }
+
+   
+    public static void setApplicationVolume(double newVolume) {
+        volume = newVolume;
     }
 
 }
