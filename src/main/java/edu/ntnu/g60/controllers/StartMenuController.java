@@ -13,6 +13,7 @@ import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;
+import edu.ntnu.g60.utils.fileHandling.TextfileParser;
 import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
@@ -26,6 +27,7 @@ import edu.ntnu.g60.views.settings.SettingsPane;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import org.apache.commons.io.FilenameUtils;
 
 
 public class StartMenuController {
@@ -101,32 +103,51 @@ public class StartMenuController {
         }
     }
 
-    public void importFile(ActionEvent event) {
+
+    public void importFile(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Import TXT File");
+        fileChooser.setTitle("Import game File");
     
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        fileChooser.getExtensionFilters().add(extFilter);
+        FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
+        fileChooser.getExtensionFilters().addAll(extFilter, jsonFilter);
     
         File file = fileChooser.showOpenDialog(null);
         String filePath = file.getAbsolutePath();
         String fileName = filePath.substring(filePath.lastIndexOf("\\") + 1);
 
-        if (file != null && filePath.toLowerCase().endsWith(".txt")) {
-            File destDir = new File("src/main/resources/stories");
-            if (!destDir.exists()) {
-                destDir.mkdirs();
+        if (file != null) {
+            if (filePath.toLowerCase().endsWith(".txt") || filePath.toLowerCase().endsWith(".json")) {
+                File destDir = new File("src/main/resources/stories");
+                if (!destDir.exists()) {
+                    destDir.mkdirs();
+                }
+                Path destPath = Paths.get(destDir.getAbsolutePath(), file.getName());
+                try {
+                    Files.copy(file.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
+                    CustomGamePane.addImportSucessfullText(getCurrentCustomGamePane());
+                    ControllerValues.setGameFile(FilenameUtils.removeExtension(fileName));
+                } catch (IOException e) {
+                    DialogBoxes.alertBox("Import failed", "Your import was not saved", "");
+                }
+                if (filePath.toLowerCase().endsWith(".txt")){
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        TextfileParser.parseStory(fileName.replace(".txt", ""));
+                    } catch (IOException e) {
+                        System.out.println(fileName);
+                    }
+                    String filePathOld = "src/main/resources/stories/" + fileName;
+                    File fileOld = new File(filePathOld);
+                    fileOld.delete();
+                }
+            } else {
+                DialogBoxes.alertBox("Import failed", "Your import was not saved", "Please check that your import was of the right type");
             }
-            Path destPath = Paths.get(destDir.getAbsolutePath(), file.getName());
-            try {
-                Files.copy(file.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
-                CustomGamePane.addImportSucessfullText(getCurrentCustomGamePane());
-                ControllerValues.setGameFile(fileName.replaceAll(".txt", ""));
-            } catch (IOException e) {
-                DialogBoxes.alertBox("Import failed", "Your import was not saved", "");
-            }
-        } else {
-            DialogBoxes.alertBox("Import failed", "Your import was not saved", "Please check that your import was of the right type");
         }
     }
 
@@ -171,6 +192,7 @@ public class StartMenuController {
 
     public void startAction(ActionEvent event){
         NewGamePane.updateSaveName();
+        //TODO: legg inn dialog box om overwrite må til. typ SaveRegister.saveExists(3). spør om dialog box. 
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
             try {
                 ControllerValues.setGameFile(NewGamePane.getStoryChoice());

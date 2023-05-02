@@ -3,6 +3,7 @@ module edu.ntnu.g60 {
     requires transitive javafx.graphics;
     requires transitive javafx.media;
     requires transitive javafx.web;
+    requires org.apache.commons.io;
     
     requires com.fasterxml.jackson.databind;
     opens edu.ntnu.g60;
