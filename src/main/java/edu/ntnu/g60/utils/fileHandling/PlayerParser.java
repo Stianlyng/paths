@@ -20,7 +20,7 @@ public class PlayerParser {
     private final ObjectMapper objectMapper;
 
     public PlayerParser(String jsonFilePath) {
-        this.jsonFile = Paths.get("src/main/resources/saves/" + jsonFilePath + ".json").toFile(); //TODO:add functionality for the path to be txt aswell / remove .json from string
+        this.jsonFile = Paths.get("src/main/resources/saves/" + jsonFilePath + ".json").toFile();
         this.objectMapper = new ObjectMapper();
     }
 
