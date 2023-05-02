@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -47,10 +48,11 @@ public class FightPane extends StackPane{
         Text scoreText = ViewObjects.newText("" + GameController.getCurrentGame().getPlayer().getScore(), 18, false, 342-193, 155-71);
         Text goldText = ViewObjects.newText("" + GameController.getCurrentGame().getPlayer().getGold(), 18, false, 422-193, 155-71);
         Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 163, 38);
+        MenuButton dropDown = ViewObjects.newMenuButton(controller::menuAction, controller::exitAction, "menu_button", "menu_hover", 283, 129-71, "Go to main menu", "Exit application");
         playerBar =  ViewObjects.newHealthBar(309-193, 504-71, 1.00F, "progress_bar"); 
         enemyBar = ViewObjects.newHealthBar(704-193, 504-71, 1.00F, "progress_bar");
         return new Group(backgroundImage, infoBoard, enemyImage, playerImage, fightButton, healButton,
-        inventoryButton, escapeButton, coinIcon, scoreIcon, scoreText, goldText, playerBar, enemyBar);
+        inventoryButton, escapeButton, coinIcon, scoreIcon, scoreText, goldText, playerBar, enemyBar, dropDown);
     }
 
     public static void addWinText(FightPane pane){

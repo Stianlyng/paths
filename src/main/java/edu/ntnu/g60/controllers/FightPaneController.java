@@ -4,13 +4,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import edu.ntnu.g60.models.Game;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;
+import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.GamePanes.FightPane;
+import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.event.ActionEvent;
 
 public class FightPaneController {
@@ -33,6 +36,18 @@ public class FightPaneController {
         currentFightPane = pane;
     }
     
+    public void exitAction(ActionEvent event){
+        GameApp.closeApplication();
+    }
+
+    public void menuAction(ActionEvent event){
+        try {
+            GameApp.changeRootPane(new OpeningPane());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void fightAction(ActionEvent event){
         try {
             FightPane.addFightObjects(getCurrentFightPane());

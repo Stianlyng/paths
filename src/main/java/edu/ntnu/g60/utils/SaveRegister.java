@@ -50,4 +50,7 @@ public class SaveRegister {
         return filenames;
     }
 
+    public static void main(String[] args) throws IOException {
+        setDefaultSaves();
+    }
 }

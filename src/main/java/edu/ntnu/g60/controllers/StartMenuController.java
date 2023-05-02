@@ -192,33 +192,43 @@ public class StartMenuController {
 
     public void startAction(ActionEvent event){
         NewGamePane.updateSaveName();
-        //TODO: legg inn dialog box om overwrite må til. typ SaveRegister.saveExists(3). spør om dialog box. 
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
+            boolean overwrite = true;
             try {
-                ControllerValues.setGameFile(NewGamePane.getStoryChoice());
-                Game game = GameController.getNewGame();
-                int saveNumber = 1;
-                if (SaveRegister.saveExists(1)) {
-                    saveNumber = 2;
-                    if (SaveRegister.saveExists(2)) {
-                        saveNumber = 3;
-                    }
+                if(SaveRegister.saveExists(3)){
+                    overwrite = DialogBoxes.alertBoxChoices("CAUTION!", "This will action will overwrite save: " + SaveRegister.getSave(3).getSaveName(), "Are you sure you want to continue?");
                 }
-                
-                Save save = new Save(game.getStory().getOpeningPassage(), NewGamePane.saveName, saveNumber, ControllerValues.getGameFile());
-                SaveRegister.setSave(save, saveNumber);
-                Story.setCurrentSave(save);
-                
+            } catch (ClassNotFoundException | IOException e) {
+                e.printStackTrace();
+            }
+            if(overwrite){
                 try {
-                    GameController.setCurrentGame(game);
-                    GameController.setCurrentPassage(game.begin());
-                    NextLevelAnimation.animation();
-                } catch (MalformedURLException e1) {
+                    ControllerValues.setGameFile(NewGamePane.getStoryChoice());
+                    Game game = GameController.getNewGame();
+                    int saveNumber = 1;
+                    if (SaveRegister.saveExists(1)) {
+                        saveNumber = 2;
+                        if (SaveRegister.saveExists(2)) {
+                            saveNumber = 3;
+                        }
+                    }
+                    
+                    Save save = new Save(game.getStory().getOpeningPassage(), NewGamePane.saveName, saveNumber, ControllerValues.getGameFile());
+                    SaveRegister.setSave(save, saveNumber);
+                    Story.setCurrentSave(save);
+                    
+                    try {
+                        GameController.setCurrentGame(game);
+                        GameController.setCurrentPassage(game.begin());
+                        NextLevelAnimation.animation();
+                    } catch (MalformedURLException e1) {
+                        e1.printStackTrace();
+                    }
+                } catch (IOException | ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }
-            } catch (IOException | ClassNotFoundException e1) {
-                e1.printStackTrace();
             }
+
         } 
     }
 }

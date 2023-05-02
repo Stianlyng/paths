@@ -17,6 +17,7 @@ import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.GamePanes.FightPane;
+import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -90,6 +91,18 @@ public class ConversationPaneController {
         }
     }
     
+    public void exitAction(ActionEvent event){
+        GameApp.closeApplication();
+    }
+
+    public void menuAction(ActionEvent event){
+        try {
+            GameApp.changeRootPane(new OpeningPane());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void choiceOneAction(ActionEvent event){
         try {
             Link link1 = GameController.getCurrentPassage().getLinks().get(0);

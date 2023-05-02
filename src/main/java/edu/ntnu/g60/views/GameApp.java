@@ -34,6 +34,10 @@ public class GameApp extends Application {
         stage.show();
     }
 
+    public static void closeApplication(){
+        stage.close();
+    }
+
     public static void changeRootPane(Pane pane) {
         try {
             stage.getScene().setRoot(pane);

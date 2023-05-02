@@ -9,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,6 +40,22 @@ public class ViewObjects {
         button.setOnMouseEntered(e -> button.setId(hover));
         button.setOnMouseExited(e -> button.setId(id));
         return button;
+    }
+
+    public static MenuButton newMenuButton(EventHandler<ActionEvent> action1, EventHandler<ActionEvent> action2, String id, String hover,
+    int x, int y, String choice1, String choice2){
+        MenuButton dropdownButton = new MenuButton();
+        dropdownButton.setId(id);
+        dropdownButton.setLayoutX(x);
+        dropdownButton.setLayoutY(y);
+        MenuItem menuItem1 = new MenuItem(choice1);
+        menuItem1.setOnAction(action1);
+        MenuItem menuItem2 = new MenuItem(choice2);
+        menuItem2.setOnAction(action2);
+        dropdownButton.getItems().addAll(menuItem1, menuItem2);
+        dropdownButton.setOnMouseEntered(e -> dropdownButton.setId(hover));
+        dropdownButton.setOnMouseExited(e -> dropdownButton.setId(id));
+        return dropdownButton;
     }
 
     public static Slider newSlider(int x, int y){

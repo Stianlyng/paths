@@ -250,5 +250,33 @@
     -fx-pref-height: 35;
     -fx-font-size: 15;
 }
+#menu_button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#d000ff, #d000ff);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-control-inner-background: #d000ff;
+    -fx-focus-color: midnightblue;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-weight: bold;
+    -fx-pref-width: 15;
+    -fx-pref-height: 20;
+    -fx-font-size: 18;
+}
+#menu_hover {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#000000, #d000ff);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-control-inner-background: #d000ff;
+    -fx-focus-color: midnightblue;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-weight: bold;
+    -fx-pref-width: 15;
+    -fx-pref-height: 20;
+    -fx-font-size: 18;
+}
 
 
