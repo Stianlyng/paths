@@ -42,7 +42,7 @@ public class StoryParser {
      * @param jsonFilePath the path to the JSON file to be parsed.
      */
     public StoryParser(String jsonFilePath) {
-        this.jsonFile = Paths.get("src/main/resources/stories/" + jsonFilePath + ".json").toFile();
+        this.jsonFile = Paths.get("src/main/resources/stories/" + jsonFilePath + ".json").toFile(); //TODO:add functionality for the path to be txt aswell
         this.objectMapper = new ObjectMapper();
     }
     

@@ -209,5 +209,46 @@
   -fx-pref-width: 150;
   -fx-pref-height: 10;
 }
+#launch_choicebox {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#d000ff, #d000ff);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-control-inner-background: #d000ff;
+    -fx-focus-color: midnightblue;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-weight: bold;
+    -fx-pref-width: 158;
+    -fx-pref-height: 35;
+    -fx-font-size: 12;
+}
+#delete_button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#d000ff, #d000ff);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-weight: bold;
+    -fx-pref-width: 200;
+    -fx-pref-height: 35;
+    -fx-font-size: 15;
+}
+#delete_hover {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#000000, #d000ff);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-weight: bold;
+    -fx-pref-width: 200;
+    -fx-pref-height: 35;
+    -fx-font-size: 15;
+}
 
 

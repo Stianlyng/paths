@@ -14,11 +14,13 @@ public class Save implements Externalizable{
     public Passage passage;
     public String saveName;
     public int saveNumber;
+    public String storyName;
     
-    public Save(Passage passage, String saveName, int saveNumber){
+    public Save(Passage passage, String saveName, int saveNumber, String storyName){
         this.saveNumber = saveNumber;
         this.passage = passage;
         this.saveName = saveName;
+        this.storyName = storyName;
         if (passage == null) throw new IllegalArgumentException("Passage is empty");
     }
 
@@ -37,6 +39,9 @@ public class Save implements Externalizable{
         return saveNumber;
     }
 
+    public String getStoryName(){
+        return storyName;
+    }
 
 
     @Override
@@ -48,7 +53,6 @@ public class Save implements Externalizable{
         String background = passage.getBackground();
         boolean fightScene = passage.hasFightScene();
 
-  
         List<Link> links = passage.getLinks();
         String linkRef1 = links.get(0).getReference();
         String linkRef2 = links.get(1).getReference();
@@ -65,6 +69,7 @@ public class Save implements Externalizable{
         out.writeUTF(linkRef2);
         out.writeUTF(linkTxt1);
         out.writeUTF(linkTxt2);
+        out.writeUTF(storyName);
     }
 
     @Override
@@ -88,7 +93,7 @@ public class Save implements Externalizable{
         String linkRef2 = in.readUTF();
         String linkTxt1 = in.readUTF();
         String linkTxt2 = in.readUTF();
-
+        storyName = in.readUTF();
         passage.addLink(new Link(linkTxt1, linkRef1));
         passage.addLink(new Link(linkTxt2, linkRef2));
     }

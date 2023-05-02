@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -54,6 +55,16 @@ public class ViewObjects {
             }
         });
         return volumeSlider;
+    }
+
+    public static ChoiceBox<String> newChoiceBox(String[] choices, int x, int y, String id) {
+        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+        choiceBox.setValue(choices[0]);
+        choiceBox.setId(id);
+        choiceBox.getItems().addAll(choices);
+        choiceBox.setLayoutX(x);
+        choiceBox.setLayoutY(y);
+        return choiceBox;
     }
 
     public static ImageView newImage(String foldername, String imagename,

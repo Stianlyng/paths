@@ -1,6 +1,6 @@
 package edu.ntnu.g60.views;
 
-public class Values {
+public class ViewValues {
     public static String MENU_BACKGROUND_FOLDERNAME = "backgrounds";
     public static String MENU_BACKGROUND_IMAGENAME = "Background2.jpg";
     public static int BACKGROUND_HEIGHT = 1006;
@@ -9,4 +9,5 @@ public class Values {
     public static String MENU_BUTTON_HOVER_ID = "launch_hover";
     public static String BACK_BUTTON_ID = "back_button";
     public static String BACK_BUTTON_HOVER_ID = "back_hover";
+    //make all private. add setters and getters. 
 }

@@ -1,5 +1,6 @@
 package edu.ntnu.g60.utils;
 
+import java.io.File;
 import java.io.IOException;
 
 import edu.ntnu.g60.utils.serialization.SerializationUtils;
@@ -23,7 +24,7 @@ public class SaveRegister {
         SerializationUtils.serializeToFile(saves, PATH);
     }
 
-    //funker ikke. hele metoden bare kaster en exception. prøv å putt metoden i en excetion
+ 
     public static boolean saveExists(int number) throws ClassNotFoundException, IOException {
         Save save = getSave(number);
         if(save == null){
@@ -33,7 +34,20 @@ public class SaveRegister {
         }
     }
 
-    public static void main(String[] args) throws ClassNotFoundException, IOException {
-        setDefaultSaves();
+    public static String[] getStories(){
+        String directoryPath = "src/main/resources/stories";
+        File directory = new File(directoryPath);
+        File[] files = directory.listFiles();
+        String[] filenames = new String[files.length];
+        for (int i = 0; i < files.length; i++) {
+            String filename = files[i].getName();
+            int pos = filename.lastIndexOf(".");
+            if (pos > 0) {
+                filename = filename.substring(0, pos);
+            }
+            filenames[i] = filename;
+        }
+        return filenames;
     }
+
 }

@@ -128,7 +128,7 @@ public class FightPaneController {
             NextLevelAnimation.animation();
             try {
                 SaveRegister.setSave(new Save(GameController.getCurrentGame().go(link2), Story.getCurrentSave().getSaveName(),
-                Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
+                Story.getCurrentSave().getSaveNumber(), ControllerValues.getGameFile()), Story.getCurrentSave().getSaveNumber());
             } catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
             }
@@ -145,7 +145,7 @@ public class FightPaneController {
             NextLevelAnimation.animation();
             try {
                 SaveRegister.setSave(new Save(GameController.getCurrentGame().go(link1), Story.getCurrentSave().getSaveName(),
-                Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
+                Story.getCurrentSave().getSaveNumber(), ControllerValues.getGameFile()), Story.getCurrentSave().getSaveNumber());
             } catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
             }

@@ -100,7 +100,7 @@ public class ConversationPaneController {
                 GameController.setCurrentPassage(GameController.getCurrentGame().go(link1));
                 NextLevelAnimation.animation();
                 SaveRegister.setSave(new Save(GameController.getCurrentGame().go(link1), Story.getCurrentSave().getSaveName(),
-                Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
+                Story.getCurrentSave().getSaveNumber(), ControllerValues.getGameFile()), Story.getCurrentSave().getSaveNumber());
             }
         } catch (IOException | ClassNotFoundException e1) {
             e1.printStackTrace();
@@ -117,7 +117,7 @@ public class ConversationPaneController {
                 GameController.setCurrentPassage(GameController.getCurrentGame().go(link2));
                 NextLevelAnimation.animation();
                 SaveRegister.setSave(new Save(GameController.getCurrentGame().go(link2), Story.getCurrentSave().getSaveName(),
-                Story.getCurrentSave().getSaveNumber()), Story.getCurrentSave().getSaveNumber());
+                Story.getCurrentSave().getSaveNumber(), ControllerValues.getGameFile()), Story.getCurrentSave().getSaveNumber());
             }
         } catch (IOException | ClassNotFoundException e1) {
             e1.printStackTrace();
