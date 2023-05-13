@@ -1,4 +1,4 @@
-package edu.ntnu.g60.models;
+package edu.ntnu.g60.models.game;
 import java.util.List;
 
 import edu.ntnu.g60.models.goals.Goal;

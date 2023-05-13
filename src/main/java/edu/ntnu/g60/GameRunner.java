@@ -1,7 +1,8 @@
 package edu.ntnu.g60;
 
-import edu.ntnu.g60.models.*;
 import edu.ntnu.g60.models.actions.Action;
+import edu.ntnu.g60.models.game.Game;
+import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;

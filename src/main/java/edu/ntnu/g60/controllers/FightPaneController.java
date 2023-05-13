@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import edu.ntnu.g60.models.Game;
+import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.Save;

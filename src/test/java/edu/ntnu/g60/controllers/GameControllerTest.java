@@ -7,7 +7,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import edu.ntnu.g60.models.Game;
+
+import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.passage.Passage;
