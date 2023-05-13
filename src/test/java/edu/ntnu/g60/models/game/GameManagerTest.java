@@ -1,4 +1,4 @@
-package edu.ntnu.g60.models;
+package edu.ntnu.g60.models.game;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import edu.ntnu.g60.models.Game;
+import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.Save;
 import edu.ntnu.g60.utils.SaveRegister;

@@ -1,4 +1,4 @@
-package edu.ntnu.g60.models;
+package edu.ntnu.g60.models.game;
 
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.passage.Link;

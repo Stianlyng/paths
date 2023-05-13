@@ -3,7 +3,7 @@ package edu.ntnu.g60.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.ntnu.g60.models.Game;
+import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.passage.Passage;
