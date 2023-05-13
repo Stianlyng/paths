@@ -1,10 +1,8 @@
-package edu.ntnu.g60.models;
+package edu.ntnu.g60.models.passage;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.ntnu.g60.models.passage.Link;
-import edu.ntnu.g60.models.passage.Passage;
-import edu.ntnu.g60.models.passage.PassageBuilder;
 
 import java.util.ArrayList;
 
@@ -12,9 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PassageTest {
 
-    @Test
-    void testPassageBuilder() {
-        Passage passage = new PassageBuilder()
+    private Passage passage;
+    private Link link;
+
+
+    @BeforeEach
+    void setUp() {
+        passage = new PassageBuilder()
                 .setTitle("Opening Passage")
                 .setContent("This is the opening passage")
                 .setPlayer("player1.png")
@@ -23,6 +25,10 @@ class PassageTest {
                 .isFightScene(true)
                 .build();
 
+        link = new Link("Link 1", "Passage 1");
+    }
+    @Test
+    void testPassageBuilder() {
         assertNotNull(passage);
         assertEquals("Opening Passage", passage.getTitle());
         assertEquals("This is the opening passage", passage.getContent());
@@ -43,12 +49,6 @@ class PassageTest {
 
     @Test
     void testAddLink() {
-        Passage passage = new PassageBuilder()
-                .setTitle("Opening Passage")
-                .setContent("This is the opening passage")
-                .build();
-
-        Link link = new Link("Next Passage", "next");
         assertTrue(passage.addLink(link));
         assertEquals(1, passage.getLinks().size());
         assertEquals(link, passage.getLinks().get(0));
@@ -56,11 +56,51 @@ class PassageTest {
 
     @Test
     void testAddLinkWithInvalidArguments() {
-        Passage passage = new PassageBuilder()
+        assertThrows(IllegalArgumentException.class, () -> passage.addLink(null));
+    }
+
+    @Test
+    void testHasLinks() {
+        assertFalse(passage.hasLinks());
+        passage.addLink(link);
+        assertTrue(passage.hasLinks());
+    }
+    
+    @Test
+    void testEquals() {
+        Passage theOtherPassage = new PassageBuilder()
                 .setTitle("Opening Passage")
                 .setContent("This is the opening passage")
+                .setPlayer("player1.png")
+                .setEnemy("enemy1.png")
+                .setBackground("background2.png")
+                .isFightScene(true)
                 .build();
 
-        assertThrows(IllegalArgumentException.class, () -> passage.addLink(null));
+        assertEquals(passage, theOtherPassage);
+    }
+    
+    @Test
+    void testNotEquals() {
+        Passage passage2 = new PassageBuilder()
+                .setTitle("Different Title")
+                .setContent("This is the opening passage")
+                .build();
+        assertNotEquals(passage, passage2);
+    }
+    
+    @Test
+    void testHashCode() {
+        Passage theOtherPassage = new PassageBuilder()
+                .setTitle("Opening Passage")
+                .setContent("This is the opening passage")
+                .setPlayer("player1.png")
+                .setEnemy("enemy1.png")
+                .setBackground("background2.png")
+                .isFightScene(true)
+                .build();
+
+
+        assertEquals(passage.hashCode(), theOtherPassage.hashCode());
     }
 }

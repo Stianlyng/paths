@@ -10,16 +10,14 @@ public class InventoryGoal implements Goal{
         this.mandatoryItems = mandatoryItems;
     }
 
-    public boolean isFulfilled(Player player){ //implement lambda
-        boolean fulfilled = false;
+
+    public boolean isFulfilled(Player player){ 
         for (String item : mandatoryItems){
-            if(player.getInventory().contains(item)){
-                fulfilled = true;
-            }else{
-                fulfilled = false;
+            if(!player.getInventory().contains(item)){
+                return false;
             }
         }
-        return fulfilled;
+        return true;
     }
 }
 
