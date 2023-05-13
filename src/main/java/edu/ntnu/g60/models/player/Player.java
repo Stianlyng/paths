@@ -38,7 +38,7 @@ public class Player {
     this.score = score;
     this.gold = gold;
     this.inventory = inventory;
-}
+  }
 
 
   public String getName(){
@@ -77,6 +77,16 @@ public class Player {
   public void addToInventory(String item) throws IllegalArgumentException{
     if (item == null || item.isBlank()) throw new IllegalArgumentException("Item cannot be null or blank.");
     inventory.add(item);
+  }
+  
+  /**
+   * Removes an item from the inventory.
+   * @param item The item to remove.
+   * @throws IllegalArgumentException if item is null or blank.
+   */
+  public void removeFromInventory(String item) throws IllegalArgumentException{
+    if (item == null || item.isBlank()) throw new IllegalArgumentException("Item cannot be null or blank.");
+    this.inventory.remove(item);
   }
 
   public List<String> getInventory() {
