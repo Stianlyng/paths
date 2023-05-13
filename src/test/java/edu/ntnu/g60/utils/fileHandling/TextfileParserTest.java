@@ -28,10 +28,8 @@ class TextfileParserTest {
         Path testStoryPath = Paths.get("src/main/resources/stories/" + filename + ".txt");
         Files.writeString(testStoryPath, "Haunted House\n\n:: Test Passage\nThis is a test passage.\n[Try to open the door](Another room)\n[Stay](Room 3)\n");
 
-        // Call the method under test
         TextfileParser.parseStory(filename);
 
-        // Verify the output
         Path expectedJsonPath = Paths.get("src/main/resources/stories/" + filename + ".json");
         assertTrue(Files.exists(expectedJsonPath), "Expected output file was not created");
 
@@ -40,7 +38,6 @@ class TextfileParserTest {
         assertEquals("Test Passage", jsonNode.get("passages").get(0).get("title").asText(), "Title does not match");
         assertEquals("This is a test passage.\n", jsonNode.get("passages").get(0).get("content").asText(), "Content does not match");
 
-        // Clean up
         Files.deleteIfExists(testStoryPath);
         Files.deleteIfExists(expectedJsonPath);
     }
