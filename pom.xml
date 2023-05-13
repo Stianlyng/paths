@@ -22,6 +22,13 @@
     <jupiter.version>5.9.1</jupiter.version>
   </properties>
 
+  <pluginRepositories>
+      <pluginRepository>
+        <id>maven-central</id>
+        <url>https://repo1.maven.org/maven2/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -83,22 +90,9 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.0</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <mainClass>edu.ntnu.g60.GameAppLauncher</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
-        <version>0.0.8</version>
+        <version>0.0.9</version>
         <configuration>
           <mainClass>edu.ntnu.g60.GameAppLauncher/edu.ntnu.g60</mainClass>
         </configuration>
@@ -107,11 +101,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M7</version>
-      </plugin>
-      <plugin>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-maven-plugin</artifactId>
-        <version>0.0.8</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
