@@ -17,9 +17,10 @@ public class GameManager {
   private Story story;
   private List<Goal> goals;
 
-  private GameManager() {
-    // Private constructor to prevent instantiation
-  }
+  /**
+   * Private constructor to prevent instantiation.
+   */
+  private GameManager() {}
 
   /**
    * Returns the single instance of the GameManager class, creating it if necessary.
