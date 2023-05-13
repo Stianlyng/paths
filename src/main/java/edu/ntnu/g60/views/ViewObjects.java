@@ -12,6 +12,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,6 +40,21 @@ public class ViewObjects {
         button.setOnAction(action);
         button.setOnMouseEntered(e -> button.setId(hover));
         button.setOnMouseExited(e -> button.setId(id));
+        return button;
+    }
+
+    public static Button newButton(String text, int x, int y, String id, String hover, EventHandler<ActionEvent> action, String altText){
+        Button button = new Button(text);
+        button.setAccessibleText(altText);
+        button.setId(id);
+        button.setLayoutX(x);
+        button.setLayoutY(y);
+        button.setOnAction(action);
+        button.setOnMouseEntered(e -> button.setId(hover));
+        button.setOnMouseExited(e -> button.setId(id));
+        Tooltip tooltip = new Tooltip();
+        tooltip.setText(button.getAccessibleText());
+        button.setTooltip(tooltip);
         return button;
     }
 

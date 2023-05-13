@@ -27,7 +27,8 @@ public class CustomGamePane extends StackPane{
         Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::backAction);
         Button importButton = ViewObjects.newButton("Import", 614-193, 327-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::importFile);
         ImageView background = ViewObjects.newImage(ViewValues.MENU_BACKGROUND_FOLDERNAME, ViewValues.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,ViewValues.BACKGROUND_WIDTH ,ViewValues.BACKGROUND_HEIGHT);
-        return new Group(background, startButton, backButton, importButton);
+        ImageView information = ViewObjects.newImage("icons", "information.png", 830 ,20 ,35 ,35, controller::informationFileStructureAction);
+        return new Group(background, startButton, backButton, importButton, information);
     }
 
     public static void addImportSucessfullText(CustomGamePane pane) throws FileNotFoundException{

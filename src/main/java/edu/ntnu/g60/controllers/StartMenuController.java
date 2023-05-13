@@ -21,6 +21,7 @@ import edu.ntnu.g60.views.StartMenu.ContinuePane;
 import edu.ntnu.g60.views.StartMenu.CustomGamePane;
 import edu.ntnu.g60.views.StartMenu.NewGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
+import edu.ntnu.g60.views.settings.InformationFileStructurePane;
 import edu.ntnu.g60.views.settings.InformationPane;
 import edu.ntnu.g60.views.settings.ProjectPane;
 import edu.ntnu.g60.views.settings.SettingsPane;
@@ -66,6 +67,14 @@ public class StartMenuController {
             GameApp.changeRootPane(new ProjectPane());
         } catch (IOException e1) {
             e1.printStackTrace();
+        }
+    }
+
+    public void informationFileStructureAction(MouseEvent event){
+        try{
+            GameApp.changeRootPane(new InformationFileStructurePane());
+        } catch (IOException e1) {
+
         }
     }
 
@@ -163,6 +172,14 @@ public class StartMenuController {
         try {
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void backCustomAction(ActionEvent event){
+        try {
+            GameApp.changeRootPane(new CustomGamePane());
+        } catch (IOException | ClassNotFoundException e1) {
             e1.printStackTrace();
         }
     }
