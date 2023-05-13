@@ -91,53 +91,54 @@ public class GameRunner {
             return null;
         }
     }
-    public static void main(String[] args) {
-
-
+   public static void main(String[] args) {
+    
         Scanner scanner = new Scanner(System.in);
-
+    
         Player player = choosePlayer(scanner);
-
-        
         Story story = chooseStory(scanner);
-
         List<Goal> goals = List.of(
                 new HealthGoal(0),
                 new GoldGoal(0),
                 new InventoryGoal(List.of("Sword", "Shield")),
                 new ScoreGoal(100)
         );
-
-        Game game = new Game(player, story, goals);
-
+    
+        GameManager gameManager = GameManager.getInstance();
+        gameManager.setPlayer(player);
+        gameManager.setStory(story);
+        gameManager.setGoals(goals);
+        gameManager.createGame();
+        Game game = gameManager.getGame();
+    
         Passage currentPassage = game.begin();
         boolean playing = true;
-
+    
         while (playing) {
             clearScreen();
             displayPlayerStats(player);
             displayPassageInfo(currentPassage);
-
+    
             System.out.println("\n" + currentPassage.getTitle());
             System.out.println(currentPassage.getContent());
-
+    
             if (currentPassage.hasLinks()) {
                 int choice = promptChoice(scanner, currentPassage.getLinks());
                 Link chosenLink = currentPassage.getLinks().get(choice - 1);
-
+    
                 //Execute actions associated with the chosen link
                 for (Action action : chosenLink.getActions()) {
                     action.execute(player);
                 }
                 System.out.println("text: " + chosenLink.getText() +
                         "Ref: " + chosenLink.getReference());
-
+    
                 currentPassage = game.go(chosenLink);
             } else {
                 playing = false;
                 System.out.println("\nThe story has ended.");
             }
-
+    
             // Check if goals are fulfilled
             boolean goalsFulfilled = goals.stream().allMatch(goal -> goal.isFulfilled(player));
             if (goalsFulfilled) {
@@ -145,7 +146,8 @@ public class GameRunner {
                 System.out.println("\nCongratulations! You have achieved all goals.");
             }
         }
-
+    
+        gameManager.endGame();
         scanner.close();
     }
 }
