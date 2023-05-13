@@ -29,7 +29,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import java.util.Locale;  
 
 public class ViewObjects {
 
