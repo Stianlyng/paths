@@ -116,13 +116,40 @@ public class CommandLineInterface {
     }
 
     private void loadGame() {
-       // Scanner scanner = new Scanner(System.in);
 
-       // System.out.print("Enter the file path of the saved game: ");
-       // String filePath = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
 
-        String a = gameManager.loadGameFromFile("src/main/resources/saves/savedGame.ser");
-        System.out.println(a);
+        int index=1;
+
+        System.out.println("Select player: ");
+        List<String> players = gameManager.getAvailablePlayers();
+        for (String player : players) {
+            System.out.println(index + ". " + player);
+            index++;
+        }
+
+        int playerNumber = scanner.nextInt() - 1;
+
+        List<String> playerSaves = gameManager.getPlayerSaves(players.get(playerNumber));
+        if (playerSaves.isEmpty()) {
+            System.out.println("No saves found for this player.");
+            return;
+        }
+
+        System.out.println("Select story: ");
+
+        index = 1;
+        for (String save : playerSaves) {
+            String[] split = save.split("_");
+            System.out.println(index + ". " + split[1] + " - " + split[2].replace(".ser", ""));
+            index++;
+        }
+        
+        int storyNumber = scanner.nextInt() - 1;
+
+        System.out.println(playerSaves.get(storyNumber));
+        gameManager.loadGameFromFile(playerSaves.get(storyNumber));
+        
         playGame(false);
     }
 
@@ -156,10 +183,13 @@ public class CommandLineInterface {
             String input = scanner.nextLine();
             
             if (input.equalsIgnoreCase("save")) {
-                String playerName = gameManager.getGame().getPlayer().getName();
-                String storyTitle = gameManager.getGame().getStory().getTitle();
-
-                gameManager.saveGameToFile(storyTitle, "src/main/resources/saves/" + playerName + "-" + storyTitle + ".ser");
+                if (newGame) {
+                    System.out.print("Enter a name for the save: ");
+                    String saveName = scanner.nextLine();
+                    gameManager.saveGameToFile(saveName);
+                } else {
+                    gameManager.saveGameToFile("");
+                }
                 
                 System.out.println("Game saved successfully.");
                 continue;
