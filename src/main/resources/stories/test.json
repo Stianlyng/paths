@@ -1,0 +1,47 @@
+{
+  "title": "The Adventures of Alice",
+  "passages": [
+    {
+      "title": "The Rabbit Hole",
+      "content": "Alice is falling down the rabbit hole.",
+      "background": "rabbit-hole.jpg",
+      "player": "Alice",
+      "enemy": "",
+      "isFight": false,
+      "links": [
+        {
+          "text": "Follow the rabbit",
+          "reference": "The Rabbit Hole 2",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The Rabbit Hole 2",
+      "content": "Alice finds herself in a strange room.",
+      "background": "room.jpg",
+      "player": "Alice",
+      "enemy": "",
+      "isFight": false,
+      "links": [
+        {
+          "text": "Examine the room",
+          "reference": "room-description",
+          "actions": []
+        },
+        {
+          "text": "Go through the door",
+          "reference": "room-door",
+          "actions": []
+        }
+        ]
+    }
+    ]
+}
+
+         

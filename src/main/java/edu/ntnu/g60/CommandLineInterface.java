@@ -31,6 +31,9 @@ public class CommandLineInterface {
     }
 
     public void start() {
+
+        clearScreen();
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("1. Start a new game");
@@ -56,6 +59,7 @@ public class CommandLineInterface {
     }
 
     private static Story chooseStory() {
+        clearScreen();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please choose a story:");
         List<String> names = listFilesInFolder();
@@ -83,6 +87,7 @@ public class CommandLineInterface {
         }
     }
     private void startNewGame() {
+        clearScreen();
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter your player name: ");
@@ -98,12 +103,11 @@ public class CommandLineInterface {
                 .setInventory(inventory)
                 .build();
 
-
         Story story = chooseStory();
         List<Goal> goals = List.of(
                 new HealthGoal(0),
                 new GoldGoal(0),
-                new InventoryGoal(List.of("Sword", "Shield")),
+                new InventoryGoal(List.of("Sword")),
                 new ScoreGoal(100)
         );
 
@@ -116,7 +120,7 @@ public class CommandLineInterface {
     }
 
     private void loadGame() {
-
+        clearScreen();
         Scanner scanner = new Scanner(System.in);
 
         int index=1;
@@ -153,7 +157,19 @@ public class CommandLineInterface {
         playGame(false);
     }
 
+    private static void displayPlayerStats(Player player) {
+        System.out.println("Player: " + player.getName() + 
+                            "\nHealth: " + player.getHealth() + 
+                            " Gold: " + player.getGold() + 
+                            " Score: " + player.getScore() +
+                            "\nInventory: " + player.getInventory() +
+                            "\n--------------------------------------------" +
+                            "\nType: 'save' to save, 'exit' to exit the game" +
+                            "\n--------------------------------------------");
+    }
+
     private void playGame(boolean newGame) {
+
         Scanner scanner = new Scanner(System.in);
 
         if (gameManager.getGame().getCurrentPassage() == null) {
@@ -164,6 +180,9 @@ public class CommandLineInterface {
         Passage currentPassage = gameManager.getGame().getCurrentPassage();
 
         while (true) {
+
+            clearScreen();
+            displayPlayerStats(gameManager.getGame().getPlayer());
             System.out.println(currentPassage.getContent());
     
             List<Link> links = currentPassage.getLinks();
@@ -177,8 +196,6 @@ public class CommandLineInterface {
             for (int i = 0; i < links.size(); i++) {
                 System.out.println((i + 1) + ". " + links.get(i).getText());
             }
-    
-            System.out.println("Or type 'save' to save the game.");
     
             String input = scanner.nextLine();
             
@@ -205,6 +222,13 @@ public class CommandLineInterface {
             currentPassage = gameManager.getGame().go(selectedLink);
         }
     }
+
+    private static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+
 
     public static void main(String[] args) {
         CommandLineInterface cli = new CommandLineInterface();
