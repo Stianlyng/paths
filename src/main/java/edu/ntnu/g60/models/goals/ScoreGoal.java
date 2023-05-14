@@ -19,5 +19,9 @@ public class ScoreGoal implements Goal, Serializable{
         }
     }
 
+    @Override
+    public String toString(){
+        return "ScoreGoal: " + this.minimumPoints;
+    }
 }
 

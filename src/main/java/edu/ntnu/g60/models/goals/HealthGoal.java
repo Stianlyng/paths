@@ -18,5 +18,11 @@ public class HealthGoal implements Goal, Serializable{
             return false;
         }
     }
+    
+    @Override
+    public String toString(){
+        return "HealthGoal: " + this.minimumHealth;
+    }
+    
 }
 

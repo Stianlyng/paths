@@ -182,9 +182,20 @@ public class CommandLineInterface {
         while (true) {
 
             clearScreen();
+            for (Goal goal : gameManager.getGame().getGoals()) {
+                System.out.println(goal.toString());
+            }
             displayPlayerStats(gameManager.getGame().getPlayer());
             System.out.println(currentPassage.getContent());
     
+            // Check if goals are fulfilled
+            boolean goalsFulfilled = gameManager.getGame().getGoals().stream().allMatch(goal -> goal.isFulfilled(gameManager.getGame().getPlayer()));
+            if (goalsFulfilled) {
+                System.out.println("\nCongratulations! You have achieved all goals.");
+                gameManager.endGame();
+                break;
+            }
+
             List<Link> links = currentPassage.getLinks();
             if (links.isEmpty()) {
                 System.out.println("The story ends here.");

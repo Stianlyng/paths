@@ -18,6 +18,11 @@ public class GoldGoal implements Goal, Serializable{
         return player.getGold() >= this.minimumGold;
     }
     
+    @Override
+    public String toString(){
+        return "GoldGoal: " + this.minimumGold;
+    }
+    
 }
 
 

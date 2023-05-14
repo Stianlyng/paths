@@ -20,5 +20,11 @@ public class InventoryGoal implements Goal, Serializable{
         }
         return true;
     }
+    
+    @Override
+    public String toString(){
+        return "InventoryGoal: " + this.mandatoryItems;
+    }
+    
 }
 
