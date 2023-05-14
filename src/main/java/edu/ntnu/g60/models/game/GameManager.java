@@ -1,5 +1,10 @@
 package edu.ntnu.g60.models.game;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import edu.ntnu.g60.models.goals.Goal;
@@ -94,4 +99,34 @@ public class GameManager {
   public void endGame() {
     game = null;
   }
+  
+  // Save the current game state to a file
+  public void saveGameToFile(String saveName, String filePath) {
+    if (game == null) {
+        throw new IllegalStateException("No game to save.");
+    }
+
+    Save save = new Save(saveName, game);
+    try (FileOutputStream fileOut = new FileOutputStream(filePath);
+         ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+        out.writeObject(save);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+  }
+  
+  // Load a saved game state from a file
+  public String loadGameFromFile(String filePath) {
+      try (FileInputStream fileIn = new FileInputStream(filePath);
+           ObjectInputStream in = new ObjectInputStream(fileIn)) {
+          Save save = (Save) in.readObject();
+          System.out.println("Loaded save: " + save.getSaveName());
+          game = new Game(save.getGame()); // Create a deep copy of the saved game
+          return save.getSaveName();
+      } catch (IOException | ClassNotFoundException e) {
+          e.printStackTrace();
+          return null;
+      }
+  }
+
 }

@@ -1,5 +1,6 @@
 package edu.ntnu.g60.models.passage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -8,7 +9,7 @@ import java.util.Objects;
  * The Passage class represents a passage in the story.
  * It contains the title, the content, and the links to other passages.
  */
-public class Passage{
+public class Passage implements Serializable{
 
   private String title;
   private String content;
@@ -57,6 +58,22 @@ public class Passage{
     this.background = "background1.png";
     this.fightScene = false;
     this.links = new ArrayList<>();
+  }
+
+  /**
+   * Copy constructor for the Passage class.
+   * 
+   * @param other The other passage to copy.
+   * todo; add exception
+   */
+  public Passage(Passage other) {
+      this.title = other.title;
+      this.content = other.content;
+      this.player = other.player;
+      this.enemy = other.enemy;
+      this.background = other.background;
+      this.fightScene = other.fightScene;
+      this.links = new ArrayList<>(other.links); // Assuming Link has a suitable copy constructor or is immutable
   }
 
   public String getPlayer(){
@@ -148,19 +165,5 @@ public class Passage{
   public int hashCode() {
     return Objects.hash(title, content, links);
   }
-  
-  /*
-  public static void main(String[] args) {
-    Passage passage = new PassageBuilder()
-                    .setTitle("Opening Passage")
-                    .setContent("This is the opening passage")
-                    .setPlayer("player1.png")
-                    .setEnemy("enemy1.png")
-                    .setBackground("background2.png")
-                    .isFightScene(true)
-                    .build();
-
-  }
-  */
   
 }

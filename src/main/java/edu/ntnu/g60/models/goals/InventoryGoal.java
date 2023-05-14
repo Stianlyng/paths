@@ -1,9 +1,10 @@
 package edu.ntnu.g60.models.goals;
+import java.io.Serializable;
 import java.util.List;
 
 import edu.ntnu.g60.models.player.Player;
 
-public class InventoryGoal implements Goal{
+public class InventoryGoal implements Goal, Serializable{
     List<String> mandatoryItems;
 
     public InventoryGoal(List<String> mandatoryItems){

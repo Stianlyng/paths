@@ -5,18 +5,18 @@ import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.utils.Save;
 
 import java.util.HashMap;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * The Story class represents the story of the game.
  * It contains the title, the opening passage, and the passages of the story.
  */
-public class Story {
+public class Story implements Serializable{
 
   private String title;
   private Map<String, Passage> passages;
   private Passage openingPassage;
-  private static Save currentSave;
 
   /**
    * Constructor for the Story class.
@@ -33,14 +33,19 @@ public class Story {
     this.passages = new HashMap<String, Passage>();
   }
 
-  public static void setCurrentSave(Save save){
-    currentSave = save;
+  /**
+   * Copy constructor for the Story class.
+   *
+   * @param other The story to copy.
+   */
+  public Story(Story other) {
+      this.title = other.title;
+      this.openingPassage = new Passage(other.openingPassage); // Assuming Passage has a copy constructor
+      this.passages = new HashMap<>();
+      for (Map.Entry<String, Passage> entry : other.passages.entrySet()) {
+          this.passages.put(entry.getKey(), new Passage(entry.getValue())); // Assuming Passage has a copy constructor
+      }
   }
-
-  public static Save getCurrentSave(){
-    return currentSave;
-  }
-
 
   /**
    * Adds a passage to the story.

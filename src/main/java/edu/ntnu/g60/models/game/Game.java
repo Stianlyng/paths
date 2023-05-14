@@ -1,4 +1,6 @@
 package edu.ntnu.g60.models.game;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.ntnu.g60.models.goals.Goal;
@@ -11,11 +13,12 @@ import edu.ntnu.g60.models.story.Story;
  * The Game class is the main class of the game. 
  * It contains the player, the story, and the goals.
  */
-public class Game {
+public class Game implements Serializable{
 
   private final Player player;
   private final Story story;
   private final List<Goal> goals;
+  private Passage currentPassage; // Add this field
 
   /**
    * Constructor for the Game class.
@@ -30,6 +33,20 @@ public class Game {
     this.player = player;
     this.story = story;
     this.goals = goals;
+    this.currentPassage = this.story.getOpeningPassage(); // Initialize the current passage
+  }
+
+  /**
+   * Constructor for the Game class.
+   * 
+   * Shallow copy of the goals is fine because Goal objects are immutable
+   * todo; finish the java doc
+   */
+  public Game(Game other) {
+      this.player = new Player(other.player); 
+        this.story = new Story(other.story); 
+        this.goals = new ArrayList<>(other.goals); 
+        this.currentPassage = this.story.getPassage(other.currentPassage.getTitle()); // Copy the current passage
   }
 
   public Player getPlayer() {
@@ -44,13 +61,19 @@ public class Game {
     return this.goals;
   }
 
+  public Passage getCurrentPassage() {
+        return this.currentPassage; // Add this getter method
+  }
+
   /**
    * Starts the game by returning the first passage of the story.
    * @return The first passage of the story.
    */
   public Passage begin() {
-    return this.story.getOpeningPassage();
+    this.currentPassage = this.story.getOpeningPassage(); 
+    return this.currentPassage;
   }
+
 
   /**
    * Moves the player to the passage that the link points to.
@@ -58,6 +81,8 @@ public class Game {
    * @return The passage that the link points to.
    */
   public Passage go(Link link) {
-    return this.story.getPassage(link.getReference());
+      this.currentPassage = this.story.getPassage(link.getReference()); // Update the current passage
+      return this.currentPassage;
+
   }
 }
