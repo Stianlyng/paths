@@ -100,23 +100,30 @@ public class GameManager {
     game = null;
   }
   
-  // Save the current game state to a file
-  public void saveGameToFile(String saveName, String filePath) {
-    if (game == null) {
-        throw new IllegalStateException("No game to save.");
-    }
-
-    Save save = new Save(saveName, game);
-    try (FileOutputStream fileOut = new FileOutputStream(filePath);
-         ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-        out.writeObject(save);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+  public void saveGameToFile(String saveName) {
+      if (game == null) {
+          throw new IllegalStateException("No game to save.");
+      }
+  
+      String playerIdentifier = this.player.getName(); 
+      String storyIdentifier = this.story.getTitle(); 
+      String filePath = "src/main/resources/saves/" +
+                            playerIdentifier + "_" + 
+                            storyIdentifier + "_" + 
+                            saveName + ".ser";
+  
+      Save save = new Save(saveName, game);
+      try (FileOutputStream fileOut = new FileOutputStream(filePath);
+           ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+          out.writeObject(save);
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
   }
   
-  // Load a saved game state from a file
-  public String loadGameFromFile(String filePath) {
+  public String loadGameFromFile(String playerIdentifier, String storyIdentifier, String saveName) {
+      String filePath = playerIdentifier + "_" + storyIdentifier + "_" + saveName + ".ser";
+  
       try (FileInputStream fileIn = new FileInputStream(filePath);
            ObjectInputStream in = new ObjectInputStream(fileIn)) {
           Save save = (Save) in.readObject();
