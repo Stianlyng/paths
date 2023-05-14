@@ -16,6 +16,14 @@
             {
               "type": "HEALTH",
               "value": 100
+            },
+            {
+              "type": "GOLD",
+              "value": 100
+            },
+            {
+              "type": "SCORE",
+              "value": 100
             }
           ]
         }

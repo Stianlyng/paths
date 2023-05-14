@@ -31,9 +31,9 @@ public class CommandLineInterface {
     }
 
     public void start() {
-
+    
         clearScreen();
-
+    
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("1. Start a new game");
@@ -42,22 +42,28 @@ public class CommandLineInterface {
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
-
+    
+            boolean gameEnded = false;
             switch (choice) {
                 case 1:
-                    startNewGame();
+                    gameEnded = startNewGame();
                     break;
                 case 2:
-                    loadGame();
+                    gameEnded = loadGame();
                     break;
                 case 3:
                     System.exit(0);
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
+    
+            if (gameEnded) {
+                // If the game ended due to goals being fulfilled, break out of the loop and start it again.
+                continue;
+            }
         }
     }
-
+          
     private static Story chooseStory() {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
@@ -86,14 +92,14 @@ public class CommandLineInterface {
             return null;
         }
     }
-    private void startNewGame() {
+    private boolean startNewGame() {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter your player name: ");
         String playerName = scanner.nextLine();
         
-        List<String> inventory = List.of("Sword", "Shield");
+        List<String> inventory = List.of("Sword");
 
         Player player = new PlayerBuilder()
                 .setName(playerName)
@@ -105,7 +111,7 @@ public class CommandLineInterface {
 
         Story story = chooseStory();
         List<Goal> goals = List.of(
-                new HealthGoal(0),
+                new HealthGoal(110),
                 new GoldGoal(0),
                 new InventoryGoal(List.of("Sword")),
                 new ScoreGoal(100)
@@ -116,10 +122,10 @@ public class CommandLineInterface {
         gameManager.setGoals(goals);
         gameManager.createGame();
 
-        playGame(true);
+        return playGame(true);
     }
 
-    private void loadGame() {
+    private boolean loadGame() {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
 
@@ -137,7 +143,6 @@ public class CommandLineInterface {
         List<String> playerSaves = gameManager.getPlayerSaves(players.get(playerNumber));
         if (playerSaves.isEmpty()) {
             System.out.println("No saves found for this player.");
-            return;
         }
 
         System.out.println("Select story: ");
@@ -154,27 +159,23 @@ public class CommandLineInterface {
         System.out.println(playerSaves.get(storyNumber));
         gameManager.loadGameFromFile(playerSaves.get(storyNumber));
         
-        playGame(false);
+        return playGame(false);
     }
 
     private static void displayPlayerStats(Player player) {
         System.out.println("Player: " + player.getName() + 
                             "\nHealth: " + player.getHealth() + 
-                            " Gold: " + player.getGold() + 
-                            " Score: " + player.getScore() +
-                            "\nInventory: " + player.getInventory() +
-                            "\n--------------------------------------------" +
-                            "\nType: 'save' to save, 'exit' to exit the game" +
-                            "\n--------------------------------------------");
-    }
+                            ", Gold: " + player.getGold() + 
+                            ", Score: " + player.getScore() +
+                            ", Inventory: " + player.getInventory());
+        }
 
-    private void playGame(boolean newGame) {
+    private boolean playGame(boolean newGame) {
 
         Scanner scanner = new Scanner(System.in);
 
         if (gameManager.getGame().getCurrentPassage() == null) {
             gameManager.getGame().begin();
-            return;
         }
 
         Passage currentPassage = gameManager.getGame().getCurrentPassage();
@@ -182,10 +183,10 @@ public class CommandLineInterface {
         while (true) {
 
             clearScreen();
-            for (Goal goal : gameManager.getGame().getGoals()) {
-                System.out.println(goal.toString());
-            }
             displayPlayerStats(gameManager.getGame().getPlayer());
+
+            System.out.println("Minimum Goals: " + gameManager.getGame().getGoals().toString());
+
             System.out.println(currentPassage.getContent());
     
             // Check if goals are fulfilled
@@ -193,9 +194,8 @@ public class CommandLineInterface {
             if (goalsFulfilled) {
                 System.out.println("\nCongratulations! You have achieved all goals.");
                 gameManager.endGame();
-                break;
+                return true;  // Return true to indicate that the game ended due to goals being fulfilled.
             }
-
             List<Link> links = currentPassage.getLinks();
             if (links.isEmpty()) {
                 System.out.println("The story ends here.");
@@ -232,6 +232,7 @@ public class CommandLineInterface {
     
             currentPassage = gameManager.getGame().go(selectedLink);
         }
+        return false; // if game ends 4 some reason..
     }
 
     private static void clearScreen() {
