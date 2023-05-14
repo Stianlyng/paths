@@ -1,5 +1,7 @@
 package edu.ntnu.g60.models.actions;
 
+import java.io.Serializable;
+
 import edu.ntnu.g60.exceptions.model.actions.IllegalActionException;
 import edu.ntnu.g60.models.player.Player;
 
@@ -8,7 +10,7 @@ import edu.ntnu.g60.models.player.Player;
  * 
  * @author Stian Lyng
  */
-public class ScoreAction implements Action{
+public class ScoreAction implements Action, Serializable{
     int score;
 
     /**
