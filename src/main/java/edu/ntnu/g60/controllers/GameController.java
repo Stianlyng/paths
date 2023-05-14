@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.ntnu.g60.models.game.Game;
+import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.passage.Passage;
@@ -45,7 +46,12 @@ public class GameController {
                 .setName("Alice")
                 .build();
 
-        Game game = new Game(player, story, goals);
+        GameManager gameManager = GameManager.getInstance();
+        gameManager.setGoals(goals);
+        gameManager.setPlayer(player);
+        gameManager.setStory(story);
+
+        Game game = gameManager.getGame();
         return game;
     }
 
