@@ -1,8 +1,10 @@
 package edu.ntnu.g60.models.goals;
 
+import java.io.Serializable;
+
 import edu.ntnu.g60.models.player.Player;
 
-public class HealthGoal implements Goal{
+public class HealthGoal implements Goal, Serializable{
     int minimumHealth;
 
     public HealthGoal(int minimumHealth){

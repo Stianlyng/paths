@@ -1,6 +1,18 @@
 package edu.ntnu.g60.models.game;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.player.Player;
@@ -94,4 +106,79 @@ public class GameManager {
   public void endGame() {
     game = null;
   }
+  
+  public void saveGameToFile(String saveName) {
+      if (game == null) {
+          throw new IllegalStateException("No game to save.");
+      }
+  
+      String playerIdentifier = this.player.getName(); 
+      String storyIdentifier = this.story.getTitle(); 
+      String filePath = "src/main/resources/saves/" +
+                            playerIdentifier + "_" + 
+                            storyIdentifier + "_" + 
+                            saveName + ".ser";
+  
+      Save save = new Save(saveName, game);
+      try (FileOutputStream fileOut = new FileOutputStream(filePath);
+           ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+          out.writeObject(save);
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+  }
+  
+  public String loadGameFromFile(String filename) {
+      String filePath = "src/main/resources/saves/" + filename;
+      try (FileInputStream fileIn = new FileInputStream(filePath);
+           ObjectInputStream in = new ObjectInputStream(fileIn)) {
+          Save save = (Save) in.readObject();
+          System.out.println("Loaded save: " + save.getSaveName());
+          game = new Game(save.getGame()); // Create a deep copy of the saved game
+          return save.getSaveName();
+      } catch (IOException | ClassNotFoundException e) {
+          e.printStackTrace();
+          return null;
+      }
+  }
+
+  /**
+   * Returns a list of the current active player's available saves.
+   *
+   * @param playerIdentifier The identifier of the player.
+   * @return A list of save names.
+   */
+  public List<String> getPlayerSaves(String playerIdentifier) {
+      try (Stream<Path> paths = Files.walk(Paths.get("src/main/resources/saves/"))) {
+          return paths
+              .filter(Files::isRegularFile)
+              .map(Path::getFileName)
+              .map(Path::toString)
+              .filter(filename -> filename.startsWith(playerIdentifier + "_"))
+              .collect(Collectors.toList());
+      } catch (IOException e) {
+          e.printStackTrace();
+          return Collections.emptyList();
+      }
+  }
+  
+  /**
+  * Returns a set of the available players.
+  *
+  * @return A set of player identifiers.
+  */
+  public List<String> getAvailablePlayers() {
+     try (Stream<Path> paths = Files.walk(Paths.get("src/main/resources/saves/"))) {
+         return paths
+             .filter(Files::isRegularFile)
+             .map(Path::getFileName)
+             .map(Path::toString)
+             .map(filename -> filename.split("_")[0])
+             .collect(Collectors.toList());
+     } catch (IOException e) {
+         e.printStackTrace();
+         return Collections.emptyList();
+     }
+  }
+
 }

@@ -1,12 +1,14 @@
 package edu.ntnu.g60.models.player;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The Player class represents the player of the game.
  * It contains the name, health, score, gold, and inventory of the player.
  */
-public class Player {
+public class Player implements Serializable{
   
   private String name;
   private int health;
@@ -40,6 +42,17 @@ public class Player {
     this.inventory = inventory;
   }
 
+  /**
+   * Copy constructor for the Player class.
+   * @param other The Player object to copy.
+   */
+  public Player(Player other) {
+      this.name = other.name;
+      this.health = other.health;
+      this.score = other.score;
+      this.gold = other.gold;
+      this.inventory = new ArrayList<>(other.inventory); 
+  }
 
   public String getName(){
     return this.name;

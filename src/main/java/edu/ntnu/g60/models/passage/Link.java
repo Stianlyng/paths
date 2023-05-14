@@ -1,5 +1,6 @@
 package edu.ntnu.g60.models.passage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +11,7 @@ import edu.ntnu.g60.models.actions.Action;
  * The Link class represents a link between two passages.
  * It allows the player to move from one passage to another.
  */
-public class Link {
+public class Link implements Serializable{
 
   private String text;
   private String reference;

@@ -53,17 +53,4 @@ public class PlayerBuilder {
         return player;
     }
 
-    /*
-    public static void main(String[] args) {
-        Player player = new PlayerBuilder()
-            .setName("John Doe")
-            .setHealth(100)
-            .setScore(0)
-            .setGold(50)
-            .addItemToInventory("Sword")
-            .addItemToInventory("Shield")
-            .build();
-    }
-    */
-
 }
