@@ -186,6 +186,18 @@ public class GameManager {
           Files.deleteIfExists(filePath);
       }
   }
+
+  /**
+   * Deletes a specific save.
+   * 
+   * @param saveName
+   * @throws IOException
+   */
+  public static void deleteSave(String playerIdentifier, String saveName) throws IOException {
+      Path filePath = Paths.get("src/main/resources/saves/" + playerIdentifier + "_" + saveName);
+      Files.deleteIfExists(filePath);
+  }
+
   
   /**
   * Returns a set of the available players.
