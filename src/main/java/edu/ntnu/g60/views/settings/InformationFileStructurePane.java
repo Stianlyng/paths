@@ -31,12 +31,14 @@ public class InformationFileStructurePane extends StackPane{
             "::Beginnings \n" +
             "You are in a small, dimly lit room. There is a door in front of you.\n" +
             "[Try to open the door](Another room)\n" +
+            "[Leave](game over)\n" +
             "\n" + 
             "::Another room\n" +
             "The door opens to another room. You see a desk with a large, dusty book.\n" +
             "[Open the book](The book of spells)\n" +
             "[Go back](Beginnings)\n" +
-            "...", 22, false, 170, 100);
+            "...\n\n\n" +
+            "PS: Every passage must have two links", 22, false, 170, 100);
         return new Group(background, backButton, informationTitle, informationText);
     }
 }
