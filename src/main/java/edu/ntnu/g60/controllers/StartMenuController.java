@@ -199,15 +199,12 @@ public class StartMenuController {
     }
 
     public void deleteAction(ActionEvent event){
-        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameManager.getInstance().getPlayer().getName());
-        String filePath = "src/main/resources/saves/saves.ser";
-        File file = new File(filePath);
-        if(file.exists() && playerSaves.isEmpty()) {
+        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
+        if(!playerSaves.isEmpty()) {
             if(DialogBoxes.alertBoxChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
-                file.delete();
                 ContinuePane.addDeleteObjects(getCurreContinuePane());
                 try {
-                    GameManager.deletePlayerSaves(GameManager.getInstance().getPlayer().getName());
+                    GameManager.deletePlayerSaves(GameController.getPlayerName());
                 } catch (IOException e) {
                 e.printStackTrace();
                 }

@@ -59,7 +59,7 @@ public class ContinuePane extends StackPane{
         }
         //TODO: move to controller
         IntStream.rangeClosed(1, 3).forEach(buttonNumber -> {
-            if (playerSaves.size() == buttonNumber) {
+            if (playerSaves.size() >= buttonNumber) {
                 Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
                 saveButton.setText(saveNames[buttonNumber - 1]);
                 
@@ -69,6 +69,7 @@ public class ContinuePane extends StackPane{
                         GameController.setSaveName(saveNames[buttonNumber - 1]);
                         GameController.setStoryName(storyNames[buttonNumber - 1].replace(" ", "_"));
                         GameController.createNewGame();
+                        GameManager.getInstance().loadGameFromFile(GameController.getPlayerName() + "_" + storyNames[buttonNumber - 1] + "_" + saveNames[buttonNumber - 1] + ".ser");
                         NextLevelAnimation.animation();
                     } catch (IOException e1) {
                         e1.printStackTrace();
