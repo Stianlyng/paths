@@ -405,6 +405,7 @@ public class StartMenuController {
     * Handles the start action for a new game.
     *
     * @param event the action event
+     * @throws IOException
     */
     public void startAction(ActionEvent event){
         GameManager.getInstance().endGame();
@@ -412,8 +413,8 @@ public class StartMenuController {
         NewGamePane.updateSaveName();
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
             boolean overwrite = true;
+            String[] saveNames = new String[3];
             if(playerSaves.size() == 3){
-                String[] saveNames = new String[3];
                 int index = 0;
                 for (String save : playerSaves) {
                     String[] split = save.split("_");
@@ -424,7 +425,11 @@ public class StartMenuController {
                 overwrite = DialogBoxes.alertBoxChoices("CAUTION!", "This will action will overwrite save: " + saveNames[2], "Are you sure you want to continue?");
             }
             if(overwrite){
-                //TODO: delete save 3 if save 3 exist
+                try {
+                    GameManager.deleteSave(saveNames[2], GameController.getPlayerName());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 GameController.setSaveName(NewGamePane.saveName);
                 ControllerValues.setGameFile(NewGamePane.getStoryChoice());
                 GameController.setStoryName(NewGamePane.getStoryChoice());
