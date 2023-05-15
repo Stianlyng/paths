@@ -72,7 +72,7 @@ public class GameController {
                 .setInventory(inventory)
                 .build();
 
-        String storyPath = storyName + ".json";
+        String storyPath = storyName;
         StoryParser parser = new StoryParser(storyPath);
         Story story = parser.build();
 

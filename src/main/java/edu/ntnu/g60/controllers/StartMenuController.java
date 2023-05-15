@@ -230,7 +230,7 @@ public class StartMenuController {
 
     public void startAction(ActionEvent event){
 
-        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameManager.getInstance().getPlayer().getName());
+        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
         NewGamePane.updateSaveName();
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
             boolean overwrite = true;
@@ -248,7 +248,6 @@ public class StartMenuController {
             if(overwrite){
                 
                 ControllerValues.setGameFile(NewGamePane.getStoryChoice());
-                GameManager.getInstance().saveGameToFile(NewGamePane.saveName);
                 GameController.setStoryName(NewGamePane.getStoryChoice());
 
                 try {

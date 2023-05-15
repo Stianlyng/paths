@@ -137,7 +137,7 @@ public class FightPaneController {
         if(link2.getReference().equals("game over")){
             DeathAnimation.animation();
         } else { 
-            GameManager.getInstance().setGame(GameManager.getInstance().getGame());
+            GameManager.getInstance().getGame().go(link2);
             NextLevelAnimation.animation();
             GameManager.getInstance().saveGameToFile(ControllerValues.getGameFile());
         }
@@ -148,7 +148,7 @@ public class FightPaneController {
         if(link1.getReference().equals("game over")){
             DeathAnimation.animation();
         } else { 
-            GameManager.getInstance().setGame(GameManager.getInstance().getGame());
+            GameManager.getInstance().getGame().go(link1);
             NextLevelAnimation.animation();
             GameManager.getInstance().saveGameToFile(ControllerValues.getGameFile());
         }

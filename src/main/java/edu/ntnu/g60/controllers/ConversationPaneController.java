@@ -16,6 +16,7 @@ import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.GamePanes.FightPane;
+import edu.ntnu.g60.views.StartMenu.NewGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
@@ -108,9 +109,10 @@ public class ConversationPaneController {
             if(link1.getReference().equals("game over")){
                 DeathAnimation.animation();
             } else{
-                GameManager.getInstance().setGame(GameManager.getInstance().getGame());
+                GameManager.getInstance().getGame().go(link1);
                 NextLevelAnimation.animation();
-                GameManager.getInstance().saveGameToFile(ControllerValues.getGameFile());
+                NewGamePane.updateSaveName();
+                GameManager.getInstance().saveGameToFile(NewGamePane.saveName);
             }
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -123,9 +125,10 @@ public class ConversationPaneController {
             if(link2.getReference().equals("game over")){
                 DeathAnimation.animation();
             } else{
-                GameManager.getInstance().setGame(GameManager.getInstance().getGame());
+                GameManager.getInstance().getGame().go(link2);
                 NextLevelAnimation.animation();
-                GameManager.getInstance().saveGameToFile(ControllerValues.getGameFile());
+                NewGamePane.updateSaveName();
+                GameManager.getInstance().saveGameToFile(NewGamePane.saveName);
             }
         } catch (IOException e1) {
             e1.printStackTrace();
