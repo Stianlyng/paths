@@ -2,7 +2,6 @@ package edu.ntnu.g60.views.StartMenu;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import edu.ntnu.g60.controllers.StartMenuController;
 import edu.ntnu.g60.views.ViewValues;
 import edu.ntnu.g60.views.ViewObjects;

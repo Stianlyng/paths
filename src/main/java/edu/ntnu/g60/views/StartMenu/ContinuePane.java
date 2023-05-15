@@ -1,19 +1,9 @@
 package edu.ntnu.g60.views.StartMenu;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.IntStream;
-
-import edu.ntnu.g60.controllers.ControllerValues;
-import edu.ntnu.g60.controllers.GameController;
 import edu.ntnu.g60.controllers.StartMenuController;
-import edu.ntnu.g60.models.game.GameManager;
-import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.views.ViewValues;
 import edu.ntnu.g60.views.ViewObjects;
-import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -32,55 +22,12 @@ public class ContinuePane extends StackPane{
         getChildren().addAll(getContinueSceneObjects());
     }
 
-    public static Group getContinueSceneObjects() throws FileNotFoundException{
+    public static Group getContinueSceneObjects() throws IOException{
         Button save1Button = ViewObjects.newBlankButton("", 614-193, 278-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
         Button save2Button = ViewObjects.newBlankButton("", 614-193, 345-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
         Button save3Button = ViewObjects.newBlankButton("", 614-193, 412-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
         Button deleteSaves = ViewObjects.newButton("Delete all saves", 120, 595-71, "delete_button", "delete_hover", controller::deleteAction);
-        
-
-        //vis saves til player utifra lagret playername
-        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
-        String[] saveNames = new String[3];
-        String[] storyNames = new String[3];
-        int index = 0;
-        for (String save : playerSaves) {
-            String[] split = save.split("_");
-            saveNames[index] = split[2].replace(".ser", "");
-            storyNames[index] = split[1];
-            index++;
-        }
-        if(playerSaves.size() == 2){
-            saveNames[2] = "";
-        }
-        if(playerSaves.size() == 1){
-            saveNames[1] = "";
-            saveNames[2] = "";
-        }
-        //TODO: move to controller
-        IntStream.rangeClosed(1, 3).forEach(buttonNumber -> {
-            if (playerSaves.size() >= buttonNumber) {
-                Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
-                saveButton.setText(saveNames[buttonNumber - 1]);
-                
-                saveButton.setOnAction(e -> {
-                    try {
-                        GameManager.getInstance().endGame();
-                        GameController.setSaveName(saveNames[buttonNumber - 1]);
-                        GameController.setStoryName(storyNames[buttonNumber - 1].replace(" ", "_"));
-                        GameController.createNewGame();
-                        GameManager.getInstance().loadGameFromFile(GameController.getPlayerName() + "_" + storyNames[buttonNumber - 1] + "_" + saveNames[buttonNumber - 1] + ".ser");
-                        NextLevelAnimation.animation();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                });
-            } else {
-                Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
-                saveButton.setText("Empty");
-            }
-        });
-
+        StartMenuController.populateSaveButtons(save1Button, save2Button, save3Button);
         Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::backAction);
         ImageView background = ViewObjects.newImage(ViewValues.MENU_BACKGROUND_FOLDERNAME, ViewValues.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,ViewValues.BACKGROUND_WIDTH ,ViewValues.BACKGROUND_HEIGHT);
         return new Group(background, save1Button, save2Button, save3Button, backButton, deleteSaves);

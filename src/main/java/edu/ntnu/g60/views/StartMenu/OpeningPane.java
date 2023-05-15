@@ -24,9 +24,10 @@ public class OpeningPane extends StackPane{
         Button continueButton = ViewObjects.newButton("Continue", 614-193, 278-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::continueAction, "Press here to continue from a previous save");
         Button newGameButton = ViewObjects.newButton("New game", 614-193, 345-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::newGameAction, "Press here to start a new game");
         Button customButton = ViewObjects.newButton("Custom", 614-193, 412-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::customAction, "Press here to import your own custom game");
+        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::backActionOpening);
         ImageView background = ViewObjects.newImage(ViewValues.MENU_BACKGROUND_FOLDERNAME, ViewValues.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,ViewValues.BACKGROUND_WIDTH ,ViewValues.BACKGROUND_HEIGHT);
         ImageView information = ViewObjects.newImage("icons", "information.png", 830 ,20 ,35 ,35, controller::informationAction);
         ImageView settings = ViewObjects.newImage("icons", "settings.png", 130 ,20 ,35 ,35, controller::settingsAction);
-        return new Group(background, continueButton, newGameButton, customButton, information, settings);
+        return new Group(background, continueButton, newGameButton, customButton, information, settings, backButton);
     }
 }
