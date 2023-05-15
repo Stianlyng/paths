@@ -50,16 +50,24 @@ public class ContinuePane extends StackPane{
             storyNames[index] = split[1];
             index++;
         }
-
+        if(playerSaves.size() == 2){
+            saveNames[2] = "";
+        }
+        if(playerSaves.size() == 1){
+            saveNames[1] = "";
+            saveNames[2] = "";
+        }
         //TODO: move to controller
         IntStream.rangeClosed(1, 3).forEach(buttonNumber -> {
             if (playerSaves.size() == buttonNumber) {
                 Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
-                saveButton.setText(saveNames[buttonNumber]);
+                saveButton.setText(saveNames[buttonNumber - 1]);
                 
                 saveButton.setOnAction(e -> {
                     try {
-                        GameController.setStoryName(storyNames[buttonNumber]);
+                        GameManager.getInstance().endGame();
+                        GameController.setSaveName(saveNames[buttonNumber - 1]);
+                        GameController.setStoryName(storyNames[buttonNumber - 1].replace(" ", "_"));
                         GameController.createNewGame();
                         NextLevelAnimation.animation();
                     } catch (IOException e1) {

@@ -97,6 +97,7 @@ public class ConversationPaneController {
 
     public void menuAction(ActionEvent event){
         try {
+            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e) {
             e.printStackTrace();
@@ -111,8 +112,7 @@ public class ConversationPaneController {
             } else{
                 GameManager.getInstance().getGame().go(link1);
                 NextLevelAnimation.animation();
-                NewGamePane.updateSaveName();
-                GameManager.getInstance().saveGameToFile(NewGamePane.saveName);
+                GameManager.getInstance().saveGameToFile(GameController.getSaveName());
             }
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -127,8 +127,7 @@ public class ConversationPaneController {
             } else{
                 GameManager.getInstance().getGame().go(link2);
                 NextLevelAnimation.animation();
-                NewGamePane.updateSaveName();
-                GameManager.getInstance().saveGameToFile(NewGamePane.saveName);
+                GameManager.getInstance().saveGameToFile(GameController.getSaveName());
             }
         } catch (IOException e1) {
             e1.printStackTrace();

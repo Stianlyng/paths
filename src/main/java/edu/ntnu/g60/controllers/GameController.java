@@ -26,6 +26,15 @@ public class GameController {
 
     static String playerName;
     static String storyName;
+    static String saveName;
+
+    public static void setSaveName(String name){
+        saveName = name;
+    }
+
+    public static String getSaveName(){
+        return saveName;
+    }
 
     public static void setStoryName(String name){
         storyName = name;

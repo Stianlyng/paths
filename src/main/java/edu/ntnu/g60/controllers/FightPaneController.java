@@ -12,6 +12,7 @@ import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.GamePanes.FightPane;
+import edu.ntnu.g60.views.StartMenu.NewGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.event.ActionEvent;
 
@@ -41,6 +42,7 @@ public class FightPaneController {
 
     public void menuAction(ActionEvent event){
         try {
+            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e) {
             e.printStackTrace();
@@ -139,7 +141,7 @@ public class FightPaneController {
         } else { 
             GameManager.getInstance().getGame().go(link2);
             NextLevelAnimation.animation();
-            GameManager.getInstance().saveGameToFile(ControllerValues.getGameFile());
+            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
         }
     }
     
@@ -150,7 +152,7 @@ public class FightPaneController {
         } else { 
             GameManager.getInstance().getGame().go(link1);
             NextLevelAnimation.animation();
-            GameManager.getInstance().saveGameToFile(ControllerValues.getGameFile());
+            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
         }
     }
 

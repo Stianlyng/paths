@@ -229,7 +229,7 @@ public class StartMenuController {
     }
 
     public void startAction(ActionEvent event){
-
+        GameManager.getInstance().endGame();
         Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
         NewGamePane.updateSaveName();
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
@@ -246,7 +246,8 @@ public class StartMenuController {
                 overwrite = DialogBoxes.alertBoxChoices("CAUTION!", "This will action will overwrite save: " + saveNames[2], "Are you sure you want to continue?");
             }
             if(overwrite){
-                
+                //TODO: delete save 3 if save 3 exist
+                GameController.setSaveName(NewGamePane.saveName);
                 ControllerValues.setGameFile(NewGamePane.getStoryChoice());
                 GameController.setStoryName(NewGamePane.getStoryChoice());
 
