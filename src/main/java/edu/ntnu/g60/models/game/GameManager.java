@@ -192,17 +192,17 @@ public class GameManager {
   *
   * @return A set of player identifiers.
   */
-  public static List<String> getAvailablePlayers() {
+  public static Set<String> getAvailablePlayers() {
      try (Stream<Path> paths = Files.walk(Paths.get("src/main/resources/saves/"))) {
          return paths
              .filter(Files::isRegularFile)
              .map(Path::getFileName)
              .map(Path::toString)
              .map(filename -> filename.split("_")[0])
-             .collect(Collectors.toList());
+             .collect(Collectors.toSet());
      } catch (IOException e) {
          e.printStackTrace();
-         return Collections.emptyList();
+         return Collections.emptySet();
      }
   }
 

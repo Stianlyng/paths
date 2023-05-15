@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import edu.ntnu.g60.controllers.StartMenuController;
 import edu.ntnu.g60.models.game.GameManager;
@@ -31,7 +32,8 @@ public class SelectPlayerPane extends StackPane{
     private static Group SelectPlayerObjects() throws FileNotFoundException{
         Button startButton = ViewObjects.newButton("Create new player", 614-193, 375-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::createPlayerAction);
         //flytt players value til controller
-        List<String> availablePlayers = GameManager.getAvailablePlayers();
+        List<String> availablePlayers = new ArrayList<>(GameManager.getAvailablePlayers());
+
         String[] players = availablePlayers.toArray(new String[availablePlayers.size()]);
 
         playerNameTextField = ViewObjects.newTextField("Playername..", 614-193, 327-71, "text_field");
