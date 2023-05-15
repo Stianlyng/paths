@@ -108,11 +108,10 @@ public class ConversationPaneController {
                 DeathAnimation.animation();
             } else{
                 GameController.setCurrentGame(GameController.getCurrentGame());
-                GameController.setCurrentPassage(GameController.getCurrentGame().go(link1));
                 NextLevelAnimation.animation();
-                GameController.getGameManager().saveGameToFile(saveName);
+                GameController.getGameManager().saveGameToFile(ControllerValues.getGameFile());
             }
-        } catch (IOException | ClassNotFoundException e1) {
+        } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
@@ -124,11 +123,10 @@ public class ConversationPaneController {
                 DeathAnimation.animation();
             } else{
                 GameController.setCurrentGame(GameController.getCurrentGame());
-                GameController.setCurrentPassage(GameController.getCurrentGame().go(link2));
                 NextLevelAnimation.animation();
-                GameController.getGameManager().saveGameToFile(saveName);
+                GameController.getGameManager().saveGameToFile(ControllerValues.getGameFile());
             }
-        } catch (IOException | ClassNotFoundException e1) {
+        } catch (IOException e1) {
             e1.printStackTrace();
         }
     }

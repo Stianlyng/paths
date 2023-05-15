@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Set;
 
 import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
@@ -188,7 +189,7 @@ public class StartMenuController {
     }
 
     public void deleteAction(ActionEvent event){
-        List<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
+        Set<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
         String filePath = "src/main/resources/saves/saves.ser";
         File file = new File(filePath);
         try {
@@ -220,39 +221,38 @@ public class StartMenuController {
 
     public void startAction(ActionEvent event){
         GameController.getGameManager();
-        List<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
+        Set<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
         NewGamePane.updateSaveName();
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
             boolean overwrite = true;
-            try {
-                if(playerSaves.size() == 3){
-                    overwrite = DialogBoxes.alertBoxChoices("CAUTION!", "This will action will overwrite save: " + SaveRegister.getSave(3).getSaveName(), "Are you sure you want to continue?");
+            if(playerSaves.size() == 3){
+                String[] saveNames = new String[3];
+                int index = 0;
+                for (String save : playerSaves) {
+                    String[] split = save.split("_");
+                    saveNames[index] = split[2].replace(".ser", "");
+                    index++;
                 }
-            } catch (ClassNotFoundException | IOException e) {
-                e.printStackTrace();
+
+                overwrite = DialogBoxes.alertBoxChoices("CAUTION!", "This will action will overwrite save: " + saveNames[2], "Are you sure you want to continue?");
             }
             if(overwrite){
+                ControllerValues.setGameFile(NewGamePane.getStoryChoice());
+                Game game = GameController.getNewGame();
+                int saveNumber = 1;
+                if (playerSaves.size() == 1) {
+                    saveNumber = 2;
+                    if (playerSaves.size() == 2) {
+                        saveNumber = 3;
+                    }
+                }
+                
+                GameController.getGameManager().saveGameToFile(NewGamePane.saveName);
+                
                 try {
-                    ControllerValues.setGameFile(NewGamePane.getStoryChoice());
-                    Game game = GameController.getNewGame();
-                    int saveNumber = 1;
-                    if (playerSaves.size() == 1) {
-                        saveNumber = 2;
-                        if (playerSaves.size() == 2) {
-                            saveNumber = 3;
-                        }
-                    }
-                    
-                    GameController.getGameManager().saveGameToFile(NewGamePane.saveName);
-                    
-                    try {
-                        GameController.setCurrentGame(game);
-                        GameController.setCurrentPassage(game.begin());
-                        NextLevelAnimation.animation();
-                    } catch (MalformedURLException e1) {
-                        e1.printStackTrace();
-                    }
-                } catch (IOException | ClassNotFoundException e1) {
+                    GameController.setCurrentGame(game);
+                    NextLevelAnimation.animation();
+                } catch (MalformedURLException e1) {
                     e1.printStackTrace();
                 }
             }

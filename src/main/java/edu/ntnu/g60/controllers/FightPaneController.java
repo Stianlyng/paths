@@ -137,13 +137,8 @@ public class FightPaneController {
             DeathAnimation.animation();
         } else { 
             GameController.setCurrentGame(GameController.getCurrentGame());
-            GameController.setCurrentPassage(GameController.getCurrentGame().go(link2));
             NextLevelAnimation.animation();
-            try {
-                GameController.getGameManager().saveGameToFile(saveName);
-            } catch (ClassNotFoundException | IOException e) {
-                e.printStackTrace();
-            }
+            GameController.getGameManager().saveGameToFile(ControllerValues.getGameFile());
         }
     }
     
@@ -153,13 +148,8 @@ public class FightPaneController {
             DeathAnimation.animation();
         } else { 
             GameController.setCurrentGame(GameController.getCurrentGame());
-            GameController.setCurrentPassage(GameController.getCurrentGame().go(link1));
             NextLevelAnimation.animation();
-            try {
-                GameController.getGameManager().saveGameToFile(saveName);
-            } catch (ClassNotFoundException | IOException e) {
-                e.printStackTrace();
-            }
+            GameController.getGameManager().saveGameToFile(ControllerValues.getGameFile());
         }
     }
 

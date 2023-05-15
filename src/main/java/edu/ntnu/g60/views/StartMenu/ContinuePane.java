@@ -2,13 +2,14 @@ package edu.ntnu.g60.views.StartMenu;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import edu.ntnu.g60.controllers.ControllerValues;
 import edu.ntnu.g60.controllers.GameController;
 import edu.ntnu.g60.controllers.StartMenuController;
 import edu.ntnu.g60.models.story.Story;
-import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.views.ViewValues;
 import edu.ntnu.g60.views.ViewObjects;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
@@ -36,30 +37,36 @@ public class ContinuePane extends StackPane{
         Button save3Button = ViewObjects.newBlankButton("", 614-193, 412-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
         Button deleteSaves = ViewObjects.newButton("Delete all saves", 120, 595-71, "delete_button", "delete_hover", controller::deleteAction);
         
+
+        Set<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
+        String[] saveNames = new String[3];
+        int index = 0;
+        for (String save : playerSaves) {
+            String[] split = save.split("_");
+            saveNames[index] = split[2].replace(".ser", "");
+            index++;
+        }
+
+
         //TODO: move to controller
         IntStream.rangeClosed(1, 3).forEach(buttonNumber -> {
-            try {
-                if (SaveRegister.saveExists(buttonNumber)) {
-                    Story.setCurrentSave(SaveRegister.getSave(buttonNumber));
-                    Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
-                    saveButton.setText(SaveRegister.getSave(buttonNumber).getSaveName());
-                    
-                    saveButton.setOnAction(e -> {
-                        try {
-                            ControllerValues.setGameFile(SaveRegister.getSave(buttonNumber).getStoryName());
-                            GameController.setCurrentGame(GameController.getNewGame());
-                            GameController.setCurrentPassage(SaveRegister.getSave(buttonNumber).getPassage());
-                            NextLevelAnimation.animation();
-                        } catch (IOException | ClassNotFoundException e1) {
-                            e1.printStackTrace();
-                        }
-                    });
-                } else {
-                    Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
-                    saveButton.setText("Empty");
-                }
-            } catch (ClassNotFoundException | IOException e) {
-                e.printStackTrace();
+            if (playerSaves.size() == buttonNumber) {
+                Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
+                saveButton.setText(saveNames[buttonNumber]);
+                
+                saveButton.setOnAction(e -> {
+                    try {
+                        ControllerValues.setGameFile(saveNames[buttonNumber]);
+                        GameController.getGameManager().loadGameFromFile(saveNames[buttonNumber]);
+                        GameController.setCurrentGame(GameController.getGameManager().getGame());
+                        NextLevelAnimation.animation();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                });
+            } else {
+                Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
+                saveButton.setText("Empty");
             }
         });
 
