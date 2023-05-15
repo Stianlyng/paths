@@ -23,7 +23,12 @@ public class ConversationPane extends StackPane{
 
     public ConversationPane() throws FileNotFoundException, MalformedURLException{
         ConversationPane.controller = new ConversationPaneController();
-        SoundController.playSound("mumble");
+        try{
+            SoundController.playSound("mumble");
+        } catch (Exception e1){
+            e1.printStackTrace();
+        }
+
         getChildren().addAll(getConversationPaneObjects());
     }
 
