@@ -2,7 +2,6 @@ package edu.ntnu.g60.views.GamePanes;
 
 import java.io.FileNotFoundException;
 import edu.ntnu.g60.controllers.FightPaneController;
-import edu.ntnu.g60.controllers.GameController;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.views.ViewObjects;
 import javafx.geometry.Insets;

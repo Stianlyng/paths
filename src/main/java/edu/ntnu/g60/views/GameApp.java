@@ -2,7 +2,6 @@ package edu.ntnu.g60.views;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import edu.ntnu.g60.views.StartMenu.SelectPlayerPane;
 import javafx.application.Application;
 import javafx.scene.Scene;

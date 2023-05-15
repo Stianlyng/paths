@@ -3,7 +3,6 @@ package edu.ntnu.g60.views.GamePanes;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import edu.ntnu.g60.controllers.ConversationPaneController;
-import edu.ntnu.g60.controllers.GameController;
 import edu.ntnu.g60.controllers.SoundController;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.views.ViewObjects;

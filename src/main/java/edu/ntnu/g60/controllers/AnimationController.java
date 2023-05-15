@@ -6,8 +6,6 @@ import java.net.MalformedURLException;
 
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.views.GameApp;
-import edu.ntnu.g60.views.Animations.DeathAnimation;
-import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import edu.ntnu.g60.views.TitlePanes.AdvancePane;
@@ -18,7 +16,6 @@ public class AnimationController {
     
     public void firstFrame() throws MalformedURLException{
         try {
-            NextLevelAnimation animation = new NextLevelAnimation();
             GameApp.changeRootPane(new AdvancePane());
         } catch (FileNotFoundException e1) {
             
@@ -27,7 +24,6 @@ public class AnimationController {
     }
 
     public void deathFirstFrame() throws FileNotFoundException{
-        DeathAnimation animation = new DeathAnimation();
         GameApp.changeRootPane(new DeathPane());
     }
 

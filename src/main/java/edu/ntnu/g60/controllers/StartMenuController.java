@@ -12,12 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
-
-import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
-import edu.ntnu.g60.models.player.Player;
-import edu.ntnu.g60.models.player.PlayerBuilder;
-import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.fileHandling.TextfileParser;
 import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;
