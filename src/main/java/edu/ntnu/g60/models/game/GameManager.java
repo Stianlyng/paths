@@ -56,11 +56,11 @@ public class GameManager {
    *
    * @param player The Player for the next game.
    */
-  public static void setPlayer(Player updatedPlayer) {
+  public void setPlayer(Player updatedPlayer) {
     player = updatedPlayer;
   }
 
-  public static void setGame(Game updatedGame){
+  public void setGame(Game updatedGame){
     game = updatedGame;
   }
 
@@ -159,7 +159,7 @@ public class GameManager {
    * @param playerIdentifier The identifier of the player.
    * @return A list of save names.
    */
-  public Set<String> getPlayerSaves(String playerIdentifier) {
+  public static Set<String> getPlayerSaves(String playerIdentifier) {
       try (Stream<Path> paths = Files.walk(Paths.get("src/main/resources/saves/"))) {
           return paths
               .filter(Files::isRegularFile)
@@ -179,7 +179,7 @@ public class GameManager {
    * @param playerIdentifier The identifier of the player.
    * @throws IOException If an I/O error occurs.
    */
-  public void deletePlayerSaves(String playerIdentifier) throws IOException {
+  public static void deletePlayerSaves(String playerIdentifier) throws IOException {
       Set<String> playerSaves = getPlayerSaves(playerIdentifier);
       for (String save : playerSaves) {
           Path filePath = Paths.get("src/main/resources/saves/" + save);

@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 
 import edu.ntnu.g60.controllers.ConversationPaneController;
 import edu.ntnu.g60.controllers.GameController;
+import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.views.TitlePanes.LvlPane;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
@@ -34,7 +35,7 @@ public class NextLevelAnimation {
 
     public static void secondFrame(){
         try {
-            GameApp.changeRootPane(new LvlPane(GameController.getCurrentPassage().getTitle()));
+            GameApp.changeRootPane(new LvlPane(GameManager.getInstance().getGame().getCurrentPassage().getTitle()));
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         }

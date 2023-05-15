@@ -30,11 +30,13 @@ public class SelectPlayerPane extends StackPane{
         Button startButton = ViewObjects.newButton("Create new player", 614-193, 375-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::createPlayerAction);
         //flytt players value til controller
         List<String> availablePlayers = GameManager.getAvailablePlayers();
-        String[] players = availablePlayers.toArray(new String[0]);
-        playerNameTextField = ViewObjects.newTextField("Savename..", 614-193, 327-71, "text_field");
+        //String[] players = availablePlayers.toArray(new String[0]);
+        String[] players = new String[1];
+        players[0] = "remove me!"; //add 
+        playerNameTextField = ViewObjects.newTextField("Playername..", 614-193, 327-71, "text_field");
         playerChoice = ViewObjects.newChoiceBox(players, 614-193, 269-71, "launch_choicebox");
         ImageView background = ViewObjects.newImage(ViewValues.MENU_BACKGROUND_FOLDERNAME, ViewValues.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,ViewValues.BACKGROUND_WIDTH ,ViewValues.BACKGROUND_HEIGHT);
-        return new Group(background, startButton, playerChoice);
+        return new Group(background, startButton, playerChoice, playerNameTextField);
     }
 
     public static void updatePlayerName(){

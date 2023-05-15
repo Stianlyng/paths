@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import edu.ntnu.g60.controllers.ControllerValues;
 import edu.ntnu.g60.controllers.GameController;
 import edu.ntnu.g60.controllers.StartMenuController;
+import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.views.ViewValues;
 import edu.ntnu.g60.views.ViewObjects;
@@ -38,7 +39,7 @@ public class ContinuePane extends StackPane{
         Button deleteSaves = ViewObjects.newButton("Delete all saves", 120, 595-71, "delete_button", "delete_hover", controller::deleteAction);
         
 
-        Set<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
+        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameManager.getInstance().getPlayer().getName());
         String[] saveNames = new String[3];
         int index = 0;
         for (String save : playerSaves) {
@@ -57,8 +58,8 @@ public class ContinuePane extends StackPane{
                 saveButton.setOnAction(e -> {
                     try {
                         ControllerValues.setGameFile(saveNames[buttonNumber]);
-                        GameController.getGameManager().loadGameFromFile(saveNames[buttonNumber]);
-                        GameController.setCurrentGame(GameController.getGameManager().getGame());
+                        GameManager.getInstance().loadGameFromFile(saveNames[buttonNumber]);
+                        GameManager.getInstance().setGame(GameManager.getInstance().getGame());
                         NextLevelAnimation.animation();
                     } catch (IOException e1) {
                         e1.printStackTrace();

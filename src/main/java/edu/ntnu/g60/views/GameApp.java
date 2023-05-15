@@ -3,6 +3,7 @@ package edu.ntnu.g60.views;
 import java.io.FileInputStream;
 import java.io.IOException;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
+import edu.ntnu.g60.views.StartMenu.SelectPlayerPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -27,7 +28,7 @@ public class GameApp extends Application {
         stage.setTitle(TITLE);
         stage.getIcons().add(new Image(new FileInputStream(ICON_PATH)));
         stage.setResizable(false);
-        OpeningPane startMenu = new OpeningPane();
+        SelectPlayerPane startMenu = new SelectPlayerPane();
         Scene scene = new Scene(startMenu, HEIGHT, WIDTH, backgound);
         stage.setScene(scene);
         scene.getStylesheets().add(STYLESHEET);

@@ -7,7 +7,6 @@ import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.HealthGoal;
-import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
 import edu.ntnu.g60.models.story.Story;
@@ -15,28 +14,6 @@ import edu.ntnu.g60.utils.fileHandling.StoryParser;
 import javafx.concurrent.Task;
 
 public class GameController {
-    private static GameManager gameManager;
-
-
-    public static GameManager getGameManager(){
-        return gameManager;
-    }
-
-    public static void setCurrentGame(Game game){
-        gameManager.setGame(game);
-    }
-
-    public static Game getCurrentGame(){
-        return gameManager.getGame();
-    }
-
-    public static void setCurrentPassage(Passage passage){
-        gameManager.getGame().setCurrentPassage(passage);;
-    }
-
-    public static Passage getCurrentPassage(){
-        return gameManager.getGame().getCurrentPassage();
-    }
 
 
     public static Game getNewGame(){

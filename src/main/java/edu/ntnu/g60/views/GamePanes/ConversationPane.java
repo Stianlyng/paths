@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import edu.ntnu.g60.controllers.ConversationPaneController;
 import edu.ntnu.g60.controllers.GameController;
 import edu.ntnu.g60.controllers.SoundController;
+import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.views.ViewObjects;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -29,8 +30,8 @@ public class ConversationPane extends StackPane{
 
 
     public static void addChoiceObjects(ConversationPane pane) throws FileNotFoundException, MalformedURLException{
-        Button choiceOne = ViewObjects.newButton(GameController.getCurrentPassage().getLinks().get(0).getText(), 71, 212, "talk_button", "talk_hover", controller::choiceOneAction);
-        Button choiceTwo = ViewObjects.newButton(GameController.getCurrentPassage().getLinks().get(1).getText(), 318, 212, "talk_button", "talk_hover", controller::choiceTwoAction);
+        Button choiceOne = ViewObjects.newButton(GameManager.getInstance().getGame().getCurrentPassage().getLinks().get(0).getText(), 71, 212, "talk_button", "talk_hover", controller::choiceOneAction);
+        Button choiceTwo = ViewObjects.newButton(GameManager.getInstance().getGame().getCurrentPassage().getLinks().get(1).getText(), 318, 212, "talk_button", "talk_hover", controller::choiceTwoAction);
         StackPane.setAlignment(choiceOne, Pos.CENTER_LEFT);
         StackPane.setMargin(choiceOne, new Insets(50, 50, 50, 50)); 
         StackPane.setAlignment(choiceTwo, Pos.CENTER_RIGHT);
@@ -39,17 +40,17 @@ public class ConversationPane extends StackPane{
     }
 
     public static Group getConversationPaneObjects() throws FileNotFoundException{
-        ImageView enemyImage = ViewObjects.newImage("characters", GameController.getCurrentPassage().getPlayer(), 150, 200, 150, 150, controller::sceneClickedAction);
-        ImageView playerImage = ViewObjects.newImage("characters", GameController.getCurrentPassage().getEnemy(), 700, 200, 150, 150, controller::sceneClickedAction);
-        ImageView backgroundImage = ViewObjects.newImage("backgrounds", GameController.getCurrentPassage().getBackground(), 0, 0, 1650, 1000, controller::sceneClickedAction);
+        ImageView enemyImage = ViewObjects.newImage("characters", GameManager.getInstance().getGame().getCurrentPassage().getPlayer(), 150, 200, 150, 150, controller::sceneClickedAction);
+        ImageView playerImage = ViewObjects.newImage("characters", GameManager.getInstance().getGame().getCurrentPassage().getEnemy(), 700, 200, 150, 150, controller::sceneClickedAction);
+        ImageView backgroundImage = ViewObjects.newImage("backgrounds", GameManager.getInstance().getGame().getCurrentPassage().getBackground(), 0, 0, 1650, 1000, controller::sceneClickedAction);
         ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 309-193, 136-71, 24, 24, controller::sceneClickedAction);
         ImageView healthIcon = ViewObjects.newImage("icons", "heart.png", 488-193, 136-71, 24, 24, controller::sceneClickedAction);
         ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24, controller::sceneClickedAction);
 
         MenuButton dropDown = ViewObjects.newMenuButton(controller::menuAction, controller::exitAction, "menu_button", "menu_hover", 413, 129-71, "Go to main menu", "Exit application");
-        Text scoreText = ViewObjects.newText("" + GameController.getCurrentGame().getPlayer().getScore(), 18, false, 342-193, 155-71, controller::sceneClickedAction);
-        Text goldText = ViewObjects.newText("" + GameController.getCurrentGame().getPlayer().getGold(), 18, false, 422-193, 155-71, controller::sceneClickedAction);
-        Text healthText = ViewObjects.newText("" + GameController.getCurrentGame().getPlayer().getHealth(), 18, false, 520-193, 155-71, controller::sceneClickedAction);
+        Text scoreText = ViewObjects.newText("" + GameManager.getInstance().getGame().getPlayer().getScore(), 18, false, 342-193, 155-71, controller::sceneClickedAction);
+        Text goldText = ViewObjects.newText("" + GameManager.getInstance().getGame().getPlayer().getGold(), 18, false, 422-193, 155-71, controller::sceneClickedAction);
+        Text healthText = ViewObjects.newText("" + GameManager.getInstance().getGame().getPlayer().getHealth(), 18, false, 520-193, 155-71, controller::sceneClickedAction);
 
         Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 293, 38, controller::sceneClickedAction);
         String[] textline = ConversationPaneController.getTextLines();

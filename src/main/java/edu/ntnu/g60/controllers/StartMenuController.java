@@ -189,39 +189,39 @@ public class StartMenuController {
     }
 
     public void deleteAction(ActionEvent event){
-        Set<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
+        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameManager.getInstance().getPlayer().getName());
         String filePath = "src/main/resources/saves/saves.ser";
         File file = new File(filePath);
-        try {
-            if(file.exists() && playerSaves.isEmpty()) {
-                if(DialogBoxes.alertBoxChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
-                    file.delete();
-                    ContinuePane.addDeleteObjects(getCurreContinuePane());
-                    try {
-                        SaveRegister.setDefaultSaves();
-                    } catch (IOException e) {
-                    e.printStackTrace();
-                    }
+        if(file.exists() && playerSaves.isEmpty()) {
+            if(DialogBoxes.alertBoxChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
+                file.delete();
+                ContinuePane.addDeleteObjects(getCurreContinuePane());
+                try {
+                    GameManager.deletePlayerSaves(GameManager.getInstance().getPlayer().getName());
+                } catch (IOException e) {
+                e.printStackTrace();
                 }
-            } else {
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
         }
     }
 
     public void createPlayerAction(ActionEvent event){
+        SelectPlayerPane.updatePlayerName();
         if(SelectPlayerPane.playerName != null && !SelectPlayerPane.playerName.equals("")){
             Player player = new PlayerBuilder().setName(SelectPlayerPane.getPlayerChoice()).build();
-            GameManager.setPlayer(player);
+            GameManager.getInstance().setPlayer(player);
+            try {
+                GameApp.changeRootPane(new OpeningPane());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
     public void startAction(ActionEvent event){
-        GameController.getGameManager();
-        Set<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
+
+        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameManager.getInstance().getPlayer().getName());
         NewGamePane.updateSaveName();
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
             boolean overwrite = true;
@@ -247,10 +247,10 @@ public class StartMenuController {
                     }
                 }
                 
-                GameController.getGameManager().saveGameToFile(NewGamePane.saveName);
+                GameManager.getInstance().saveGameToFile(NewGamePane.saveName);
                 
                 try {
-                    GameController.setCurrentGame(game);
+                    GameManager.getInstance().setGame(game);
                     NextLevelAnimation.animation();
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();
