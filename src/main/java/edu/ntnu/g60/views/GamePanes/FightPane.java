@@ -115,7 +115,7 @@ public class FightPane extends StackPane{
     }
 
     public static void addInventoryObjects(FightPane pane) throws FileNotFoundException{
-        //TODO: add actuall inventory
+        //TODO: add actual inventory
         Button itemOneButton = ViewObjects.newButton("Item 1", 209-193, 484-71, "inventory_button", "inventory_hover", controller::inventoryOneAction);
         Button itemTwoButton = ViewObjects.newButton("Item 2", 604-193, 484-71, "inventory_button", "inventory_hover", controller::inventoryTwoAction);
         Button itemThreeButton = ViewObjects.newButton("Item 3", 209-193, 575-71, "inventory_button", "inventory_hover", controller::inventoryThreeAction);
