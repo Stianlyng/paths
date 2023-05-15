@@ -32,28 +32,57 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import org.apache.commons.io.FilenameUtils;
 
-
+/**
+* The StartMenuController class is responsible for handling user interactions and controlling the start menu views.
+* It provides methods for various actions such as starting a new game, continuing a game, importing game files,
+* accessing information and settings, managing player saves, and handling button actions.
+*/
 public class StartMenuController {
 
     public static CustomGamePane currentCustomGamePane;
     public static ContinuePane currentContinuePane;
 
+    /**
+    * Retrieves the current ContinuePane.
+    *
+    * @return the current ContinuePane
+    */
     public static ContinuePane getCurreContinuePane(){
         return currentContinuePane;
     }
 
+    /**
+    * Sets the current ContinuePane.
+    *
+    * @param pane the ContinuePane to set as the current ContinuePane
+    */
     public static void setCurrentContinuePane(ContinuePane pane){
         currentContinuePane = pane;
     }
 
+    /**
+    * Retrieves the current CustomGamePane.
+    *
+    * @return the current CustomGamePane
+    */
     public static CustomGamePane getCurrentCustomGamePane(){
         return currentCustomGamePane;
     }
 
+    /**
+    * Sets the current CustomGamePane.
+    *
+    * @param pane the CustomGamePane to set as the current CustomGamePane
+    */
     public static void setCurrentCustomGamePane(CustomGamePane pane){
         currentCustomGamePane = pane;
     }
 
+    /**
+    * Handles the continue action event.
+    *
+    * @param event the ActionEvent triggered
+    */
     public void continueAction(ActionEvent event){
         try {
             ContinuePane pane = new ContinuePane();
@@ -64,6 +93,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Handles the link action event.
+    *
+    * @param event the MouseEvent triggered
+    */
     public void linkAction(MouseEvent event){
         try {
             GameApp.changeRootPane(new ProjectPane());
@@ -72,6 +106,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Handles the information file structure action event.
+    *
+    * @param event the MouseEvent triggered
+    */
     public void informationFileStructureAction(MouseEvent event){
         try{
             GameApp.changeRootPane(new InformationFileStructurePane());
@@ -80,6 +119,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Switches the root pane to a new game pane.
+    *
+    * @param event the action event
+    */
     public void newGameAction(ActionEvent event){
         try {
             GameApp.changeRootPane(new NewGamePane());
@@ -88,6 +132,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Switches the root pane to a custom game pane.
+    *
+    * @param event the action event
+    */
     public void customAction(ActionEvent event){
         try {
             CustomGamePane customGamePane = new CustomGamePane();
@@ -98,6 +147,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Switches the root pane to an information pane.
+    *
+    * @param event the mouse event
+    */
     public void informationAction(MouseEvent event){
         try {
             GameApp.changeRootPane(new InformationPane());
@@ -106,6 +160,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Switches the root pane to a settings pane.
+    *
+    * @param event the mouse event
+    */
     public void settingsAction(MouseEvent event){
         try {
             GameApp.changeRootPane(new SettingsPane());
@@ -114,7 +173,11 @@ public class StartMenuController {
         }
     }
 
-
+    /**
+    * Handles the import of a file.
+    *
+    * @param event the action event
+    */
     public void importFile(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Import game File");
@@ -162,6 +225,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Switches the root pane to a new game pane for custom games.
+    *
+    * @param event the action event
+    */
     public void startCustomAction(ActionEvent event){
         try {
             GameApp.changeRootPane(new NewGamePane());
@@ -170,6 +238,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Switches the root pane to the opening pane.
+    *
+    * @param event the action event
+    */
     public void backAction(ActionEvent event){
         try {
             GameApp.changeRootPane(new OpeningPane());
@@ -178,6 +251,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Switches the root pane to the custom game pane.
+    *
+    * @param event the action event
+    */
     public void backCustomAction(ActionEvent event){
         try {
             GameApp.changeRootPane(new CustomGamePane());
@@ -186,12 +264,22 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Retrieves the names of the available players.
+    *
+    * @return an array of player names
+    */
     public String[] getPlayerNames(){
         List<String> availablePlayers = new ArrayList<>(GameManager.getAvailablePlayers());
         String[] players = availablePlayers.toArray(new String[availablePlayers.size()]);
         return players;
     }
 
+    /**
+    * Switches the root pane to the select player pane.
+    *
+    * @param event the action event
+    */
     public void backActionOpening(ActionEvent evnet){
         try {
             GameApp.changeRootPane(new SelectPlayerPane());
@@ -200,6 +288,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Handles the player choice action.
+    *
+    * @param event the action event
+    */
     public void playerChoiceAction(ActionEvent event){
         SelectPlayerPane.updatePlayerName();
         GameController.setPLayerName(SelectPlayerPane.getPlayerChoice());
@@ -210,6 +303,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Handles the deletion of player saves.
+    *
+    * @param event the action event
+    */
     public void deleteAction(ActionEvent event){
         Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
         if(!playerSaves.isEmpty()) {
@@ -225,8 +323,15 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Populates the save buttons with the corresponding save information.
+    *
+    * @param save1Button the first save button
+    * @param save2Button the second save button
+    * @param save3Button the third save button
+    * @throws IOException if an I/O error occurs
+    */
     public static void populateSaveButtons(Button save1Button, Button save2Button, Button save3Button) throws IOException {
-
        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
        String[] saveNames = new String[3];
        String[] storyNames = new String[3];
@@ -269,11 +374,21 @@ public class StartMenuController {
        });
     }
 
+    /**
+    * Retrieves the available stories.
+    *
+    * @return an array of story names
+    */
     public String[] getStories(){
         List<String> availableStories = GameController.listFilesInFolder();
         return availableStories.toArray(new String[availableStories.size()]);
     }
 
+    /**
+    * Handles the creation of a new player.
+    *
+    * @param event the action event
+    */
     public void createPlayerAction(ActionEvent event){
         SelectPlayerPane.updatePlayerName();
         if(SelectPlayerPane.playerName != null && !SelectPlayerPane.playerName.equals("")){
@@ -286,6 +401,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+    * Handles the start action for a new game.
+    *
+    * @param event the action event
+    */
     public void startAction(ActionEvent event){
         GameManager.getInstance().endGame();
         Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());

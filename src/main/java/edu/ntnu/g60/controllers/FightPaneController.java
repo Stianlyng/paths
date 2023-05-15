@@ -12,30 +12,68 @@ import edu.ntnu.g60.views.GamePanes.FightPane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.event.ActionEvent;
 
+/**
+ * The FightPaneController class is responsible for handling the actions and logic related to the fight pane in the game.
+ * It provides methods for managing the fight actions, updating health values, and controlling the flow of the fight.
+ */
 public class FightPaneController {
     
+    /**
+    * The current health value of the enemy.
+    */
     public static float enemyHealth;
+
+    /**
+    * The current health value of the player.
+    * Independent from a Player objects health.
+    */
     public static float playerHealth;
+
+    /**
+    * The currently active fight pane.
+    */
     public static FightPane currentFightPane;
 
+    /**
+    * Sets the default health values for the enemy and player.
+    */
     public static void setDefaultHealthValues(){
         enemyHealth = 1.00F;
         playerHealth = 1.00F;
     }
 
-
+    /**
+    * Retrieves the currently active fight pane.
+    *
+    * @return The current FightPane object.
+    */
     public static FightPane getCurrentFightPane(){
         return currentFightPane;
     }
 
+    /**
+    * Sets the currently active fight pane.
+    *
+    * @param pane The FightPane object to set as the current fight pane.
+    */
     public static void setCurrentFightPane(FightPane pane){
         currentFightPane = pane;
     }
     
+    /**
+    * Handles the exit action event by closing the game application.
+    *
+    * @param event The ActionEvent object representing the exit action.
+    */
     public void exitAction(ActionEvent event){
         GameApp.closeApplication();
     }
 
+    /**
+    * Handles the menu action event by saving the game and changing the root pane to the opening pane.
+    *
+    * @param event The ActionEvent object representing the menu action.
+    */
     public void menuAction(ActionEvent event){
         try {
             GameManager.getInstance().saveGameToFile(GameController.getSaveName());
@@ -45,6 +83,11 @@ public class FightPaneController {
         }
     }
 
+    /**
+    * Handles the fight action event by adding fight objects to the current fight pane.
+    *
+    * @param event The ActionEvent object representing the fight action.
+    */
     public void fightAction(ActionEvent event){
         try {
             FightPane.addFightObjects(getCurrentFightPane());
@@ -53,6 +96,11 @@ public class FightPaneController {
         }
     }
 
+    /**
+    * Handles the heal action event by adding heal objects to the current fight pane.
+    *
+    * @param event The ActionEvent object representing the heal action.
+    */
     public void healAction(ActionEvent event){
         try {
             FightPane.addHealObjects(getCurrentFightPane());
@@ -61,6 +109,11 @@ public class FightPaneController {
         }
     }
 
+    /**
+    * Handles the inventory action event by adding inventory objects to the current fight pane.
+    *
+    * @param event The ActionEvent object representing the inventory action.
+    */
     public void inventoryAction(ActionEvent event){
         try {
             FightPane.addInventoryObjects(getCurrentFightPane());
@@ -69,6 +122,11 @@ public class FightPaneController {
         }
     }
 
+    /**
+     * Performs the escape action.
+     *
+     * @param event the action event
+     */
     public void escapeAction(ActionEvent event){
         try {
             FightPane.addEscapeObjects(getCurrentFightPane());
@@ -77,27 +135,51 @@ public class FightPaneController {
         }
     }
 
-
+    /**
+     * Performs the first ability action.
+     *
+     * @param event the action event
+     */
     public void abilityOneAction(ActionEvent event){
         playerAction(0.15F, 0.0F);
         enemyAction(0.4F, 0.0F);
     }
 
+    /**
+     * Performs the second ability action.
+     *
+     * @param event the action event
+     */
     public void abilityTwoAction(ActionEvent event){
         playerAction(0.1F, 0.0F);
         enemyAction(0.2F, 0.0F);
     }
 
+    /**
+     * Performs the third ability action.
+     *
+     * @param event the action event
+     */    
     public void abilityThreeAction(ActionEvent event){
         playerAction(0.65F, 0.0F);
         enemyAction(0.25F, 0.0F);
     }
 
+    /**
+     * Performs the first healing action.
+     *
+     * @param event the action event
+     */
     public void healOneAction(ActionEvent event){
         playerAction(0.0F, 0.01F);
         enemyAction(0.2F, 0.0F);
     }
 
+    /**
+     * Performs the second healing action.
+     *
+     * @param event the action event
+     */
     public void healTwoAction(ActionEvent event){
         playerAction(0.0F, (1.0F - playerHealth));
         enemyAction(0.1F, 0.0F);
@@ -115,6 +197,11 @@ public class FightPaneController {
         //TODO: ADD functionality
     }
 
+    /**
+     * Performs the second escape action.
+     *
+     * @param event the action event
+     */
     public void escapeTwoAction(ActionEvent event){
         try {
             looseFight();
@@ -123,13 +210,29 @@ public class FightPaneController {
         }
     }
 
+    /**
+     * Performs an empty action.
+     *
+     * @param event the action event
+     */
     public void emptyAction(ActionEvent event){}
 
 
+    /**
+     * Performs the back action.
+     *
+     * @param event the action event
+     */
     public void backAction(ActionEvent event){
         FightPane.addDefaultObjects(getCurrentFightPane());
     }
 
+    /**
+     * Handles the win condition of a fight.
+     *
+     * @throws MalformedURLException if a malformed URL is encountered
+     * @throws FileNotFoundException if the file is not found
+     */
     public static void winFight() throws MalformedURLException, FileNotFoundException{
         Link link2 = GameManager.getInstance().getGame().getCurrentPassage().getLinks().get(1);
         if(link2.getReference().equals("game over")){
@@ -141,6 +244,12 @@ public class FightPaneController {
         }
     }
     
+    /**
+     * Handles the loose condition of a fight.
+     *
+     * @throws MalformedURLException if a malformed URL is encountered
+     * @throws FileNotFoundException if the file is not found
+     */
     public static void looseFight() throws MalformedURLException, FileNotFoundException{
         Link link1 = GameManager.getInstance().getGame().getCurrentPassage().getLinks().get(0);
         if(link1.getReference().equals("game over")){
@@ -152,6 +261,12 @@ public class FightPaneController {
         }
     }
 
+    /**
+     * Performs the action of the enemy attacking the player and the player attacking the enemy.
+     *
+     * @param damageAmount the amount of damage inflicted by the enemy
+     * @param healAmount the amount of health healed by the enemy
+     */
     public static void enemyAction(float damageAmount, float healAmount){
         GameController.delay(2000, () -> {
             playerHealth = playerHealth - damageAmount;
@@ -187,9 +302,13 @@ public class FightPaneController {
         });
     }
  
-
+    /**
+     * Performs the action of the player attacking the enemy and healing the player.
+     *
+     * @param damageAmount the amount of damage inflicted by the player
+     * @param healAmount the amount of health healed by the player
+     */
     public static void playerAction(float damageAmount, float healAmount){
-        
         enemyHealth = enemyHealth - damageAmount;
         playerHealth = playerHealth + healAmount;
         FightPane.updateHealthEnemy(enemyHealth);

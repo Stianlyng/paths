@@ -12,8 +12,16 @@ import edu.ntnu.g60.views.TitlePanes.AdvancePane;
 import edu.ntnu.g60.views.TitlePanes.DeathPane;
 import edu.ntnu.g60.views.TitlePanes.LvlPane;
 
+/**
+ * The AnimationController class is responsible for controlling the
+ * animations and transitions between panes.
+ */
 public class AnimationController {
     
+    /**
+    * Loads and displays the first frame of the next level sequence.
+    * @throws MalformedURLException if the specified URL is malformed.
+    */
     public void firstFrame() throws MalformedURLException{
         try {
             GameApp.changeRootPane(new AdvancePane());
@@ -23,10 +31,17 @@ public class AnimationController {
         }
     }
 
+    /**
+    * Loads and displays the first frame of the death sequence.
+    * @throws FileNotFoundException if the specified file is not found.
+    */
     public void deathFirstFrame() throws FileNotFoundException{
         GameApp.changeRootPane(new DeathPane());
     }
 
+    /**
+    * Loads and displays the second frame of the death sequence.
+    */
     public void deathSecondFrame(){
         try {
             GameApp.changeRootPane(new OpeningPane());
@@ -35,6 +50,9 @@ public class AnimationController {
         }
     }
 
+    /**
+    * Loads and displays the second frame of the next level sequence.
+    */
     public void secondFrame(){
         try {
             GameApp.changeRootPane(new LvlPane(GameManager.getInstance().getGame().getCurrentPassage().getTitle()));
@@ -43,6 +61,9 @@ public class AnimationController {
         }
     }
 
+    /**
+    * Loads and displays the third frame of the next level sequence.
+    */
     public void thirdFrame(){
         try {
             ConversationPaneController.setConversationPaneNumber(0);

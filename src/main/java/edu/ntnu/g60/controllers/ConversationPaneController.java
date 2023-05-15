@@ -19,35 +19,75 @@ import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * The ConversationPaneController class is responsible for controlling the conversation pane in the game.
+ * It handles user interactions and updates the conversation pane accordingly.
+ */
 public class ConversationPaneController {
     boolean clickable;
 
+    /**
+    * Constructs a ConversationPaneController object.
+    * Initializes the clickable flag as true.
+    */    
     public ConversationPaneController(){
         clickable = true;
     }
 
+    /**
+    * The current conversation pane number.
+    */
     public static int conversationPaneNumber;
 
+    /**
+    * The current conversation pane.
+    */
     static ConversationPane currentConversationPane;
 
+    /**
+    * Returns the current conversation pane.
+    * 
+    * @return the current ConversationPane object
+    */
     public ConversationPane getCurrentConversationPane(){
         return currentConversationPane;
     }
 
+    /**
+    * Sets the current conversation pane.
+    * 
+    * @param pane the ConversationPane object to set as current
+    */
     public static void setCurrentConversationPane(ConversationPane pane){
         currentConversationPane = pane;
     }
 
+    /**
+    * Sets the conversation pane number.
+    * 
+    * @param conversationPaneUpdatedNumber the updated conversation pane number
+    */
     public static void setConversationPaneNumber(int conversationPaneUpdatedNumber){
         conversationPaneNumber = conversationPaneUpdatedNumber;
     }
 
+    /**
+    * Returns the type of the current conversation pane.
+    * 
+    * @return the type of the conversation pane as a String
+    */
     public static String getType(){
         String[] types = types();
         String type = types[conversationPaneNumber];
         return type;
     }
 
+    /**
+    * Handles the action when the scene is clicked.
+    * Updates the conversation pane or switches to fight pane based on the game state.
+    * 
+    * @param event the MouseEvent representing the click event
+    */
     public void sceneClickedAction(MouseEvent event){
         if(clickable){
             boolean moreLinesLeft = (conversationPaneNumber + 1 == types().length) ? false : true;
@@ -89,10 +129,20 @@ public class ConversationPaneController {
         }
     }
     
+    /**
+     * Handles the action when the exit button is clicked.
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void exitAction(ActionEvent event){
         GameApp.closeApplication();
     }
 
+    /**
+     * Handles the action when the menu button is clicked.
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void menuAction(ActionEvent event){
         try {
             GameManager.getInstance().saveGameToFile(GameController.getSaveName());
@@ -102,6 +152,11 @@ public class ConversationPaneController {
         }
     }
 
+    /**
+     * Handles the action when the first choice button is clicked.
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void choiceOneAction(ActionEvent event){
         try {
             Link link1 = GameManager.getInstance().getGame().getCurrentPassage().getLinks().get(0);
@@ -117,6 +172,11 @@ public class ConversationPaneController {
         }
     }
 
+    /**
+     * Handles the action when the second choice button is clicked.
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void choiceTwoAction(ActionEvent event){
         try {
             Link link2 = GameManager.getInstance().getGame().getCurrentPassage().getLinks().get(1);
@@ -132,6 +192,11 @@ public class ConversationPaneController {
         }
     }
 
+    /**
+     * Retrieves the text lines for the current conversation pane in a manageble form.
+     *
+     * @return an array of text lines for display in the conversation pane
+     */
     public static String[] getTextLines(){
         String[] passageContent = contents();
         String line = passageContent[ConversationPaneController.conversationPaneNumber];
@@ -171,6 +236,11 @@ public class ConversationPaneController {
         return textLines;
     }
 
+    /**
+     * Retrieves the passages for the current conversation pane.
+     *
+     * @return an array of passages for the conversation pane
+     */
     public static String[] passages(){
         String text = GameManager.getInstance().getGame().getCurrentPassage().getContent();
         int braceIndexx = text.indexOf('{');
@@ -179,6 +249,11 @@ public class ConversationPaneController {
         return passages;
     }
 
+    /**
+     * Retrieves the types of the passages in the conversation pane.
+     *
+     * @return an array of passage types for the conversation pane
+     */
     public static String[] types(){
         String[] passages = passages();
         String[] types = new String[passages.length];
@@ -191,6 +266,11 @@ public class ConversationPaneController {
         return types;
     }
 
+    /**
+     * Retrieves the contents of the passages in the conversation pane.
+     *
+     * @return an array of passage contents for the conversation pane
+     */
     public static String[] contents(){
         String[] passages = passages();
         String[] contents = new String[passages.length];
