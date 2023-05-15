@@ -18,8 +18,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -140,7 +142,7 @@ public class CommandLineInterface {
 
         int playerNumber = scanner.nextInt() - 1;
 
-        List<String> playerSaves = gameManager.getPlayerSaves(players.get(playerNumber));
+        Set<String> playerSaves = gameManager.getPlayerSaves(players.get(playerNumber));
         if (playerSaves.isEmpty()) {
             System.out.println("No saves found for this player.");
         }
@@ -155,9 +157,10 @@ public class CommandLineInterface {
         }
         
         int storyNumber = scanner.nextInt() - 1;
+        List<String> playerSavesList = new ArrayList<>(playerSaves);
+        System.out.println(playerSavesList.get(storyNumber));
 
-        System.out.println(playerSaves.get(storyNumber));
-        gameManager.loadGameFromFile(playerSaves.get(storyNumber));
+        gameManager.loadGameFromFile(playerSavesList.get(storyNumber));
         
         return playGame(false);
     }
