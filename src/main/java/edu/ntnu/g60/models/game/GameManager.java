@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -152,12 +153,6 @@ public class GameManager {
       }
   }
 
-  getSaveName(Player player, int save)
-  getSaveGame(Player player, int save)
-  deletePlayerSaves(Player player)
-
-  limit amount of saves on user to 3.
-
   /**
    * Returns a list of the current active player's available saves.
    *
@@ -175,6 +170,20 @@ public class GameManager {
       } catch (IOException e) {
           e.printStackTrace();
           return Collections.emptySet();
+      }
+  }
+
+  /**
+   * Deletes all saves for a specific player.
+   *
+   * @param playerIdentifier The identifier of the player.
+   * @throws IOException If an I/O error occurs.
+   */
+  public void deletePlayerSaves(String playerIdentifier) throws IOException {
+      Set<String> playerSaves = getPlayerSaves(playerIdentifier);
+      for (String save : playerSaves) {
+          Path filePath = Paths.get("src/main/resources/saves/" + save);
+          Files.deleteIfExists(filePath);
       }
   }
   
