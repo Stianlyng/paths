@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import edu.ntnu.g60.models.game.Game;
+import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.GamePanes.FightPane;
+import edu.ntnu.g60.views.StartMenu.NewGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.event.ActionEvent;
 
@@ -40,6 +42,7 @@ public class FightPaneController {
 
     public void menuAction(ActionEvent event){
         try {
+            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e) {
             e.printStackTrace();
@@ -132,24 +135,24 @@ public class FightPaneController {
     }
 
     public static void winFight() throws MalformedURLException, FileNotFoundException{
-        Link link2 = GameController.getCurrentPassage().getLinks().get(1);
+        Link link2 = GameManager.getInstance().getGame().getCurrentPassage().getLinks().get(1);
         if(link2.getReference().equals("game over")){
             DeathAnimation.animation();
         } else { 
-            GameController.setCurrentGame(GameController.getCurrentGame());
+            GameManager.getInstance().getGame().go(link2);
             NextLevelAnimation.animation();
-            GameController.getGameManager().saveGameToFile(ControllerValues.getGameFile());
+            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
         }
     }
     
     public static void looseFight() throws MalformedURLException, FileNotFoundException{
-        Link link1 = GameController.getCurrentPassage().getLinks().get(0);
+        Link link1 = GameManager.getInstance().getGame().getCurrentPassage().getLinks().get(0);
         if(link1.getReference().equals("game over")){
             DeathAnimation.animation();
         } else { 
-            GameController.setCurrentGame(GameController.getCurrentGame());
+            GameManager.getInstance().getGame().go(link1);
             NextLevelAnimation.animation();
-            GameController.getGameManager().saveGameToFile(ControllerValues.getGameFile());
+            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
         }
     }
 

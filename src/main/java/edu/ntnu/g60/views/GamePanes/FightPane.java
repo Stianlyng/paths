@@ -3,6 +3,7 @@ package edu.ntnu.g60.views.GamePanes;
 import java.io.FileNotFoundException;
 import edu.ntnu.g60.controllers.FightPaneController;
 import edu.ntnu.g60.controllers.GameController;
+import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.views.ViewObjects;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,19 +37,19 @@ public class FightPane extends StackPane{
     }
 
     public static Group addFightPaneObjects() throws FileNotFoundException{
-        ImageView enemyImage = ViewObjects.newImage("characters", GameController.getCurrentPassage().getPlayer(), 150, 200, 150, 150);
-        ImageView playerImage = ViewObjects.newImage("characters", GameController.getCurrentPassage().getEnemy(), 700, 200, 150, 150);
-        ImageView backgroundImage = ViewObjects.newImage("backgrounds", GameController.getCurrentPassage().getBackground(), 0, 0, 1650, 1000);
+        ImageView enemyImage = ViewObjects.newImage("characters", GameManager.getInstance().getGame().getCurrentPassage().getPlayer(), 150, 200, 150, 150);
+        ImageView playerImage = ViewObjects.newImage("characters", GameManager.getInstance().getGame().getCurrentPassage().getEnemy(), 700, 200, 150, 150);
+        ImageView backgroundImage = ViewObjects.newImage("backgrounds", GameManager.getInstance().getGame().getCurrentPassage().getBackground(), 0, 0, 1650, 1000);
         Button fightButton = ViewObjects.newButton("Fight", 309-193, 534-71, "fight_button", "fight_hover", controller::fightAction);
         Button healButton = ViewObjects.newButton("Heal", 704-193, 534-71, "heal_button", "heal_hover", controller::healAction);
         Button inventoryButton = ViewObjects.newButton("Inventory", 309-193, 625-71, "inventory_button", "inventory_hover", controller::inventoryAction);
         Button escapeButton = ViewObjects.newButton("Escape", 704-193, 625-71, "escape_button", "escape_hover", controller::escapeAction);
         ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 309-193, 136-71, 24, 24);
         ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24);
-        Text scoreText = ViewObjects.newText("" + GameController.getCurrentGame().getPlayer().getScore(), 18, false, 342-193, 155-71);
-        Text goldText = ViewObjects.newText("" + GameController.getCurrentGame().getPlayer().getGold(), 18, false, 422-193, 155-71);
+        Text scoreText = ViewObjects.newText("" + GameManager.getInstance().getGame().getPlayer().getScore(), 18, false, 342-193, 155-71);
+        Text goldText = ViewObjects.newText("" + GameManager.getInstance().getGame().getPlayer().getGold(), 18, false, 422-193, 155-71);
         Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 163, 38);
-        MenuButton dropDown = ViewObjects.newMenuButton(controller::menuAction, controller::exitAction, "menu_button", "menu_hover", 283, 129-71, "Go to main menu", "Exit application");
+        MenuButton dropDown = ViewObjects.newMenuButton(controller::menuAction, controller::exitAction, "menu_button", "menu_hover", 283, 129-71, "Save and go to main menu", "Exit application");
         playerBar =  ViewObjects.newHealthBar(309-193, 504-71, 1.00F, "progress_bar"); 
         enemyBar = ViewObjects.newHealthBar(704-193, 504-71, 1.00F, "progress_bar");
         return new Group(backgroundImage, infoBoard, enemyImage, playerImage, fightButton, healButton,

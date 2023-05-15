@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.views.GameApp;
@@ -15,6 +16,7 @@ import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.GamePanes.FightPane;
+import edu.ntnu.g60.views.StartMenu.NewGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
@@ -63,7 +65,7 @@ public class ConversationPaneController {
                 } catch (FileNotFoundException | MalformedURLException e1) {
                     e1.printStackTrace();
                 } 
-            } else if (GameController.getCurrentPassage().hasFightScene()){
+            } else if (GameManager.getInstance().getGame().getCurrentPassage().hasFightScene()){
                 try {
                     SoundController.stopSound();
                     FightPane pane = new FightPane();
@@ -95,6 +97,7 @@ public class ConversationPaneController {
 
     public void menuAction(ActionEvent event){
         try {
+            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e) {
             e.printStackTrace();
@@ -103,13 +106,13 @@ public class ConversationPaneController {
 
     public void choiceOneAction(ActionEvent event){
         try {
-            Link link1 = GameController.getCurrentPassage().getLinks().get(0);
+            Link link1 = GameManager.getInstance().getGame().getCurrentPassage().getLinks().get(0);
             if(link1.getReference().equals("game over")){
                 DeathAnimation.animation();
             } else{
-                GameController.setCurrentGame(GameController.getCurrentGame());
+                GameManager.getInstance().getGame().go(link1);
                 NextLevelAnimation.animation();
-                GameController.getGameManager().saveGameToFile(ControllerValues.getGameFile());
+                GameManager.getInstance().saveGameToFile(GameController.getSaveName());
             }
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -118,13 +121,13 @@ public class ConversationPaneController {
 
     public void choiceTwoAction(ActionEvent event){
         try {
-            Link link2 = GameController.getCurrentPassage().getLinks().get(1);
+            Link link2 = GameManager.getInstance().getGame().getCurrentPassage().getLinks().get(1);
             if(link2.getReference().equals("game over")){
                 DeathAnimation.animation();
             } else{
-                GameController.setCurrentGame(GameController.getCurrentGame());
+                GameManager.getInstance().getGame().go(link2);
                 NextLevelAnimation.animation();
-                GameController.getGameManager().saveGameToFile(ControllerValues.getGameFile());
+                GameManager.getInstance().saveGameToFile(GameController.getSaveName());
             }
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -171,7 +174,7 @@ public class ConversationPaneController {
     }
 
     public static String[] passages(){
-        String text = GameController.getCurrentPassage().getContent();
+        String text = GameManager.getInstance().getGame().getCurrentPassage().getContent();
         int braceIndexx = text.indexOf('{');
         String output = text.substring(braceIndexx);
         String[] passages = output.split("\\n");

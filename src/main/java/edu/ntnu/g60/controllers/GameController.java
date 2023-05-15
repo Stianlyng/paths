@@ -1,13 +1,21 @@
 package edu.ntnu.g60.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.goals.Goal;
+import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
-import edu.ntnu.g60.models.passage.Passage;
+import edu.ntnu.g60.models.goals.InventoryGoal;
+import edu.ntnu.g60.models.goals.ScoreGoal;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
 import edu.ntnu.g60.models.story.Story;
@@ -15,48 +23,80 @@ import edu.ntnu.g60.utils.fileHandling.StoryParser;
 import javafx.concurrent.Task;
 
 public class GameController {
-    private static GameManager gameManager;
 
+    static String playerName;
+    static String storyName;
+    static String saveName;
 
-    public static GameManager getGameManager(){
-        return gameManager;
+    public static void setSaveName(String name){
+        saveName = name;
     }
 
-    public static void setCurrentGame(Game game){
-        gameManager.setGame(game);
+    public static String getSaveName(){
+        return saveName;
     }
 
-    public static Game getCurrentGame(){
-        return gameManager.getGame();
+    public static void setStoryName(String name){
+        storyName = name;
     }
 
-    public static void setCurrentPassage(Passage passage){
-        gameManager.getGame().setCurrentPassage(passage);;
+    public static String getStoryName(){
+        return storyName;
     }
 
-    public static Passage getCurrentPassage(){
-        return gameManager.getGame().getCurrentPassage();
+    public static void setPLayerName(String name){
+        playerName = name;
+    }
+
+    public static String getPlayerName(){
+        return playerName;
     }
 
 
-    public static Game getNewGame(){
-        StoryParser parser = new StoryParser(ControllerValues.getGameFile());
-        Story story = parser.build();
+    public static List<String> listFilesInFolder() {
+        Path folderPath = Paths.get("src/main/resources/stories");
 
-        List<Goal> goals = new ArrayList<Goal>();
-        goals.add(new HealthGoal(4));
-    
+        try (Stream<Path> paths = Files.list(folderPath)) {
+            return paths.filter(Files::isRegularFile)
+                        .map(Path::getFileName)
+                        .map(Path::toString)
+                        .map(name -> name.substring(0, name.lastIndexOf('.')))
+                        .collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public static void createNewGame(){
+        
+        List<String> inventory = List.of("Sword");
+
         Player player = new PlayerBuilder()
-                .setName("Alice")
+                .setName(playerName)
+                .setHealth(100)
+                .setGold(0)
+                .setScore(0)
+                .setInventory(inventory)
                 .build();
 
-        GameManager gameManager = GameManager.getInstance();
-        gameManager.setGoals(goals);
-        gameManager.setPlayer(player);
-        gameManager.setStory(story);
+        String storyPath = storyName;
+        StoryParser parser = new StoryParser(storyPath);
+        Story story = parser.build();
 
-        Game game = gameManager.getGame();
-        return game;
+
+        List<Goal> goals = List.of(
+                new HealthGoal(110),
+                new GoldGoal(0),
+                new InventoryGoal(List.of("Sword")),
+                new ScoreGoal(100)
+        );
+
+        GameManager.getInstance().setPlayer(player);
+        GameManager.getInstance().setStory(story);
+        GameManager.getInstance().setGoals(goals);
+        GameManager.getInstance().createGame();
     }
 
     public static void delay(long millis, Runnable continuation){

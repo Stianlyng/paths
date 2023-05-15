@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import edu.ntnu.g60.controllers.ControllerValues;
 import edu.ntnu.g60.controllers.GameController;
 import edu.ntnu.g60.controllers.StartMenuController;
+import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.views.ViewValues;
 import edu.ntnu.g60.views.ViewObjects;
@@ -38,27 +39,37 @@ public class ContinuePane extends StackPane{
         Button deleteSaves = ViewObjects.newButton("Delete all saves", 120, 595-71, "delete_button", "delete_hover", controller::deleteAction);
         
 
-        Set<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
+        //vis saves til player utifra lagret playername
+        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
         String[] saveNames = new String[3];
+        String[] storyNames = new String[3];
         int index = 0;
         for (String save : playerSaves) {
             String[] split = save.split("_");
             saveNames[index] = split[2].replace(".ser", "");
+            storyNames[index] = split[1];
             index++;
         }
-
-
+        if(playerSaves.size() == 2){
+            saveNames[2] = "";
+        }
+        if(playerSaves.size() == 1){
+            saveNames[1] = "";
+            saveNames[2] = "";
+        }
         //TODO: move to controller
         IntStream.rangeClosed(1, 3).forEach(buttonNumber -> {
-            if (playerSaves.size() == buttonNumber) {
+            if (playerSaves.size() >= buttonNumber) {
                 Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
-                saveButton.setText(saveNames[buttonNumber]);
+                saveButton.setText(saveNames[buttonNumber - 1]);
                 
                 saveButton.setOnAction(e -> {
                     try {
-                        ControllerValues.setGameFile(saveNames[buttonNumber]);
-                        GameController.getGameManager().loadGameFromFile(saveNames[buttonNumber]);
-                        GameController.setCurrentGame(GameController.getGameManager().getGame());
+                        GameManager.getInstance().endGame();
+                        GameController.setSaveName(saveNames[buttonNumber - 1]);
+                        GameController.setStoryName(storyNames[buttonNumber - 1].replace(" ", "_"));
+                        GameController.createNewGame();
+                        GameManager.getInstance().loadGameFromFile(GameController.getPlayerName() + "_" + storyNames[buttonNumber - 1] + "_" + saveNames[buttonNumber - 1] + ".ser");
                         NextLevelAnimation.animation();
                     } catch (IOException e1) {
                         e1.printStackTrace();

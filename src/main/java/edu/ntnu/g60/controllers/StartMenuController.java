@@ -188,40 +188,46 @@ public class StartMenuController {
         }
     }
 
-    public void deleteAction(ActionEvent event){
-        Set<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
-        String filePath = "src/main/resources/saves/saves.ser";
-        File file = new File(filePath);
+    public void playerChoiceAction(ActionEvent event){
+        SelectPlayerPane.updatePlayerName();
+        GameController.setPLayerName(SelectPlayerPane.getPlayerChoice());
         try {
-            if(file.exists() && playerSaves.isEmpty()) {
-                if(DialogBoxes.alertBoxChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
-                    file.delete();
-                    ContinuePane.addDeleteObjects(getCurreContinuePane());
-                    try {
-                        SaveRegister.setDefaultSaves();
-                    } catch (IOException e) {
-                    e.printStackTrace();
-                    }
+            GameApp.changeRootPane(new OpeningPane());
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void deleteAction(ActionEvent event){
+        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
+        if(!playerSaves.isEmpty()) {
+            if(DialogBoxes.alertBoxChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
+                ContinuePane.addDeleteObjects(getCurreContinuePane());
+                try {
+                    GameManager.deletePlayerSaves(GameController.getPlayerName());
+                } catch (IOException e) {
+                e.printStackTrace();
                 }
-            } else {
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
         }
     }
 
     public void createPlayerAction(ActionEvent event){
+        SelectPlayerPane.updatePlayerName();
         if(SelectPlayerPane.playerName != null && !SelectPlayerPane.playerName.equals("")){
-            Player player = new PlayerBuilder().setName(SelectPlayerPane.getPlayerChoice()).build();
-            GameManager.setPlayer(player);
+            GameController.setPLayerName(SelectPlayerPane.playerName);
+            try {
+                GameApp.changeRootPane(new OpeningPane());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
     public void startAction(ActionEvent event){
-        GameController.getGameManager();
-        Set<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
+        GameManager.getInstance().endGame();
+        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
         NewGamePane.updateSaveName();
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
             boolean overwrite = true;
@@ -237,20 +243,13 @@ public class StartMenuController {
                 overwrite = DialogBoxes.alertBoxChoices("CAUTION!", "This will action will overwrite save: " + saveNames[2], "Are you sure you want to continue?");
             }
             if(overwrite){
+                //TODO: delete save 3 if save 3 exist
+                GameController.setSaveName(NewGamePane.saveName);
                 ControllerValues.setGameFile(NewGamePane.getStoryChoice());
-                Game game = GameController.getNewGame();
-                int saveNumber = 1;
-                if (playerSaves.size() == 1) {
-                    saveNumber = 2;
-                    if (playerSaves.size() == 2) {
-                        saveNumber = 3;
-                    }
-                }
-                
-                GameController.getGameManager().saveGameToFile(NewGamePane.saveName);
-                
+                GameController.setStoryName(NewGamePane.getStoryChoice());
+
                 try {
-                    GameController.setCurrentGame(game);
+                    GameController.createNewGame();
                     NextLevelAnimation.animation();
                 } catch (MalformedURLException e1) {
                     e1.printStackTrace();

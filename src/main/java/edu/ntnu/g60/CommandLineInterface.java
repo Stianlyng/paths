@@ -95,7 +95,7 @@ public class CommandLineInterface {
         }
     }
     private boolean startNewGame() {
-        clearScreen();
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter your player name: ");
@@ -134,7 +134,10 @@ public class CommandLineInterface {
         int index=1;
 
         System.out.println("Select player: ");
-        List<String> players = gameManager.getAvailablePlayers();
+
+        Set<String> players = gameManager.getAvailablePlayers();
+        List<String> playersList = new ArrayList<>(players);
+
         for (String player : players) {
             System.out.println(index + ". " + player);
             index++;
@@ -142,7 +145,7 @@ public class CommandLineInterface {
 
         int playerNumber = scanner.nextInt() - 1;
 
-        Set<String> playerSaves = gameManager.getPlayerSaves(players.get(playerNumber));
+        Set<String> playerSaves = gameManager.getPlayerSaves(playersList.get(playerNumber));
         if (playerSaves.isEmpty()) {
             System.out.println("No saves found for this player.");
         }
