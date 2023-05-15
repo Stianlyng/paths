@@ -47,7 +47,7 @@ public class ConversationPane extends StackPane{
         ImageView healthIcon = ViewObjects.newImage("icons", "heart.png", 488-193, 136-71, 24, 24, controller::sceneClickedAction);
         ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24, controller::sceneClickedAction);
 
-        MenuButton dropDown = ViewObjects.newMenuButton(controller::menuAction, controller::exitAction, "menu_button", "menu_hover", 413, 129-71, "Go to main menu", "Exit application");
+        MenuButton dropDown = ViewObjects.newMenuButton(controller::menuAction, controller::exitAction, "menu_button", "menu_hover", 413, 129-71, "Save and go to main menu", "Exit application");
         Text scoreText = ViewObjects.newText("" + GameManager.getInstance().getGame().getPlayer().getScore(), 18, false, 342-193, 155-71, controller::sceneClickedAction);
         Text goldText = ViewObjects.newText("" + GameManager.getInstance().getGame().getPlayer().getGold(), 18, false, 422-193, 155-71, controller::sceneClickedAction);
         Text healthText = ViewObjects.newText("" + GameManager.getInstance().getGame().getPlayer().getHealth(), 18, false, 520-193, 155-71, controller::sceneClickedAction);
