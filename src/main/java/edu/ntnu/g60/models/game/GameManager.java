@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,8 +23,8 @@ import edu.ntnu.g60.models.story.Story;
  */
 public class GameManager {
   private static GameManager instance;
-  private Game game;
-  private Player player;
+  private static Game game;
+  private static Player player;
   private Story story;
   private List<Goal> goals;
 
@@ -46,13 +45,21 @@ public class GameManager {
     return instance;
   }
 
+  public Player getPlayer(){
+    return player;
+  }
+
   /**
    * Sets the Player for the next game.
    *
    * @param player The Player for the next game.
    */
-  public void setPlayer(Player player) {
-    this.player = player;
+  public static void setPlayer(Player updatedPlayer) {
+    player = updatedPlayer;
+  }
+
+  public static void setGame(Game updatedGame){
+    game = updatedGame;
   }
 
   /**
@@ -142,13 +149,19 @@ public class GameManager {
       }
   }
 
+  getSaveName(Player player, int save)
+  getSaveGame(Player player, int save)
+  deletePlayerSaves(Player player)
+
+  limit amount of saves on user to 3.
+
   /**
    * Returns a list of the current active player's available saves.
    *
    * @param playerIdentifier The identifier of the player.
    * @return A list of save names.
    */
-  public List<String> getPlayerSaves(String playerIdentifier) {
+  public static List<String> getPlayerSaves(String playerIdentifier) {
       try (Stream<Path> paths = Files.walk(Paths.get("src/main/resources/saves/"))) {
           return paths
               .filter(Files::isRegularFile)
@@ -167,7 +180,7 @@ public class GameManager {
   *
   * @return A set of player identifiers.
   */
-  public List<String> getAvailablePlayers() {
+  public static List<String> getAvailablePlayers() {
      try (Stream<Path> paths = Files.walk(Paths.get("src/main/resources/saves/"))) {
          return paths
              .filter(Files::isRegularFile)

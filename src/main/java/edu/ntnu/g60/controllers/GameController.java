@@ -15,23 +15,27 @@ import edu.ntnu.g60.utils.fileHandling.StoryParser;
 import javafx.concurrent.Task;
 
 public class GameController {
-    public static Game currentGame;
-    public static Passage currentPassage;
+    private static GameManager gameManager;
+
+
+    public static GameManager getGameManager(){
+        return gameManager;
+    }
 
     public static void setCurrentGame(Game game){
-        currentGame = game;
+        gameManager.setGame(game);
     }
 
     public static Game getCurrentGame(){
-        return currentGame;
+        return gameManager.getGame();
     }
 
     public static void setCurrentPassage(Passage passage){
-        currentPassage = passage;
+        gameManager.getGame().setCurrentPassage(passage);;
     }
 
     public static Passage getCurrentPassage(){
-        return currentPassage;
+        return gameManager.getGame().getCurrentPassage();
     }
 
 

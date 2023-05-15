@@ -8,11 +8,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 import edu.ntnu.g60.models.game.Game;
+import edu.ntnu.g60.models.game.GameManager;
+import edu.ntnu.g60.models.player.Player;
+import edu.ntnu.g60.models.player.PlayerBuilder;
 import edu.ntnu.g60.models.story.Story;
-import edu.ntnu.g60.utils.Save;
-import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.utils.fileHandling.TextfileParser;
 import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;
@@ -21,6 +23,7 @@ import edu.ntnu.g60.views.StartMenu.ContinuePane;
 import edu.ntnu.g60.views.StartMenu.CustomGamePane;
 import edu.ntnu.g60.views.StartMenu.NewGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
+import edu.ntnu.g60.views.StartMenu.SelectPlayerPane;
 import edu.ntnu.g60.views.settings.InformationFileStructurePane;
 import edu.ntnu.g60.views.settings.InformationPane;
 import edu.ntnu.g60.views.settings.ProjectPane;
@@ -185,10 +188,11 @@ public class StartMenuController {
     }
 
     public void deleteAction(ActionEvent event){
+        List<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
         String filePath = "src/main/resources/saves/saves.ser";
         File file = new File(filePath);
         try {
-            if(file.exists() && SaveRegister.getSave(1) != null) {
+            if(file.exists() && playerSaves.isEmpty()) {
                 if(DialogBoxes.alertBoxChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
                     file.delete();
                     ContinuePane.addDeleteObjects(getCurreContinuePane());
@@ -207,12 +211,21 @@ public class StartMenuController {
         }
     }
 
+    public void createPlayerAction(ActionEvent event){
+        if(SelectPlayerPane.playerName != null && !SelectPlayerPane.playerName.equals("")){
+            Player player = new PlayerBuilder().setName(SelectPlayerPane.getPlayerChoice()).build();
+            GameManager.setPlayer(player);
+        }
+    }
+
     public void startAction(ActionEvent event){
+        GameController.getGameManager();
+        List<String> playerSaves = GameController.getGameManager().getPlayerSaves(GameController.getGameManager().getPlayer().getName());
         NewGamePane.updateSaveName();
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
             boolean overwrite = true;
             try {
-                if(SaveRegister.saveExists(3)){
+                if(playerSaves.size() == 3){
                     overwrite = DialogBoxes.alertBoxChoices("CAUTION!", "This will action will overwrite save: " + SaveRegister.getSave(3).getSaveName(), "Are you sure you want to continue?");
                 }
             } catch (ClassNotFoundException | IOException e) {
@@ -223,16 +236,14 @@ public class StartMenuController {
                     ControllerValues.setGameFile(NewGamePane.getStoryChoice());
                     Game game = GameController.getNewGame();
                     int saveNumber = 1;
-                    if (SaveRegister.saveExists(1)) {
+                    if (playerSaves.size() == 1) {
                         saveNumber = 2;
-                        if (SaveRegister.saveExists(2)) {
+                        if (playerSaves.size() == 2) {
                             saveNumber = 3;
                         }
                     }
                     
-                    Save save = new Save(game.getStory().getOpeningPassage(), NewGamePane.saveName, saveNumber, ControllerValues.getGameFile());
-                    SaveRegister.setSave(save, saveNumber);
-                    Story.setCurrentSave(save);
+                    GameController.getGameManager().saveGameToFile(NewGamePane.saveName);
                     
                     try {
                         GameController.setCurrentGame(game);

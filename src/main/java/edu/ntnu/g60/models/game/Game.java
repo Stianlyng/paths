@@ -65,6 +65,10 @@ public class Game implements Serializable{
         return this.currentPassage; // Add this getter method
   }
 
+  public void setCurrentPassage(Passage passage){
+    this.currentPassage = passage;
+  }
+
   /**
    * Starts the game by returning the first passage of the story.
    * @return The first passage of the story.

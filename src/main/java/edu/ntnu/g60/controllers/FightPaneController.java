@@ -7,8 +7,6 @@ import java.net.MalformedURLException;
 import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.story.Story;
-import edu.ntnu.g60.utils.Save;
-import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
@@ -142,8 +140,7 @@ public class FightPaneController {
             GameController.setCurrentPassage(GameController.getCurrentGame().go(link2));
             NextLevelAnimation.animation();
             try {
-                SaveRegister.setSave(new Save(GameController.getCurrentGame().go(link2), Story.getCurrentSave().getSaveName(),
-                Story.getCurrentSave().getSaveNumber(), ControllerValues.getGameFile()), Story.getCurrentSave().getSaveNumber());
+                GameController.getGameManager().saveGameToFile(saveName);
             } catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
             }
@@ -159,8 +156,7 @@ public class FightPaneController {
             GameController.setCurrentPassage(GameController.getCurrentGame().go(link1));
             NextLevelAnimation.animation();
             try {
-                SaveRegister.setSave(new Save(GameController.getCurrentGame().go(link1), Story.getCurrentSave().getSaveName(),
-                Story.getCurrentSave().getSaveNumber(), ControllerValues.getGameFile()), Story.getCurrentSave().getSaveNumber());
+                GameController.getGameManager().saveGameToFile(saveName);
             } catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
             }

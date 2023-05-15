@@ -10,8 +10,6 @@ import java.util.stream.IntStream;
 
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.story.Story;
-import edu.ntnu.g60.utils.Save;
-import edu.ntnu.g60.utils.SaveRegister;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
@@ -112,8 +110,7 @@ public class ConversationPaneController {
                 GameController.setCurrentGame(GameController.getCurrentGame());
                 GameController.setCurrentPassage(GameController.getCurrentGame().go(link1));
                 NextLevelAnimation.animation();
-                SaveRegister.setSave(new Save(GameController.getCurrentGame().go(link1), Story.getCurrentSave().getSaveName(),
-                Story.getCurrentSave().getSaveNumber(), ControllerValues.getGameFile()), Story.getCurrentSave().getSaveNumber());
+                GameController.getGameManager().saveGameToFile(saveName);
             }
         } catch (IOException | ClassNotFoundException e1) {
             e1.printStackTrace();
@@ -129,8 +126,7 @@ public class ConversationPaneController {
                 GameController.setCurrentGame(GameController.getCurrentGame());
                 GameController.setCurrentPassage(GameController.getCurrentGame().go(link2));
                 NextLevelAnimation.animation();
-                SaveRegister.setSave(new Save(GameController.getCurrentGame().go(link2), Story.getCurrentSave().getSaveName(),
-                Story.getCurrentSave().getSaveNumber(), ControllerValues.getGameFile()), Story.getCurrentSave().getSaveNumber());
+                GameController.getGameManager().saveGameToFile(saveName);
             }
         } catch (IOException | ClassNotFoundException e1) {
             e1.printStackTrace();

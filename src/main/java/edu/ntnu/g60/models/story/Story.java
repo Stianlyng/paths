@@ -67,7 +67,7 @@ public class Story implements Serializable{
     return this.openingPassage;
   }
 
- public Passage getPassage(String title) {
+  public Passage getPassage(String title) {
       return this.passages.get(title);
   }
 
