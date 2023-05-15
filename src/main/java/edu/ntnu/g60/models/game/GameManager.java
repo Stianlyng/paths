@@ -121,6 +121,7 @@ public class GameManager {
                             saveName + ".ser";
   
       Save save = new Save(saveName, game);
+      saveName = save.getSaveName();
       try (FileOutputStream fileOut = new FileOutputStream(filePath);
            ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
           out.writeObject(save);
