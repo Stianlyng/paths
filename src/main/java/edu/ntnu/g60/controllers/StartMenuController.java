@@ -189,6 +189,7 @@ public class StartMenuController {
     }
 
     public void playerChoiceAction(ActionEvent event){
+        SelectPlayerPane.updatePlayerName();
         GameController.setPLayerName(SelectPlayerPane.getPlayerChoice());
         try {
             GameApp.changeRootPane(new OpeningPane());
@@ -218,7 +219,7 @@ public class StartMenuController {
     public void createPlayerAction(ActionEvent event){
         SelectPlayerPane.updatePlayerName();
         if(SelectPlayerPane.playerName != null && !SelectPlayerPane.playerName.equals("")){
-            GameController.setPLayerName(SelectPlayerPane.getPlayerChoice());
+            GameController.setPLayerName(SelectPlayerPane.playerName);
             try {
                 GameApp.changeRootPane(new OpeningPane());
             } catch (IOException e1) {
