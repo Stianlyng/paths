@@ -36,8 +36,9 @@ public class SelectPlayerPane extends StackPane{
 
         playerNameTextField = ViewObjects.newTextField("Playername..", 614-193, 327-71, "text_field");
         playerChoice = ViewObjects.newChoiceBox(players, 614-193, 269-71, "launch_choicebox");
+        Button chooseButton = ViewObjects.newButton("Choose player", 414-193, 325-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::playerChoiceAction);
         ImageView background = ViewObjects.newImage(ViewValues.MENU_BACKGROUND_FOLDERNAME, ViewValues.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,ViewValues.BACKGROUND_WIDTH ,ViewValues.BACKGROUND_HEIGHT);
-        return new Group(background, startButton, playerChoice, playerNameTextField);
+        return new Group(background, startButton, playerChoice, playerNameTextField, chooseButton);
     }
 
     public static void updatePlayerName(){

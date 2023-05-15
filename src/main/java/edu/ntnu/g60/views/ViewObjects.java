@@ -89,6 +89,7 @@ public class ViewObjects {
         return volumeSlider;
     }
 
+
     public static ChoiceBox<String> newChoiceBox(String[] choices, int x, int y, String id) {
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
         choiceBox.setValue(choices[0]);

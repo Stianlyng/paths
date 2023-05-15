@@ -39,15 +39,17 @@ public class ContinuePane extends StackPane{
         Button deleteSaves = ViewObjects.newButton("Delete all saves", 120, 595-71, "delete_button", "delete_hover", controller::deleteAction);
         
 
-        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameManager.getInstance().getPlayer().getName());
+        //vis saves til player utifra lagret playername
+        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
         String[] saveNames = new String[3];
+        String[] storyNames = new String[3];
         int index = 0;
         for (String save : playerSaves) {
             String[] split = save.split("_");
             saveNames[index] = split[2].replace(".ser", "");
+            storyNames[index] = split[1];
             index++;
         }
-
 
         //TODO: move to controller
         IntStream.rangeClosed(1, 3).forEach(buttonNumber -> {
@@ -57,9 +59,8 @@ public class ContinuePane extends StackPane{
                 
                 saveButton.setOnAction(e -> {
                     try {
-                        ControllerValues.setGameFile(saveNames[buttonNumber]);
-                        GameManager.getInstance().loadGameFromFile(saveNames[buttonNumber]);
-                        GameManager.getInstance().setGame(GameManager.getInstance().getGame());
+                        GameController.setStoryName(storyNames[buttonNumber]);
+                        GameController.createNewGame();
                         NextLevelAnimation.animation();
                     } catch (IOException e1) {
                         e1.printStackTrace();

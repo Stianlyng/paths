@@ -95,7 +95,7 @@ public class CommandLineInterface {
         }
     }
     private boolean startNewGame() {
-        clearScreen();
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter your player name: ");

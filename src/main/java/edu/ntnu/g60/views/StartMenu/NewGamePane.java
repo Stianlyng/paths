@@ -33,11 +33,14 @@ public class NewGamePane extends StackPane{
     private static Group getNewGameObjects() throws FileNotFoundException{
         Button startButton = ViewObjects.newButton("Start", 614-193, 375-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::startAction);
         Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::backAction);
-        Set<String> availableStories = GameManager.getPlayerSaves(GameManager.getInstance().getPlayer().getName());
+        
+        
+        //etter nytt game er trykket på skal det lages gamemanager
+        List<String> availableStories = GameController.listFilesInFolder();
         if (availableStories.isEmpty()) {
             // Display a message to the user or provide a default story option
         } else {
-            String[] stories = availableStories.toArray(new String[0]);
+            String[] stories = availableStories.toArray(new String[availableStories.size()]);
             storyChoice = ViewObjects.newChoiceBox(stories, 614-193, 269-71, "launch_choicebox");
         }
         ImageView background = ViewObjects.newImage(ViewValues.MENU_BACKGROUND_FOLDERNAME, ViewValues.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,ViewValues.BACKGROUND_WIDTH ,ViewValues.BACKGROUND_HEIGHT);
