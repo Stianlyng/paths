@@ -95,10 +95,10 @@ public class ConversationPaneController {
     
             if(moreLinesLeft){
                 try {
+                    SoundController.stopSound();
                     ConversationPane pane = new ConversationPane();
                     ConversationPaneController.setCurrentConversationPane(pane);
                     GameApp.changeRootPane(pane);
-                    SoundController.stopSound();
                     SoundController.playSound("mumble");
                 } catch (FileNotFoundException | MalformedURLException e1) {
                     e1.printStackTrace();

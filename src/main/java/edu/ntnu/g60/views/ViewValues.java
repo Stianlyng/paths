@@ -9,5 +9,5 @@ public class ViewValues {
     public static String MENU_BUTTON_HOVER_ID = "launch_hover";
     public static String BACK_BUTTON_ID = "back_button";
     public static String BACK_BUTTON_HOVER_ID = "back_hover";
-    //make all private. add setters and getters. 
+    //TODO: make all private. add setters and getters. 
 }

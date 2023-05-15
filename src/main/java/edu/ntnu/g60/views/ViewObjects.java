@@ -75,7 +75,7 @@ public class ViewObjects {
     }
 
     public static Slider newSlider(int x, int y){
-        Slider volumeSlider = new Slider(0, 100, 100);
+        Slider volumeSlider = new Slider(0, 100, 50);
         volumeSlider.setId("slider");
         volumeSlider.setLayoutX(x);
         volumeSlider.setLayoutY(y);

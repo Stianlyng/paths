@@ -2,6 +2,8 @@ package edu.ntnu.g60.views;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+
+import edu.ntnu.g60.controllers.SoundController;
 import edu.ntnu.g60.views.StartMenu.SelectPlayerPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -32,6 +34,8 @@ public class GameApp extends Application {
         stage.setScene(scene);
         scene.getStylesheets().add(STYLESHEET);
         stage.show();
+        SoundController.playMusic("music");
+        SoundController.setApplicationVolume((double) 0.03);
     }
 
     public static void closeApplication(){
