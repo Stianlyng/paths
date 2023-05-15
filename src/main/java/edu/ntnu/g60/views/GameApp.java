@@ -34,8 +34,12 @@ public class GameApp extends Application {
         stage.setScene(scene);
         scene.getStylesheets().add(STYLESHEET);
         stage.show();
-        SoundController.playMusic("music");
-        SoundController.setApplicationVolume((double) 0.03);
+        try{
+            SoundController.playMusic("music");
+            SoundController.setApplicationVolume((double) 0.03);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
     }
 
     public static void closeApplication(){
