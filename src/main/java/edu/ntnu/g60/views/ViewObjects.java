@@ -167,7 +167,7 @@ public class ViewObjects {
     }
 
     public static MediaPlayer newSound(String soundName) throws MalformedURLException{
-        File mediaFile = new File("src/main/resources/sounds/" + soundName + ".mp3");
+        File mediaFile = new File("src/main/resources/sounds/" + soundName + ".m4a");
         Media media = new Media(mediaFile.toURI().toURL().toString());
         MediaPlayer player = new MediaPlayer(media);
         return player;
