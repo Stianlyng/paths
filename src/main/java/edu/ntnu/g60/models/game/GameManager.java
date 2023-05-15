@@ -27,6 +27,7 @@ public class GameManager {
   private static Player player;
   private Story story;
   private List<Goal> goals;
+  private String saveName;
 
   /**
    * Private constructor to prevent instantiation.
@@ -127,6 +128,7 @@ public class GameManager {
                             saveName + ".ser";
   
       Save save = new Save(saveName, game);
+      saveName = save.getSaveName();
       try (FileOutputStream fileOut = new FileOutputStream(filePath);
            ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
           out.writeObject(save);
@@ -142,6 +144,7 @@ public class GameManager {
           Save save = (Save) in.readObject();
           System.out.println("Loaded save: " + save.getSaveName());
           game = new Game(save.getGame()); // Create a deep copy of the saved game
+          saveName = save.getSaveName();
           return save.getSaveName();
       } catch (IOException | ClassNotFoundException e) {
           e.printStackTrace();
@@ -161,17 +164,17 @@ public class GameManager {
    * @param playerIdentifier The identifier of the player.
    * @return A list of save names.
    */
-  public static List<String> getPlayerSaves(String playerIdentifier) {
+  public Set<String> getPlayerSaves(String playerIdentifier) {
       try (Stream<Path> paths = Files.walk(Paths.get("src/main/resources/saves/"))) {
           return paths
               .filter(Files::isRegularFile)
               .map(Path::getFileName)
               .map(Path::toString)
               .filter(filename -> filename.startsWith(playerIdentifier + "_"))
-              .collect(Collectors.toList());
+              .collect(Collectors.toSet());
       } catch (IOException e) {
           e.printStackTrace();
-          return Collections.emptyList();
+          return Collections.emptySet();
       }
   }
   
