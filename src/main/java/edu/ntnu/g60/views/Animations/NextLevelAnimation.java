@@ -10,6 +10,10 @@ public class NextLevelAnimation extends StackPane{
 
     private static AnimationController controller;
 
+    static {
+        controller = new AnimationController();
+    }
+
     public static void animation() throws MalformedURLException{
         controller.firstFrame();
         GameController.delay(2000, () -> {
