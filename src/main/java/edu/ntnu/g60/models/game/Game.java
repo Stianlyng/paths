@@ -18,7 +18,6 @@ public class Game implements Serializable{
   private final Player player;
   private final Story story;
   private final List<Goal> goals;
-  private Passage currentPassage; // Add this field
 
   /**
    * Constructor for the Game class.
@@ -33,7 +32,6 @@ public class Game implements Serializable{
     this.player = player;
     this.story = story;
     this.goals = goals;
-    this.currentPassage = this.story.getOpeningPassage(); // Initialize the current passage
   }
 
   /**
@@ -46,7 +44,6 @@ public class Game implements Serializable{
       this.player = new Player(other.player); 
         this.story = new Story(other.story); 
         this.goals = new ArrayList<>(other.goals); 
-        this.currentPassage = this.story.getPassage(other.currentPassage.getTitle()); // Copy the current passage
   }
 
   public Player getPlayer() {
@@ -61,17 +58,12 @@ public class Game implements Serializable{
     return this.goals;
   }
 
-  public Passage getCurrentPassage() {
-        return this.currentPassage; // Add this getter method
-  }
-
   /**
    * Starts the game by returning the first passage of the story.
    * @return The first passage of the story.
    */
   public Passage begin() {
-    this.currentPassage = this.story.getOpeningPassage(); 
-    return this.currentPassage;
+    return this.story.getOpeningPassage(); 
   }
 
 
@@ -81,8 +73,9 @@ public class Game implements Serializable{
    * @return The passage that the link points to.
    */
   public Passage go(Link link) {
-      this.currentPassage = this.story.getPassage(link.getReference()); // Update the current passage
-      return this.currentPassage;
+    System.out.println("Going to: " + link.getReference());
+    System.out.println(this.story.getPassage(link).getTitle());
+    return this.story.getPassage(link);
 
   }
 }
