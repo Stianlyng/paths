@@ -32,19 +32,22 @@ public class SoundController {
     * @param musicName the name of the music file to be played
     * @throws MalformedURLException if the URL of the music file is malformed
     */
-    public static void playMusic(String musicName) throws MalformedURLException{
-        setMusic(ViewObjects.newSound(musicName));
-        music.setVolume(volume / 2);
+    public static void playMusic(String musicName) {
+        try {
+            setMusic(ViewObjects.newSound(musicName));
+            if (music != null) {
+                music.setVolume(volume / 2);
 
-        music.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                music.seek(music.getStartTime());
+                music.setOnEndOfMedia(() -> {
+                    music.seek(music.getStartTime());
+                    music.play();
+                });
+
                 music.play();
             }
-        });
-
-        music.play();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -53,6 +56,9 @@ public class SoundController {
     * @param newMusic the new MediaPlayer object for the music
     */
     public static void setMusic(MediaPlayer newMusic){
+        if (music != null) {
+            music.dispose();
+        }
         music = newMusic;
     }
 
@@ -62,7 +68,9 @@ public class SoundController {
     * @throws MalformedURLException if the URL of the music file is malformed
     */
     public static void stopMusic() throws MalformedURLException{
-        music.stop();
+        if (music != null) {
+            music.stop();
+        }
     }
 
     /**
@@ -71,10 +79,16 @@ public class SoundController {
     * @param soundName the name of the sound effect file to be played
     * @throws MalformedURLException if the URL of the sound effect file is malformed
     */
-    public static void playSound(String soundName) throws MalformedURLException{
-        setSound(ViewObjects.newSound(soundName));
-        sound.setVolume(volume * 5);
-        sound.play();
+    public static void playSound(String soundName) {
+        try {
+            setSound(ViewObjects.newSound(soundName));
+            if (sound != null) {
+                sound.setVolume(volume * 5);
+                sound.play();
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -82,7 +96,10 @@ public class SoundController {
     * 
     * @param newSound the new MediaPlayer object for the sound effect
     */
-    public static void setSound(MediaPlayer newSound){
+    public static void setSound(MediaPlayer newSound) {
+        if (sound != null) {
+            sound.dispose();
+        }
         sound = newSound;
     }
 
@@ -92,7 +109,9 @@ public class SoundController {
     * @throws MalformedURLException if the URL of the sound effect file is malformed
     */
     public static void stopSound() throws MalformedURLException{
-        sound.stop();
+        if (sound != null) {
+            sound.stop();
+        }
     }
 
     /**
@@ -101,8 +120,13 @@ public class SoundController {
     * @param newVolume the new volume level
     */
     public static void setApplicationVolume(double newVolume) {
+        if (newVolume < 0.0 || newVolume > 1.0) {
+            throw new IllegalArgumentException("Volume must be between 0.0 and 1.0");
+        }
         volume = newVolume;
-        music.setVolume(newVolume / 2);
+        if (music != null) {
+            music.setVolume(newVolume / 2);
+        }
     }
 
 }

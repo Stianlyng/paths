@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaException;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 
@@ -34,11 +35,15 @@ public class GameApp extends Application {
         stage.setScene(scene);
         scene.getStylesheets().add(STYLESHEET);
         stage.show();
-        try{
+        try {
             SoundController.playMusic("music");
             SoundController.setApplicationVolume((double) 0.03);
-        } catch (Exception e1) {
-            e1.printStackTrace();
+        } catch (MediaException e) {
+            // Handle the exception, e.g., display an error message or fallback to alternative sound playback
+            e.printStackTrace();
+        } catch (Exception e) {
+            // Handle other exceptions
+            e.printStackTrace();
         }
     }
 
