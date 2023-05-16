@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
+import edu.ntnu.g60.utils.fileHandling.SaveFileHandler;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
@@ -76,7 +77,7 @@ public class FightPaneController {
     */
     public void menuAction(ActionEvent event){
         try {
-            SaveFileHandler.saveGameToFile(GameController.getSaveName());
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), currentPassage.getName());
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e) {
             e.printStackTrace();
@@ -240,7 +241,7 @@ public class FightPaneController {
         } else { 
             GameManager.getInstance().getGame().go(link2);
             NextLevelAnimation.animation();
-            SaveFileHandler.saveGameToFile(GameController.getSaveName());
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), currentPassage.getName());
         }
     }
     
@@ -257,7 +258,7 @@ public class FightPaneController {
         } else { 
             GameManager.getInstance().getGame().go(link1);
             NextLevelAnimation.animation();
-            SaveFileHandler.saveGameToFile(GameController.getSaveName());
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), currentPassage.getName());
         }
     }
 
