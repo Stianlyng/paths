@@ -1,15 +1,15 @@
 package edu.ntnu.g60.models.story;
 
 import java.util.HashMap;
-import java.util.Map;
 
+import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
 
 public class StoryBuilder {
     
   private String title;
-  private Map<String, Passage> passages;
   private Passage openingPassage;
+  private final HashMap<Link, Passage> passages = new HashMap<>();
 
   public StoryBuilder setTitle(String title) {
     this.title = title;
@@ -22,10 +22,8 @@ public class StoryBuilder {
   }
 
   public StoryBuilder addPassage(Passage passage) {
-    if (this.passages == null) {
-      this.passages = new HashMap<>();
-    }
-    this.passages.put(passage.getTitle(), passage);
+    Link link = new Link(passage.getTitle(), passage.getTitle());
+    this.passages.put(link, passage);
     return this;
   }
 

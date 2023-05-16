@@ -180,11 +180,7 @@ public class CommandLineInterface {
 
         Scanner scanner = new Scanner(System.in);
 
-        if (gameManager.getGame().getCurrentPassage() == null) {
-            gameManager.getGame().begin();
-        }
-
-        Passage currentPassage = gameManager.getGame().getCurrentPassage();
+        Passage currentPassage = gameManager.getGame().begin();
 
         while (true) {
 
