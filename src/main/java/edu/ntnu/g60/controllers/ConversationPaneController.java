@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
+import edu.ntnu.g60.utils.fileHandling.SaveFileHandler;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
@@ -145,7 +146,7 @@ public class ConversationPaneController {
      */
     public void menuAction(ActionEvent event){
         try {
-            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
+            SaveFileHandler.saveGameToFile(GameController.getSaveName());
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e) {
             e.printStackTrace();
@@ -165,7 +166,7 @@ public class ConversationPaneController {
             } else{
                 GameManager.getInstance().getGame().go(link1);
                 NextLevelAnimation.animation();
-                GameManager.getInstance().saveGameToFile(GameController.getSaveName());
+                SaveFileHandler.saveGameToFile(GameController.getSaveName());
             }
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -185,7 +186,7 @@ public class ConversationPaneController {
             } else{
                 GameManager.getInstance().getGame().go(link2);
                 NextLevelAnimation.animation();
-                GameManager.getInstance().saveGameToFile(GameController.getSaveName());
+                SaveFileHandler.saveGameToFile(GameController.getSaveName());
             }
         } catch (IOException e1) {
             e1.printStackTrace();

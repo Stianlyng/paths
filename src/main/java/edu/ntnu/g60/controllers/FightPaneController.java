@@ -76,7 +76,7 @@ public class FightPaneController {
     */
     public void menuAction(ActionEvent event){
         try {
-            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
+            SaveFileHandler.saveGameToFile(GameController.getSaveName());
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e) {
             e.printStackTrace();
@@ -240,7 +240,7 @@ public class FightPaneController {
         } else { 
             GameManager.getInstance().getGame().go(link2);
             NextLevelAnimation.animation();
-            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
+            SaveFileHandler.saveGameToFile(GameController.getSaveName());
         }
     }
     
@@ -257,7 +257,7 @@ public class FightPaneController {
         } else { 
             GameManager.getInstance().getGame().go(link1);
             NextLevelAnimation.animation();
-            GameManager.getInstance().saveGameToFile(GameController.getSaveName());
+            SaveFileHandler.saveGameToFile(GameController.getSaveName());
         }
     }
 
