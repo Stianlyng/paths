@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -99,6 +100,26 @@ public class SaveFileHandler{
   }
 
   
+  /**
+  * Lists the files in the "src/main/resources/stories" folder.
+  *
+  * @return a list of file names without extensions
+  */
+  public static List<String> listFilesInFolder() {
+      Path folderPath = Paths.get("src/main/resources/stories");
+
+      try (Stream<Path> paths = Files.list(folderPath)) {
+          return paths.filter(Files::isRegularFile)
+                      .map(Path::getFileName)
+                      .map(Path::toString)
+                      .map(name -> name.substring(0, name.lastIndexOf('.')))
+                      .collect(Collectors.toList());
+      } catch (IOException e) {
+          e.printStackTrace();
+          return null;
+      }
+  }
+
   /**
   * Returns a set of the available players.
   *

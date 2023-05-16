@@ -16,16 +16,10 @@ import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.fileHandling.SaveFileHandler;
 import edu.ntnu.g60.utils.fileHandling.StoryParser;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CommandLineInterface {
     private GameManager gameManager;
@@ -72,7 +66,7 @@ public class CommandLineInterface {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please choose a story:");
-        List<String> names = listFilesInFolder();
+        List<String> names = SaveFileHandler.listFilesInFolder();
         for (int i = 0; i < names.size(); i++) {
             System.out.println((i + 1) + ": " + names.get(i));
         }
@@ -82,20 +76,6 @@ public class CommandLineInterface {
         return parser.build();
     }
    
-    private static List<String> listFilesInFolder() {
-        Path folderPath = Paths.get("src/main/resources/stories");
-
-        try (Stream<Path> paths = Files.list(folderPath)) {
-            return paths.filter(Files::isRegularFile)
-                        .map(Path::getFileName)
-                        .map(Path::toString)
-                        .map(name -> name.substring(0, name.lastIndexOf('.')))
-                        .collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
     private boolean startNewGame() {
 
         Scanner scanner = new Scanner(System.in);

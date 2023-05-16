@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 import edu.ntnu.g60.models.game.GameManager;
+import edu.ntnu.g60.utils.fileHandling.SaveFileHandler;
 import edu.ntnu.g60.utils.fileHandling.TextfileParser;
 import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;
@@ -380,7 +381,7 @@ public class StartMenuController {
     * @return an array of story names
     */
     public String[] getStories(){
-        List<String> availableStories = GameController.listFilesInFolder();
+        List<String> availableStories = SaveFileHandler.listFilesInFolder();
         return availableStories.toArray(new String[availableStories.size()]);
     }
 
