@@ -7,7 +7,6 @@ import edu.ntnu.g60.models.player.Player;
  * 
  * @author Stian Lyng
  */
-@FunctionalInterface
 public interface Goal{
   public boolean isFulfilled(Player player);
 }

@@ -7,11 +7,11 @@ import edu.ntnu.g60.models.player.Player;
  * 
  * @author Stian Lyng
  */
-@FunctionalInterface
 public interface Action {
-    
+
     /**
      * Executes the action on the player.
+     * 
      * @param player
      */
     public void execute(Player player);

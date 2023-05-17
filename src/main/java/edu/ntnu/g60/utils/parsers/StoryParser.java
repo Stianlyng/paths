@@ -44,7 +44,7 @@ public class StoryParser {
         this.jsonFile = Paths.get("src/main/resources/stories/" + jsonFilePath + ".json").toFile();
         this.objectMapper = new ObjectMapper();
     }
-    
+
     /**
      * Builds a Passage object from a PassageEntity object.
      *
@@ -53,21 +53,20 @@ public class StoryParser {
      */
     private Passage buildPassage(PassageEntity passageEntity) {
         Passage passage = new PassageBuilder()
-            .setTitle(passageEntity.getTitle())
-            .setContent(passageEntity.getContent())
-            .setBackground(passageEntity.getBackground())
-            .setPlayer(passageEntity.getPlayer())
-            .setEnemy(passageEntity.getEnemy())
-            .isFightScene(passageEntity.getIsFight())
-            .build();
-    
+                .setTitle(passageEntity.getTitle())
+                .setContent(passageEntity.getContent())
+                .setBackground(passageEntity.getBackground())
+                .setPlayer(passageEntity.getPlayer())
+                .setEnemy(passageEntity.getEnemy())
+                .isFightScene(passageEntity.getIsFight())
+                .build();
+
         passageEntity.getLinks().forEach(linkEntity -> {
             passage.addLink(buildLink(linkEntity));
         });
-    
+
         return passage;
     }
-
 
     /**
      * Builds a Link object from a LinkEntity object.

@@ -1,4 +1,5 @@
 package edu.ntnu.g60.models.goals;
+
 import java.io.Serializable;
 
 import edu.ntnu.g60.models.player.Player;
@@ -8,16 +9,16 @@ import edu.ntnu.g60.models.player.Player;
  * 
  * @author Stian Lyng
  */
-public class ScoreGoal implements Goal, Serializable{
+public class ScoreGoal implements Goal, Serializable {
     int minimumPoints;
 
-    public ScoreGoal(int minimumPoints){
+    public ScoreGoal(int minimumPoints) {
         this.minimumPoints = minimumPoints;
     }
 
-    public boolean isFulfilled(Player player){
+    public boolean isFulfilled(Player player) {
 
-        if (player.getScore() >= this.minimumPoints){
+        if (player.getScore() >= this.minimumPoints) {
             return true;
         } else {
             return false;
@@ -25,8 +26,7 @@ public class ScoreGoal implements Goal, Serializable{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "ScoreGoal: " + this.minimumPoints;
     }
 }
-

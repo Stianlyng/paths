@@ -10,7 +10,7 @@ import edu.ntnu.g60.models.player.Player;
  *
  * @author Stian Lyng
  */
-public class HealthAction implements Action, Serializable{
+public class HealthAction implements Action, Serializable {
     int health;
 
     /**
@@ -18,17 +18,19 @@ public class HealthAction implements Action, Serializable{
      *
      * @param health The health to add to the player.
      */
-    public HealthAction(int health){
+    public HealthAction(int health) {
         this.health = health;
     }
 
     /**
      * Executes the action on the player.
+     * 
      * @param player The player to execute the action on.
      * @throws IllegalActionException if the player is null.
      */
-    public void execute(Player player) throws IllegalActionException { 
-        if (player == null) throw new IllegalActionException("Player cannot be null.");
+    public void execute(Player player) throws IllegalActionException {
+        if (player == null)
+            throw new IllegalActionException("Player cannot be null.");
         player.addHealth(health);
     }
 

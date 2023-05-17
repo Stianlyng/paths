@@ -7,7 +7,8 @@ import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.story.Story;
 
 /**
- * The GameManager class is a singleton class that manages the creation, retrieval, and ending of a Game instance.
+ * The GameManager class is a singleton class that manages the creation,
+ * retrieval, and ending of a Game instance.
  *
  * @author Stian Lyng
  */
@@ -21,10 +22,12 @@ public class GameManager {
   /**
    * Private constructor to prevent instantiation.
    */
-  private GameManager() {}
+  private GameManager() {
+  }
 
   /**
-   * Returns the single instance of the GameManager class, creating it if necessary.
+   * Returns the single instance of the GameManager class, creating it if
+   * necessary.
    *
    * @return The single instance of the GameManager class.
    */
@@ -44,7 +47,6 @@ public class GameManager {
     this.player = player;
   }
 
-
   /**
    * Sets the Story for the next game.
    *
@@ -62,10 +64,11 @@ public class GameManager {
   public void setGoals(List<Goal> goals) {
     this.goals = goals;
   }
-  
+
   /**
    * Creates a new Game instance with the previously set Player, Story, and Goals.
-   * Throws an IllegalStateException if a game is already in progress or if the Player, Story, and Goals have not been set.
+   * Throws an IllegalStateException if a game is already in progress or if the
+   * Player, Story, and Goals have not been set.
    */
   public void createGame() {
     if (game != null) {

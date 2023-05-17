@@ -12,7 +12,7 @@ import edu.ntnu.g60.models.passage.Passage;
  * @author Stian Lyng
  */
 public class StoryBuilder {
-    
+
   private String title;
   private Passage openingPassage;
   private final HashMap<Link, Passage> passages = new HashMap<>();
@@ -40,10 +40,10 @@ public class StoryBuilder {
     if (openingPassage == null) {
       throw new IllegalArgumentException("Opening passage cannot be null.");
     }
-  
+
     Story story = new Story(title, openingPassage);
     story.addAllPassages(passages);
     return story;
   }
-  
+
 }

@@ -19,9 +19,9 @@ import edu.ntnu.g60.models.player.PlayerBuilder;
  * @author Stian Lyng
  */
 public class PlayerParser {
-    
+
     private final File jsonFile;
-    
+
     private final ObjectMapper objectMapper;
 
     public PlayerParser(String jsonFilePath) {
@@ -31,17 +31,19 @@ public class PlayerParser {
 
     public List<Player> parse() {
         try {
-            List<PlayerEntity> playerEntities = objectMapper.readValue(jsonFile, new TypeReference<List<PlayerEntity>>() {});
+            List<PlayerEntity> playerEntities = objectMapper.readValue(jsonFile,
+                    new TypeReference<List<PlayerEntity>>() {
+                    });
 
             return playerEntities.stream()
-                .map(playerEntity -> new PlayerBuilder()
-                    .setName(playerEntity.getName())
-                    .setHealth(playerEntity.getHealth())
-                    .setScore(playerEntity.getScore())
-                    .setGold(playerEntity.getGold())
-                    .setInventory(playerEntity.getInventory())
-                    .build())
-                .collect(Collectors.toList());
+                    .map(playerEntity -> new PlayerBuilder()
+                            .setName(playerEntity.getName())
+                            .setHealth(playerEntity.getHealth())
+                            .setScore(playerEntity.getScore())
+                            .setGold(playerEntity.getGold())
+                            .setInventory(playerEntity.getInventory())
+                            .build())
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
         }
