@@ -3,7 +3,6 @@ package edu.ntnu.g60.models.game;
 import java.util.List;
 
 import edu.ntnu.g60.models.goals.Goal;
-import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.story.Story;
 
@@ -13,11 +12,10 @@ import edu.ntnu.g60.models.story.Story;
  */
 public class GameManager {
   private static GameManager instance;
-  private static Game game;
-  private static Player player;
+  private Game game;
+  private Player player;
   private Story story;
   private List<Goal> goals;
-  private Link currentLink;
 
   /**
    * Private constructor to prevent instantiation.
@@ -36,22 +34,15 @@ public class GameManager {
     return instance;
   }
 
-  public Player getPlayer(){
-    return player;
-  }
-
   /**
    * Sets the Player for the next game.
    *
    * @param player The Player for the next game.
    */
-  public void setPlayer(Player updatedPlayer) {
-    player = updatedPlayer;
+  public void setPlayer(Player player) {
+    this.player = player;
   }
 
-  public void setGame(Game updatedGame){
-    game = updatedGame;
-  }
 
   /**
    * Sets the Story for the next game.
@@ -71,10 +62,6 @@ public class GameManager {
     this.goals = goals;
   }
   
-  public void setCurrentLink(Link currentLink) {
-      this.currentLink = currentLink;
-  }
-
   /**
    * Creates a new Game instance with the previously set Player, Story, and Goals.
    * Throws an IllegalStateException if a game is already in progress or if the Player, Story, and Goals have not been set.
@@ -107,10 +94,6 @@ public class GameManager {
    */
   public void endGame() {
     game = null;
-  }
-  
-  public Link getCurrentLink() {
-      return currentLink;
   }
 
 }

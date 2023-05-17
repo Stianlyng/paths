@@ -45,15 +45,26 @@ public class Game implements Serializable{
         this.story = new Story(other.story); 
         this.goals = new ArrayList<>(other.goals); 
   }
-
+  /**
+   * Gets the player of the game.
+   * @return The player of the game.
+   */
   public Player getPlayer() {
     return this.player;
   }
 
+  /**
+   * Gets the story of the game.
+   * @return The story of the game.
+   */
   public Story getStory() {
     return this.story;
   }
 
+  /**
+   * Gets the goals of the game.
+   * @return The goals of the game.
+   */
   public List<Goal> getGoals() {
     return this.goals;
   }
@@ -65,7 +76,6 @@ public class Game implements Serializable{
   public Passage begin() {
     return this.story.getOpeningPassage(); 
   }
-
 
   /**
    * Moves the player to the passage that the link points to.

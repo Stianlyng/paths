@@ -23,6 +23,7 @@ import java.util.Set;
 
 public class CommandLineInterface {
     private GameManager gameManager;
+    private static Passage currentPassage;
 
     public CommandLineInterface() {
         gameManager = GameManager.getInstance();
@@ -146,8 +147,12 @@ public class CommandLineInterface {
         System.out.println(playerSavesList.get(storyNumber));
 
         SerializedGameState save = SaveFileHandler.loadGameFromFile(playerSavesList.get(storyNumber));
-        gameManager.setGame(save.getGame());
-        gameManager.setCurrentLink(save.getCurrentLink()); 
+        gameManager.setPlayer(save.getGame().getPlayer());
+        gameManager.setStory(save.getGame().getStory());
+        gameManager.setGoals(save.getGame().getGoals());
+        gameManager.createGame();
+        
+        currentPassage = gameManager.getGame().go(save.getCurrentLink()); 
         return playGame(false);
     }
 
@@ -163,10 +168,9 @@ public class CommandLineInterface {
 
         Scanner scanner = new Scanner(System.in);
 
-        Passage currentPassage = gameManager.getGame().begin();
 
-        if (!newGame) {
-            currentPassage = gameManager.getGame().go(gameManager.getCurrentLink());
+        if (newGame) {
+            currentPassage = gameManager.getGame().begin();
         }
 
         while (true) {
