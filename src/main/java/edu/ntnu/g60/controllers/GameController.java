@@ -10,7 +10,7 @@ import edu.ntnu.g60.models.goals.ScoreGoal;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
 import edu.ntnu.g60.models.story.Story;
-import edu.ntnu.g60.utils.fileHandling.StoryParser;
+import edu.ntnu.g60.utils.parsers.StoryParser;
 import javafx.concurrent.Task;
 
 

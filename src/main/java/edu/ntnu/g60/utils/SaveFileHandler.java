@@ -1,4 +1,4 @@
-package edu.ntnu.g60.utils.fileHandling;
+package edu.ntnu.g60.utils;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import edu.ntnu.g60.models.game.Game;
-import edu.ntnu.g60.models.game.Save;
 import edu.ntnu.g60.models.passage.Link;
 
 public class SaveFileHandler{
@@ -32,7 +31,7 @@ public class SaveFileHandler{
                             storyIdentifier + "_" + 
                             saveName + ".ser";
       Link link = new Link(currentPassage, currentPassage);
-      Save save = new Save(game, link);
+      SerializedGameState save = new SerializedGameState(game, link);
       try (FileOutputStream fileOut = new FileOutputStream(filePath);
            ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
           out.writeObject(save);
@@ -42,11 +41,11 @@ public class SaveFileHandler{
   }
   
   // returns the save and the link to the current passage
-  public static Save loadGameFromFile(String filename) {
+  public static SerializedGameState loadGameFromFile(String filename) {
       String filePath = "src/main/resources/saves/" + filename;
       try (FileInputStream fileIn = new FileInputStream(filePath);
            ObjectInputStream in = new ObjectInputStream(fileIn)) {
-          Save save = (Save) in.readObject();
+          SerializedGameState save = (SerializedGameState) in.readObject();
           return save;
       } catch (IOException | ClassNotFoundException e) {
           e.printStackTrace();

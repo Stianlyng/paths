@@ -2,6 +2,9 @@ package edu.ntnu.g60.utils.fileHandling;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.ntnu.g60.utils.parsers.TextfileParser;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

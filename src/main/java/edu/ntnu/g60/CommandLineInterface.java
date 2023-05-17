@@ -2,7 +2,6 @@ package edu.ntnu.g60;
 
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.game.GameManager;
-import edu.ntnu.g60.models.game.Save;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
@@ -13,8 +12,9 @@ import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
 import edu.ntnu.g60.models.story.Story;
-import edu.ntnu.g60.utils.fileHandling.SaveFileHandler;
-import edu.ntnu.g60.utils.fileHandling.StoryParser;
+import edu.ntnu.g60.utils.SaveFileHandler;
+import edu.ntnu.g60.utils.SerializedGameState;
+import edu.ntnu.g60.utils.parsers.StoryParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,7 +145,7 @@ public class CommandLineInterface {
         List<String> playerSavesList = new ArrayList<>(playerSaves);
         System.out.println(playerSavesList.get(storyNumber));
 
-        Save save = SaveFileHandler.loadGameFromFile(playerSavesList.get(storyNumber));
+        SerializedGameState save = SaveFileHandler.loadGameFromFile(playerSavesList.get(storyNumber));
         gameManager.setGame(save.getGame());
         gameManager.setCurrentLink(save.getCurrentLink()); 
         return playGame(false);

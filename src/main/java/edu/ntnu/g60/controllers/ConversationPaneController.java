@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
-import edu.ntnu.g60.utils.fileHandling.SaveFileHandler;
+import edu.ntnu.g60.utils.SaveFileHandler;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;

@@ -1,4 +1,4 @@
-package edu.ntnu.g60.utils.fileHandling;
+package edu.ntnu.g60.utils.parsers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
