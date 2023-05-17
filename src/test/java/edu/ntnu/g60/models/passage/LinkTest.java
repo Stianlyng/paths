@@ -33,7 +33,7 @@ class LinkTest {
 
     @Test
     void testNotEquals() {
-        Link link2 = new Link("Link 2", "Passage 1");
+        Link link2 = new Link("Link 2", "Passage 2");
         assertNotEquals(link, link2);
     }
 
