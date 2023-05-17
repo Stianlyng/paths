@@ -13,6 +13,8 @@ import java.util.Collection;
 /**
  * The Story class represents the story of the game.
  * It contains the title, the opening passage, and the passages of the story.
+ *
+ * @author Stian Lyng
  */
 public class Story implements Serializable{
 

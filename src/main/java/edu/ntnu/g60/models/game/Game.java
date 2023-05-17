@@ -12,6 +12,8 @@ import edu.ntnu.g60.models.story.Story;
 /**
  * The Game class is the main class of the game. 
  * It contains the player, the story, and the goals.
+ *
+ * @author Stian Lyng
  */
 public class Game implements Serializable{
 

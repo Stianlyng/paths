@@ -8,6 +8,8 @@ import java.util.Objects;
 /**
  * The Passage class represents a passage in the story.
  * It contains the title, the content, and the links to other passages.
+ *
+ * @author Stian Lyng
  */
 public class Passage implements Serializable{
 

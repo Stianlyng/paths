@@ -13,6 +13,11 @@ import edu.ntnu.g60.entities.PlayerEntity;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
 
+/**
+ * This class is responsible for parsing a player from a JSON file.
+ * 
+ * @author Stian Lyng
+ */
 public class PlayerParser {
     
     private final File jsonFile;

@@ -7,6 +7,8 @@ import java.util.List;
 /**
  * The Player class represents the player of the game.
  * It contains the name, health, score, gold, and inventory of the player.
+ *
+ * @author Stian Lyng
  */
 public class Player implements Serializable{
   

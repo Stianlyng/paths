@@ -11,7 +11,6 @@ import edu.ntnu.g60.exceptions.model.actions.InvalidActionTypeException;
  * 
  * @see StoryParser
  * @author Stian Lyng
- * @version 1.0
  */
 public class ActionFactory {
 

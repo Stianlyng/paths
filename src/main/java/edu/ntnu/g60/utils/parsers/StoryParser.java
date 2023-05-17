@@ -21,7 +21,6 @@ import edu.ntnu.g60.models.story.StoryBuilder;
 /**
  * StoryParser is a class that parses a JSON file into a Story object.
  *
- * @version 1.0
  * @author Stian Lyng
  */
 public class StoryParser {

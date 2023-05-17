@@ -8,7 +8,6 @@ import edu.ntnu.g60.exceptions.model.actions.InvalidActionTypeException;
  *
  * @see ActionFactory and StoryParser
  * @author Stian Lyng
- * @version 1.0
  */
 enum ActionTypeEnum {
     HEALTH("health"),

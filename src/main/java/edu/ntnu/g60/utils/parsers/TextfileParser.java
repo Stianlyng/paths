@@ -16,7 +16,6 @@ import java.util.regex.Pattern;
 /**
  * A utility class for parsing text stories and converting them to JSON format.
  * 
- * @version 1.0
  * @author Stian Lyng
  */
 public class TextfileParser {

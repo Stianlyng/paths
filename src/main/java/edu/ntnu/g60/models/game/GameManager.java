@@ -8,6 +8,7 @@ import edu.ntnu.g60.models.story.Story;
 
 /**
  * The GameManager class is a singleton class that manages the creation, retrieval, and ending of a Game instance.
+ *
  * @author Stian Lyng
  */
 public class GameManager {

@@ -17,6 +17,11 @@ import java.util.stream.Stream;
 import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.passage.Link;
 
+/**
+ * This class is responsible for saving and loading games to and from files.
+ * 
+ * @author Stian Lyng
+ */
 public class SaveFileHandler{
     
   public static void saveGameToFile(Game game, String saveName, String currentPassage) {

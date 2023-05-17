@@ -3,6 +3,11 @@ import java.io.Serializable;
 
 import edu.ntnu.g60.models.player.Player;
 
+/**
+ * This interface represents actions that can be performed on a player.
+ * 
+ * @author Stian Lyng
+ */
 public class ScoreGoal implements Goal, Serializable{
     int minimumPoints;
 

@@ -1,5 +1,10 @@
 package edu.ntnu.g60.models.passage;
 
+/**
+ * This class is used to build a passage.
+ * 
+ * @author Stian Lyng
+ */
 public class PassageBuilder {
     
     /**

@@ -10,6 +10,8 @@ import edu.ntnu.g60.models.actions.Action;
 /**
  * The Link class represents a link between two passages.
  * It allows the player to move from one passage to another.
+ *
+ * @author Stian Lyng
  */
 public class Link implements Serializable{
 

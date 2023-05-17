@@ -6,7 +6,6 @@ import edu.ntnu.g60.models.player.Player;
  * This interface represents actions that can be performed on a player.
  * 
  * @author Stian Lyng
- * @version 1.0
  */
 @FunctionalInterface
 public interface Action {
