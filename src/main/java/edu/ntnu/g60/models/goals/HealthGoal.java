@@ -4,25 +4,29 @@ import java.io.Serializable;
 
 import edu.ntnu.g60.models.player.Player;
 
-public class HealthGoal implements Goal, Serializable{
+/**
+ * This interface represents actions that can be performed on a player.
+ * 
+ * @author Stian Lyng
+ */
+public class HealthGoal implements Goal, Serializable {
     int minimumHealth;
 
-    public HealthGoal(int minimumHealth){
+    public HealthGoal(int minimumHealth) {
         this.minimumHealth = minimumHealth;
     }
 
-    public boolean isFulfilled(Player player){
-        if(player.getHealth() >= this.minimumHealth ){
+    public boolean isFulfilled(Player player) {
+        if (player.getHealth() >= this.minimumHealth) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "HealthGoal: " + this.minimumHealth;
     }
-    
-}
 
+}

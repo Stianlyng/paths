@@ -1,4 +1,5 @@
 package edu.ntnu.g60.models.game;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,30 +11,34 @@ import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.story.Story;
 
 /**
- * The Game class is the main class of the game. 
+ * The Game class is the main class of the game.
  * It contains the player, the story, and the goals.
+ *
+ * @author Stian Lyng
  */
-public class Game implements Serializable{
+public class Game implements Serializable {
 
   private final Player player;
   private final Story story;
   private final List<Goal> goals;
-  private Passage currentPassage; // Add this field
 
   /**
    * Constructor for the Game class.
+   * 
    * @param player The player of the game.
-   * @param story The story of the game.
-   * @param goals The goals of the game.
+   * @param story  The story of the game.
+   * @param goals  The goals of the game.
    */
-  public Game(Player player, Story story, List<Goal> goals) throws IllegalArgumentException{
-    if (player == null) throw new IllegalArgumentException("Player cannot be null.");
-    if (story == null) throw new IllegalArgumentException("Story cannot be null.");
-    if (goals == null) throw new IllegalArgumentException("Goals cannot be null.");
+  public Game(Player player, Story story, List<Goal> goals) throws IllegalArgumentException {
+    if (player == null)
+      throw new IllegalArgumentException("Player cannot be null.");
+    if (story == null)
+      throw new IllegalArgumentException("Story cannot be null.");
+    if (goals == null)
+      throw new IllegalArgumentException("Goals cannot be null.");
     this.player = player;
     this.story = story;
     this.goals = goals;
-    this.currentPassage = this.story.getOpeningPassage(); // Initialize the current passage
   }
 
   /**
@@ -43,46 +48,57 @@ public class Game implements Serializable{
    * todo; finish the java doc
    */
   public Game(Game other) {
-      this.player = new Player(other.player); 
-        this.story = new Story(other.story); 
-        this.goals = new ArrayList<>(other.goals); 
-        this.currentPassage = this.story.getPassage(other.currentPassage.getTitle()); // Copy the current passage
+    this.player = new Player(other.player);
+    this.story = new Story(other.story);
+    this.goals = new ArrayList<>(other.goals);
   }
 
+  /**
+   * Gets the player of the game.
+   * 
+   * @return The player of the game.
+   */
   public Player getPlayer() {
     return this.player;
   }
 
+  /**
+   * Gets the story of the game.
+   * 
+   * @return The story of the game.
+   */
   public Story getStory() {
     return this.story;
   }
 
+  /**
+   * Gets the goals of the game.
+   * 
+   * @return The goals of the game.
+   */
   public List<Goal> getGoals() {
     return this.goals;
   }
 
-  public Passage getCurrentPassage() {
-        return this.currentPassage; // Add this getter method
-  }
-
   /**
    * Starts the game by returning the first passage of the story.
+   * 
    * @return The first passage of the story.
    */
   public Passage begin() {
-    this.currentPassage = this.story.getOpeningPassage(); 
-    return this.currentPassage;
+    return this.story.getOpeningPassage();
   }
-
 
   /**
    * Moves the player to the passage that the link points to.
+   * 
    * @param link The link to the passage.
    * @return The passage that the link points to.
    */
   public Passage go(Link link) {
-      this.currentPassage = this.story.getPassage(link.getReference()); // Update the current passage
-      return this.currentPassage;
+    System.out.println("Going to: " + link.getReference());
+    System.out.println(this.story.getPassage(link).getTitle());
+    return this.story.getPassage(link);
 
   }
 }

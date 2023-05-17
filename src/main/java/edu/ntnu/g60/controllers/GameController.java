@@ -1,28 +1,25 @@
 package edu.ntnu.g60.controllers;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import edu.ntnu.g60.TEMP_CURRENT_PASSAGE;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.GoldGoal;
 import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.goals.InventoryGoal;
 import edu.ntnu.g60.models.goals.ScoreGoal;
+import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
 import edu.ntnu.g60.models.story.Story;
-import edu.ntnu.g60.utils.fileHandling.StoryParser;
+import edu.ntnu.g60.utils.parsers.StoryParser;
 import javafx.concurrent.Task;
 
 
 /**
  * The GameController class is responsible for controlling the game flow and managing game-related operations.
- * It provides methods for setting and retrieving player, story, and save names, listing files in a folder,
+ * It provides methods for setting and retrieving player, story, and save names, 
  * creating a new game, and delaying execution.
 */
 public class GameController {
@@ -85,25 +82,6 @@ public class GameController {
         return playerName;
     }
 
-    /**
-    * Lists the files in the "src/main/resources/stories" folder.
-    *
-    * @return a list of file names without extensions
-    */
-    public static List<String> listFilesInFolder() {
-        Path folderPath = Paths.get("src/main/resources/stories");
-
-        try (Stream<Path> paths = Files.list(folderPath)) {
-            return paths.filter(Files::isRegularFile)
-                        .map(Path::getFileName)
-                        .map(Path::toString)
-                        .map(name -> name.substring(0, name.lastIndexOf('.')))
-                        .collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     /**
     * Creates a new game instance.
@@ -137,6 +115,11 @@ public class GameController {
         GameManager.getInstance().setStory(story);
         GameManager.getInstance().setGoals(goals);
         GameManager.getInstance().createGame();
+
+        //todo; dette må kanskje flytte? Skjønner ikke flow i javafx...
+        Passage currentPassage = GameManager.getInstance().getGame().begin();
+        TEMP_CURRENT_PASSAGE.getInstance().setPassage(currentPassage); 
+
     }
 
     /**

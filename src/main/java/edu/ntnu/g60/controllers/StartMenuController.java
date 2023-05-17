@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 import edu.ntnu.g60.models.game.GameManager;
-import edu.ntnu.g60.utils.fileHandling.TextfileParser;
+import edu.ntnu.g60.utils.SaveFileHandler;
+import edu.ntnu.g60.utils.parsers.TextfileParser;
 import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
@@ -270,7 +271,7 @@ public class StartMenuController {
     * @return an array of player names
     */
     public String[] getPlayerNames(){
-        List<String> availablePlayers = new ArrayList<>(GameManager.getAvailablePlayers());
+        List<String> availablePlayers = new ArrayList<>(SaveFileHandler.getAvailablePlayers());
         String[] players = availablePlayers.toArray(new String[availablePlayers.size()]);
         return players;
     }
@@ -309,12 +310,12 @@ public class StartMenuController {
     * @param event the action event
     */
     public void deleteAction(ActionEvent event){
-        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
+        Set<String> playerSaves = SaveFileHandler.getPlayerSaves(GameController.getPlayerName());
         if(!playerSaves.isEmpty()) {
             if(DialogBoxes.alertBoxChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
                 ContinuePane.addDeleteObjects(getCurreContinuePane());
                 try {
-                    GameManager.deletePlayerSaves(GameController.getPlayerName());
+                    SaveFileHandler.deletePlayerSaves(GameController.getPlayerName());
                 } catch (IOException e) {
                 e.printStackTrace();
                 }
@@ -332,7 +333,7 @@ public class StartMenuController {
     * @throws IOException if an I/O error occurs
     */
     public static void populateSaveButtons(Button save1Button, Button save2Button, Button save3Button) throws IOException {
-       Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
+       Set<String> playerSaves = SaveFileHandler.getPlayerSaves(GameController.getPlayerName());
        String[] saveNames = new String[3];
        String[] storyNames = new String[3];
        int index = 0;
@@ -361,7 +362,7 @@ public class StartMenuController {
                        GameController.setSaveName(saveNames[buttonNumber - 1]);
                        GameController.setStoryName(storyNames[buttonNumber - 1].replace(" ", "_"));
                        GameController.createNewGame();
-                       GameManager.getInstance().loadGameFromFile(GameController.getPlayerName() + "_" + storyNames[buttonNumber - 1] + "_" + saveNames[buttonNumber - 1] + ".ser");
+                       SaveFileHandler.loadGameFromFile(GameController.getPlayerName() + "_" + storyNames[buttonNumber - 1] + "_" + saveNames[buttonNumber - 1] + ".ser");
                        NextLevelAnimation.animation();
                    } catch (IOException e1) {
                        e1.printStackTrace();
@@ -380,7 +381,7 @@ public class StartMenuController {
     * @return an array of story names
     */
     public String[] getStories(){
-        List<String> availableStories = GameController.listFilesInFolder();
+        List<String> availableStories = SaveFileHandler.listFilesInFolder();
         return availableStories.toArray(new String[availableStories.size()]);
     }
 
@@ -409,7 +410,7 @@ public class StartMenuController {
     */
     public void startAction(ActionEvent event){
         GameManager.getInstance().endGame();
-        Set<String> playerSaves = GameManager.getInstance().getPlayerSaves(GameController.getPlayerName());
+        Set<String> playerSaves = SaveFileHandler.getPlayerSaves(GameController.getPlayerName());
         NewGamePane.updateSaveName();
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
             boolean overwrite = true;
@@ -426,7 +427,7 @@ public class StartMenuController {
             }
             if(overwrite){
                 try {
-                    GameManager.deleteSave(saveNames[2], GameController.getPlayerName());
+                    SaveFileHandler.deleteSave(saveNames[2], GameController.getPlayerName());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

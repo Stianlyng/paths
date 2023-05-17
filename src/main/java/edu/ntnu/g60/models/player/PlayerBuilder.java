@@ -3,6 +3,11 @@ package edu.ntnu.g60.models.player;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents a player in the game.
+ * 
+ * @author Stian Lyng
+ */
 public class PlayerBuilder {
     private String name;
     private int health;

@@ -10,7 +10,7 @@ import edu.ntnu.g60.models.player.Player;
  * 
  * @author Stian Lyng
  */
-public class InventoryAction implements Action, Serializable{
+public class InventoryAction implements Action, Serializable {
     String inventory;
 
     /**
@@ -18,7 +18,7 @@ public class InventoryAction implements Action, Serializable{
      * 
      * @param inventory The inventory to add to the player.
      */
-    public InventoryAction(String  inventory){
+    public InventoryAction(String inventory) {
         this.inventory = inventory;
     }
 
@@ -28,8 +28,9 @@ public class InventoryAction implements Action, Serializable{
      * @param player The player to execute the action on.
      * @throws IllegalActionException if the player is null.
      */
-    public void execute(Player player) throws IllegalActionException { 
-        if (player == null) throw new IllegalActionException("Player cannot be null.");
+    public void execute(Player player) throws IllegalActionException {
+        if (player == null)
+            throw new IllegalActionException("Player cannot be null.");
         player.addToInventory(inventory);
     }
 

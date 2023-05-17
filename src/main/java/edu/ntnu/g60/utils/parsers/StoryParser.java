@@ -1,4 +1,4 @@
-package edu.ntnu.g60.utils.fileHandling;
+package edu.ntnu.g60.utils.parsers;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,6 @@ import edu.ntnu.g60.models.story.StoryBuilder;
 /**
  * StoryParser is a class that parses a JSON file into a Story object.
  *
- * @version 1.0
  * @author Stian Lyng
  */
 public class StoryParser {
@@ -45,7 +44,7 @@ public class StoryParser {
         this.jsonFile = Paths.get("src/main/resources/stories/" + jsonFilePath + ".json").toFile();
         this.objectMapper = new ObjectMapper();
     }
-    
+
     /**
      * Builds a Passage object from a PassageEntity object.
      *
@@ -54,21 +53,20 @@ public class StoryParser {
      */
     private Passage buildPassage(PassageEntity passageEntity) {
         Passage passage = new PassageBuilder()
-            .setTitle(passageEntity.getTitle())
-            .setContent(passageEntity.getContent())
-            .setBackground(passageEntity.getBackground())
-            .setPlayer(passageEntity.getPlayer())
-            .setEnemy(passageEntity.getEnemy())
-            .isFightScene(passageEntity.getIsFight())
-            .build();
-    
+                .setTitle(passageEntity.getTitle())
+                .setContent(passageEntity.getContent())
+                .setBackground(passageEntity.getBackground())
+                .setPlayer(passageEntity.getPlayer())
+                .setEnemy(passageEntity.getEnemy())
+                .isFightScene(passageEntity.getIsFight())
+                .build();
+
         passageEntity.getLinks().forEach(linkEntity -> {
             passage.addLink(buildLink(linkEntity));
         });
-    
+
         return passage;
     }
-
 
     /**
      * Builds a Link object from a LinkEntity object.

@@ -12,21 +12,18 @@ import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
 import edu.ntnu.g60.models.story.Story;
-import edu.ntnu.g60.utils.fileHandling.StoryParser;
+import edu.ntnu.g60.utils.SaveFileHandler;
+import edu.ntnu.g60.utils.SerializedGameState;
+import edu.ntnu.g60.utils.parsers.StoryParser;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CommandLineInterface {
     private GameManager gameManager;
+    private static Passage currentPassage;
 
     public CommandLineInterface() {
         gameManager = GameManager.getInstance();
@@ -70,7 +67,7 @@ public class CommandLineInterface {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please choose a story:");
-        List<String> names = listFilesInFolder();
+        List<String> names = SaveFileHandler.listFilesInFolder();
         for (int i = 0; i < names.size(); i++) {
             System.out.println((i + 1) + ": " + names.get(i));
         }
@@ -80,20 +77,6 @@ public class CommandLineInterface {
         return parser.build();
     }
    
-    private static List<String> listFilesInFolder() {
-        Path folderPath = Paths.get("src/main/resources/stories");
-
-        try (Stream<Path> paths = Files.list(folderPath)) {
-            return paths.filter(Files::isRegularFile)
-                        .map(Path::getFileName)
-                        .map(Path::toString)
-                        .map(name -> name.substring(0, name.lastIndexOf('.')))
-                        .collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
     private boolean startNewGame() {
 
         Scanner scanner = new Scanner(System.in);
@@ -135,7 +118,7 @@ public class CommandLineInterface {
 
         System.out.println("Select player: ");
 
-        Set<String> players = gameManager.getAvailablePlayers();
+        Set<String> players = SaveFileHandler.getAvailablePlayers();
         List<String> playersList = new ArrayList<>(players);
 
         for (String player : players) {
@@ -145,7 +128,7 @@ public class CommandLineInterface {
 
         int playerNumber = scanner.nextInt() - 1;
 
-        Set<String> playerSaves = gameManager.getPlayerSaves(playersList.get(playerNumber));
+        Set<String> playerSaves = SaveFileHandler.getPlayerSaves(playersList.get(playerNumber));
         if (playerSaves.isEmpty()) {
             System.out.println("No saves found for this player.");
         }
@@ -163,8 +146,13 @@ public class CommandLineInterface {
         List<String> playerSavesList = new ArrayList<>(playerSaves);
         System.out.println(playerSavesList.get(storyNumber));
 
-        gameManager.loadGameFromFile(playerSavesList.get(storyNumber));
+        SerializedGameState save = SaveFileHandler.loadGameFromFile(playerSavesList.get(storyNumber));
+        gameManager.setPlayer(save.getGame().getPlayer());
+        gameManager.setStory(save.getGame().getStory());
+        gameManager.setGoals(save.getGame().getGoals());
+        gameManager.createGame();
         
+        currentPassage = gameManager.getGame().go(save.getCurrentLink()); 
         return playGame(false);
     }
 
@@ -180,11 +168,10 @@ public class CommandLineInterface {
 
         Scanner scanner = new Scanner(System.in);
 
-        if (gameManager.getGame().getCurrentPassage() == null) {
-            gameManager.getGame().begin();
-        }
 
-        Passage currentPassage = gameManager.getGame().getCurrentPassage();
+        if (newGame) {
+            currentPassage = gameManager.getGame().begin();
+        }
 
         while (true) {
 
@@ -217,13 +204,9 @@ public class CommandLineInterface {
             String input = scanner.nextLine();
             
             if (input.equalsIgnoreCase("save")) {
-                if (newGame) {
-                    System.out.print("Enter a name for the save: ");
-                    String saveName = scanner.nextLine();
-                    gameManager.saveGameToFile(saveName);
-                } else {
-                    gameManager.saveGameToFile("");
-                }
+                System.out.print("Enter a name for the save: ");
+                String saveName = scanner.nextLine();
+                SaveFileHandler.saveGameToFile(gameManager.getGame(), saveName, currentPassage.getTitle());
                 
                 System.out.println("Game saved successfully.");
                 continue;
@@ -245,8 +228,6 @@ public class CommandLineInterface {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-
-
 
     public static void main(String[] args) {
         CommandLineInterface cli = new CommandLineInterface();

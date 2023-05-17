@@ -1,42 +1,33 @@
 package edu.ntnu.g60.models.game;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.story.Story;
 
 /**
- * The GameManager class is a singleton class that manages the creation, retrieval, and ending of a Game instance.
+ * The GameManager class is a singleton class that manages the creation,
+ * retrieval, and ending of a Game instance.
+ *
  * @author Stian Lyng
  */
 public class GameManager {
   private static GameManager instance;
-  private static Game game;
-  private static Player player;
+  private Game game;
+  private Player player;
   private Story story;
   private List<Goal> goals;
-  private String saveName;
 
   /**
    * Private constructor to prevent instantiation.
    */
-  private GameManager() {}
+  private GameManager() {
+  }
 
   /**
-   * Returns the single instance of the GameManager class, creating it if necessary.
+   * Returns the single instance of the GameManager class, creating it if
+   * necessary.
    *
    * @return The single instance of the GameManager class.
    */
@@ -47,21 +38,13 @@ public class GameManager {
     return instance;
   }
 
-  public Player getPlayer(){
-    return player;
-  }
-
   /**
    * Sets the Player for the next game.
    *
    * @param player The Player for the next game.
    */
-  public void setPlayer(Player updatedPlayer) {
-    player = updatedPlayer;
-  }
-
-  public void setGame(Game updatedGame){
-    game = updatedGame;
+  public void setPlayer(Player player) {
+    this.player = player;
   }
 
   /**
@@ -84,7 +67,8 @@ public class GameManager {
 
   /**
    * Creates a new Game instance with the previously set Player, Story, and Goals.
-   * Throws an IllegalStateException if a game is already in progress or if the Player, Story, and Goals have not been set.
+   * Throws an IllegalStateException if a game is already in progress or if the
+   * Player, Story, and Goals have not been set.
    */
   public void createGame() {
     if (game != null) {
@@ -114,108 +98,6 @@ public class GameManager {
    */
   public void endGame() {
     game = null;
-  }
-  
-  public void saveGameToFile(String saveName) {
-      if (game == null) {
-          throw new IllegalStateException("No game to save.");
-      }
-  
-      String playerIdentifier = this.player.getName(); 
-      String storyIdentifier = this.story.getTitle(); 
-      String filePath = "src/main/resources/saves/" +
-                            playerIdentifier + "_" + 
-                            storyIdentifier + "_" + 
-                            saveName + ".ser";
-  
-      Save save = new Save(saveName, game);
-      saveName = save.getSaveName();
-      try (FileOutputStream fileOut = new FileOutputStream(filePath);
-           ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-          out.writeObject(save);
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
-  }
-  
-  public String loadGameFromFile(String filename) {
-      String filePath = "src/main/resources/saves/" + filename;
-      try (FileInputStream fileIn = new FileInputStream(filePath);
-           ObjectInputStream in = new ObjectInputStream(fileIn)) {
-          Save save = (Save) in.readObject();
-          System.out.println("Loaded save: " + save.getSaveName());
-          game = new Game(save.getGame()); // Create a deep copy of the saved game
-          saveName = save.getSaveName();
-          return save.getSaveName();
-      } catch (IOException | ClassNotFoundException e) {
-          e.printStackTrace();
-          return null;
-      }
-  }
-
-  /**
-   * Returns a list of the current active player's available saves.
-   *
-   * @param playerIdentifier The identifier of the player.
-   * @return A list of save names.
-   */
-  public static Set<String> getPlayerSaves(String playerIdentifier) {
-      try (Stream<Path> paths = Files.walk(Paths.get("src/main/resources/saves/"))) {
-          return paths
-              .filter(Files::isRegularFile)
-              .map(Path::getFileName)
-              .map(Path::toString)
-              .filter(filename -> filename.startsWith(playerIdentifier + "_"))
-              .collect(Collectors.toSet());
-      } catch (IOException e) {
-          e.printStackTrace();
-          return Collections.emptySet();
-      }
-  }
-
-  /**
-   * Deletes all saves for a specific player.
-   *
-   * @param playerIdentifier The identifier of the player.
-   * @throws IOException If an I/O error occurs.
-   */
-  public static void deletePlayerSaves(String playerIdentifier) throws IOException {
-      Set<String> playerSaves = getPlayerSaves(playerIdentifier);
-      for (String save : playerSaves) {
-          Path filePath = Paths.get("src/main/resources/saves/" + save);
-          Files.deleteIfExists(filePath);
-      }
-  }
-
-  /**
-   * Deletes a specific save.
-   * 
-   * @param saveName
-   * @throws IOException
-   */
-  public static void deleteSave(String playerIdentifier, String saveName) throws IOException {
-      Path filePath = Paths.get("src/main/resources/saves/" + playerIdentifier + "_" + saveName);
-      Files.deleteIfExists(filePath);
-  }
-
-  
-  /**
-  * Returns a set of the available players.
-  *
-  * @return A set of player identifiers.
-  */
-  public static Set<String> getAvailablePlayers() {
-     try (Stream<Path> paths = Files.walk(Paths.get("src/main/resources/saves/"))) {
-         return paths
-             .filter(Files::isRegularFile)
-             .map(Path::getFileName)
-             .map(Path::toString)
-             .map(filename -> filename.split("_")[0])
-             .collect(Collectors.toSet());
-     } catch (IOException e) {
-         e.printStackTrace();
-         return Collections.emptySet();
-     }
   }
 
 }

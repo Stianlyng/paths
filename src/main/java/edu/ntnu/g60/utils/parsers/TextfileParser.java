@@ -1,4 +1,4 @@
-package edu.ntnu.g60.utils.fileHandling;
+package edu.ntnu.g60.utils.parsers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -16,7 +16,6 @@ import java.util.regex.Pattern;
 /**
  * A utility class for parsing text stories and converting them to JSON format.
  * 
- * @version 1.0
  * @author Stian Lyng
  */
 public class TextfileParser {
