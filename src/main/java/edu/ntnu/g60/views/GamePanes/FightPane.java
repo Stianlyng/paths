@@ -1,6 +1,8 @@
 package edu.ntnu.g60.views.GamePanes;
 
 import java.io.FileNotFoundException;
+
+import edu.ntnu.g60.TEMP_CURRENT_PASSAGE;
 import edu.ntnu.g60.controllers.FightPaneController;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.views.ViewObjects;
@@ -36,9 +38,9 @@ public class FightPane extends StackPane{
     }
 
     public static Group addFightPaneObjects() throws FileNotFoundException{
-        ImageView enemyImage = ViewObjects.newImage("characters", GameManager.getInstance().getGame().getCurrentPassage().getPlayer(), 150, 200, 150, 150);
-        ImageView playerImage = ViewObjects.newImage("characters", GameManager.getInstance().getGame().getCurrentPassage().getEnemy(), 700, 200, 150, 150);
-        ImageView backgroundImage = ViewObjects.newImage("backgrounds", GameManager.getInstance().getGame().getCurrentPassage().getBackground(), 0, 0, 1650, 1000);
+        ImageView enemyImage = ViewObjects.newImage("characters", TEMP_CURRENT_PASSAGE.getInstance().getPassage().getPlayer(), 150, 200, 150, 150);
+        ImageView playerImage = ViewObjects.newImage("characters", TEMP_CURRENT_PASSAGE.getInstance().getPassage().getEnemy(), 700, 200, 150, 150);
+        ImageView backgroundImage = ViewObjects.newImage("backgrounds", TEMP_CURRENT_PASSAGE.getInstance().getPassage().getBackground(), 0, 0, 1650, 1000);
         Button fightButton = ViewObjects.newButton("Fight", 309-193, 534-71, "fight_button", "fight_hover", controller::fightAction);
         Button healButton = ViewObjects.newButton("Heal", 704-193, 534-71, "heal_button", "heal_hover", controller::healAction);
         Button inventoryButton = ViewObjects.newButton("Inventory", 309-193, 625-71, "inventory_button", "inventory_hover", controller::inventoryAction);
