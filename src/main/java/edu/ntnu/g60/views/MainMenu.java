@@ -10,11 +10,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
+import edu.ntnu.g60.utils.parsers.TextfileParser;
 
 /**
  * Class representing the main menu.
@@ -61,14 +63,19 @@ public class MainMenu {
         importGameFileButton.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
-
-            // TODO: Handle the selected file
-            
+        
             if (selectedFile != null) {
-                System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                TextfileParser parser = new TextfileParser();
+                boolean parsedStory = parser.parseStory(selectedFile);
+                if (parsedStory) {
+                    // Handle successful parsing, e.g., show a success message
+                } else {
+                    // Handle unsuccessful parsing, e.g., show an error message
+                }
+            } else {
+                // Handle case where no file was selected
             }
         });
-
         GridPane layout = new GridPane();
         layout.setAlignment(Pos.CENTER);
         layout.setVgap(10);

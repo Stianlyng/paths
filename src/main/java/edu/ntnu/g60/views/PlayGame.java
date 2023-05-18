@@ -1,6 +1,7 @@
 package edu.ntnu.g60.views;
 
 import java.util.List;
+import java.util.Optional;
 
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.game.Game;
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -115,12 +117,17 @@ public class PlayGame {
         ComboBox<String> options = new ComboBox<>();
         options.getItems().addAll(SAVE, MAIN_MENU);
         options.setPromptText(OPTIONS);
-
+    
         options.setOnAction(e -> {
             String selectedOption = options.getSelectionModel().getSelectedItem();
             switch (selectedOption) {
                 case SAVE:
-                    saveGame("saveFile",passage.getTitle());
+                    TextInputDialog dialog = new TextInputDialog();
+                    dialog.setTitle("Save Game");
+                    dialog.setHeaderText("Enter a name for your save file:");
+                    dialog.setContentText("Name:");
+                    Optional<String> result = dialog.showAndWait();
+                    result.ifPresent(name -> saveGame(name, passage.getTitle()));
                     break;
                 case MAIN_MENU:
                     String playerName = GameManager.getInstance().getGame().getPlayer().getName();
@@ -131,7 +138,7 @@ public class PlayGame {
         });
         return options;
     }
-
+    
     private void saveGame(String saveName, String currentPassageTitle) {
         Game game = GameManager.getInstance().getGame();
         try {
