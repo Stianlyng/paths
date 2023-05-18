@@ -201,7 +201,6 @@ public class StartMenuController {
                 Path destPath = Paths.get(destDir.getAbsolutePath(), file.getName());
                 try {
                     Files.copy(file.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
-                    CustomGamePane.addImportSucessfullText(getCurrentCustomGamePane());
                     ControllerValues.setGameFile(FilenameUtils.removeExtension(fileName));
                 } catch (IOException e) {
                     DialogBoxes.alertBox("Import failed", "Your import was not saved", "");
@@ -214,8 +213,20 @@ public class StartMenuController {
                     }
                     try {
                         TextfileParser.parseStory(fileName.replace(".paths", ""));
-                    } catch (IOException e) {
-                        System.out.println(fileName);
+                        GameController.setSaveName("test");
+                        GameController.setStoryName(fileName.replace(".paths", ""));
+                        GameController.createNewGame();
+                        CustomGamePane.addImportSucessfullText(getCurrentCustomGamePane());
+                    } catch (IOException | BrokenLinkException e) {
+                        DialogBoxes.alertBox("", "", e.toString());
+                        String filePathOld = "src/main/resources/stories/" + fileName.replace(".paths", ".json");
+                        File fileOld = new File(filePathOld);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e1) {
+                            e1.printStackTrace();
+                        }
+                        fileOld.delete();
                     }
                     String filePathOld = "src/main/resources/stories/" + fileName;
                     File fileOld = new File(filePathOld);
