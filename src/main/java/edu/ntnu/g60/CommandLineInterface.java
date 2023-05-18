@@ -1,5 +1,6 @@
 package edu.ntnu.g60;
 
+import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.goals.Goal;
@@ -74,7 +75,12 @@ public class CommandLineInterface {
         int choice = scanner.nextInt();
         System.out.println(choice);
         StoryParser parser = new StoryParser(names.get(choice - 1));
-        return parser.build();
+        try {
+            return parser.build();
+        } catch (BrokenLinkException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
    
     private boolean startNewGame() {
@@ -189,6 +195,7 @@ public class CommandLineInterface {
                 gameManager.endGame();
                 return true;  // Return true to indicate that the game ended due to goals being fulfilled.
             }
+
             List<Link> links = currentPassage.getLinks();
             if (links.isEmpty()) {
                 System.out.println("The story ends here.");

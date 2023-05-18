@@ -24,6 +24,14 @@ import edu.ntnu.g60.models.passage.Link;
  */
 public class SaveFileHandler{
     
+ /**
+  * Saves the current state of the Game to a .ser file. The filename is based on the player's name, the story's title, and the provided save name.
+  * 
+  * @param game The current Game object that will be saved.
+  * @param saveName The name for the save file.
+  * @param currentPassage The current passage in the game.
+  * @throws IllegalStateException if the game parameter is null.
+  */
   public static void saveGameToFile(Game game, String saveName, String currentPassage) {
       if (game == null) {
           throw new IllegalStateException("No game to save.");
@@ -45,7 +53,12 @@ public class SaveFileHandler{
       }
   }
   
-  // returns the save and the link to the current passage
+ /**
+  * Loads a game from a .ser file in the /saves/ directory.
+  *
+  * @param filename The name of the .ser file in the /saves/ directory (without the path).
+  * @return The SerializedGameState object representing the saved game state, or null if the file could not be read or does not represent a SerializedGameState.
+  */
   public static SerializedGameState loadGameFromFile(String filename) {
       String filePath = "src/main/resources/saves/" + filename;
       try (FileInputStream fileIn = new FileInputStream(filePath);

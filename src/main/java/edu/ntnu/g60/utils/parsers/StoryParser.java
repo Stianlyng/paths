@@ -3,6 +3,8 @@ package edu.ntnu.g60.utils.parsers;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -10,6 +12,7 @@ import edu.ntnu.g60.entities.ActionEntity;
 import edu.ntnu.g60.entities.LinkEntity;
 import edu.ntnu.g60.entities.PassageEntity;
 import edu.ntnu.g60.entities.StoryEntity;
+import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.actions.ActionFactory;
 import edu.ntnu.g60.models.passage.Link;
@@ -101,7 +104,7 @@ public class StoryParser {
      *
      * @return a Story object.
      */
-    public Story build() {
+    public Story build() throws BrokenLinkException {
         try {
             StoryEntity storyMap = objectMapper.readValue(jsonFile, StoryEntity.class);
             StoryBuilder storyBuilder = new StoryBuilder().setTitle(storyMap.getTitle());
@@ -114,7 +117,18 @@ public class StoryParser {
                 }
             });
 
-            return storyBuilder.build();
+            Story story = storyBuilder.build();
+
+            List<Link> brokenLinks = story.getBrokenLinks();
+            if (!brokenLinks.isEmpty()) {
+                String brokenLinkTitles = brokenLinks.stream()
+                        .map(link -> link.getText())
+                        .distinct()
+                        .collect(Collectors.joining(", \n"));
+                throw new BrokenLinkException("There are broken links in the story: " + brokenLinkTitles);
+            }
+
+            return story;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
