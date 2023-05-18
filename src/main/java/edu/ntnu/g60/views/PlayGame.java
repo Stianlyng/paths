@@ -6,13 +6,16 @@ import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
+import edu.ntnu.g60.models.player.Player;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -52,13 +55,25 @@ public class PlayGame {
             gridPane.add(linkButton, i, 0);
         }
 
-        VBox vBox = new VBox(label1, label3);
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-        vBox.setSpacing(10);
+        VBox centerBox = new VBox(label1, label3);
+        centerBox.setAlignment(Pos.CENTER);
+        centerBox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+        centerBox.setSpacing(10);
+
+        HBox topBox = new HBox();
+        topBox.setAlignment(Pos.CENTER);
+        topBox.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+        topBox.setSpacing(10);
+        
+        Player player = GameManager.getInstance().getGame().getPlayer();
+        topBox.getChildren().add(new Label("Health: " + player.getHealth()));
+        topBox.getChildren().add(new Label("Gold: " + player.getGold()));        
+        topBox.getChildren().add(new Label("Score: " + player.getScore()));        
+        // todo; add dropdown for inventory
 
         BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(vBox);
+        borderPane.setTop(topBox);
+        borderPane.setCenter(centerBox);
         borderPane.setBottom(gridPane);
 
         scene = new Scene(borderPane, WIDTH, HEIGHT);
