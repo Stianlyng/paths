@@ -2,7 +2,7 @@
   "title" : "Default story",
   "passages" : [ {
     "title" : "Beginnings",
-    "content" : "{N}You find yourself standing in front of a dilapidated, old haunted house. The wind howls eerily, and the moon casts long shadows on the creaky porch.\n{E}Greetings, adventurer. Will you dare to enter?\n\n",
+    "content" : "{N}To continue, click anywhere on the screen\n{N}You find yourself standing in front of a dilapidated, old haunted house. The wind howls eerily, and the moon casts long shadows on the creaky porch.\n{E}Greetings, adventurer. Will you dare to enter?\n\n",
     "isFight":false,
     "links" : [ {
       "text" : "Enter the haunted house",
