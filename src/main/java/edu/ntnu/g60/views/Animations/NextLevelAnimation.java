@@ -2,7 +2,7 @@ package edu.ntnu.g60.views.Animations;
 
 import java.net.MalformedURLException;
 import edu.ntnu.g60.controllers.AnimationController;
-import edu.ntnu.g60.controllers.GameController;
+import edu.ntnu.g60.utils.FrontendUtils;
 import javafx.scene.layout.StackPane;
 
 
@@ -16,9 +16,9 @@ public class NextLevelAnimation extends StackPane{
 
     public static void animation() throws MalformedURLException{
         controller.firstFrame();
-        GameController.delay(2000, () -> {
+        FrontendUtils.delay(2000, () -> {
             controller.secondFrame();
-            GameController.delay(2000, () -> {
+            FrontendUtils.delay(2000, () -> {
                 controller.thirdFrame();
             });
         });

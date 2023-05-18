@@ -148,7 +148,7 @@ public class ConversationPaneController {
      */
     public void menuAction(ActionEvent event){
         try {
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), PassageManager.getInstance().getPassage().getTitle());
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e) {
             e.printStackTrace();
@@ -171,7 +171,7 @@ public class ConversationPaneController {
                 PassageManager.getInstance().setPassage(currentPassage); 
                 
                 NextLevelAnimation.animation();
-                SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), PassageManager.getInstance().getPassage().getTitle() );
+                SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle() );
             }
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -195,7 +195,7 @@ public class ConversationPaneController {
                 PassageManager.getInstance().setPassage(currentPassage); 
 
                 NextLevelAnimation.animation();
-                SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), PassageManager.getInstance().getPassage().getTitle());
+                SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
             }
         } catch (IOException e1) {
             e1.printStackTrace();

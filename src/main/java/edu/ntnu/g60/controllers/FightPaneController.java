@@ -8,6 +8,7 @@ import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.passage.PassageManager;
+import edu.ntnu.g60.utils.FrontendUtils;
 import edu.ntnu.g60.utils.SaveFileHandler;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
@@ -80,7 +81,7 @@ public class FightPaneController {
     */
     public void menuAction(ActionEvent event){
         try {
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), PassageManager.getInstance().getPassage().getTitle());
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e) {
             e.printStackTrace();
@@ -248,7 +249,7 @@ public class FightPaneController {
             PassageManager.getInstance().setPassage(currentPassage); 
 
             NextLevelAnimation.animation();
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), PassageManager.getInstance().getPassage().getTitle());
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
         }
     }
     
@@ -268,7 +269,7 @@ public class FightPaneController {
             PassageManager.getInstance().setPassage(currentPassage); 
 
             NextLevelAnimation.animation();
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), PassageManager.getInstance().getPassage().getTitle());
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
         }
     }
 
@@ -279,16 +280,16 @@ public class FightPaneController {
      * @param healAmount the amount of health healed by the enemy
      */
     public static void enemyAction(float damageAmount, float healAmount){
-        GameController.delay(2000, () -> {
+        FrontendUtils.delay(2000, () -> {
             playerHealth = playerHealth - damageAmount;
             enemyHealth = enemyHealth + healAmount;
             FightPane.updateHealthEnemy(enemyHealth);
             FightPane.updateHealthPlayer(playerHealth);
             if(enemyHealth < 0.00){
                 FightPane.updateHealthEnemy(0.00F);
-                GameController.delay(1000, () -> {
+                FrontendUtils.delay(1000, () -> {
                     FightPane.addWinText(getCurrentFightPane());
-                    GameController.delay(3000, () -> {
+                    FrontendUtils.delay(3000, () -> {
                         try {
                             winFight();
                         } catch (MalformedURLException | FileNotFoundException e) {
@@ -299,9 +300,9 @@ public class FightPaneController {
                 
             } else if(playerHealth < 0.00){
                 FightPane.updateHealthPlayer(0.00F);
-                GameController.delay(1000, () -> {
+                FrontendUtils.delay(1000, () -> {
                     FightPane.addLooseText(getCurrentFightPane());
-                    GameController.delay(3000, () -> {
+                    FrontendUtils.delay(3000, () -> {
                         try {
                             looseFight();
                         } catch (MalformedURLException | FileNotFoundException e) {

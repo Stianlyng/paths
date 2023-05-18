@@ -21,6 +21,7 @@ public class Game implements Serializable {
   private final Player player;
   private final Story story;
   private final List<Goal> goals;
+  private final String gameName;
 
   /**
    * Constructor for the Game class.
@@ -29,16 +30,19 @@ public class Game implements Serializable {
    * @param story  The story of the game.
    * @param goals  The goals of the game.
    */
-  public Game(Player player, Story story, List<Goal> goals) throws IllegalArgumentException {
+  public Game(Player player, Story story, List<Goal> goals, String gameName) throws IllegalArgumentException {
     if (player == null)
       throw new IllegalArgumentException("Player cannot be null.");
     if (story == null)
       throw new IllegalArgumentException("Story cannot be null.");
     if (goals == null)
       throw new IllegalArgumentException("Goals cannot be null.");
+    if (gameName == null)
+      throw new IllegalArgumentException("Game name cannot be null.");
     this.player = player;
     this.story = story;
     this.goals = goals;
+    this.gameName = gameName;
   }
 
   /**
@@ -51,6 +55,7 @@ public class Game implements Serializable {
     this.player = new Player(other.player);
     this.story = new Story(other.story);
     this.goals = new ArrayList<>(other.goals);
+    this.gameName = other.gameName;
   }
 
   /**
@@ -78,6 +83,15 @@ public class Game implements Serializable {
    */
   public List<Goal> getGoals() {
     return this.goals;
+  }
+
+  /**
+   * Gets the name of the game.
+   * 
+   * @return The name of the game.
+   */
+  public String getGameName() {
+    return this.gameName;
   }
 
   /**

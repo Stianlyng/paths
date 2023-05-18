@@ -15,10 +15,19 @@ import java.util.stream.IntStream;
 
 import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.game.GameManager;
+import edu.ntnu.g60.models.goals.Goal;
+import edu.ntnu.g60.models.goals.GoldGoal;
+import edu.ntnu.g60.models.goals.HealthGoal;
+import edu.ntnu.g60.models.goals.InventoryGoal;
+import edu.ntnu.g60.models.goals.ScoreGoal;
 import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.passage.PassageManager;
+import edu.ntnu.g60.models.player.Player;
+import edu.ntnu.g60.models.player.PlayerBuilder;
+import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.utils.SaveFileHandler;
 import edu.ntnu.g60.utils.SerializedGameState;
+import edu.ntnu.g60.utils.parsers.StoryParser;
 import edu.ntnu.g60.utils.parsers.TextfileParser;
 import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;
@@ -36,7 +45,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import org.apache.commons.io.FilenameUtils;
 
 /**
 * The StartMenuController class is responsible for handling user interactions and controlling the start menu views.
@@ -205,7 +213,6 @@ public class StartMenuController {
                 try {
                     Files.copy(file.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
                     CustomGamePane.addImportSucessfullText(getCurrentCustomGamePane());
-                    ControllerValues.setGameFile(FilenameUtils.removeExtension(fileName));
                 } catch (IOException e) {
                     DialogBoxes.alertBox("Import failed", "Your import was not saved", "");
                 }
@@ -439,12 +446,10 @@ public class StartMenuController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                GameController.setSaveName(NewGamePane.saveName);
-                ControllerValues.setGameFile(NewGamePane.getStoryChoice());
-                GameController.setStoryName(NewGamePane.getStoryChoice());
+                //GameController.setStoryName(NewGamePane.getStoryChoice());
 
                 try {
-                    GameController.createNewGame();
+                    createNewGame(GameController.getPlayerName(),NewGamePane.getStoryChoice());
                     NextLevelAnimation.animation();
                 } catch (MalformedURLException | BrokenLinkException e1) {
                     DialogBoxes.alertBox("", "", e1.toString());
@@ -453,5 +458,44 @@ public class StartMenuController {
             }
 
         } 
+    }
+    
+    /**
+    * Creates a new game instance.
+    * Initializes the player, story, goals, and creates the game.
+     * @throws BrokenLinkException
+    */
+    private static void createNewGame(String playerName, String storyName) throws BrokenLinkException{
+        
+        List<String> inventory = List.of("Sword");
+
+        Player player = new PlayerBuilder()
+                .setName(playerName)
+                .setHealth(100)
+                .setGold(0)
+                .setScore(0)
+                .setInventory(inventory)
+                .build();
+
+        String storyPath = storyName;
+        StoryParser parser = new StoryParser(storyPath);
+        Story story = parser.build();
+        
+        List<Goal> goals = List.of(
+                new HealthGoal(110),
+                new GoldGoal(0),
+                new InventoryGoal(List.of("Sword")),
+                new ScoreGoal(100)
+        );
+
+        GameManager.getInstance().setPlayer(player);
+        GameManager.getInstance().setStory(story);
+        GameManager.getInstance().setGoals(goals);
+        GameManager.getInstance().setGameName("TEST");
+        GameManager.getInstance().createGame();
+
+        Passage currentPassage = GameManager.getInstance().getGame().begin();
+        PassageManager.getInstance().setPassage(currentPassage); 
+
     }
 }

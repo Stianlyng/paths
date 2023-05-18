@@ -18,6 +18,7 @@ public class GameManager {
   private Player player;
   private Story story;
   private List<Goal> goals;
+  private String gameName;
 
   /**
    * Private constructor to prevent instantiation.
@@ -64,6 +65,15 @@ public class GameManager {
   public void setGoals(List<Goal> goals) {
     this.goals = goals;
   }
+  
+  /**
+   * Sets the name of the next game.
+   *
+   * @param gameName The name of the next game.
+   */
+  public void setGameName(String gameName) {
+    this.gameName = gameName;
+  }
 
   /**
    * Creates a new Game instance with the previously set Player, Story, and Goals.
@@ -74,10 +84,10 @@ public class GameManager {
     if (game != null) {
       throw new IllegalStateException("A game is already in progress.");
     }
-    if (player == null || story == null || goals == null) {
+    if (player == null || story == null || goals == null || gameName == null) {
       throw new IllegalStateException("Player, story, and goals must be set before creating a game.");
     }
-    game = new Game(player, story, goals);
+    game = new Game(player, story, goals, gameName);
   }
 
   /**
