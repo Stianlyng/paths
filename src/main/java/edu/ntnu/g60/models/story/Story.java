@@ -163,10 +163,10 @@ public class Story implements Serializable {
 
     for (Passage passage : passages.values()) {
         for (Link link : passage.getLinks()) {
-            if (link.getReference().equals("End Game")) {
+            if (link.getReference().equalsIgnoreCase("End Game")) {
                 continue;
             }
-            if (link.getReference().equals("Game Over")) {
+            if (link.getReference().equalsIgnoreCase("Game Over")) {
                 continue;
             }
             boolean linkExists = passages.keySet().stream()
