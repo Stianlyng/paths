@@ -28,14 +28,6 @@ public class TextfileParser {
     private TextfileParser() {
     }
 
-    public static void main(String[] args) {
-        try {
-            TextfileParser.parseStory("demo_story");
-        } catch (IOException e) {
-            // Log the error or handle it as appropriate
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Parses a text story and saves it in JSON format.
@@ -56,7 +48,12 @@ public class TextfileParser {
     }
     
 
-    // The rest of the methods remain unchanged
+    /**
+     * Creates a story node from a list of lines and a JsonNodeFactory. 
+     * The first line is set as the title of the story, and each line that 
+     * starts with "::" is treated as a passage, which is converted into a 
+     * passage node and added to the "passages" array in the story node.
+     */
     private static ObjectNode createStoryNode(List<String> lines, JsonNodeFactory nodeFactory) {
         ObjectNode storyNode = nodeFactory.objectNode();
         storyNode.put("title", lines.get(0));
