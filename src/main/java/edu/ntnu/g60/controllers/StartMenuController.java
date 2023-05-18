@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
+
+import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.utils.SaveFileHandler;
 import edu.ntnu.g60.utils.parsers.TextfileParser;
@@ -183,16 +185,15 @@ public class StartMenuController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Import game File");
     
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        FileChooser.ExtensionFilter jsonFilter = new FileChooser.ExtensionFilter("JSON files (*.json)", "*.json");
-        fileChooser.getExtensionFilters().addAll(extFilter, jsonFilter);
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PATHS files (*.paths)", "*.paths");
+        fileChooser.getExtensionFilters().addAll(extFilter);
     
         File file = fileChooser.showOpenDialog(null);
         String filePath = file.getAbsolutePath();
         String fileName = filePath.substring(filePath.lastIndexOf("\\") + 1);
 
         if (file != null) {
-            if (filePath.toLowerCase().endsWith(".txt") || filePath.toLowerCase().endsWith(".json")) {
+            if (filePath.toLowerCase().endsWith(".paths")) {
                 File destDir = new File("src/main/resources/stories");
                 if (!destDir.exists()) {
                     destDir.mkdirs();
@@ -205,14 +206,14 @@ public class StartMenuController {
                 } catch (IOException e) {
                     DialogBoxes.alertBox("Import failed", "Your import was not saved", "");
                 }
-                if (filePath.toLowerCase().endsWith(".txt")){
+                if (filePath.toLowerCase().endsWith(".paths")){
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     try {
-                        TextfileParser.parseStory(fileName.replace(".txt", ""));
+                        TextfileParser.parseStory(fileName.replace(".paths", ""));
                     } catch (IOException e) {
                         System.out.println(fileName);
                     }
@@ -364,8 +365,9 @@ public class StartMenuController {
                        GameController.createNewGame();
                        SaveFileHandler.loadGameFromFile(GameController.getPlayerName() + "_" + storyNames[buttonNumber - 1] + "_" + saveNames[buttonNumber - 1] + ".ser");
                        NextLevelAnimation.animation();
-                   } catch (IOException e1) {
-                       e1.printStackTrace();
+                   } catch (IOException | BrokenLinkException e1) {
+                        DialogBoxes.alertBox("", "", e1.toString());
+                        e1.printStackTrace();
                    }
                });
            } else {
@@ -438,7 +440,8 @@ public class StartMenuController {
                 try {
                     GameController.createNewGame();
                     NextLevelAnimation.animation();
-                } catch (MalformedURLException e1) {
+                } catch (MalformedURLException | BrokenLinkException e1) {
+                    DialogBoxes.alertBox("", "", e1.toString());
                     e1.printStackTrace();
                 }
             }

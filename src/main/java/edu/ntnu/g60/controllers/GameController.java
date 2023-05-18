@@ -2,6 +2,7 @@ package edu.ntnu.g60.controllers;
 
 import java.util.List;
 
+import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.GoldGoal;
@@ -86,8 +87,9 @@ public class GameController {
     /**
     * Creates a new game instance.
     * Initializes the player, story, goals, and creates the game.
+     * @throws BrokenLinkException
     */
-    public static void createNewGame(){
+    public static void createNewGame() throws BrokenLinkException{
         
         List<String> inventory = List.of("Sword");
 
@@ -102,8 +104,7 @@ public class GameController {
         String storyPath = storyName;
         StoryParser parser = new StoryParser(storyPath);
         Story story = parser.build();
-
-
+        
         List<Goal> goals = List.of(
                 new HealthGoal(110),
                 new GoldGoal(0),
@@ -116,7 +117,6 @@ public class GameController {
         GameManager.getInstance().setGoals(goals);
         GameManager.getInstance().createGame();
 
-        //todo; dette må kanskje flytte? Skjønner ikke flow i javafx...
         Passage currentPassage = GameManager.getInstance().getGame().begin();
         PassageManager.getInstance().setPassage(currentPassage); 
 
