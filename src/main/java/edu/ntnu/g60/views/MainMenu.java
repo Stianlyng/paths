@@ -37,7 +37,7 @@ public class MainMenu {
         });
 
         loadGameButton.setOnAction(e -> {
-            LoadGame loadGame = new LoadGame(primaryStage, WIDTH, HEIGHT);
+            LoadGame loadGame = new LoadGame(primaryStage,playerName, WIDTH, HEIGHT);
             primaryStage.setScene(loadGame.getScene());
         });
 

@@ -111,6 +111,7 @@ public class CommandLineInterface {
         gameManager.setPlayer(player);
         gameManager.setStory(story);
         gameManager.setGoals(goals);
+        gameManager.setGameName("KID");
         gameManager.createGame();
 
         return playGame(true);
