@@ -16,7 +16,6 @@ class StoryTest {
     private Passage openingPassage;
     private Passage additionalPassage;
     private Link link;
-    private Link additionaLink;
 
 
     @BeforeEach
@@ -39,7 +38,6 @@ class StoryTest {
                 .build();
         
         link = new Link("Go to Additional Passage", "Additional Passage");
-        additionaLink = new Link("Go to Opening Passage", "Opening Passage");
     }
 
     @Test
@@ -79,6 +77,7 @@ class StoryTest {
         assertEquals(1, story.getPassages().size());
         assertTrue(story.getPassages().contains(additionalPassage));
     }
+    
 
     @Test
     void testDeletePassage() {

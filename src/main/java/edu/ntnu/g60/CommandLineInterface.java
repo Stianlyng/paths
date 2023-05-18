@@ -46,10 +46,10 @@ public class CommandLineInterface {
             boolean gameEnded = false;
             switch (choice) {
                 case 1:
-                    gameEnded = startNewGame();
+                    gameEnded = startNewGame(scanner);
                     break;
                 case 2:
-                    gameEnded = loadGame();
+                    gameEnded = loadGame(scanner);
                     break;
                 case 3:
                     System.exit(0);
@@ -64,9 +64,8 @@ public class CommandLineInterface {
         }
     }
           
-    private static Story chooseStory() {
+    private static Story chooseStory(Scanner scanner) {
         clearScreen();
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Please choose a story:");
         List<String> names = SaveFileHandler.listFilesInFolder();
         for (int i = 0; i < names.size(); i++) {
@@ -83,9 +82,7 @@ public class CommandLineInterface {
         }
     }
    
-    private boolean startNewGame() {
-
-        Scanner scanner = new Scanner(System.in);
+    private boolean startNewGame(Scanner scanner) {
 
         System.out.print("Enter your player name: ");
         String playerName = scanner.nextLine();
@@ -100,7 +97,7 @@ public class CommandLineInterface {
                 .setInventory(inventory)
                 .build();
 
-        Story story = chooseStory();
+        Story story = chooseStory(scanner);
         List<Goal> goals = List.of(
                 new HealthGoal(110),
                 new GoldGoal(0),
@@ -114,12 +111,11 @@ public class CommandLineInterface {
         gameManager.setGameName("KID");
         gameManager.createGame();
 
-        return playGame(true);
+        return playGame(true, scanner);
     }
 
-    private boolean loadGame() {
+    private boolean loadGame(Scanner scanner) {
         clearScreen();
-        Scanner scanner = new Scanner(System.in);
 
         int index=1;
 
@@ -160,7 +156,7 @@ public class CommandLineInterface {
         gameManager.createGame();
         
         currentPassage = gameManager.getGame().go(save.getCurrentLink()); 
-        return playGame(false);
+        return playGame(false, scanner);
     }
 
     private static void displayPlayerStats(Player player) {
@@ -171,9 +167,7 @@ public class CommandLineInterface {
                             ", Inventory: " + player.getInventory());
         }
 
-    private boolean playGame(boolean newGame) {
-
-        Scanner scanner = new Scanner(System.in);
+    private boolean playGame(boolean newGame, Scanner scanner) {
 
 
         if (newGame) {
@@ -208,30 +202,36 @@ public class CommandLineInterface {
             for (int i = 0; i < links.size(); i++) {
                 System.out.println((i + 1) + ". " + links.get(i).getText());
             }
-    
-            String input = scanner.nextLine();
-            
-            if (input.equalsIgnoreCase("save")) {
-                System.out.print("Enter a name for the save: ");
-                String saveName = scanner.nextLine();
-                SaveFileHandler.saveGameToFile(gameManager.getGame(), saveName, currentPassage.getTitle());
-                
-                System.out.println("Game saved successfully.");
-                continue;
+
+            int choice = -1;
+            while (true) {
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("save")) {
+                    System.out.print("Enter a name for the save: ");
+                    String saveName = scanner.nextLine();
+                    SaveFileHandler.saveGameToFile(gameManager.getGame(), saveName, currentPassage.getTitle());
+
+                    System.out.println("Game saved successfully.");
+                    continue;
+                }
+                try {
+                    choice = Integer.parseInt(input) - 1;
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a number.");
+                }
             }
-    
-            int choice = Integer.parseInt(input) - 1;
+
             Link selectedLink = links.get(choice);
-    
+
             for (Action action : selectedLink.getActions()) {
                 action.execute(gameManager.getGame().getPlayer());
             }
-    
+
             currentPassage = gameManager.getGame().go(selectedLink);
         }
-        return false; // if game ends 4 some reason..
+        return false; // if game ends for some reason..
     }
-
     private static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();

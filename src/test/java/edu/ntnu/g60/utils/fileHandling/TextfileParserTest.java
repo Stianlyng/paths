@@ -8,6 +8,7 @@ import edu.ntnu.g60.utils.parsers.TextfileParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,10 +29,12 @@ class TextfileParserTest {
     void testParseStory() throws IOException {
         // Prepare a test story file
         String filename = "test_story";
-        Path testStoryPath = Paths.get("src/main/resources/stories/" + filename + ".paths");
-        Files.writeString(testStoryPath, "Haunted House\n\n:: Test Passage\nThis is a test passage.\n[Try to open the door](Another room)\n[Stay](Room 3)\n");
+        File selectedFile = new File("src/main/resources/stories/" + filename + ".paths");
+        Files.writeString(selectedFile.toPath(), "Haunted House\n\n:: Test Passage\nThis is a test passage.\n[Try to open the door](Another room)\n[Stay](Room 3)\n");
 
-        TextfileParser.parseStory(filename);
+        TextfileParser.parseStory(selectedFile);
+
+        TextfileParser.parseStory(selectedFile);
 
         Path expectedJsonPath = Paths.get("src/main/resources/stories/" + filename + ".json");
         assertTrue(Files.exists(expectedJsonPath), "Expected output file was not created");
@@ -41,7 +44,7 @@ class TextfileParserTest {
         assertEquals("Test Passage", jsonNode.get("passages").get(0).get("title").asText(), "Title does not match");
         assertEquals("This is a test passage.\n", jsonNode.get("passages").get(0).get("content").asText(), "Content does not match");
 
-        Files.deleteIfExists(testStoryPath);
+        Files.deleteIfExists(selectedFile.toPath());
         Files.deleteIfExists(expectedJsonPath);
     }
 }

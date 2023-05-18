@@ -11,7 +11,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import edu.ntnu.g60.components.BackgroundComponent;
@@ -67,8 +66,7 @@ public class MainMenu {
             File selectedFile = fileChooser.showOpenDialog(primaryStage);
         
             if (selectedFile != null) {
-                TextfileParser parser = new TextfileParser();
-                boolean parsedStory = parser.parseStory(selectedFile);
+                boolean parsedStory = TextfileParser.parseStory(selectedFile);
                 if (parsedStory) {
                     // Handle successful parsing, e.g., show a success message
                 } else {
