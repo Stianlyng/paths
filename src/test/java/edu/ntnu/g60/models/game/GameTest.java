@@ -53,7 +53,7 @@ class GameTest {
                 .build();
 
         goals = new ArrayList<>(); 
-        game = new Game(player, story, goals);
+        game = new Game(player, story, goals, "Test Game"); //todo; fjenr gameName??
     }
 
     @Test

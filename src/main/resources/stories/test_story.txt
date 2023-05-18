@@ -1,0 +1,6 @@
+Haunted House
+
+:: Test Passage
+This is a test passage.
+[Try to open the door](Another room)
+[Stay](Room 3)

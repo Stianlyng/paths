@@ -28,7 +28,7 @@ class TextfileParserTest {
     void testParseStory() throws IOException {
         // Prepare a test story file
         String filename = "test_story";
-        Path testStoryPath = Paths.get("src/main/resources/stories/" + filename + ".txt");
+        Path testStoryPath = Paths.get("src/main/resources/stories/" + filename + ".paths");
         Files.writeString(testStoryPath, "Haunted House\n\n:: Test Passage\nThis is a test passage.\n[Try to open the door](Another room)\n[Stay](Room 3)\n");
 
         TextfileParser.parseStory(filename);
