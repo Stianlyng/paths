@@ -10,6 +10,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.List;
+
+import edu.ntnu.g60.models.game.GameManager;
+import edu.ntnu.g60.models.player.Player;
+import edu.ntnu.g60.models.player.PlayerBuilder;
 
 /**
  * Class representing the main menu.
@@ -22,6 +27,18 @@ public class MainMenu {
     private Scene scene;
 
     public MainMenu(Stage primaryStage, String playerName, int WIDTH, int HEIGHT) {
+
+        List<String> inventory = List.of("Sword");
+
+        Player player = new PlayerBuilder()
+            .setName(playerName)
+            .setHealth(100)
+            .setGold(0)
+            .setScore(0)
+            .setInventory(inventory)
+            .build();
+
+        GameManager.getInstance().setPlayer(player);
 
         Button newGameButton = new Button("New Game");
         Button loadGameButton = new Button("Load Game");

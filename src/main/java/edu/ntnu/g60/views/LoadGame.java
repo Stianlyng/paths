@@ -11,12 +11,10 @@ import javafx.stage.Stage;
 
 import java.util.Set;
 
-import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.utils.SaveFileHandler;
 import edu.ntnu.g60.utils.SerializedGameState;
-import edu.ntnu.g60.exceptions.BrokenLinkException;
 /**
  * Class representing the story selection scene.
  */

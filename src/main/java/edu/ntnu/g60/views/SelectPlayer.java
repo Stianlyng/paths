@@ -39,18 +39,6 @@ public class SelectPlayer {
         continueButton.setOnAction(e -> {
             String enteredPlayer = newPlayerName.getText();
 
-            List<String> inventory = List.of("Sword");
-
-            Player player = new PlayerBuilder()
-                .setName(newPlayerName.getText())
-                .setHealth(100)
-                .setGold(0)
-                .setScore(0)
-                .setInventory(inventory)
-                .build();
-
-            GameManager.getInstance().setPlayer(player);
-
             controller.handleContinueButton(primaryStage, enteredPlayer, WIDTH, HEIGHT);
         });
 
