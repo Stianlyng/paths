@@ -3,6 +3,7 @@ package edu.ntnu.g60.views;
 import java.util.List;
 import java.util.Optional;
 
+import edu.ntnu.g60.components.BackgroundComponent;
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
@@ -17,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -46,11 +48,14 @@ public class PlayGame {
 
     public PlayGame(Stage primaryStage, Passage passage, int WIDTH, int HEIGHT) {
 
+
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(topBar(optionDropdown(primaryStage, passage, WIDTH, HEIGHT)));
         borderPane.setCenter(passageContent(passage));
         borderPane.setBottom(chooseLinkButtons(primaryStage, passage, WIDTH, HEIGHT));
-
+        
+        Background background = BackgroundComponent.createBackground(passage.getBackground());
+        borderPane.setBackground(background);
         scene = new Scene(borderPane, WIDTH, HEIGHT);
     }
     

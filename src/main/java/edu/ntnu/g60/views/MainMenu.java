@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import edu.ntnu.g60.components.BackgroundComponent;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
@@ -85,6 +87,9 @@ public class MainMenu {
         layout.add(loadGameButton, 0, 2);
         layout.add(importGameFileButton, 0, 3);
 
+        Background background = BackgroundComponent.createBackground("mainMenuScene.png");
+        layout.setBackground(background);
+ 
         scene = new Scene(layout, WIDTH, HEIGHT);
     }
 
