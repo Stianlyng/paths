@@ -44,7 +44,7 @@ public class TextfileParser {
      * @throws IOException If there is a problem reading or writing the files
      */
     public static void parseStory(String filename) throws IOException {
-        Path inputPath = Paths.get("src/main/resources/stories/" + filename + ".txt");
+        Path inputPath = Paths.get("src/main/resources/stories/" + filename + ".paths");
         Path outputPath = Paths.get("src/main/resources/stories/" + filename + ".json");
 
         List<String> lines = Files.readAllLines(inputPath);

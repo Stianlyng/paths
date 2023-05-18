@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import edu.ntnu.g60.TEMP_CURRENT_PASSAGE;
+import edu.ntnu.g60.models.passage.PassageManager;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
@@ -55,7 +55,7 @@ public class AnimationController {
     */
     public void secondFrame(){
         try {
-            GameApp.changeRootPane(new LvlPane(TEMP_CURRENT_PASSAGE.getInstance().getPassage().getTitle())); //todo; dont use singleton
+            GameApp.changeRootPane(new LvlPane(PassageManager.getInstance().getPassage().getTitle())); //todo; dont use singleton
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         }

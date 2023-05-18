@@ -2,7 +2,6 @@ package edu.ntnu.g60.controllers;
 
 import java.util.List;
 
-import edu.ntnu.g60.TEMP_CURRENT_PASSAGE;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.goals.GoldGoal;
@@ -10,6 +9,7 @@ import edu.ntnu.g60.models.goals.HealthGoal;
 import edu.ntnu.g60.models.goals.InventoryGoal;
 import edu.ntnu.g60.models.goals.ScoreGoal;
 import edu.ntnu.g60.models.passage.Passage;
+import edu.ntnu.g60.models.passage.PassageManager;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
 import edu.ntnu.g60.models.story.Story;
@@ -118,7 +118,7 @@ public class GameController {
 
         //todo; dette må kanskje flytte? Skjønner ikke flow i javafx...
         Passage currentPassage = GameManager.getInstance().getGame().begin();
-        TEMP_CURRENT_PASSAGE.getInstance().setPassage(currentPassage); 
+        PassageManager.getInstance().setPassage(currentPassage); 
 
     }
 

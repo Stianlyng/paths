@@ -4,10 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import edu.ntnu.g60.TEMP_CURRENT_PASSAGE;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
+import edu.ntnu.g60.models.passage.PassageManager;
 import edu.ntnu.g60.utils.SaveFileHandler;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
@@ -80,7 +80,7 @@ public class FightPaneController {
     */
     public void menuAction(ActionEvent event){
         try {
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), TEMP_CURRENT_PASSAGE.getInstance().getPassage().getTitle());
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), PassageManager.getInstance().getPassage().getTitle());
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e) {
             e.printStackTrace();
@@ -238,17 +238,17 @@ public class FightPaneController {
      * @throws FileNotFoundException if the file is not found
      */
     public static void winFight() throws MalformedURLException, FileNotFoundException{
-        Link link2 = TEMP_CURRENT_PASSAGE.getInstance().getPassage().getLinks().get(1);
+        Link link2 = PassageManager.getInstance().getPassage().getLinks().get(1);
         if(link2.getReference().equals("game over")){
             DeathAnimation.animation();
         } else { 
             
             //todo; fix this
             Passage currentPassage = GameManager.getInstance().getGame().go(link2);
-            TEMP_CURRENT_PASSAGE.getInstance().setPassage(currentPassage); 
+            PassageManager.getInstance().setPassage(currentPassage); 
 
             NextLevelAnimation.animation();
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), TEMP_CURRENT_PASSAGE.getInstance().getPassage().getTitle());
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), PassageManager.getInstance().getPassage().getTitle());
         }
     }
     
@@ -259,16 +259,16 @@ public class FightPaneController {
      * @throws FileNotFoundException if the file is not found
      */
     public static void looseFight() throws MalformedURLException, FileNotFoundException{
-        Link link1 = TEMP_CURRENT_PASSAGE.getInstance().getPassage().getLinks().get(0);
+        Link link1 = PassageManager.getInstance().getPassage().getLinks().get(0);
         if(link1.getReference().equals("game over")){
             DeathAnimation.animation();
         } else { 
             //todo; fix this
             Passage currentPassage = GameManager.getInstance().getGame().go(link1);
-            TEMP_CURRENT_PASSAGE.getInstance().setPassage(currentPassage); 
+            PassageManager.getInstance().setPassage(currentPassage); 
 
             NextLevelAnimation.animation();
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), TEMP_CURRENT_PASSAGE.getInstance().getPassage().getTitle());
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameController.getSaveName(), PassageManager.getInstance().getPassage().getTitle());
         }
     }
 

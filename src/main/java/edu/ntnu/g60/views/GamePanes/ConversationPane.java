@@ -3,10 +3,10 @@ package edu.ntnu.g60.views.GamePanes;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 
-import edu.ntnu.g60.TEMP_CURRENT_PASSAGE;
 import edu.ntnu.g60.controllers.ConversationPaneController;
 import edu.ntnu.g60.controllers.SoundController;
 import edu.ntnu.g60.models.game.GameManager;
+import edu.ntnu.g60.models.passage.PassageManager;
 import edu.ntnu.g60.views.ViewObjects;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,8 +36,8 @@ public class ConversationPane extends StackPane{
 
 
     public static void addChoiceObjects(ConversationPane pane) throws FileNotFoundException, MalformedURLException{
-        Button choiceOne = ViewObjects.newButton(TEMP_CURRENT_PASSAGE.getInstance().getPassage().getLinks().get(0).getText(), 71, 212, "talk_button", "talk_hover", controller::choiceOneAction);
-        Button choiceTwo = ViewObjects.newButton(TEMP_CURRENT_PASSAGE.getInstance().getPassage().getLinks().get(1).getText(), 318, 212, "talk_button", "talk_hover", controller::choiceTwoAction);
+        Button choiceOne = ViewObjects.newButton(PassageManager.getInstance().getPassage().getLinks().get(0).getText(), 71, 212, "talk_button", "talk_hover", controller::choiceOneAction);
+        Button choiceTwo = ViewObjects.newButton(PassageManager.getInstance().getPassage().getLinks().get(1).getText(), 318, 212, "talk_button", "talk_hover", controller::choiceTwoAction);
         StackPane.setAlignment(choiceOne, Pos.CENTER_LEFT);
         StackPane.setMargin(choiceOne, new Insets(50, 50, 50, 50)); 
         StackPane.setAlignment(choiceTwo, Pos.CENTER_RIGHT);
@@ -46,9 +46,9 @@ public class ConversationPane extends StackPane{
     }
 
     public static Group getConversationPaneObjects() throws FileNotFoundException{
-        ImageView enemyImage = ViewObjects.newImage("characters", TEMP_CURRENT_PASSAGE.getInstance().getPassage().getPlayer(), 150, 200, 150, 150, controller::sceneClickedAction);
-        ImageView playerImage = ViewObjects.newImage("characters", TEMP_CURRENT_PASSAGE.getInstance().getPassage().getEnemy(), 700, 200, 150, 150, controller::sceneClickedAction);
-        ImageView backgroundImage = ViewObjects.newImage("backgrounds", TEMP_CURRENT_PASSAGE.getInstance().getPassage().getBackground(), 0, 0, 1650, 1000, controller::sceneClickedAction);
+        ImageView enemyImage = ViewObjects.newImage("characters", PassageManager.getInstance().getPassage().getPlayer(), 150, 200, 150, 150, controller::sceneClickedAction);
+        ImageView playerImage = ViewObjects.newImage("characters", PassageManager.getInstance().getPassage().getEnemy(), 700, 200, 150, 150, controller::sceneClickedAction);
+        ImageView backgroundImage = ViewObjects.newImage("backgrounds", PassageManager.getInstance().getPassage().getBackground(), 0, 0, 1650, 1000, controller::sceneClickedAction);
         ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 309-193, 136-71, 24, 24, controller::sceneClickedAction);
         ImageView healthIcon = ViewObjects.newImage("icons", "heart.png", 488-193, 136-71, 24, 24, controller::sceneClickedAction);
         ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24, controller::sceneClickedAction);
