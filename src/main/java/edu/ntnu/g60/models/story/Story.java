@@ -155,23 +155,31 @@ public class Story implements Serializable {
    * Finds and returns a list of dead links. A link is dead if it refers to a
    * passage that does not exist in passages.
    *
+   * It ignores the links to the passages "End Game" and "Game Over".
    * @return a list of dead links.
    */
   public List<Link> getBrokenLinks() {
     List<Link> brokenLinks = new ArrayList<>();
 
     for (Passage passage : passages.values()) {
-      for (Link link : passage.getLinks()) {
-        boolean linkExists = passages.keySet().stream()
-            .anyMatch(mapLink -> mapLink.getReference().equals(link.getReference()));
-        if (!linkExists) {
-          brokenLinks.add(link);
+        for (Link link : passage.getLinks()) {
+            if (link.getReference().equals("End Game")) {
+                continue;
+            }
+            if (link.getReference().equals("Game Over")) {
+                continue;
+            }
+            boolean linkExists = passages.keySet().stream()
+                .anyMatch(mapLink -> mapLink.getReference().equals(link.getReference()));
+
+            if (!linkExists) {
+                brokenLinks.add(link);
+            }
         }
-      }
     }
 
     return brokenLinks;
-  }
+}
 
   @Override
   public String toString() {
