@@ -15,7 +15,10 @@ import java.util.stream.IntStream;
 
 import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.game.GameManager;
+import edu.ntnu.g60.models.passage.Passage;
+import edu.ntnu.g60.models.passage.PassageManager;
 import edu.ntnu.g60.utils.SaveFileHandler;
+import edu.ntnu.g60.utils.SerializedGameState;
 import edu.ntnu.g60.utils.parsers.TextfileParser;
 import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;
@@ -201,6 +204,7 @@ public class StartMenuController {
                 Path destPath = Paths.get(destDir.getAbsolutePath(), file.getName());
                 try {
                     Files.copy(file.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
+                    CustomGamePane.addImportSucessfullText(getCurrentCustomGamePane());
                     ControllerValues.setGameFile(FilenameUtils.removeExtension(fileName));
                 } catch (IOException e) {
                     DialogBoxes.alertBox("Import failed", "Your import was not saved", "");
@@ -213,20 +217,8 @@ public class StartMenuController {
                     }
                     try {
                         TextfileParser.parseStory(fileName.replace(".paths", ""));
-                        GameController.setSaveName("test");
-                        GameController.setStoryName(fileName.replace(".paths", ""));
-                        GameController.createNewGame();
-                        CustomGamePane.addImportSucessfullText(getCurrentCustomGamePane());
-                    } catch (IOException | BrokenLinkException e) {
-                        DialogBoxes.alertBox("", "", e.toString());
-                        String filePathOld = "src/main/resources/stories/" + fileName.replace(".paths", ".json");
-                        File fileOld = new File(filePathOld);
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e1) {
-                            e1.printStackTrace();
-                        }
-                        fileOld.delete();
+                    } catch (IOException e) {
+                        System.out.println(fileName);
                     }
                     String filePathOld = "src/main/resources/stories/" + fileName;
                     File fileOld = new File(filePathOld);
@@ -369,17 +361,20 @@ public class StartMenuController {
                saveButton.setText(saveNames[buttonNumber - 1]);
                
                saveButton.setOnAction(e -> {
-                   try {
-                       GameManager.getInstance().endGame();
-                       GameController.setSaveName(saveNames[buttonNumber - 1]);
-                       GameController.setStoryName(storyNames[buttonNumber - 1].replace(" ", "_"));
-                       GameController.createNewGame();
-                       SaveFileHandler.loadGameFromFile(GameController.getPlayerName() + "_" + storyNames[buttonNumber - 1] + "_" + saveNames[buttonNumber - 1] + ".ser");
-                       NextLevelAnimation.animation();
-                   } catch (IOException | BrokenLinkException e1) {
-                        DialogBoxes.alertBox("", "", e1.toString());
+                    GameManager.getInstance().endGame();
+                    SerializedGameState save = SaveFileHandler.loadGameFromFile(GameController.getPlayerName() + "_" + storyNames[buttonNumber - 1] + "_" + saveNames[buttonNumber - 1] + ".ser");
+                    GameManager.getInstance().setPlayer(save.getGame().getPlayer());
+                    GameManager.getInstance().setStory(save.getGame().getStory());
+                    GameManager.getInstance().setGoals(save.getGame().getGoals());
+                    GameManager.getInstance().createGame();
+
+                    Passage currentPassage = GameManager.getInstance().getGame().go(save.getCurrentLink()); 
+                    PassageManager.getInstance().setPassage(currentPassage); 
+                    try {
+                        NextLevelAnimation.animation();
+                    } catch (MalformedURLException e1) {
                         e1.printStackTrace();
-                   }
+                    }
                });
            } else {
                Button saveButton = buttonNumber == 1 ? save1Button : buttonNumber == 2 ? save2Button : save3Button;
