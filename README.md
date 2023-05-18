@@ -3,6 +3,7 @@
 A JavaFX maven prosject made as a semesterproject in Programming 2 at NTNU
 
 ## Semester project in Programming 2 at NTNU
+
 By: Stian Lyng & Olav Sie Rotvær
 
 ## Links
@@ -33,9 +34,15 @@ If you want to add custom stories, it kan be imported using the importer inside 
 ```txt
 Title Of the Story
 
-:: Passage Title
-The Content you would like to present
-[The text of a link](Reference to the other passage, by its title)
+:: First Passage
+This is the first passage, and this is the text the player has to base the answer of.
+[Go to the second passage](Second Passage)
+[Go to the third passsage](Third Passage)
+
+:: Second Passage
+This is the second passage
+[Go to the third passage](Third Passage)
+[Go back](First Passage)
 ```
 
 Or you can create a story with custom styling and actions by placing a json file inside the `resources/stories` directory. The format of the json file should be:
