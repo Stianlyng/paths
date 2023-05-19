@@ -53,7 +53,7 @@ class GameTest {
                 .build();
 
         goals = new ArrayList<>(); 
-        game = new Game(player, story, goals);
+        game = new Game(player, story, goals, "TestGame");
     }
 
     @Test

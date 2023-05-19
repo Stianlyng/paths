@@ -56,6 +56,17 @@ public class StartMenuController {
     public static CustomGamePane currentCustomGamePane;
     public static ContinuePane currentContinuePane;
 
+    static String playerName;
+
+    /**
+    * Retrieves the name of the player.
+    *
+    * @return the name of the player
+    */
+    public static String getPlayerName(){
+        return playerName;
+    }
+
     /**
     * Retrieves the current ContinuePane.
     *
@@ -307,7 +318,7 @@ public class StartMenuController {
     */
     public void playerChoiceAction(ActionEvent event){
         SelectPlayerPane.updatePlayerName();
-        GameController.setPLayerName(SelectPlayerPane.getPlayerChoice());
+        playerName = SelectPlayerPane.getPlayerChoice();
         try {
             GameApp.changeRootPane(new OpeningPane());
         } catch (IOException e1) {
@@ -321,12 +332,12 @@ public class StartMenuController {
     * @param event the action event
     */
     public void deleteAction(ActionEvent event){
-        Set<String> playerSaves = SaveFileHandler.getPlayerSaves(GameController.getPlayerName());
+        Set<String> playerSaves = SaveFileHandler.getPlayerSaves(getPlayerName());
         if(!playerSaves.isEmpty()) {
             if(DialogBoxes.alertBoxChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
                 ContinuePane.addDeleteObjects(getCurreContinuePane());
                 try {
-                    SaveFileHandler.deletePlayerSaves(GameController.getPlayerName());
+                    SaveFileHandler.deletePlayerSaves(getPlayerName());
                 } catch (IOException e) {
                 e.printStackTrace();
                 }
@@ -344,7 +355,7 @@ public class StartMenuController {
     * @throws IOException if an I/O error occurs
     */
     public static void populateSaveButtons(Button save1Button, Button save2Button, Button save3Button) throws IOException {
-       Set<String> playerSaves = SaveFileHandler.getPlayerSaves(GameController.getPlayerName());
+       Set<String> playerSaves = SaveFileHandler.getPlayerSaves(getPlayerName());
        String[] saveNames = new String[3];
        String[] storyNames = new String[3];
        int index = 0;
@@ -369,7 +380,7 @@ public class StartMenuController {
                
                saveButton.setOnAction(e -> {
                     GameManager.getInstance().endGame();
-                    SerializedGameState save = SaveFileHandler.loadGameFromFile(GameController.getPlayerName() + "_" + storyNames[buttonNumber - 1] + "_" + saveNames[buttonNumber - 1] + ".ser");
+                    SerializedGameState save = SaveFileHandler.loadGameFromFile(getPlayerName() + "_" + storyNames[buttonNumber - 1] + "_" + saveNames[buttonNumber - 1] + ".ser");
                     GameManager.getInstance().setPlayer(save.getGame().getPlayer());
                     GameManager.getInstance().setStory(save.getGame().getStory());
                     GameManager.getInstance().setGoals(save.getGame().getGoals());
@@ -408,7 +419,7 @@ public class StartMenuController {
     public void createPlayerAction(ActionEvent event){
         SelectPlayerPane.updatePlayerName();
         if(SelectPlayerPane.playerName != null && !SelectPlayerPane.playerName.equals("")){
-            GameController.setPLayerName(SelectPlayerPane.playerName);
+            playerName = SelectPlayerPane.playerName;
             try {
                 GameApp.changeRootPane(new OpeningPane());
             } catch (IOException e1) {
@@ -425,7 +436,7 @@ public class StartMenuController {
     */
     public void startAction(ActionEvent event){
         GameManager.getInstance().endGame();
-        Set<String> playerSaves = SaveFileHandler.getPlayerSaves(GameController.getPlayerName());
+        Set<String> playerSaves = SaveFileHandler.getPlayerSaves(getPlayerName());
         NewGamePane.updateSaveName();
         if(NewGamePane.saveName != null && !NewGamePane.saveName.equals("")){
             boolean overwrite = true;
@@ -442,14 +453,13 @@ public class StartMenuController {
             }
             if(overwrite){
                 try {
-                    SaveFileHandler.deleteSave(saveNames[2], GameController.getPlayerName());
+                    SaveFileHandler.deleteSave(saveNames[2], getPlayerName());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                //GameController.setStoryName(NewGamePane.getStoryChoice());
 
                 try {
-                    createNewGame(GameController.getPlayerName(),NewGamePane.getStoryChoice());
+                    createNewGame(getPlayerName(),NewGamePane.getStoryChoice(), NewGamePane.saveName);
                     NextLevelAnimation.animation();
                 } catch (MalformedURLException | BrokenLinkException e1) {
                     DialogBoxes.alertBox("", "", e1.toString());
@@ -465,7 +475,7 @@ public class StartMenuController {
     * Initializes the player, story, goals, and creates the game.
      * @throws BrokenLinkException
     */
-    private static void createNewGame(String playerName, String storyName) throws BrokenLinkException{
+    private static void createNewGame(String playerName, String storyName, String saveName) throws BrokenLinkException{
         
         List<String> inventory = List.of("Sword");
 
@@ -491,7 +501,7 @@ public class StartMenuController {
         GameManager.getInstance().setPlayer(player);
         GameManager.getInstance().setStory(story);
         GameManager.getInstance().setGoals(goals);
-        GameManager.getInstance().setGameName("TEST");
+        GameManager.getInstance().setGameName(saveName);
         GameManager.getInstance().createGame();
 
         Passage currentPassage = GameManager.getInstance().getGame().begin();
