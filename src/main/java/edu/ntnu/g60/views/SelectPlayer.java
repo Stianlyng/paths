@@ -23,6 +23,8 @@ public class SelectPlayer extends StackPane {
         Button continueButton = continueButton(playerName);
 
         
+        // make button width same as text field
+        
         GridPane layout = new GridPane();
         layout.setAlignment(Pos.CENTER);
         layout.setVgap(10);
@@ -50,6 +52,7 @@ public class SelectPlayer extends StackPane {
     
     private Button continueButton(TextField playerName){
         Button continueButton = new Button("Continue");
+        continueButton.prefWidthProperty().bind(playerName.widthProperty());
         continueButton.setOnAction(e -> {
             String enteredPlayer = playerName.getText();
             switchToMainMenu(enteredPlayer);

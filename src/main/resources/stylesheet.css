@@ -1,14 +1,50 @@
-.combo-box {
-    -fx-font-size: 14px;
-    -fx-background-color: #ffffff;
+.root {
+    -fx-font-family: "Monospace";
+    -fx-base: #000000;
+    -fx-font-size: 20px;
 }
 
 .button {
-    -fx-background-color: #4CAF50; /* green */
-    -fx-font-size: 15px;
-    -fx-text-fill: white;
+    -fx-background-color: 
+        linear-gradient(#0d0d0d, #262626),
+        radial-gradient(center 50% -40%, radius 200%, #303030 45%, #202020 50%);
+    -fx-background-radius: 0;
+    -fx-background-insets: 0, 1, 2;
+    -fx-text-fill: #00ff00;
+    -fx-effect: dropshadow(three-pass-box, #0000ff, 10, 0, 0, 0);
+    -fx-min-width: 160px;
+    -fx-min-height: 60px;
+    -fx-font-size: 22px;
 }
 
 .button:hover {
-    -fx-background-color: #45a049; /* dark green */
+    -fx-text-fill: #ffffff;
+}
+
+.button:pressed {
+    -fx-background-color: 
+        linear-gradient(#0d0d0d, #262626),
+        radial-gradient(center 50% -40%, radius 200%, #202020 45%, #101010 50%);
+    -fx-text-fill: #00ffff;
+}
+
+.combobox-base {
+    -fx-background-color: 
+        linear-gradient(#0d0d0d, #262626),
+        radial-gradient(center 50% -40%, radius 200%, #303030 45%, #202020 50%);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0, 1, 2;
+    -fx-text-fill: #00ff00;
+    -fx-effect: dropshadow(three-pass-box, #0000ff, 10, 0, 0, 0);
+}
+
+.combobox-popup .list-cell {
+    -fx-background-color: #202020;
+    -fx-text-fill: #00ff00;
+    -fx-padding: 5px;
+}
+
+.combobox-popup .list-cell:filled:selected, .combobox-popup .list-cell:filled:selected:hover {
+    -fx-background-color: #303030;
+    -fx-text-fill: #00ffff;
 }
