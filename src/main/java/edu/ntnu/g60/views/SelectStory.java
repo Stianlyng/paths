@@ -6,11 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.util.List;
 
+import edu.ntnu.g60.components.BackgroundComponent;
 import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.goals.Goal;
@@ -56,7 +58,6 @@ public class SelectStory {
                 );
                 GameManager.getInstance().setStory(story);
                 GameManager.getInstance().setGoals(goals);
-                GameManager.getInstance().setGameName("kuk"); //todo; fjern??
                 GameManager.getInstance().createGame();
 
             } catch (BrokenLinkException error) {
@@ -74,7 +75,9 @@ public class SelectStory {
         layout.add(new Label("Welcome"), 0, 0);
         layout.add(storySelection, 0, 1);
         layout.add(playButton, 0, 2);
-
+        Background background = BackgroundComponent.createBackground("selectStoryScene.png");
+        layout.setBackground(background);
+ 
         scene = new Scene(layout, WIDTH, HEIGHT);
     }
 

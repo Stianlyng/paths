@@ -18,8 +18,8 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Paths Adventure Game");
-        SelectPlayer initialScene = new SelectPlayer(primaryStage, WIDTH, HEIGHT);
-        primaryStage.setScene(initialScene.getScene());
+        SelectPlayer selectPlayerScene = new SelectPlayer(primaryStage, WIDTH, HEIGHT);
+        primaryStage.setScene(selectPlayerScene.getScene());
         primaryStage.show();
     }
 }

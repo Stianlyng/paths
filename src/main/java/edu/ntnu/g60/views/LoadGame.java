@@ -40,7 +40,6 @@ public class LoadGame {
 
             GameManager.getInstance().setStory(gameState.getGame().getStory());
             GameManager.getInstance().setGoals(gameState.getGame().getGoals());
-            GameManager.getInstance().setGameName("kuk"); //todo; fjern??
             GameManager.getInstance().createGame();
 
 

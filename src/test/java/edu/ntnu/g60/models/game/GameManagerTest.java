@@ -64,7 +64,6 @@ public class GameManagerTest {
         gameManager.setPlayer(player);
         gameManager.setStory(story);
         gameManager.setGoals(goals);
-        gameManager.setGameName("Test Game"); //todo; fjern gameName??
         gameManager.createGame();
         Game game = gameManager.getGame();
         assertNotNull(game, "Game should not be null");
@@ -81,7 +80,6 @@ public class GameManagerTest {
         gameManager.setPlayer(player);
         gameManager.setStory(story);
         gameManager.setGoals(goals);
-        gameManager.setGameName("Test Game"); //todo; fjern gameName??
         gameManager.createGame();
         gameManager.endGame();
         assertThrows(IllegalStateException.class, () -> gameManager.getGame(), "Should throw exception when no game has been created");
