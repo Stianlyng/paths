@@ -60,10 +60,10 @@ public class ConversationPane extends StackPane{
 
         Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 293, 38, controller::sceneClickedAction);
         String[] textline = ConversationPaneController.getTextLines();
-        Text textLineOne = ViewObjects.newText(textline[0], 27, false, 333-193, 520-71, controller::sceneClickedAction);
-        Text textLineTwo = ViewObjects.newText(textline[1], 27, false, 333-193, 555-71, controller::sceneClickedAction);
-        Text textLineThree = ViewObjects.newText(textline[2], 27, false, 333-193, 590-71, controller::sceneClickedAction);
-        Text textLineFour = ViewObjects.newText(textline[3], 27, false, 333-193, 425-71, controller::sceneClickedAction);
+        Text textLineOne = ViewObjects.newText(textline[0], 24, false, 333-193, 520-71, controller::sceneClickedAction);
+        Text textLineTwo = ViewObjects.newText(textline[1], 24, false, 333-193, 555-71, controller::sceneClickedAction);
+        Text textLineThree = ViewObjects.newText(textline[2], 24, false, 333-193, 590-71, controller::sceneClickedAction);
+        Text textLineFour = ViewObjects.newText(textline[3], 24, false, 333-193, 425-71, controller::sceneClickedAction);
 
         Group root = new Group(backgroundImage, infoBoard, enemyImage, playerImage, coinIcon,
         healthIcon, scoreIcon, scoreText, goldText, healthText,

@@ -99,7 +99,7 @@ public class ConversationPaneController {
             boolean moreLinesLeft = (conversationPaneNumber + 1 == types().length) ? false : true;
             setConversationPaneNumber(conversationPaneNumber + 1);
     
-            if(moreLinesLeft){
+            if(moreLinesLeft){  
                 try {
                     SoundController.stopSound();
                     ConversationPane pane = new ConversationPane();

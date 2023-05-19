@@ -119,19 +119,6 @@ public class StartMenuController {
     }
 
     /**
-    * Handles the link action event.
-    *
-    * @param event the MouseEvent triggered
-    */
-    public void linkAction(MouseEvent event){
-        try {
-            GameApp.changeRootPane(new ProjectPane());
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
-
-    /**
     * Handles the information file structure action event.
     *
     * @param event the MouseEvent triggered

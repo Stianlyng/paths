@@ -36,7 +36,6 @@ public class InformationPane extends StackPane{
             " make your own decisions, you will be fully immersed in this amazing \n" +
             " gaming experience. So gear up and get ready to enter a world like no \n" +
             "           other as you journey through this passage-based game.\n", 22, false, 170, 100);
-        Text projectLink = ViewObjects.newText("*View Repository*", 22, true, 200, 595-71, controller::linkAction);
-        return new Group(background, backButton, informationTitle, informationText, projectLink);
+        return new Group(background, backButton, informationTitle, informationText);
     }
 }
