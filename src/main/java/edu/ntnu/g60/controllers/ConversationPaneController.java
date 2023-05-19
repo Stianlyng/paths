@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
@@ -17,6 +18,7 @@ import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.EndGameAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
+import edu.ntnu.g60.views.Animations.WinAnimation;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.GamePanes.FightPane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
@@ -164,7 +166,14 @@ public class ConversationPaneController {
     public void choiceOneAction(ActionEvent event){
         try {
             Link link1 = PassageManager.getInstance().getPassage().getLinks().get(0);
-            if(link1.getReference().equalsIgnoreCase("game over")){
+            for (Action action : link1.getActions()) {
+                action.execute(GameManager.getInstance().getGame().getPlayer());
+            }
+            boolean goalsFulfilled = GameManager.getInstance().getGame().getGoals().stream().allMatch(goal -> goal.isFulfilled(GameManager.getInstance().getGame().getPlayer()));
+            if(goalsFulfilled){
+                WinAnimation.animation();
+            }
+            else if(link1.getReference().equalsIgnoreCase("game over")){
                 DeathAnimation.animation();
             } else if (link1.getReference().equalsIgnoreCase("end game")){
                 EndGameAnimation.animation();
@@ -189,7 +198,13 @@ public class ConversationPaneController {
     public void choiceTwoAction(ActionEvent event){
         try {
             Link link2 = PassageManager.getInstance().getPassage().getLinks().get(1);
-            if(link2.getReference().equalsIgnoreCase("game over")){
+            for (Action action : link2.getActions()) {
+                action.execute(GameManager.getInstance().getGame().getPlayer());
+            }
+            boolean goalsFulfilled = GameManager.getInstance().getGame().getGoals().stream().allMatch(goal -> goal.isFulfilled(GameManager.getInstance().getGame().getPlayer()));
+            if(goalsFulfilled){
+                WinAnimation.animation();
+            } else if(link2.getReference().equalsIgnoreCase("game over")){
                 DeathAnimation.animation();
             } else if (link2.getReference().equalsIgnoreCase("end game")){
                 EndGameAnimation.animation();
