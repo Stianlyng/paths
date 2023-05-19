@@ -6,10 +6,10 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import edu.ntnu.g60.models.actions.Action;
+import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
-import edu.ntnu.g60.models.passage.PassageManager;
 import edu.ntnu.g60.utils.FrontendUtils;
 import edu.ntnu.g60.utils.SaveFileHandler;
 import edu.ntnu.g60.views.GameApp;
@@ -27,62 +27,39 @@ import javafx.event.ActionEvent;
  */
 public class FightPaneController {
     
-    /**
-    * The current health value of the enemy.
-    */
+    
+    private Passage passage;
+    
+    public FightPaneController(Passage passage){
+        this.passage = passage;
+    }
+ 
     public static float enemyHealth;
-
-    /**
-    * The current health value of the player.
-    * Independent from a Player objects health.
-    */
     public static float playerHealth;
 
-    /**
-    * The currently active fight pane.
-    */
+
     public static FightPane currentFightPane;
 
-    /**
-    * Sets the default health values for the enemy and player.
-    */
     public static void setDefaultHealthValues(){
         enemyHealth = 1.00F;
         playerHealth = 1.00F;
     }
 
-    /**
-    * Retrieves the currently active fight pane.
-    *
-    * @return The current FightPane object.
-    */
+
     public static FightPane getCurrentFightPane(){
         return currentFightPane;
     }
 
-    /**
-    * Sets the currently active fight pane.
-    *
-    * @param pane The FightPane object to set as the current fight pane.
-    */
     public static void setCurrentFightPane(FightPane pane){
         currentFightPane = pane;
     }
     
-    /**
-    * Handles the exit action event by closing the game application.
-    *
-    * @param event The ActionEvent object representing the exit action.
-    */
+
     public void exitAction(ActionEvent event){
         GameApp.closeApplication();
     }
 
-    /**
-    * Handles the menu action event by saving the game and changing the root pane to the opening pane.
-    *
-    * @param event The ActionEvent object representing the menu action.
-    */
+
     public void menuAction(ActionEvent event){
         try {
             SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
@@ -92,11 +69,7 @@ public class FightPaneController {
         }
     }
 
-    /**
-    * Handles the fight action event by adding fight objects to the current fight pane.
-    *
-    * @param event The ActionEvent object representing the fight action.
-    */
+
     public void fightAction(ActionEvent event){
         try {
             FightPane.addFightObjects(getCurrentFightPane());
@@ -105,11 +78,7 @@ public class FightPaneController {
         }
     }
 
-    /**
-    * Handles the heal action event by adding heal objects to the current fight pane.
-    *
-    * @param event The ActionEvent object representing the heal action.
-    */
+
     public void healAction(ActionEvent event){
         try {
             FightPane.addHealObjects(getCurrentFightPane());
@@ -118,11 +87,7 @@ public class FightPaneController {
         }
     }
 
-    /**
-    * Handles the inventory action event by adding inventory objects to the current fight pane.
-    *
-    * @param event The ActionEvent object representing the inventory action.
-    */
+
     public void inventoryAction(ActionEvent event){
         try {
             FightPane.addInventoryObjects(getCurrentFightPane());
@@ -245,7 +210,7 @@ public class FightPaneController {
      * @throws FileNotFoundException if the file is not found
      */
     public static void winFight() throws MalformedURLException, FileNotFoundException{
-        Link link2 = PassageManager.getInstance().getPassage().getLinks().get(1);
+        Link link2 = passage.getLinks().get(1);
         for (Action action : link2.getActions()) {
             action.execute(GameManager.getInstance().getGame().getPlayer());
         }
@@ -259,9 +224,8 @@ public class FightPaneController {
         } else { 
             
             Passage currentPassage = GameManager.getInstance().getGame().go(link2);
-            PassageManager.getInstance().setPassage(currentPassage); 
 
-            NextLevelAnimation.animation();
+            NextLevelAnimation.animation(currentPassage);
             SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
         }
     }
@@ -273,7 +237,7 @@ public class FightPaneController {
      * @throws FileNotFoundException if the file is not found
      */
     public static void looseFight() throws MalformedURLException, FileNotFoundException{
-        Link link1 = PassageManager.getInstance().getPassage().getLinks().get(0);
+        Link link1 = passage.getLinks().get(0);
         for (Action action : link1.getActions()) {
             action.execute(GameManager.getInstance().getGame().getPlayer());
         }
@@ -286,10 +250,8 @@ public class FightPaneController {
             EndGameAnimation.animation();
         } else { 
             Passage currentPassage = GameManager.getInstance().getGame().go(link1);
-            PassageManager.getInstance().setPassage(currentPassage); 
-
-            NextLevelAnimation.animation();
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
+            NextLevelAnimation.animation(currentPassage);
+            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), passage.getTitle());
         }
     }
 
@@ -333,7 +295,7 @@ public class FightPaneController {
             }   
         });
     }
- 
+
     /**
      * Performs the action of the player attacking the enemy and healing the player.
      *

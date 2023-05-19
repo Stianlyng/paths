@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import edu.ntnu.g60.models.passage.PassageManager;
+import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
@@ -40,9 +40,9 @@ public class AnimationController {
     /**
     * Loads and displays the second frame of the next level sequence.
     */
-    public void secondFrame(){
+    public void secondFrame(String passageTitle){
         try {
-            GameApp.changeRootPane(new TxtPane(PassageManager.getInstance().getPassage().getTitle())); //todo; dont use singleton
+            GameApp.changeRootPane(new TxtPane(passageTitle)); //todo; dont use singleton
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         }
@@ -51,10 +51,10 @@ public class AnimationController {
     /**
     * Loads and displays the third frame of the next level sequence.
     */
-    public void thirdFrame(){
+    public void thirdFrame(Passage passage){
         try {
             ConversationPaneController.setConversationPaneNumber(0);
-            ConversationPane pane = new ConversationPane();
+            ConversationPane pane = new ConversationPane(passage);
             ConversationPaneController.setCurrentConversationPane(pane);
             GameApp.changeRootPane(pane);
             

@@ -47,6 +47,10 @@ public class GameApp extends Application {
         }
     }
 
+    public static Stage getStage(){
+        return stage;
+    }
+
     public static void closeApplication(){
         stage.close();
     }
