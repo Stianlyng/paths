@@ -39,7 +39,6 @@ import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import edu.ntnu.g60.views.StartMenu.SelectPlayerPane;
 import edu.ntnu.g60.views.settings.InformationFileStructurePane;
 import edu.ntnu.g60.views.settings.InformationPane;
-import edu.ntnu.g60.views.settings.ProjectPane;
 import edu.ntnu.g60.views.settings.SettingsPane;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
