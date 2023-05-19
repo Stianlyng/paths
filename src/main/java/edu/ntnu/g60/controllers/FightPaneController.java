@@ -3,6 +3,7 @@ package edu.ntnu.g60.controllers;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.game.GameManager;
@@ -195,6 +196,8 @@ public class FightPaneController {
 
     public void inventoryOneAction(ActionEvent event){
         //TODO: ADD functionality
+        //remove item from inventory
+        //do something in fight
     }
 
     public void inventoryTwoAction(ActionEvent event){
@@ -347,5 +350,20 @@ public class FightPaneController {
         } else if(playerHealth < 0.00){
             FightPane.updateHealthPlayer(0.00F);
         }  
+    }
+
+    public static String[] getPlayerInventoryItems(){
+        List<String> inventoryItems = GameManager.getInstance().getGame().getPlayer().getInventory();
+        String[] result = new String[3];
+    
+        for (int i = 0; i < 3; i++) {
+            if (i < inventoryItems.size()) {
+                result[i] = inventoryItems.get(i);
+            } else {
+                result[i] = "Missing item";
+            }
+        }
+    
+        return result;
     }
 }

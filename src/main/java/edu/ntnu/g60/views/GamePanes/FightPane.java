@@ -116,10 +116,10 @@ public class FightPane extends StackPane{
     }
 
     public static void addInventoryObjects(FightPane pane) throws FileNotFoundException{
-        //TODO: add actual inventory
-        Button itemOneButton = ViewObjects.newButton("Item 1", 209-193, 484-71, "inventory_button", "inventory_hover", controller::inventoryOneAction);
-        Button itemTwoButton = ViewObjects.newButton("Item 2", 604-193, 484-71, "inventory_button", "inventory_hover", controller::inventoryTwoAction);
-        Button itemThreeButton = ViewObjects.newButton("Item 3", 209-193, 575-71, "inventory_button", "inventory_hover", controller::inventoryThreeAction);
+        String[] inventoryItems = FightPaneController.getPlayerInventoryItems();
+        Button itemOneButton = ViewObjects.newButton(inventoryItems[0], 209-193, 484-71, "inventory_button", "inventory_hover", controller::inventoryOneAction);
+        Button itemTwoButton = ViewObjects.newButton(inventoryItems[1], 604-193, 484-71, "inventory_button", "inventory_hover", controller::inventoryTwoAction);
+        Button itemThreeButton = ViewObjects.newButton(inventoryItems[2], 209-193, 575-71, "inventory_button", "inventory_hover", controller::inventoryThreeAction);
         Button backButton = ViewObjects.newButton("Back", 604-193, 575-71, "inventory_button", "inventory_hover", controller::backAction);
         StackPane.setAlignment(itemOneButton, Pos.BOTTOM_LEFT);
         StackPane.setMargin(itemOneButton, new Insets(50, 16, 109, 16)); 
