@@ -1,0 +1,384 @@
+{
+  "title" : "Title Of the Story: Mr. Robot: The Revolution",
+  "passages" : [ {
+    "title" : "First Passage",
+    "content" : "Meet Elliot Alderson, a cyber-security engineer by day and a vigilante hacker by night. Haunted by a troubled past, he suffers from social anxiety and clinical depression. His only solace lies in dismantling corrupt corporations through his hacking.\n\n",
+    "links" : [ {
+      "text" : "Join fsociety",
+      "reference" : "fsociety's Invitation"
+    }, {
+      "text" : "Stay with AllSafe",
+      "reference" : "Elliot Stays at AllSafe"
+    } ]
+  }, {
+    "title" : "fsociety's Invitation",
+    "content" : "One day, Elliot is contacted by an anarchistic hacker group called \"fsociety\". The group's charismatic and enigmatic leader, known only as Mr. Robot, has a plan to wipe out all consumer debt by targeting the multi-billion dollar conglomerate, E Corp.\n\n",
+    "links" : [ {
+      "text" : "Join Mr. Robot",
+      "reference" : "Elliot Joins fsociety"
+    }, {
+      "text" : "Refuse Mr. Robot's Offer",
+      "reference" : "Elliot Refuses"
+    } ]
+  }, {
+    "title" : "Elliot Stays at AllSafe",
+    "content" : "Elliot decides to stay with his day job at AllSafe, ignoring the tempting offer from fsociety. But as he digs deeper, he uncovers horrifying secrets about E Corp that he can't ignore. He finds himself at a crossroads.\n\n",
+    "links" : [ {
+      "text" : "Reconsider fsociety's offer",
+      "reference" : "fsociety's Invitation"
+    }, {
+      "text" : "Report to the authorities",
+      "reference" : "Report to Authorities"
+    } ]
+  }, {
+    "title" : "Elliot Joins fsociety",
+    "content" : "Joining fsociety, Elliot is thrown into the chaos of cyber-warfare. His exceptional skills help them inch closer to their goal, but as the line between right and wrong blur, he must face his own demons and make tough decisions.\n\n",
+    "links" : [ {
+      "text" : "Carry out the hack",
+      "reference" : "Execute fsociety Hack"
+    }, {
+      "text" : "Confront his personal demons",
+      "reference" : "Elliot's Personal Demons"
+    } ]
+  }, {
+    "title" : "Elliot Refuses",
+    "content" : "Elliot refuses to join Mr. Robot's anarchist group, choosing his own solo fight against E Corp. However, a sudden event forces him to reconsider.\n\n",
+    "links" : [ {
+      "text" : "Reconsider fsociety's offer",
+      "reference" : "fsociety's Invitation"
+    }, {
+      "text" : "Stick to his own methods",
+      "reference" : "Elliot's Solo Fight"
+    } ]
+  }, {
+    "title" : "Report to Authorities",
+    "content" : "Elliot decides to report everything to the authorities. As he prepares his evidence, he's plunged into a world of corporate espionage and dangerous liaisons.\n\n",
+    "links" : [ {
+      "text" : "Stick with the authorities",
+      "reference" : "Stay with Authorities"
+    }, {
+      "text" : "Reconsider fsociety's offer",
+      "reference" : "fsociety's Invitation"
+    } ]
+  }, {
+    "title" : "Execute fsociety Hack",
+    "content" : "With determination, Elliot initiates the greatest hack in history. Success promises a new world order, but failure could mean their destruction. The tension escalates as the time draws near.\n\n",
+    "links" : [ {
+      "text" : "Continue with the plan",
+      "reference" : "Hack Success"
+    }, {
+      "text" : "Abort the hack",
+      "reference" : "Abort the Hack"
+    } ]
+  }, {
+    "title" : "Elliot's Personal Demons",
+    "content" : "Haunted by his past, Elliot confronts his personal demons. As he grapples with his reality, the line between his mind and the world begins to blur.\n\n",
+    "links" : [ {
+      "text" : "Overcome his past",
+      "reference" : "Overcome Past"
+    }, {
+      "text" : "Give in to his demons",
+      "reference" : "Succumb to Demons"
+    } ]
+  }, {
+    "title" : "Elliot's Solo Fight",
+    "content" : "Elliot continues his solo fight against E Corp, using his unique hacking abilities. Along the way, he makes unexpected discoveries about himself and those around him.\n\n",
+    "links" : [ {
+      "text" : "Discover Mr. Robot's true identity",
+      "reference" : "Mr. Robot's Identity"
+    }, {
+      "text" : "Uncover E Corp's darkest secret",
+      "reference" : "E Corp's Secret"
+    } ]
+  }, {
+    "title" : "Stay with Authorities",
+    "content" : "Elliot decides to stay with the authorities and try to expose E Corp through legal means. It's a rocky path, with many obstacles and dangerous threats.\n\n",
+    "links" : [ {
+      "text" : "Take down E Corp legally",
+      "reference" : "Legal Victory"
+    }, {
+      "text" : "Get forced out of the case",
+      "reference" : "Forced Out"
+    } ]
+  }, {
+    "title" : "Hack Success",
+    "content" : "The hack is a success, and E Corp falls. The world plunges into chaos and disorder, and Elliot must face the consequences of his actions.\n\n",
+    "links" : [ {
+      "text" : "Lead the new world order",
+      "reference" : "New World Order"
+    }, {
+      "text" : "Deal with remorse",
+      "reference" : "Deal with Remorse"
+    } ]
+  }, {
+    "title" : "Abort the Hack",
+    "content" : "Elliot decides to abort the hack at the last moment. But the effects of his actions have already rippled far and wide, and he must deal with the aftermath.\n\n",
+    "links" : [ {
+      "text" : "Face the fallout",
+      "reference" : "Deal with Fallout"
+    }, {
+      "text" : "Go into hiding",
+      "reference" : "Elliot in Hiding"
+    } ]
+  }, {
+    "title" : "Overcome Past",
+    "content" : "Elliot overcomes his past, finding a newfound sense of purpose and determination. He is ready to face any challenge that comes his way.\n\n",
+    "links" : [ {
+      "text" : "Uncover Mr. Robot's true identity",
+      "reference" : "Mr. Robot's Identity"
+    }, {
+      "text" : "Rejoin fsociety",
+      "reference" : "fsociety's Invitation"
+    } ]
+  }, {
+    "title" : "Succumb to Demons",
+    "content" : "Overwhelmed by his past and his present, Elliot gives in to his demons. He finds himself in a spiraling abyss of confusion and despair.\n\n",
+    "links" : [ {
+      "text" : "Seek help",
+      "reference" : "Seek Help"
+    }, {
+      "text" : "Go into hiding",
+      "reference" : "Elliot in Hiding"
+    } ]
+  }, {
+    "title" : "Mr. Robot's Identity",
+    "content" : "Elliot makes a shocking discovery about Mr. Robot's true identity, shattering everything he thought he knew about his world.\n\n",
+    "links" : [ {
+      "text" : "Confront Mr. Robot",
+      "reference" : "Confront Mr. Robot"
+    }, {
+      "text" : "Go into hiding",
+      "reference" : "Elliot in Hiding"
+    } ]
+  }, {
+    "title" : "E Corp's Secret",
+    "content" : "Elliot uncovers E Corp's darkest secret, further fueling his determination to take down the corporation.\n\n",
+    "links" : [ {
+      "text" : "Expose E Corp's secret",
+      "reference" : "Expose E Corp"
+    }, {
+      "text" : "Get caught by E Corp",
+      "reference" : "Caught by E Corp"
+    } ]
+  }, {
+    "title" : "Legal Victory",
+    "content" : "Elliot manages to expose E Corp legally. However, the victory comes at a price.\n\n",
+    "links" : [ {
+      "text" : "Enjoy the victory",
+      "reference" : "End Game"
+    }, {
+      "text" : "Face retaliation",
+      "reference" : "Face Retaliation"
+    } ]
+  }, {
+    "title" : "Forced Out",
+    "content" : "Elliot is forced out of the case, left helpless as E Corp continues its ruthless business. But he's not one to give up so easily.\n\n",
+    "links" : [ {
+      "text" : "Join fsociety",
+      "reference" : "fsociety's Invitation"
+    }, {
+      "text" : "Plan a new strategy",
+      "reference" : "Plan New Strategy"
+    } ]
+  }, {
+    "title" : "New World Order",
+    "content" : "In the aftermath of E Corp's downfall, Elliot emerges as a leader in the new world order. However, power comes with its own set of challenges.\n\n",
+    "links" : [ {
+      "text" : "Rule the new world",
+      "reference" : "End Game"
+    }, {
+      "text" : "Abdicate and disappear",
+      "reference" : "Elliot in Hiding"
+    } ]
+  }, {
+    "title" : "Deal with Remorse",
+    "content" : "Elliot deals with the remorse of his actions, grappling with the chaos he has unleashed upon the world.\n\n",
+    "links" : [ {
+      "text" : "Seek redemption",
+      "reference" : "Seek Redemption"
+    }, {
+      "text" : "Surrender to authorities",
+      "reference" : "Report to Authorities"
+    } ]
+  }, {
+    "title" : "Deal with Fallout",
+    "content" : "Elliot faces the fallout of aborting the hack. He is left to navigate a world where he has become a target.\n\n",
+    "links" : [ {
+      "text" : "Defend against threats",
+      "reference" : "Defend Against Threats"
+    }, {
+      "text" : "Go into hiding",
+      "reference" : "Elliot in Hiding"
+    } ]
+  }, {
+    "title" : "Seek Help",
+    "content" : "Elliot decides to seek help, trying to escape the spiraling abyss of his own mind. His path to recovery reveals more about his past and his identity.\n\n",
+    "links" : [ {
+      "text" : "Overcome his past",
+      "reference" : "Overcome Past"
+    }, {
+      "text" : "Discover Mr. Robot's true identity",
+      "reference" : "Mr. Robot's Identity"
+    } ]
+  }, {
+    "title" : "Elliot in Hiding",
+    "content" : "Elliot goes into hiding, leaving behind his old life. But even in hiding, the ghosts of his past continue to haunt him.\n\n",
+    "links" : [ {
+      "text" : "Return to face his past",
+      "reference" : "Overcome Past"
+    }, {
+      "text" : "Stay in hiding",
+      "reference" : "End Game"
+    } ]
+  }, {
+    "title" : "Confront Mr. Robot",
+    "content" : "Elliot confronts Mr. Robot, leading to an intense showdown between the two. The outcome will determine their future.\n\n",
+    "links" : [ {
+      "text" : "Defeat Mr. Robot",
+      "reference" : "Defeat Mr. Robot"
+    }, {
+      "text" : "Join forces with Mr. Robot",
+      "reference" : "Join Mr. Robot"
+    } ]
+  }, {
+    "title" : "Expose E Corp",
+    "content" : "Elliot exposes E Corp's secret, sparking outrage and chaos. The aftermath of his revelation sets a new course for the world.\n\n",
+    "links" : [ {
+      "text" : "Lead the new world order",
+      "reference" : "New World Order"
+    }, {
+      "text" : "Go into hiding",
+      "reference" : "Elliot in Hiding"
+    } ]
+  }, {
+    "title" : "Caught by E Corp",
+    "content" : "Elliot gets caught by E Corp, landing him in a perilous situation. His fate now hangs in the balance.\n\n",
+    "links" : [ {
+      "text" : "Escape E Corp's grasp",
+      "reference" : "Escape E Corp"
+    }, {
+      "text" : "Work for E Corp",
+      "reference" : "Work for E Corp"
+    } ]
+  }, {
+    "title" : "Face Retaliation",
+    "content" : "Elliot faces retaliation from those affected by his legal victory. He must navigate this dangerous new terrain and protect those he cares about.\n\n",
+    "links" : [ {
+      "text" : "Defend himself and his friends",
+      "reference" : "Defend Against Threats"
+    }, {
+      "text" : "Run away",
+      "reference" : "Elliot in Hiding"
+    } ]
+  }, {
+    "title" : "Plan New Strategy",
+    "content" : "Elliot plans a new strategy to bring down E Corp. This path is filled with danger and uncertainty, but his resolve is unwavering.\n\n",
+    "links" : [ {
+      "text" : "Implement the new plan",
+      "reference" : "Execute New Plan"
+    }, {
+      "text" : "Seek allies",
+      "reference" : "Seek Allies"
+    } ]
+  }, {
+    "title" : "Seek Redemption",
+    "content" : "Riddled with guilt, Elliot seeks redemption for his actions. His journey is one of self-discovery, forgiveness, and making amends.\n\n",
+    "links" : [ {
+      "text" : "Rebuild the world he broke",
+      "reference" : "Rebuild the World"
+    }, {
+      "text" : "Help those hurt by the hack",
+      "reference" : "Help Victims"
+    } ]
+  }, {
+    "title" : "Defend Against Threats",
+    "content" : "Elliot takes a stand against the threats coming his way, defending himself and his friends. It's a dangerous game, and every move could be his last.\n\n",
+    "links" : [ {
+      "text" : "Defeat the threats",
+      "reference" : "Defeat the Threats"
+    }, {
+      "text" : "Seek help",
+      "reference" : "Seek Help"
+    } ]
+  }, {
+    "title" : "Defeat Mr. Robot",
+    "content" : "Elliot manages to defeat Mr. Robot, gaining control over his life once again. He is finally free to make his own choices.\n\n",
+    "links" : [ {
+      "text" : "Start a new life",
+      "reference" : "End Game"
+    }, {
+      "text" : "Go back to fsociety",
+      "reference" : "fsociety's Invitation"
+    } ]
+  }, {
+    "title" : "Join Mr. Robot",
+    "content" : "Elliot decides to join forces with Mr. Robot, merging their skills and resources for a common goal.\n\n",
+    "links" : [ {
+      "text" : "Implement a new plan with Mr. Robot",
+      "reference" : "Execute New Plan"
+    }, {
+      "text" : "Take down E Corp with Mr. Robot",
+      "reference" : "E Corp's Downfall"
+    } ]
+  }, {
+    "title" : "Escape E Corp",
+    "content" : "Elliot manages to escape E Corp's grasp, but not without leaving a trail of chaos in his wake.\n\n",
+    "links" : [ {
+      "text" : "Run away from everything",
+      "reference" : "Elliot in Hiding"
+    }, {
+      "text" : "Turn the tables on E Corp",
+      "reference" : "Turn Tables on E Corp"
+    } ]
+  }, {
+    "title" : "Work for E Corp",
+    "content" : "Caught by E Corp, Elliot is forced to work for the enemy. But even within the belly of the beast, he plots his resistance.\n\n",
+    "links" : [ {
+      "text" : "Secretly undermine E Corp",
+      "reference" : "Undermine E Corp"
+    }, {
+      "text" : "Become a loyal employee",
+      "reference" : "End Game"
+    } ]
+  }, {
+    "title" : "Execute New Plan",
+    "content" : "Elliot puts his new plan into action. The stakes are high and the risks even higher. Will he succeed, or will his plan crumble?\n\n",
+    "links" : [ {
+      "text" : "Plan succeeds",
+      "reference" : "Plan Success"
+    }, {
+      "text" : "Plan fails",
+      "reference" : "Plan Failure"
+    } ]
+  }, {
+    "title" : "Seek Allies",
+    "content" : "Elliot seeks allies to bolster his fight against E Corp. His search leads him to unexpected places and old faces.\n\n",
+    "links" : [ {
+      "text" : "Find new allies",
+      "reference" : "New Allies"
+    }, {
+      "text" : "Return to old friends",
+      "reference" : "Return to Old Friends"
+    } ]
+  }, {
+    "title" : "Rebuild the World",
+    "content" : "Elliot decides to rebuild the world he shattered. It's a monumental task, requiring all his skills, courage, and determination.\n\n",
+    "links" : [ {
+      "text" : "Rebuild the world successfully",
+      "reference" : "End Game"
+    }, {
+      "text" : "Fail and lose hope",
+      "reference" : "Succumb to Demons"
+    } ]
+  }, {
+    "title" : "Help Victims",
+    "content" : "Elliot dedicates himself to helping those hurt by the hack. His journey takes him down a path of compassion, understanding, and healing.\n",
+    "links" : [ {
+      "text" : "Help successfully and find redemption",
+      "reference" : "End Game"
+    }, {
+      "text" : "Fail and be consumed by guilt",
+      "reference" : "Succumb to Demons"
+    } ]
+  } ]
+}
