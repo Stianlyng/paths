@@ -8,9 +8,7 @@ import edu.ntnu.g60.models.passage.PassageManager;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
-import edu.ntnu.g60.views.TitlePanes.AdvancePane;
-import edu.ntnu.g60.views.TitlePanes.DeathPane;
-import edu.ntnu.g60.views.TitlePanes.LvlPane;
+import edu.ntnu.g60.views.TitlePanes.TxtPane;
 
 /**
  * The AnimationController class is responsible for controlling the
@@ -24,7 +22,7 @@ public class AnimationController {
     */
     public void firstFrame() throws MalformedURLException{
         try {
-            GameApp.changeRootPane(new AdvancePane());
+            GameApp.changeRootPane(new TxtPane("Advancing"));
         } catch (FileNotFoundException e1) {
             
             e1.printStackTrace();
@@ -36,18 +34,7 @@ public class AnimationController {
     * @throws FileNotFoundException if the specified file is not found.
     */
     public void deathFirstFrame() throws FileNotFoundException{
-        GameApp.changeRootPane(new DeathPane());
-    }
-
-    /**
-    * Loads and displays the second frame of the death sequence.
-    */
-    public void deathSecondFrame(){
-        try {
-            GameApp.changeRootPane(new OpeningPane());
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+        GameApp.changeRootPane(new TxtPane("Game Over"));
     }
 
     /**
@@ -55,7 +42,7 @@ public class AnimationController {
     */
     public void secondFrame(){
         try {
-            GameApp.changeRootPane(new LvlPane(PassageManager.getInstance().getPassage().getTitle())); //todo; dont use singleton
+            GameApp.changeRootPane(new TxtPane(PassageManager.getInstance().getPassage().getTitle())); //todo; dont use singleton
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         }
@@ -73,6 +60,26 @@ public class AnimationController {
             
         } catch (FileNotFoundException | MalformedURLException e1) {
             
+            e1.printStackTrace();
+        }
+    }
+
+    public void winFirstFrame() throws FileNotFoundException{
+        GameApp.changeRootPane(new TxtPane("You won!"));
+    }
+
+    public void endGameFirstFrame() throws FileNotFoundException{
+        GameApp.changeRootPane(new TxtPane("Goals not reached"));
+    }
+
+    public void endGameSecondFrame() throws FileNotFoundException{
+        GameApp.changeRootPane(new TxtPane("GAME OVER!"));
+    }
+
+    public void goToOpening(){
+        try {
+            GameApp.changeRootPane(new OpeningPane());
+        } catch (IOException e1) {
             e1.printStackTrace();
         }
     }

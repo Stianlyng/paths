@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import edu.ntnu.g60.controllers.AnimationController;
 import edu.ntnu.g60.utils.FrontendUtils;
 
-public class DeathAnimation {
+public class WinAnimation {
 
     private static AnimationController controller;
 
@@ -14,7 +14,7 @@ public class DeathAnimation {
     }
 
     public static void animation() throws FileNotFoundException{
-        controller.deathFirstFrame();
+        controller.winFirstFrame();
         FrontendUtils.delay(3000, () -> {
             controller.goToOpening();
         });
