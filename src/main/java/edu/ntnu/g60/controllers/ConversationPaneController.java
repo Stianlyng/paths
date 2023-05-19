@@ -15,6 +15,7 @@ import edu.ntnu.g60.models.passage.PassageManager;
 import edu.ntnu.g60.utils.SaveFileHandler;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
+import edu.ntnu.g60.views.Animations.EndGameAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
 import edu.ntnu.g60.views.GamePanes.FightPane;
@@ -163,8 +164,10 @@ public class ConversationPaneController {
     public void choiceOneAction(ActionEvent event){
         try {
             Link link1 = PassageManager.getInstance().getPassage().getLinks().get(0);
-            if(link1.getReference().equals("game over")){
+            if(link1.getReference().equalsIgnoreCase("game over")){
                 DeathAnimation.animation();
+            } else if (link1.getReference().equalsIgnoreCase("end game")){
+                EndGameAnimation.animation();
             } else{
             
                 Passage currentPassage = GameManager.getInstance().getGame().go(link1);
@@ -186,11 +189,12 @@ public class ConversationPaneController {
     public void choiceTwoAction(ActionEvent event){
         try {
             Link link2 = PassageManager.getInstance().getPassage().getLinks().get(1);
-            if(link2.getReference().equals("game over")){
+            if(link2.getReference().equalsIgnoreCase("game over")){
                 DeathAnimation.animation();
+            } else if (link2.getReference().equalsIgnoreCase("end game")){
+                EndGameAnimation.animation();
             } else{
 
-                //todo; fix this
                 Passage currentPassage = GameManager.getInstance().getGame().go(link2);
                 PassageManager.getInstance().setPassage(currentPassage); 
 

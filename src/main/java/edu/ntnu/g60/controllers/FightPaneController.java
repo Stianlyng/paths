@@ -12,6 +12,7 @@ import edu.ntnu.g60.utils.FrontendUtils;
 import edu.ntnu.g60.utils.SaveFileHandler;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
+import edu.ntnu.g60.views.Animations.EndGameAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.GamePanes.FightPane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
@@ -240,11 +241,12 @@ public class FightPaneController {
      */
     public static void winFight() throws MalformedURLException, FileNotFoundException{
         Link link2 = PassageManager.getInstance().getPassage().getLinks().get(1);
-        if(link2.getReference().equals("game over")){
+        if(link2.getReference().equalsIgnoreCase("game over")){
             DeathAnimation.animation();
+        } else if (link2.getReference().equalsIgnoreCase("end game")){
+            EndGameAnimation.animation();
         } else { 
             
-            //todo; fix this
             Passage currentPassage = GameManager.getInstance().getGame().go(link2);
             PassageManager.getInstance().setPassage(currentPassage); 
 
@@ -261,8 +263,10 @@ public class FightPaneController {
      */
     public static void looseFight() throws MalformedURLException, FileNotFoundException{
         Link link1 = PassageManager.getInstance().getPassage().getLinks().get(0);
-        if(link1.getReference().equals("game over")){
+        if(link1.getReference().equalsIgnoreCase("game over")){
             DeathAnimation.animation();
+        } else if (link1.getReference().equalsIgnoreCase("end game")){
+            EndGameAnimation.animation();
         } else { 
             //todo; fix this
             Passage currentPassage = GameManager.getInstance().getGame().go(link1);
