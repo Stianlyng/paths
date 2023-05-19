@@ -2,7 +2,6 @@ package edu.ntnu.g60.views;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Stack;
 
 import edu.ntnu.g60.components.BackgroundComponent;
 import edu.ntnu.g60.models.actions.Action;
@@ -39,12 +38,12 @@ public class PlayGame extends StackPane{
     private static final String SAVE = "Save";
 
 
-    public PlayGame(Passage passage, int WIDTH, int HEIGHT) {
+    public PlayGame(Passage passage) {
 
         BorderPane layout = new BorderPane();
-        layout.setTop(topBar(optionDropdown(passage, WIDTH, HEIGHT)));
+        layout.setTop(topBar(optionDropdown(passage)));
         layout.setCenter(passageContent(passage));
-        layout.setBottom(chooseLinkButtons(passage, WIDTH, HEIGHT));
+        layout.setBottom(chooseLinkButtons(passage));
         
         Background background = BackgroundComponent.createBackground(passage.getBackground());
         layout.setBackground(background);
@@ -64,7 +63,7 @@ public class PlayGame extends StackPane{
         return passageContent;
     }
     
-    private GridPane chooseLinkButtons(Passage passage, int WIDTH, int HEIGHT) {
+    private GridPane chooseLinkButtons(Passage passage) {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(SPACING);
@@ -85,7 +84,7 @@ public class PlayGame extends StackPane{
                 }
 
                 Passage newPassage = game.go(links.get(index));
-                PlayGame newView = new PlayGame(newPassage, WIDTH, HEIGHT);
+                PlayGame newView = new PlayGame(newPassage);
                 App.changeRootPane(newView.getLayout());
             });
 
@@ -110,7 +109,7 @@ public class PlayGame extends StackPane{
         return topBox;
     }
     
-    private ComboBox<String> optionDropdown(Passage passage, int WIDTH, int HEIGHT){
+    private ComboBox<String> optionDropdown(Passage passage){
         ComboBox<String> options = new ComboBox<>();
         options.getItems().addAll(SAVE, MAIN_MENU);
         options.setPromptText(OPTIONS);
@@ -129,7 +128,7 @@ public class PlayGame extends StackPane{
                 case MAIN_MENU:
                     String playerName = GameManager.getInstance().getGame().getPlayer().getName();
                     GameManager.getInstance().endGame();
-                    MainMenu mainMenu = new MainMenu(playerName, WIDTH, HEIGHT);  // Change this line
+                    MainMenu mainMenu = new MainMenu(playerName);  // Change this line
                     App.changeRootPane(mainMenu.getLayout());  // Add this line
                 
                     break;
@@ -146,7 +145,6 @@ public class PlayGame extends StackPane{
             e.printStackTrace();
         }
     }
-    
     
     public StackPane getLayout() {
         return this;

@@ -2,13 +2,11 @@ package edu.ntnu.g60.views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.util.Set;
 
@@ -23,12 +21,8 @@ public class LoadGame extends StackPane{
 
     private static final int PADDING = 20;
     private static final double BUTTON_WIDTH = 200;
-    private int width;
-    private int height;
 
-    public LoadGame(String playerName, int width, int height) {
-        this.width = width;
-        this.height = height;
+    public LoadGame(String playerName) {
 
         ComboBox<String> storySelection = new ComboBox<>();
         storySelection.setPromptText("Select a save");
@@ -62,7 +56,7 @@ public class LoadGame extends StackPane{
     }
 
     private void switchToPlayGame(Passage currentPassage) {
-        PlayGame playGame = new PlayGame(currentPassage, width, height);
+        PlayGame playGame = new PlayGame(currentPassage);
         App.changeRootPane(playGame.getLayout());
     }
 

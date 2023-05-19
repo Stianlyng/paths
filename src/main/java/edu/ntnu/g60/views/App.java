@@ -24,7 +24,7 @@ public class App extends Application {
         stage = primaryStage;
         primaryStage.setTitle("Paths Adventure Game");
 
-        SelectPlayer selectPlayerScene = new SelectPlayer(WIDTH, HEIGHT);
+        SelectPlayer selectPlayerScene = new SelectPlayer();
         changeRootPane(selectPlayerScene.getLayout());
 
         primaryStage.show();

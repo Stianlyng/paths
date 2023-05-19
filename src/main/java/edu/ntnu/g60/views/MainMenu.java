@@ -2,12 +2,10 @@ package edu.ntnu.g60.views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 
@@ -30,13 +28,9 @@ public class MainMenu extends StackPane{
 
     private GridPane layout;  
 
-    private int width;
-    private int height;
 
     
-    public MainMenu(String playerName, int width, int height) {
-        this.width = width;
-        this.height = height;
+    public MainMenu(String playerName) {
 
         List<String> inventory = List.of("Sword");
 
@@ -106,12 +100,12 @@ public class MainMenu extends StackPane{
     }
 
     private void switchToSelectStory(String playerName) {
-        SelectStory selectStory = new SelectStory(width, height);
+        SelectStory selectStory = new SelectStory();
         App.changeRootPane(selectStory.getLayout());
     }
 
     private void switchToLoadGame(String playerName) {
-        LoadGame loadGame = new LoadGame(playerName, width, height);
+        LoadGame loadGame = new LoadGame(playerName);
         App.changeRootPane(loadGame.getLayout());
     }
         

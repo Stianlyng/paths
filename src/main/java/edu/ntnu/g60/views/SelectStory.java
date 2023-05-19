@@ -2,7 +2,6 @@ package edu.ntnu.g60.views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -11,7 +10,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 import java.util.List;
-import java.util.Stack;
 
 import edu.ntnu.g60.components.BackgroundComponent;
 import edu.ntnu.g60.exceptions.BrokenLinkException;
@@ -34,13 +32,7 @@ public class SelectStory extends StackPane{
     private static final int PADDING = 20;
     private static final double BUTTON_WIDTH = 200;
 
-    private int width;
-    private int height;
-
-
-    public SelectStory(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public SelectStory() {
 
         ComboBox<String> storySelection = new ComboBox<>();
         storySelection.setPromptText("Select a story");
@@ -87,7 +79,7 @@ public class SelectStory extends StackPane{
     }
 
     private void switchToPlayGame(Passage openingPassage) {
-        PlayGame playGame = new PlayGame(openingPassage, width, height);
+        PlayGame playGame = new PlayGame(openingPassage);
         App.changeRootPane(playGame.getLayout());
     }
 

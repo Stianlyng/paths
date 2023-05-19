@@ -13,12 +13,8 @@ import javafx.scene.layout.StackPane;
 
 public class SelectPlayer extends StackPane {
     private static final int PADDING = 20;
-    private int width;
-    private int height;
 
-    public SelectPlayer(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public SelectPlayer() {
 
         TextField newPlayerName = new TextField();
         newPlayerName.setPromptText("Enter a new player name");
@@ -54,7 +50,7 @@ public class SelectPlayer extends StackPane {
     }
 
     private void switchToMainMenu(String playerName) {
-        MainMenu mainMenu = new MainMenu(playerName, width, height);
+        MainMenu mainMenu = new MainMenu(playerName);
         App.changeRootPane(mainMenu.getLayout());
     }
 }
