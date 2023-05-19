@@ -7,8 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.List;
@@ -22,14 +23,20 @@ import edu.ntnu.g60.utils.parsers.TextfileParser;
 /**
  * Class representing the main menu.
  */
-public class MainMenu {
+public class MainMenu extends StackPane{
 
     private static final int PADDING = 20;
     private static final double BUTTON_WIDTH = 200;
 
-    private Scene scene;
+    private GridPane layout;  
 
-    public MainMenu(Stage primaryStage, String playerName, int WIDTH, int HEIGHT) {
+    private int width;
+    private int height;
+
+    
+    public MainMenu(String playerName, int width, int height) {
+        this.width = width;
+        this.height = height;
 
         List<String> inventory = List.of("Sword");
 
@@ -52,18 +59,16 @@ public class MainMenu {
         importGameFileButton.setPrefWidth(BUTTON_WIDTH);
 
         newGameButton.setOnAction(e -> {
-            SelectStory selectStory = new SelectStory(primaryStage, WIDTH, HEIGHT);
-            primaryStage.setScene(selectStory.getScene());
+            switchToSelectStory(playerName);
         });
 
         loadGameButton.setOnAction(e -> {
-            LoadGame loadGame = new LoadGame(primaryStage,playerName, WIDTH, HEIGHT);
-            primaryStage.setScene(loadGame.getScene());
+            switchToLoadGame(playerName);
         });
 
         importGameFileButton.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
-            File selectedFile = fileChooser.showOpenDialog(primaryStage);
+            File selectedFile = fileChooser.showOpenDialog(App.getStage());
         
             if (selectedFile != null) {
                 boolean parsedStory = TextfileParser.parseStory(selectedFile);
@@ -76,7 +81,8 @@ public class MainMenu {
                 // Handle case where no file was selected
             }
         });
-        GridPane layout = new GridPane();
+        
+        layout = new GridPane();  // Change this line
         layout.setAlignment(Pos.CENTER);
         layout.setVgap(10);
         layout.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
@@ -84,17 +90,30 @@ public class MainMenu {
         layout.add(newGameButton, 0, 1);
         layout.add(loadGameButton, 0, 2);
         layout.add(importGameFileButton, 0, 3);
-
+        
         Background background = BackgroundComponent.createBackground("mainMenuScene.png");
         layout.setBackground(background);
+        this.getChildren().add(layout);
  
-        scene = new Scene(layout, WIDTH, HEIGHT);
     }
 
+
     /**
-     * Returns the scene for this view.
+     * Returns the layout for this view.
      */
-    public Scene getScene() {
-        return scene;
+    public StackPane getLayout() {
+        return this;
     }
+
+    private void switchToSelectStory(String playerName) {
+        SelectStory selectStory = new SelectStory(width, height);
+        App.changeRootPane(selectStory.getLayout());
+    }
+
+    private void switchToLoadGame(String playerName) {
+        LoadGame loadGame = new LoadGame(playerName, width, height);
+        App.changeRootPane(loadGame.getLayout());
+    }
+        
 }
+

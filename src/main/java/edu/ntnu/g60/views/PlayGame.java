@@ -2,6 +2,7 @@ package edu.ntnu.g60.views;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Stack;
 
 import edu.ntnu.g60.components.BackgroundComponent;
 import edu.ntnu.g60.models.actions.Action;
@@ -13,7 +14,6 @@ import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.utils.SaveFileHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -22,41 +22,33 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-public class PlayGame {
+public class PlayGame extends StackPane{
 
     private static final int PADDING = 20;
     private static final int SPACING = 10;
     
-    /*
-     * The following strings are used in the top bar of the game view.
-     */
     private static final String HEALTH = "Health: ";
     private static final String GOLD = "Gold: ";
     private static final String SCORE = "Score: ";
 
-    /*
-     * The following strings are used in the option dropdown menu.
-     */
     private static final String MAIN_MENU = "Main Menu";
     private static final String OPTIONS = "Options";
     private static final String SAVE = "Save";
 
-    private Scene scene;
 
-    public PlayGame(Stage primaryStage, Passage passage, int WIDTH, int HEIGHT) {
+    public PlayGame(Passage passage, int WIDTH, int HEIGHT) {
 
-
-        BorderPane borderPane = new BorderPane();
-        borderPane.setTop(topBar(optionDropdown(primaryStage, passage, WIDTH, HEIGHT)));
-        borderPane.setCenter(passageContent(passage));
-        borderPane.setBottom(chooseLinkButtons(primaryStage, passage, WIDTH, HEIGHT));
+        BorderPane layout = new BorderPane();
+        layout.setTop(topBar(optionDropdown(passage, WIDTH, HEIGHT)));
+        layout.setCenter(passageContent(passage));
+        layout.setBottom(chooseLinkButtons(passage, WIDTH, HEIGHT));
         
         Background background = BackgroundComponent.createBackground(passage.getBackground());
-        borderPane.setBackground(background);
-        scene = new Scene(borderPane, WIDTH, HEIGHT);
+        layout.setBackground(background);
+        this.getChildren().add(layout);
     }
     
     private VBox passageContent(Passage passage) {
@@ -72,7 +64,7 @@ public class PlayGame {
         return passageContent;
     }
     
-    private GridPane chooseLinkButtons(Stage primaryStage, Passage passage, int WIDTH, int HEIGHT) {
+    private GridPane chooseLinkButtons(Passage passage, int WIDTH, int HEIGHT) {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(SPACING);
@@ -93,8 +85,8 @@ public class PlayGame {
                 }
 
                 Passage newPassage = game.go(links.get(index));
-                PlayGame newView = new PlayGame(primaryStage, newPassage, WIDTH, HEIGHT);
-                primaryStage.setScene(newView.getScene());
+                PlayGame newView = new PlayGame(newPassage, WIDTH, HEIGHT);
+                App.changeRootPane(newView.getLayout());
             });
 
             gridPane.add(linkButton, i, 0);
@@ -118,7 +110,7 @@ public class PlayGame {
         return topBox;
     }
     
-    private ComboBox<String> optionDropdown(Stage primaryStage, Passage passage, int WIDTH, int HEIGHT){
+    private ComboBox<String> optionDropdown(Passage passage, int WIDTH, int HEIGHT){
         ComboBox<String> options = new ComboBox<>();
         options.getItems().addAll(SAVE, MAIN_MENU);
         options.setPromptText(OPTIONS);
@@ -129,7 +121,7 @@ public class PlayGame {
                 case SAVE:
                     TextInputDialog dialog = new TextInputDialog();
                     dialog.setTitle("Save Game");
-                    dialog.setHeaderText("Enter a name for your save file:");
+                    dialog.setHeaderText("Enter a name for your save file");
                     dialog.setContentText("Name:");
                     Optional<String> result = dialog.showAndWait();
                     result.ifPresent(name -> saveGame(name, passage.getTitle()));
@@ -137,7 +129,9 @@ public class PlayGame {
                 case MAIN_MENU:
                     String playerName = GameManager.getInstance().getGame().getPlayer().getName();
                     GameManager.getInstance().endGame();
-                    primaryStage.setScene(new MainMenu(primaryStage,playerName, WIDTH, HEIGHT).getScene());
+                    MainMenu mainMenu = new MainMenu(playerName, WIDTH, HEIGHT);  // Change this line
+                    App.changeRootPane(mainMenu.getLayout());  // Add this line
+                
                     break;
             }
         });
@@ -149,14 +143,12 @@ public class PlayGame {
         try {
             SaveFileHandler.saveGameToFile(game, saveName, currentPassageTitle);
         } catch (Exception e) {
-            // Handle error
             e.printStackTrace();
         }
     }
-    /**
-     * Returns the scene for this view.
-     */
-    public Scene getScene() {
-        return scene;
+    
+    
+    public StackPane getLayout() {
+        return this;
     }
 }

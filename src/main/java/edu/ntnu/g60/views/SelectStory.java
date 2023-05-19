@@ -8,9 +8,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
 
 import java.util.List;
+import java.util.Stack;
 
 import edu.ntnu.g60.components.BackgroundComponent;
 import edu.ntnu.g60.exceptions.BrokenLinkException;
@@ -28,14 +29,18 @@ import edu.ntnu.g60.utils.parsers.StoryParser;
 /**
  * Class representing the story selection scene.
  */
-public class SelectStory {
+public class SelectStory extends StackPane{
 
     private static final int PADDING = 20;
     private static final double BUTTON_WIDTH = 200;
 
-    private Scene scene;
+    private int width;
+    private int height;
 
-    public SelectStory(Stage primaryStage, int WIDTH, int HEIGHT) {
+
+    public SelectStory(int width, int height) {
+        this.width = width;
+        this.height = height;
 
         ComboBox<String> storySelection = new ComboBox<>();
         storySelection.setPromptText("Select a story");
@@ -44,6 +49,7 @@ public class SelectStory {
 
         Button playButton = new Button("Play Story");
         playButton.setPrefWidth(BUTTON_WIDTH);
+
         playButton.setOnAction(e -> {
 
             StoryParser parser = new StoryParser(storySelection.getValue());
@@ -64,8 +70,7 @@ public class SelectStory {
                 System.out.println(error.getMessage());
             }
             Passage openingPassage = GameManager.getInstance().getGame().begin();
-            PlayGame playGame = new PlayGame(primaryStage, openingPassage, WIDTH, HEIGHT);
-            primaryStage.setScene(playGame.getScene());
+            switchToPlayGame(openingPassage);
         });
 
         GridPane layout = new GridPane();
@@ -77,15 +82,18 @@ public class SelectStory {
         layout.add(playButton, 0, 2);
         Background background = BackgroundComponent.createBackground("selectStoryScene.png");
         layout.setBackground(background);
+        this.getChildren().add(layout);
  
-        scene = new Scene(layout, WIDTH, HEIGHT);
     }
 
-    /**
-     * Returns the scene for this view.
-     */
-    public Scene getScene() {
-        return scene;
+    private void switchToPlayGame(Passage openingPassage) {
+        PlayGame playGame = new PlayGame(openingPassage, width, height);
+        App.changeRootPane(playGame.getLayout());
     }
+
+    public StackPane getLayout() {
+        return this;
+    }
+
     
 }

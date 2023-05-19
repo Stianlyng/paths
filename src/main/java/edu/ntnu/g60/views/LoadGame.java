@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.util.Set;
@@ -18,14 +19,16 @@ import edu.ntnu.g60.utils.SerializedGameState;
 /**
  * Class representing the story selection scene.
  */
-public class LoadGame {
+public class LoadGame extends StackPane{
 
     private static final int PADDING = 20;
     private static final double BUTTON_WIDTH = 200;
+    private int width;
+    private int height;
 
-    private Scene scene;
-
-    public LoadGame(Stage primaryStage,String playerName, int WIDTH, int HEIGHT) {
+    public LoadGame(String playerName, int width, int height) {
+        this.width = width;
+        this.height = height;
 
         ComboBox<String> storySelection = new ComboBox<>();
         storySelection.setPromptText("Select a save");
@@ -44,8 +47,7 @@ public class LoadGame {
 
 
             Passage currentPassage = GameManager.getInstance().getGame().go(gameState.getCurrentLink()); 
-            PlayGame playGame = new PlayGame(primaryStage, currentPassage, WIDTH, HEIGHT);
-            primaryStage.setScene(playGame.getScene());
+            switchToPlayGame(currentPassage);
         });
 
         GridPane layout = new GridPane();
@@ -55,15 +57,17 @@ public class LoadGame {
         layout.add(new Label("Welcome"), 0, 0);
         layout.add(storySelection, 0, 1);
         layout.add(playButton, 0, 2);
+        this.getChildren().add(layout);
 
-        scene = new Scene(layout, WIDTH, HEIGHT);
     }
 
-    /**
-     * Returns the scene for this view.
-     */
-    public Scene getScene() {
-        return scene;
+    private void switchToPlayGame(Passage currentPassage) {
+        PlayGame playGame = new PlayGame(currentPassage, width, height);
+        App.changeRootPane(playGame.getLayout());
+    }
+
+    public StackPane getLayout() {
+        return this;
     }
     
 }

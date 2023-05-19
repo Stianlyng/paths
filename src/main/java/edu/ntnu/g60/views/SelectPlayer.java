@@ -1,27 +1,24 @@
 package edu.ntnu.g60.views;
 
 import edu.ntnu.g60.components.BackgroundComponent;
-import edu.ntnu.g60.controllers.SelectPlayerController;
 import edu.ntnu.g60.utils.SaveFileHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
 
-public class SelectPlayer {
-
+public class SelectPlayer extends StackPane {
     private static final int PADDING = 20;
+    private int width;
+    private int height;
 
-    private Scene scene;
-    private SelectPlayerController controller;
-
-    public SelectPlayer(Stage primaryStage, int WIDTH, int HEIGHT) {
-        controller = new SelectPlayerController();
+    public SelectPlayer(int width, int height) {
+        this.width = width;
+        this.height = height;
 
         TextField newPlayerName = new TextField();
         newPlayerName.setPromptText("Enter a new player name");
@@ -36,7 +33,7 @@ public class SelectPlayer {
         continueButton.setOnAction(e -> {
             String enteredPlayer = newPlayerName.getText();
 
-            controller.handleContinueButton(primaryStage, enteredPlayer, WIDTH, HEIGHT);
+            switchToMainMenu(enteredPlayer);
         });
 
         GridPane layout = new GridPane();
@@ -49,13 +46,15 @@ public class SelectPlayer {
 
         Background background = BackgroundComponent.createBackground("selectPlayerScene.png");
         layout.setBackground(background);
-        scene = new Scene(layout, WIDTH, HEIGHT);
+        this.getChildren().add(layout);
     }
 
-    /**
-     * Returns the scene for this view.
-     */
-    public Scene getScene() {
-        return scene;
+    public StackPane getLayout() {
+        return this;
+    }
+
+    private void switchToMainMenu(String playerName) {
+        MainMenu mainMenu = new MainMenu(playerName, width, height);
+        App.changeRootPane(mainMenu.getLayout());
     }
 }
