@@ -40,12 +40,12 @@ public class PlayGame extends StackPane{
 
     public PlayGame(Passage passage) {
 
+        Background background = BackgroundComponent.createBackground(passage.getBackground());
+
         BorderPane layout = new BorderPane();
         layout.setTop(topBar(optionDropdown(passage)));
         layout.setCenter(passageContent(passage));
         layout.setBottom(chooseLinkButtons(passage));
-        
-        Background background = BackgroundComponent.createBackground(passage.getBackground());
         layout.setBackground(background);
         this.getChildren().add(layout);
     }

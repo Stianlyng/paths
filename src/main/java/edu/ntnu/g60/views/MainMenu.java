@@ -32,6 +32,28 @@ public class MainMenu extends StackPane{
     
     public MainMenu(String playerName) {
 
+        Background background = BackgroundComponent.createBackground("mainMenuScene.png");
+        initializePlayer(playerName);
+        Button newGameButton = newGame(playerName);
+        Button loadGameButton = loadGame(playerName);
+        Button importGameFileButton = importGameFile();
+
+
+       
+        layout = new GridPane();  
+        layout.setAlignment(Pos.CENTER);
+        layout.setVgap(10);
+        layout.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+        layout.add(new Label("Welcome " + playerName), 0, 0);
+        layout.add(newGameButton, 0, 1);
+        layout.add(loadGameButton, 0, 2);
+        layout.add(importGameFileButton, 0, 3);
+        layout.setBackground(background);
+        this.getChildren().add(layout);
+ 
+    }
+
+    private void initializePlayer(String playerName) {
         List<String> inventory = List.of("Sword");
 
         Player player = new PlayerBuilder()
@@ -43,23 +65,29 @@ public class MainMenu extends StackPane{
             .build();
 
         GameManager.getInstance().setPlayer(player);
-
+    }
+    private Button newGame(String playerName){
         Button newGameButton = new Button("New Game");
-        Button loadGameButton = new Button("Load Game");
-        Button importGameFileButton = new Button("Import Gamefile");
-
         newGameButton.setPrefWidth(BUTTON_WIDTH);
-        loadGameButton.setPrefWidth(BUTTON_WIDTH);
-        importGameFileButton.setPrefWidth(BUTTON_WIDTH);
-
         newGameButton.setOnAction(e -> {
             switchToSelectStory(playerName);
         });
+        return newGameButton;
 
+    }
+    
+    private Button loadGame(String playerName){
+        Button loadGameButton = new Button("Load Game");
+        loadGameButton.setPrefWidth(BUTTON_WIDTH);
         loadGameButton.setOnAction(e -> {
             switchToLoadGame(playerName);
         });
-
+        return loadGameButton;
+    }
+    
+    private Button importGameFile(){
+        Button importGameFileButton = new Button("Import Gamefile");
+        importGameFileButton.setPrefWidth(BUTTON_WIDTH);
         importGameFileButton.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
             File selectedFile = fileChooser.showOpenDialog(App.getStage());
@@ -67,34 +95,17 @@ public class MainMenu extends StackPane{
             if (selectedFile != null) {
                 boolean parsedStory = TextfileParser.parseStory(selectedFile);
                 if (parsedStory) {
-                    // Handle successful parsing, e.g., show a success message
+                    // suksessmelding her
                 } else {
-                    // Handle unsuccessful parsing, e.g., show an error message
+                    // feilmelding her
                 }
             } else {
-                // Handle case where no file was selected
+                //  om brukeren ikke velger en fil
             }
         });
-        
-        layout = new GridPane();  // Change this line
-        layout.setAlignment(Pos.CENTER);
-        layout.setVgap(10);
-        layout.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-        layout.add(new Label("Welcome " + playerName), 0, 0);
-        layout.add(newGameButton, 0, 1);
-        layout.add(loadGameButton, 0, 2);
-        layout.add(importGameFileButton, 0, 3);
-        
-        Background background = BackgroundComponent.createBackground("mainMenuScene.png");
-        layout.setBackground(background);
-        this.getChildren().add(layout);
- 
+        return importGameFileButton;
     }
 
-
-    /**
-     * Returns the layout for this view.
-     */
     public StackPane getLayout() {
         return this;
     }

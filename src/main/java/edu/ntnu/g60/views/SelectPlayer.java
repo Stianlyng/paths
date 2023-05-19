@@ -16,33 +16,45 @@ public class SelectPlayer extends StackPane {
 
     public SelectPlayer() {
 
-        TextField newPlayerName = new TextField();
-        newPlayerName.setPromptText("Enter a new player name");
+       
+        Background background = BackgroundComponent.createBackground("selectPlayerScene.png");
+        ComboBox<String> playerSelection = playerSelection();
+        TextField playerName = setPlayerName(playerSelection);
+        Button continueButton = continueButton(playerName);
 
-        ComboBox<String> playerSelection = new ComboBox<>();
-        playerSelection.setPromptText("Select a player");
-        playerSelection.getItems().addAll(SaveFileHandler.getAvailablePlayers());
-
-        playerSelection.setOnAction(e -> newPlayerName.setText(playerSelection.getValue()));
-
-        Button continueButton = new Button("Continue");
-        continueButton.setOnAction(e -> {
-            String enteredPlayer = newPlayerName.getText();
-
-            switchToMainMenu(enteredPlayer);
-        });
-
+        
         GridPane layout = new GridPane();
         layout.setAlignment(Pos.CENTER);
         layout.setVgap(10);
         layout.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
         layout.add(playerSelection, 0, 0);
-        layout.add(newPlayerName, 0, 1);
+        layout.add(playerName, 0, 1);
         layout.add(continueButton, 0, 2);
-
-        Background background = BackgroundComponent.createBackground("selectPlayerScene.png");
         layout.setBackground(background);
         this.getChildren().add(layout);
+    }
+
+    private ComboBox<String> playerSelection(){
+        ComboBox<String> playerSelection = new ComboBox<>();
+        playerSelection.setPromptText("Select a player");
+        playerSelection.getItems().addAll(SaveFileHandler.getAvailablePlayers());
+        return playerSelection;
+    }
+    
+    private TextField setPlayerName(ComboBox<String> playerSelection){
+        TextField playerName = new TextField();
+        playerName.setPromptText("Enter a new player name");
+        playerSelection.setOnAction(e -> playerName.setText(playerSelection.getValue()));
+        return playerName;
+    }
+    
+    private Button continueButton(TextField playerName){
+        Button continueButton = new Button("Continue");
+        continueButton.setOnAction(e -> {
+            String enteredPlayer = playerName.getText();
+            switchToMainMenu(enteredPlayer);
+        });
+        return continueButton;
     }
 
     public StackPane getLayout() {

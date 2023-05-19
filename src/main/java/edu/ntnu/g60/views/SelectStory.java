@@ -4,7 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -34,12 +33,30 @@ public class SelectStory extends StackPane{
 
     public SelectStory() {
 
+        Background background = BackgroundComponent.createBackground("selectStoryScene.png");
+        ComboBox<String> storySelection = selectStory();
+        Button playButton = startGame(storySelection);
+        
+        GridPane layout = new GridPane();
+        layout.setAlignment(Pos.CENTER);
+        layout.setVgap(10);
+        layout.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
+        layout.add(storySelection, 0, 1);
+        layout.add(playButton, 0, 2);
+        layout.setBackground(background);
+        this.getChildren().add(layout);
+    }
+
+    private ComboBox<String> selectStory(){
         ComboBox<String> storySelection = new ComboBox<>();
         storySelection.setPromptText("Select a story");
         List<String> stories = SaveFileHandler.listFilesInFolder();
         storySelection.getItems().addAll(stories);
+        return storySelection;
+    }
 
-        Button playButton = new Button("Play Story");
+    private Button startGame(ComboBox<String> storySelection){
+       Button playButton = new Button("Play Story");
         playButton.setPrefWidth(BUTTON_WIDTH);
 
         playButton.setOnAction(e -> {
@@ -64,18 +81,7 @@ public class SelectStory extends StackPane{
             Passage openingPassage = GameManager.getInstance().getGame().begin();
             switchToPlayGame(openingPassage);
         });
-
-        GridPane layout = new GridPane();
-        layout.setAlignment(Pos.CENTER);
-        layout.setVgap(10);
-        layout.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
-        layout.add(new Label("Welcome"), 0, 0);
-        layout.add(storySelection, 0, 1);
-        layout.add(playButton, 0, 2);
-        Background background = BackgroundComponent.createBackground("selectStoryScene.png");
-        layout.setBackground(background);
-        this.getChildren().add(layout);
- 
+        return playButton;
     }
 
     private void switchToPlayGame(Passage openingPassage) {
