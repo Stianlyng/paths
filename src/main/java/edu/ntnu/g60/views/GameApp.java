@@ -21,7 +21,7 @@ public class GameApp extends Application {
     private static final int WIDTH = 600;
     private static final Color backgound = Color.WHITE;
     private static final String TITLE = "Half life 3";
-    private static final String ICON_PATH = DefaultValues.ICON_PATH.resolve("icon.png").toString();
+    private static final String ICON = "icon.png";
     private static final String STYLESHEET = "StyleSheet.css";
 
     private static Stage stage;
@@ -30,7 +30,8 @@ public class GameApp extends Application {
     public void start(Stage stage) throws IOException, InterruptedException {
         GameApp.stage = stage;
         stage.setTitle(TITLE);
-        stage.getIcons().add(new Image(new FileInputStream(ICON_PATH)));
+        stage.getIcons().add(new Image(new FileInputStream("src/main/resources/images/icons/" + ICON))); //todo: fix path
+
         stage.setResizable(false);
         SelectPlayerPane startMenu = new SelectPlayerPane();
         Scene scene = new Scene(startMenu, HEIGHT, WIDTH, backgound);
