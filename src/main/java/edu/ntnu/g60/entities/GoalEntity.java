@@ -1,7 +1,8 @@
 package edu.ntnu.g60.entities;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import edu.ntnu.g60.utils.DefaultValues;
 
 public class GoalEntity {
     private int score;
@@ -11,10 +12,10 @@ public class GoalEntity {
     
     public GoalEntity() {
         // Set default values
-        this.score = 0;
-        this.gold = 0;
-        this.health = 0;
-        this.inventory = new ArrayList<>();
+        this.score = DefaultValues.MINIMUM_SCORE;
+        this.gold = DefaultValues.MINIMUM_GOLD;
+        this.health = DefaultValues.MINIMUM_HEALTH;
+        this.inventory = DefaultValues.MINIMUM_INVENTORY;
     }
 
     /**
