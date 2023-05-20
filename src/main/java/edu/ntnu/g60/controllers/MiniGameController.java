@@ -76,9 +76,9 @@ public class MiniGameController {
      * @param event the ActionEvent representing the button click event
      */
     public void goToMenuAndSaveAction(ActionEvent event){
-        GameManager.getInstance().endGame();
         saveGame(DialogBoxes.dialogBoxWithTextInput("Save Game", "Enter a name for your save file", "Name:"));
         try {
+            GameManager.getInstance().endGame();
             GameApp.changeRootPane(new MainMenuPane());
         } catch (IOException e1) {
             e1.printStackTrace();

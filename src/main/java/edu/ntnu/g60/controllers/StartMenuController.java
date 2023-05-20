@@ -26,21 +26,44 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
+
+/**
+ * The StartMenuController class is responsible for controlling the start menu of the game.
+ * It handles actions and interactions related to starting a new game, continuing a saved game,
+ * importing game data, selecting players, and navigating to different screens within the game.
+*/
 public class StartMenuController {
 
     public static ContinueGamePane currentContinuePane;
     private static String playerName;
 
 
+    /**
+     * Retrieves the current ContinueGamePane object.
+     * 
+     * @return The current ContinueGamePane object.
+    */
     public static ContinueGamePane getCurreContinuePane(){
         return currentContinuePane;
     }
 
+    /**
+     * Sets the current ContinueGamePane object.
+     * 
+     * @param pane The ContinueGamePane object to set as current.
+    */
     public static void setCurrentContinuePane(ContinueGamePane pane){
         currentContinuePane = pane;
     }
 
-
+    /**
+     * Populates the save game buttons with saved game data for the current player.
+     * 
+     * @param save1Button The button for save slot 1.
+     * @param save2Button The button for save slot 2.
+     * @param save3Button The button for save slot 3.
+     * @throws IOException If an I/O error occurs while retrieving save data.
+    */
     public static void populateSaveButtons(Button save1Button, Button save2Button, Button save3Button) throws IOException {
         Set<String> playerSavesSet = SaveFileHandler.getPlayerSaves(playerName);
         List<String> playerSaves = new ArrayList<>(playerSavesSet);
@@ -71,6 +94,11 @@ public class StartMenuController {
         }
      }
 
+    /**
+     * Handles the action for import a New File
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void importNewFileAction(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PATHS files (*.paths)", "*.paths");
@@ -89,6 +117,12 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Handles the action when the "Choose Player" button is clicked.
+     * saves the chosen plaeyr to playerName
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void ChoosePlayerAction(ActionEvent event){
         SelectPlayerPane.updatePlayerName();
         playerName = SelectPlayerPane.getPlayerChoice();
@@ -102,6 +136,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Handles the action to delete all saves of a player
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void deleteAllPlayerSavesAction(ActionEvent event){
         Set<String> playerSaves = SaveFileHandler.getPlayerSaves(playerName);
         if(!playerSaves.isEmpty()) {
@@ -116,6 +155,12 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Handles the action when the "Create Player" button is clicked.
+     * Saves the selected player to playerName.
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void createPlayerAction(ActionEvent event){
         SelectPlayerPane.updatePlayerName();
         if(SelectPlayerPane.playerName != null && !SelectPlayerPane.playerName.equals("")){
@@ -129,6 +174,11 @@ public class StartMenuController {
         initializePlayer(playerName);
     }
 
+    /**
+     * Handles the action when the "Start Game" button is clicked in the NewGamePane.
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void startGameAction(ActionEvent event){
         try {
             Passage openingPassage = createNewGame(NewGamePane.getStoryChoice());
@@ -138,6 +188,11 @@ public class StartMenuController {
         }
     }
     
+    /**
+     * Switches the current showing pant to the ContinueGamePane
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void goTocontinueGamePaneAction(ActionEvent event){
         try {
             ContinueGamePane pane = new ContinueGamePane();
@@ -148,6 +203,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Switches the current showing pant to the InformationFileStructurePane
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void goToInformationFileStructurePaneAction(MouseEvent event){
         try {
             GameApp.changeRootPane(new FileStructureInformationPane());
@@ -156,6 +216,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Switches the current showing pant to the CustomGamePane
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void goToCustomGamePaneAction(ActionEvent event){
         try {
             GameApp.changeRootPane(new CustomGamePane());
@@ -164,6 +229,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Switches the current showing pant to the InformationPane
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void goToInformationPaneAction(MouseEvent event){
         try {
             GameApp.changeRootPane(new GameInformationPane());
