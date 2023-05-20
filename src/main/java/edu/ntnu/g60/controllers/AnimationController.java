@@ -16,20 +16,6 @@ import edu.ntnu.g60.views.TitlePanes.TxtPane;
  */
 public class AnimationController {
 
-    /**
-    * Loads and displays the second frame of the next level sequence.
-    */
-    public void showPassageTitle(String passageTitle){
-        try {
-            GameApp.changeRootPane(new TxtPane(passageTitle)); //todo; dont use singleton
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        }
-    }
-
-    /**
-    * Loads and displays the third frame of the next level sequence.
-    */
     public void beginPassage(Passage passage){
         try {
             ConversationPaneController.setConversationPaneNumber(0);

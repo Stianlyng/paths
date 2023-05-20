@@ -20,7 +20,11 @@ public class NextLevelAnimation extends StackPane{
     public static void animation(Passage passage) throws MalformedURLException, FileNotFoundException{
         controller.showPaneWithText("Advancing");
         FrontendUtils.delay(1000, () -> {
-            controller.showPassageTitle(passage.getTitle());
+            try {
+                controller.showPaneWithText(passage.getTitle());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             FrontendUtils.delay(1500, () -> {
                 controller.beginPassage(passage);
             });
