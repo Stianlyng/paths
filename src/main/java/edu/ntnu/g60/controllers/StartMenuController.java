@@ -150,7 +150,7 @@ public class StartMenuController {
 
     public void goToInformationFileStructurePaneAction(MouseEvent event){
         try {
-            GameApp.changeRootPane(new InformationFileStructurePane());
+            GameApp.changeRootPane(new FileStructureInformationPane());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -166,7 +166,7 @@ public class StartMenuController {
 
     public void goToInformationPaneAction(MouseEvent event){
         try {
-            GameApp.changeRootPane(new InformationPane());
+            GameApp.changeRootPane(new GameInformationPane());
         } catch (IOException e1) {
             e1.printStackTrace();
         }

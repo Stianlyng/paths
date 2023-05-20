@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
-public class InformationPane extends StackPane{
+public class GameInformationPane extends StackPane{
     
     private static StartMenuController controller;
 
@@ -20,8 +20,8 @@ public class InformationPane extends StackPane{
      * Constructs a new InformationPane object.
      * @throws FileNotFoundException if the file specified is not found.
     */
-    public InformationPane() throws FileNotFoundException, IOException {
-        InformationPane.controller = new StartMenuController();
+    public GameInformationPane() throws FileNotFoundException, IOException {
+        GameInformationPane.controller = new StartMenuController();
         getChildren().addAll(getInformationObjects());
     }
 
