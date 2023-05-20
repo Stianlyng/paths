@@ -25,7 +25,7 @@ public class InformationPane extends StackPane{
     private static Group getInformationObjects() throws FileNotFoundException {
         Text informationTitle = ViewObjects.newText("Information", 45, false, 415, 50);
         ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
-        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::backAction);
+        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToOpeningPaneAction);
         Text informationText = ViewObjects.newText(
             "   Welcome to the exciting world of the passage-based game PATHS.\n" +
             " This game was created by Olav and Stian as part of our school project. \n" +

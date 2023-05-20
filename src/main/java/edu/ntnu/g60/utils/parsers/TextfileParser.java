@@ -1,10 +1,6 @@
 package edu.ntnu.g60.utils.parsers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +8,11 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * A utility class for parsing text stories and converting them to JSON format.
@@ -25,8 +26,6 @@ public class TextfileParser {
     /**
      * Private constructor to prevent instantiation.
      */
-    private TextfileParser() {
-    }
 
 
     /**
@@ -35,18 +34,29 @@ public class TextfileParser {
      * @param filename The name of the input text file (without the extension)
      * @throws IOException If there is a problem reading or writing the files
      */
-    public static void parseStory(String filename) throws IOException {
-        Path inputPath = Paths.get("src/main/resources/stories/" + filename + ".paths");
-        Path outputPath = Paths.get("src/main/resources/stories/" + filename + ".json");
-
-        List<String> lines = Files.readAllLines(inputPath);
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNodeFactory nodeFactory = JsonNodeFactory.instance;
-
-        ObjectNode storyNode = createStoryNode(lines, nodeFactory);
-        mapper.writerWithDefaultPrettyPrinter().writeValue(outputPath.toFile(), storyNode);
-    }
+    public static boolean parseStory(File file) {
+        try {
+            Path inputPath = Paths.get(file.getAbsolutePath());
+            String filename = file.getName();
+            int pos = filename.lastIndexOf(".");
+            if (pos > 0) {
+                filename = filename.substring(0, pos);
+            }
     
+            Path outputPath = Paths.get("src/main/resources/stories/" + filename + ".json");
+    
+            List<String> lines = Files.readAllLines(inputPath);
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNodeFactory nodeFactory = JsonNodeFactory.instance;
+    
+            ObjectNode storyNode = createStoryNode(lines, nodeFactory);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(outputPath.toFile(), storyNode);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     /**
      * Creates a story node from a list of lines and a JsonNodeFactory. 

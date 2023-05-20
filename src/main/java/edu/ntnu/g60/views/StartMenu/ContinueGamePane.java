@@ -13,12 +13,12 @@ import javafx.scene.layout.StackPane;
 
 
 
-public class ContinuePane extends StackPane{
+public class ContinueGamePane extends StackPane{
 
     private static StartMenuController controller;
 
-    public ContinuePane() throws IOException, ClassNotFoundException {
-        ContinuePane.controller = new StartMenuController();
+    public ContinueGamePane() throws IOException, ClassNotFoundException {
+        ContinueGamePane.controller = new StartMenuController();
         getChildren().addAll(getContinueSceneObjects());
     }
 
@@ -26,14 +26,14 @@ public class ContinuePane extends StackPane{
         Button save1Button = ViewObjects.newBlankButton("", 614-193, 278-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
         Button save2Button = ViewObjects.newBlankButton("", 614-193, 345-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
         Button save3Button = ViewObjects.newBlankButton("", 614-193, 412-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
-        Button deleteSaves = ViewObjects.newButton("Delete all saves", 120, 595-71, "delete_button", "delete_hover", controller::deleteAction);
+        Button deleteSaves = ViewObjects.newButton("Delete all saves", 120, 595-71, "delete_button", "delete_hover", controller::deleteAllPlayerSavesAction);
         StartMenuController.populateSaveButtons(save1Button, save2Button, save3Button);
-        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::backAction);
+        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToOpeningPaneAction);
         ImageView background = ViewObjects.newImage(ViewValues.MENU_BACKGROUND_FOLDERNAME, ViewValues.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,ViewValues.BACKGROUND_WIDTH ,ViewValues.BACKGROUND_HEIGHT);
         return new Group(background, save1Button, save2Button, save3Button, backButton, deleteSaves);
     }
 
-    public static void addDeleteObjects(ContinuePane pane){
+    public static void addDeleteObjects(ContinueGamePane pane){
         Button save1Button = ViewObjects.newBlankButton("Empty", 614-193, 278-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
         Button save2Button = ViewObjects.newBlankButton("Empty", 614-193, 345-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
         Button save3Button = ViewObjects.newBlankButton("Empty", 614-193, 412-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);

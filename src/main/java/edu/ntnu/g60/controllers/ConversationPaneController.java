@@ -9,18 +9,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import edu.ntnu.g60.models.actions.Action;
+import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
-import edu.ntnu.g60.models.passage.PassageManager;
 import edu.ntnu.g60.utils.SaveFileHandler;
+import edu.ntnu.g60.utils.frontend.FrontendUtils;
+import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;
-import edu.ntnu.g60.views.Animations.DeathAnimation;
-import edu.ntnu.g60.views.Animations.EndGameAnimation;
-import edu.ntnu.g60.views.Animations.NextLevelAnimation;
-import edu.ntnu.g60.views.Animations.WinAnimation;
+import edu.ntnu.g60.views.Animations.*;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
-import edu.ntnu.g60.views.GamePanes.FightPane;
+import edu.ntnu.g60.views.GamePanes.MiniGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
@@ -30,260 +29,136 @@ import javafx.scene.input.MouseEvent;
  * It handles user interactions and updates the conversation pane accordingly.
  */
 public class ConversationPaneController {
-    boolean clickable;
     
-    /**
-    * Constructs a ConversationPaneController object.
-    * Initializes the clickable flag as true.
-    */    
-    public ConversationPaneController(){
+    public static Game game = GameManager.getInstance().getGame();
+    public static Passage passage;
+    public static int conversationPaneNumber;
+    public static ConversationPane currentConversationPane;
+    
+
+    boolean clickable;    
+
+    public ConversationPaneController(Passage passage){
+        this.passage = passage;
         clickable = true;
     }
 
-    /**
-    * The current conversation pane number.
-    */
-    public static int conversationPaneNumber;
-
-    /**
-    * The current conversation pane.
-    */
-    static ConversationPane currentConversationPane;
-
-    /**
-    * Returns the current conversation pane.
-    * 
-    * @return the current ConversationPane object
-    */
     public ConversationPane getCurrentConversationPane(){
         return currentConversationPane;
     }
 
-    /**
-    * Sets the current conversation pane.
-    * 
-    * @param pane the ConversationPane object to set as current
-    */
     public static void setCurrentConversationPane(ConversationPane pane){
         currentConversationPane = pane;
     }
 
-    /**
-    * Sets the conversation pane number.
-    * 
-    * @param conversationPaneUpdatedNumber the updated conversation pane number
-    */
+
     public static void setConversationPaneNumber(int conversationPaneUpdatedNumber){
         conversationPaneNumber = conversationPaneUpdatedNumber;
     }
 
-    /**
-    * Returns the type of the current conversation pane.
-    * 
-    * @return the type of the conversation pane as a String
-    */
-    public static String getType(){
-        String[] types = types();
-        String type = types[conversationPaneNumber];
-        return type;
-    }
 
-    /**
-    * Handles the action when the scene is clicked.
-    * Updates the conversation pane or switches to fight pane based on the game state.
-    * 
-    * @param event the MouseEvent representing the click event
-    */
-    public void sceneClickedAction(MouseEvent event){
+
+
+
+    //TODO: change stile of morelines left?
+    public void conversationPaneClickedAction(MouseEvent event){
         if(clickable){
-            boolean moreLinesLeft = (conversationPaneNumber + 1 == types().length) ? false : true;
+            boolean moreLinesLeft = (conversationPaneNumber + 1 == typesInCurrentPassage().length) ? false : true;
             setConversationPaneNumber(conversationPaneNumber + 1);
-    
-            if(moreLinesLeft){  
-                try {
-                    SoundController.stopSound();
-                    ConversationPane pane = new ConversationPane();
+            try {
+                SoundController.stopSound();
+                if(moreLinesLeft){  
+                    ConversationPane pane = new ConversationPane(passage);
                     ConversationPaneController.setCurrentConversationPane(pane);
                     GameApp.changeRootPane(pane);
                     SoundController.playSound("mumble");
-                } catch (FileNotFoundException | MalformedURLException e1) {
-                    e1.printStackTrace();
-                } 
-            } else if (PassageManager.getInstance().getPassage().hasFightScene()){
-                try {
-                    SoundController.stopSound();
-                    FightPane pane = new FightPane();
-                    FightPaneController.setDefaultHealthValues();
-                    FightPaneController.setCurrentFightPane(pane);
+                } else if (passage.hasFightScene()){
+                    MiniGamePane pane = new MiniGamePane(passage);
+                    MiniGameController.setDefaultHealthValues();
+                    MiniGameController.setCurrentFightPane(pane);
                     GameApp.changeRootPane(pane);
-                } catch (MalformedURLException | FileNotFoundException e1){
-                    e1.printStackTrace();
-                }  
-            } else {
-                try {
-                    SoundController.stopSound();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } 
-                try {
+                } else {
                     clickable = false;
                     ConversationPane.addChoiceObjects(getCurrentConversationPane());
-                } catch (FileNotFoundException | MalformedURLException e1) {
-                    e1.printStackTrace();
                 }
-            }
+            } catch (MalformedURLException | FileNotFoundException e1){
+                e1.printStackTrace();
+            }  
         }
     }
-    
-    /**
-     * Handles the action when the exit button is clicked.
-     *
-     * @param event the ActionEvent representing the button click event
-     */
-    public void exitAction(ActionEvent event){
+
+    public void choiceOneAction(ActionEvent event){
+        choiceAction(passage.getLinks().get(0));
+    }
+
+    public void choiceTwoAction(ActionEvent event){
+        choiceAction(passage.getLinks().get(1));
+    }
+
+    public void choiceAction(Link link){
+        try {
+            for (Action action : link.getActions()) {
+                action.execute(game.getPlayer());
+            }
+            boolean goalsFulfilled = game.getGoals().stream().allMatch(goal -> goal.isFulfilled(game.getPlayer()));
+            if(goalsFulfilled){
+                WinAnimation.animation();
+            } else if(link.getReference().equalsIgnoreCase("game over")){
+                DeathAnimation.animation();
+            } else if (link.getReference().equalsIgnoreCase("end game")){
+                EndGameAnimation.animation();
+            } else{
+                Passage passage = game.go(link);
+                NextLevelAnimation.animation(passage);
+            }
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void exitApplicationAction(ActionEvent event){
         GameApp.closeApplication();
     }
 
-    /**
-     * Handles the action when the menu button is clicked.
-     *
-     * @param event the ActionEvent representing the button click event
-     */
-    public void menuAction(ActionEvent event){
+    public void goToMenuAndSaveAction(ActionEvent event){
+        saveGame(DialogBoxes.dialogBoxWithTextInput("Save Game", "Enter a name for your save file", "Name:"));
         try {
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
             GameApp.changeRootPane(new OpeningPane());
-        } catch (IOException e) {
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    //TODO: kanskje gjøre om savefilehaandler til boolean for å indikere sukse
+    private void saveGame(String saveName) {
+        Game game = GameManager.getInstance().getGame();
+        try {
+            SaveFileHandler.saveGameToFile(game, saveName, passage.getTitle());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Handles the action when the first choice button is clicked.
-     *
-     * @param event the ActionEvent representing the button click event
-     */
-    public void choiceOneAction(ActionEvent event){
-        try {
-            Link link1 = PassageManager.getInstance().getPassage().getLinks().get(0);
-            for (Action action : link1.getActions()) {
-                action.execute(GameManager.getInstance().getGame().getPlayer());
-            }
-            boolean goalsFulfilled = GameManager.getInstance().getGame().getGoals().stream().allMatch(goal -> goal.isFulfilled(GameManager.getInstance().getGame().getPlayer()));
-            if(goalsFulfilled){
-                WinAnimation.animation();
-            }
-            else if(link1.getReference().equalsIgnoreCase("game over")){
-                DeathAnimation.animation();
-            } else if (link1.getReference().equalsIgnoreCase("end game")){
-                EndGameAnimation.animation();
-            } else{
-            
-                Passage currentPassage = GameManager.getInstance().getGame().go(link1);
-                PassageManager.getInstance().setPassage(currentPassage); 
-                
-                NextLevelAnimation.animation();
-                SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle() );
-            }
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
-
-    /**
-     * Handles the action when the second choice button is clicked.
-     *
-     * @param event the ActionEvent representing the button click event
-     */
-    public void choiceTwoAction(ActionEvent event){
-        try {
-            Link link2 = PassageManager.getInstance().getPassage().getLinks().get(1);
-            for (Action action : link2.getActions()) {
-                action.execute(GameManager.getInstance().getGame().getPlayer());
-            }
-            boolean goalsFulfilled = GameManager.getInstance().getGame().getGoals().stream().allMatch(goal -> goal.isFulfilled(GameManager.getInstance().getGame().getPlayer()));
-            if(goalsFulfilled){
-                WinAnimation.animation();
-            } else if(link2.getReference().equalsIgnoreCase("game over")){
-                DeathAnimation.animation();
-            } else if (link2.getReference().equalsIgnoreCase("end game")){
-                EndGameAnimation.animation();
-            } else{
-
-                Passage currentPassage = GameManager.getInstance().getGame().go(link2);
-                PassageManager.getInstance().setPassage(currentPassage); 
-
-                NextLevelAnimation.animation();
-                SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
-            }
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
-
-    /**
-     * Retrieves the text lines for the current conversation pane in a manageble form.
-     *
-     * @return an array of text lines for display in the conversation pane
-     */
     public static String[] getTextLines(){
-        String[] passageContent = contents();
-        String line = passageContent[ConversationPaneController.conversationPaneNumber];
-        
-        String[] words = line.split("\\s+");
-        int numGroups = (int) Math.ceil(words.length / 10.0);
-        
-        List<String[]> wordGroups = IntStream.range(0, numGroups)
-            .mapToObj(i -> {
-                int startIndex = i * 10;
-                int endIndex = Math.min(startIndex + 10, words.length);
-                String[] group = Arrays.copyOfRange(words, startIndex, endIndex);
-                if (group.length < 10) {
-                    String[] paddedGroup = new String[10];
-                    Arrays.fill(paddedGroup, "");
-                    System.arraycopy(group, 0, paddedGroup, 0, group.length);
-                    group = paddedGroup;
-                }
-                return group;
-            })
-            .collect(Collectors.toList());
-        
-        String[] textLines = IntStream.range(0, Math.min(numGroups, 4))
-            .mapToObj(i -> {
-                StringBuilder sb = new StringBuilder();
-                Arrays.stream(wordGroups.get(i)).forEach(word -> sb.append(word).append(" "));
-                return sb.toString().trim();
-            })
-            .toArray(String[]::new);
-        
-        if (textLines.length < 4) {
-            String[] paddedResult = new String[4];
-            Arrays.fill(paddedResult, "");
-            System.arraycopy(textLines, 0, paddedResult, 0, textLines.length);
-            textLines = paddedResult;
-        }
-        return textLines;
+        return FrontendUtils.splitTextIntoFourLines(passages(), ConversationPaneController.conversationPaneNumber);
     }
 
-    /**
-     * Retrieves the passages for the current conversation pane.
-     *
-     * @return an array of passages for the conversation pane
-     */
+    //TODO: make less manual
+    public static String getTypeInCurrentConversationPane(){
+        String[] types = typesInCurrentPassage();
+        String type = types[conversationPaneNumber];
+        return type;
+    }
+
     public static String[] passages(){
-        String text = PassageManager.getInstance().getPassage().getContent();
+        String text = passage.getContent();
         int braceIndexx = text.indexOf('{');
         String output = text.substring(braceIndexx);
         String[] passages = output.split("\\n");
         return passages;
     }
 
-    /**
-     * Retrieves the types of the passages in the conversation pane.
-     *
-     * @return an array of passage types for the conversation pane
-     */
-    public static String[] types(){
+    public static String[] typesInCurrentPassage(){
         String[] passages = passages();
         String[] types = new String[passages.length];
         for (int i = 0; i < passages.length; i++) {
@@ -295,21 +170,13 @@ public class ConversationPaneController {
         return types;
     }
 
-    /**
-     * Retrieves the contents of the passages in the conversation pane.
-     *
-     * @return an array of passage contents for the conversation pane
-     */
-    public static String[] contents(){
-        String[] passages = passages();
-        String[] contents = new String[passages.length];
-        for (int i = 0; i < passages.length; i++) {
-            int braceIndex = passages[i].indexOf('{');
-            if (braceIndex >= 0) {
-                contents[i] = passages[i].substring(braceIndex + 3);
-            }
+    public static String[] getPlayerInventoryItems(){
+        List<String> inventoryItems = GameManager.getInstance().getGame().getPlayer().getInventory();
+        String[] result = new String[inventoryItems.size()];
+    
+        for (int i = 0; i < inventoryItems.size(); i++) {
+            result[i] = inventoryItems.get(i);
         }
-        return contents;
+        return result;
     }
-
 }

@@ -29,7 +29,7 @@ public class SelectPlayerPane extends StackPane{
         Button startButton = ViewObjects.newButton("Create", 614-193, 475-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::createPlayerAction);
         playerNameTextField = ViewObjects.newTextField("Playername..", 614-193, 427-71, "text_field");
         playerChoice = ViewObjects.newChoiceBox(controller.getPlayerNames(), 614-193, 187-71, "launch_choicebox");
-        Button chooseButton = ViewObjects.newButton("Continue", 614-193, 243-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::playerChoiceAction);
+        Button chooseButton = ViewObjects.newButton("Continue", 614-193, 243-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::ChoosePlayerAction);
         ImageView background = ViewObjects.newImage(ViewValues.MENU_BACKGROUND_FOLDERNAME, ViewValues.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,ViewValues.BACKGROUND_WIDTH ,ViewValues.BACKGROUND_HEIGHT);
         return new Group(background, startButton, playerChoice, playerNameTextField, chooseButton, informationTitle);
     }
