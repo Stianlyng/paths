@@ -1,26 +1,28 @@
 package edu.ntnu.g60.utils;
 
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class DefaultValues {
     
     /**
      * The default paths:
      */
-    public static final URL RESOURCE_PATH = DefaultValues.class.getClassLoader().getResource("");
-    public static final URL STORY_PATH = DefaultValues.class.getClassLoader().getResource("stories/");
-    public static final URL SAVE_PATH = DefaultValues.class.getClassLoader().getResource("saves/");
-    
+    public static final Path RESOURCE_PATH = Paths.get("src/main/resources/");
+    public static final Path STORY_PATH = RESOURCE_PATH.resolve("stories/");
+    public static final Path SAVE_PATH = RESOURCE_PATH.resolve("saves/");
     // Images:
-    public static final URL IMAGE_PATH = DefaultValues.class.getClassLoader().getResource("images/");
+    public static final Path IMAGE_PATH = RESOURCE_PATH.resolve("images/");
     
     /**
      * The default passage image names:
      */
-    public static final String PLAYER_IMAGE = "playerDefault.png"; 
-    public static final String ENEMY_IMAGE = "enemyDefault.png"; 
+    public static final String PLAYER_IMAGE = "beer.png"; 
+    public static final String ENEMY_IMAGE = "beer.png"; 
     public static final String BACKGROUND_IMAGE = "Background1.png"; 
     
     
