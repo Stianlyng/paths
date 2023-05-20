@@ -46,7 +46,7 @@ public class GameApp extends Application {
     public void start(Stage stage) throws IOException, InterruptedException {
         GameApp.stage = stage;
         stage.setTitle(TITLE);
-        stage.getIcons().add(new Image(new FileInputStream("src/main/resources/images/icons/" + ICON))); //todo: fix path
+        stage.getIcons().add(new Image(GameApp.class.getResourceAsStream(DefaultValues.ICON_PATH + ICON)));
 
         stage.setResizable(false);
         SelectPlayerPane startMenu = new SelectPlayerPane();
