@@ -14,6 +14,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import edu.ntnu.g60.utils.DefaultValues;
+
 /**
  * A utility class for parsing text stories and converting them to JSON format.
  * 
@@ -22,11 +24,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class TextfileParser {
 
     private static final Pattern LINK_PATTERN = Pattern.compile("\\[(.+?)\\]\\((.+?)\\)");
-
-    /**
-     * Private constructor to prevent instantiation.
-     */
-
 
     /**
      * Parses a text story and saves it in JSON format.
@@ -43,7 +40,7 @@ public class TextfileParser {
                 filename = filename.substring(0, pos);
             }
     
-            Path outputPath = Paths.get("src/main/resources/stories/" + filename + ".json");
+            Path outputPath = DefaultValues.STORY_PATH.resolve(filename + ".json");
     
             List<String> lines = Files.readAllLines(inputPath);
             ObjectMapper mapper = new ObjectMapper();

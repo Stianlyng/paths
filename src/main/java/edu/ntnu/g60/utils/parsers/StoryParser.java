@@ -26,6 +26,7 @@ import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.passage.PassageBuilder;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.models.story.StoryBuilder;
+import edu.ntnu.g60.utils.DefaultValues;
 
 /**
  * StoryParser is a class that parses a JSON file into a Story object.
@@ -58,10 +59,10 @@ public class StoryParser {
     /**
      * Constructs a StoryParser object.
      * 
-     * @param jsonFilePath the path to the JSON file to be parsed.
+     * @param jsonFileName the name the JSON file to be parsed.
      */
-    public StoryParser(String jsonFilePath) {
-        this.jsonFile = Paths.get("src/main/resources/stories/" + jsonFilePath + ".json").toFile();
+    public StoryParser(String jsonFileName) {
+        this.jsonFile = DefaultValues.STORY_PATH.resolve(jsonFileName + ".json").toFile();
         this.objectMapper = new ObjectMapper();
         build();
     }

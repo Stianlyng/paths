@@ -8,18 +8,20 @@ import java.util.List;
 
 
 public class DefaultValues {
+
     
     /**
-     * The default paths:
+     * PATHS:
      */
     public static final Path RESOURCE_PATH = Paths.get("src/main/resources/");
     public static final Path STORY_PATH = RESOURCE_PATH.resolve("stories/");
     public static final Path SAVE_PATH = RESOURCE_PATH.resolve("saves/");
     // Images:
     public static final Path IMAGE_PATH = RESOURCE_PATH.resolve("images/");
+    public static final Path ICON_PATH = IMAGE_PATH.resolve("icons/");
     
     /**
-     * The default passage image names:
+     * PASSAGE:
      */
     public static final String PLAYER_IMAGE = "beer.png"; 
     public static final String ENEMY_IMAGE = "beer.png"; 
