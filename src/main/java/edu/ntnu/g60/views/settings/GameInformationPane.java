@@ -12,12 +12,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
+/**
+ * GameInformationPane represents a pane for information about the game
+ */
 public class GameInformationPane extends StackPane{
     
     private static StartMenuController controller;
 
     /**
-     * Constructs a new InformationPane object.
+     * Constructs a new GameInformationPane object.
      * @throws FileNotFoundException if the file specified is not found.
     */
     public GameInformationPane() throws FileNotFoundException, IOException {
@@ -25,6 +28,12 @@ public class GameInformationPane extends StackPane{
         getChildren().addAll(getInformationObjects());
     }
 
+    /**
+     * Adds the objects required for the GameInformationPane.
+     *
+     * @return a Group containing the game information pane objects
+     * @throws FileNotFoundException if the file specified is not found
+     */
     private static Group getInformationObjects() throws FileNotFoundException {
         Text informationTitle = ViewObjects.newText("Information", 45, false, 415, 50);
         ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);

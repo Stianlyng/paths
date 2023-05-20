@@ -13,6 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
+/**
+ * GameInformationPane represents a pane for settings in the game
+ */
 public class SettingsPane extends StackPane{
     private static StartMenuController controller;
     
@@ -25,6 +28,12 @@ public class SettingsPane extends StackPane{
         getChildren().addAll(getSettingObjects());
     }
 
+    /**
+     * Adds the objects required for the settings pane.
+     *
+     * @return a Group containing the settings information pane objects
+     * @throws FileNotFoundException if the file specified is not found
+     */
     private static Group getSettingObjects() throws FileNotFoundException{
         Text informationText = ViewObjects.newText("Settings", 45, false, 415, 50);
         ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);

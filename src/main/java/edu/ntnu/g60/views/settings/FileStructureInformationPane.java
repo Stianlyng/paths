@@ -12,6 +12,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
+/**
+ * FileStructureInformationPane represents a pane for a file structure information pane.
+ */
 public class FileStructureInformationPane extends StackPane{
     
     private static StartMenuController controller;
@@ -25,6 +28,12 @@ public class FileStructureInformationPane extends StackPane{
         getChildren().addAll(getInformationObjects());
     }
 
+    /**
+     * Adds the objects required for the InformationFileStructurePane.
+     *
+     * @return a Group containing the informationFileStructurePane objects
+     * @throws FileNotFoundException if the file specified is not found
+     */
     private static Group getInformationObjects() throws FileNotFoundException {
         Text informationTitle = ViewObjects.newText("File format", 45, false, 415, 50);
         ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);

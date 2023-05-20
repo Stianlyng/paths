@@ -58,9 +58,9 @@ public class MiniGamePane extends StackPane{
     }
 
     /**
-     * Adds the objects required for the fight pane.
+     * Adds the objects required for the minigame pane.
      *
-     * @return a Group containing the fight pane objects
+     * @return a Group containing the fight minigame objects
      * @throws FileNotFoundException if the file specified is not found
      */
     public static Group addFightPaneObjects() throws FileNotFoundException{
