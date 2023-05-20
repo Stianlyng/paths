@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import edu.ntnu.g60.controllers.SoundController;
+import edu.ntnu.g60.exceptions.MusicControllerException;
+import edu.ntnu.g60.utils.DefaultValues;
 import edu.ntnu.g60.views.StartMenu.SelectPlayerPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -19,7 +21,7 @@ public class GameApp extends Application {
     private static final int WIDTH = 600;
     private static final Color backgound = Color.WHITE;
     private static final String TITLE = "Half life 3";
-    private static final String ICON_PATH = "src/main/resources/images/icons/icon.png";
+    private static final String ICON_PATH = DefaultValues.ICON_PATH.resolve("icon.png").toString();
     private static final String STYLESHEET = "StyleSheet.css";
 
     private static Stage stage;
@@ -38,11 +40,9 @@ public class GameApp extends Application {
         try {
             SoundController.playMusic("music");
             SoundController.setApplicationVolume((double) 0.03);
-        } catch (MediaException e) {
-            // Handle the exception, e.g., display an error message or fallback to alternative sound playback
-            e.printStackTrace();
+        } catch (MusicControllerException e) {
+            System.err.println(e.getMessage());
         } catch (Exception e) {
-            // Handle other exceptions
             e.printStackTrace();
         }
     }

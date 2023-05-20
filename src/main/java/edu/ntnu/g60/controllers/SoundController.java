@@ -2,7 +2,9 @@ package edu.ntnu.g60.controllers;
 
 import java.net.MalformedURLException;
 
+import edu.ntnu.g60.exceptions.MusicControllerException;
 import edu.ntnu.g60.views.ViewObjects;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 
 /**
@@ -30,9 +32,9 @@ public class SoundController {
      * Plays the specified background music.
      * 
      * @param musicName the name of the music file to be played
-     * @throws MalformedURLException if the URL of the music file is malformed
+     * @throws MusicControllerExeption if the URL of the music file is malformed
     */
-    public static void playMusic(String musicName) {
+    public static void playMusic(String musicName) throws MusicControllerException{
         try {
             setMusic(ViewObjects.newSound(musicName));
             if (music != null) {
@@ -46,7 +48,9 @@ public class SoundController {
                 music.play();
             }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            throw new MusicControllerException("Malformed URL for music file: " + musicName, e);
+        } catch (MediaException e) {
+            throw new MusicControllerException("Error creating media player for music: " + musicName, e);
         }
     }
 
@@ -65,21 +69,25 @@ public class SoundController {
     /**
      * Stops the playback of the background music.
      * 
-     * @throws MalformedURLException if the URL of the music file is malformed
+     * @throws MusicControllerException  if the music cannot be stopped
     */
-    public static void stopMusic() throws MalformedURLException{
+    public static void stopMusic() throws MusicControllerException {
         if (music != null) {
-            music.stop();
-        }
+            try {
+                    music.stop();
+                } catch (Exception e) {
+                    throw new MusicControllerException("Error while stopping music", e);
+                }
+            }
     }
 
     /**
      * Plays the specified sound effect.
      * 
      * @param soundName the name of the sound effect file to be played
-     * @throws MalformedURLException if the URL of the sound effect file is malformed
+     * @throws MusicControllerException if the URL of the sound effect file is malformed
     */
-    public static void playSound(String soundName) {
+    public static void playSound(String soundName) throws MusicControllerException {
         try {
             setSound(ViewObjects.newSound(soundName));
             if (sound != null) {
@@ -87,7 +95,9 @@ public class SoundController {
                 sound.play();
             }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            throw new MusicControllerException("Malformed URL for sound file: " + soundName, e);
+        } catch (MediaException e) {
+            throw new MusicControllerException("Error creating media player for music: " + soundName, e);
         }
     }
 
@@ -106,11 +116,15 @@ public class SoundController {
     /**
      * Stops the playback of the sound effect.
      * 
-     * @throws MalformedURLException if the URL of the sound effect file is malformed
+     * @throws MusicControllerExceptioin if there is an error while stopping the sound effect
     */
-    public static void stopSound() throws MalformedURLException{
+    public static void stopSound() throws MusicControllerException {
         if (sound != null) {
-            sound.stop();
+            try {
+                sound.stop();
+            } catch (Exception e) {
+                throw new MusicControllerException("Error while stopping sound", e);
+            }
         }
     }
 

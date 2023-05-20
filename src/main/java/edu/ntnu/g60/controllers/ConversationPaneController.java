@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
+
+import edu.ntnu.g60.exceptions.MusicControllerException;
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
@@ -97,6 +99,9 @@ public class ConversationPaneController {
                 }
             } catch (MalformedURLException | FileNotFoundException e1){
                 e1.printStackTrace();
+            } catch (MusicControllerException e) {
+                System.err.println(e.getMessage());
+                e.printStackTrace();
             }  
         }
     }
