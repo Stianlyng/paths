@@ -19,8 +19,8 @@ public class DefaultValues {
     /**
      * The default passage image names:
      */
-    public static final String PLAYER_IMAGE = "beer.png"; 
-    public static final String ENEMY_IMAGE = "beer.png"; 
+    public static final String PLAYER_IMAGE = "playerDefault.png"; 
+    public static final String ENEMY_IMAGE = "enemyDefault.png"; 
     public static final String BACKGROUND_IMAGE = "Background1.png"; 
     
     
