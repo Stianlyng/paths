@@ -19,7 +19,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-
+/**
+ * The ConversationPane class is responsible for showing the diffrent conversation parts
+ * of a passage.
+ * The pane has functions to change depending on the type of conversation.
+ */
 public class ConversationPane extends StackPane{
 
     private static ConversationPaneController controller;
@@ -43,8 +47,13 @@ public class ConversationPane extends StackPane{
         getChildren().addAll(getConversationPaneObjects());
     }
 
-
-    public static void addChoiceObjects(ConversationPane pane) throws FileNotFoundException, MalformedURLException{
+    /**
+     * Adds two choice buttons to the pane
+     * 
+     * @param pane the current showing conversationpane
+     * @throws FileNotFoundException if the specified text file is not found.
+     */
+    public static void addChoiceObjects(ConversationPane pane) throws FileNotFoundException{
         Button choiceOneButton = ViewObjects.newButton(passage.getLinks().get(0).getText(), 71, 212, "talk_button", "talk_hover", controller::choiceOneAction);
         Button choiceTwoButton = ViewObjects.newButton(passage.getLinks().get(1).getText(), 318, 212, "talk_button", "talk_hover", controller::choiceTwoAction);
         StackPane.setAlignment(choiceOneButton, Pos.CENTER_LEFT);
@@ -54,6 +63,12 @@ public class ConversationPane extends StackPane{
         pane.getChildren().addAll(choiceOneButton, choiceTwoButton);
     }
 
+    /**
+     * Adds default objects to the ConversationPane.
+     * 
+     * @return objects to be added to the pane
+     * @throws FileNotFoundException if the specified text file is not found.
+     */
     public static Group getConversationPaneObjects() throws FileNotFoundException{
         ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayer(), 150, 200, 150, 150, controller::conversationPaneClickedAction);
         ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemy(), 700, 200, 150, 150, controller::conversationPaneClickedAction);
