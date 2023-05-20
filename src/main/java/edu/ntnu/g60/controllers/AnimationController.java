@@ -16,6 +16,11 @@ import edu.ntnu.g60.views.TitlePanes.TxtPane;
  */
 public class AnimationController {
 
+    /**
+     * Begins a passage by setting up the initial conversation pane and changing the root pane to it.
+     * 
+     *  @param passage The Passage object representing the passage to begin.
+    */
     public void beginPassage(Passage passage){
         try {
             ConversationPaneController.setConversationPaneNumber(0);
@@ -29,10 +34,19 @@ public class AnimationController {
         }
     }
 
+    /**
+     * Shows a pane with the specified text by changing the root pane to a TxtPane with the given text.
+     * 
+     * @param text The text to display in the pane.
+     * @throws FileNotFoundException if the specified text file is not found.
+    */
     public void showPaneWithText(String text) throws FileNotFoundException{
         GameApp.changeRootPane(new TxtPane(text));
     }
 
+    /**
+     * Goes to the opening main menu pane by changing the root pane to a MainMenuPane.
+    */
     public void goToOpening(){
         try {
             GameApp.changeRootPane(new MainMenuPane());
