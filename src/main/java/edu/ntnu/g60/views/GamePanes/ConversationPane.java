@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -61,6 +62,7 @@ public class ConversationPane extends StackPane{
         Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 342-193, 155-71, controller::conversationPaneClickedAction);
         Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 422-193, 155-71, controller::conversationPaneClickedAction);
         Text healthText = ViewObjects.newText("" + game.getPlayer().getHealth(), 18, false, 520-193, 155-71, controller::conversationPaneClickedAction);
+        ChoiceBox inventory = ViewObjects.newChoiceBox(ConversationPaneController.getPlayerInventoryItems(), 724, 129-71, "inventory_choicebox");
 
         Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 293, 38, controller::conversationPaneClickedAction);
         String[] textline = ConversationPaneController.getTextLines();
@@ -71,7 +73,7 @@ public class ConversationPane extends StackPane{
 
         Group root = new Group(backgroundImage, infoBoard, enemyImage, playerImage, coinIcon,
         healthIcon, scoreIcon, scoreText, goldText, healthText,
-        conversationTextLineOne, conversationTextLineTwo, conversationTextLineThree, conversationTextLineFour, dropDownMenu);
+        conversationTextLineOne, conversationTextLineTwo, conversationTextLineThree, conversationTextLineFour, dropDownMenu, inventory);
 
         if(ConversationPaneController.getTypeInCurrentConversationPane().equals("{N}")){
             ImageView neutralBubble = ViewObjects.newImage("animations", "neutralbubble.png", 327-193, 440-71, 793, 211+511, controller::conversationPaneClickedAction);

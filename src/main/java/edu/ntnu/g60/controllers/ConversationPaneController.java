@@ -169,4 +169,14 @@ public class ConversationPaneController {
         }
         return types;
     }
+
+    public static String[] getPlayerInventoryItems(){
+        List<String> inventoryItems = GameManager.getInstance().getGame().getPlayer().getInventory();
+        String[] result = new String[inventoryItems.size()];
+    
+        for (int i = 0; i < inventoryItems.size(); i++) {
+            result[i] = inventoryItems.get(i);
+        }
+        return result;
+    }
 }

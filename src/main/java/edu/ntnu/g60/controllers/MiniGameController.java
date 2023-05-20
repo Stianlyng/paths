@@ -30,16 +30,13 @@ public class MiniGameController {
     
     public static Game game = GameManager.getInstance().getGame();
     private static Passage passage;
+    public static float enemyHealth;
+    public static float playerHealth;
+    public static MiniGamePane currentFightPane;
     
     public MiniGameController(Passage passage){
         this.passage = passage;
     }
- 
-    public static float enemyHealth;
-    public static float playerHealth;
-
-
-    public static MiniGamePane currentFightPane;
 
     public static void setDefaultHealthValues(){
         enemyHealth = 1.00F;
@@ -178,10 +175,14 @@ public class MiniGameController {
 
     public void inventoryTwoAction(ActionEvent event){
         //TODO: ADD functionality
+        //remove item from inventory
+        //do something in fight
     }
 
     public void inventoryThreeAction(ActionEvent event){
         //TODO: ADD functionality
+        //remove item from inventory
+        //do something in fight
     }
 
     /**
@@ -221,23 +222,7 @@ public class MiniGameController {
      * @throws FileNotFoundException if the file is not found
      */
     public static void winFight() throws MalformedURLException, FileNotFoundException{
-        Link link2 = passage.getLinks().get(1);
-        for (Action action : link2.getActions()) {
-            action.execute(GameManager.getInstance().getGame().getPlayer());
-        }
-        boolean goalsFulfilled = GameManager.getInstance().getGame().getGoals().stream().allMatch(goal -> goal.isFulfilled(GameManager.getInstance().getGame().getPlayer()));
-        if(goalsFulfilled){
-            WinAnimation.animation();
-        } else if(link2.getReference().equalsIgnoreCase("game over")){
-            DeathAnimation.animation();
-        } else if (link2.getReference().equalsIgnoreCase("end game")){
-            EndGameAnimation.animation();
-        } else { 
-            
-            Passage currentPassage = GameManager.getInstance().getGame().go(link2);
-
-            NextLevelAnimation.animation(currentPassage);
-        }
+        fightOutcome(passage.getLinks().get(1));
     }
     
     /**
@@ -247,73 +232,28 @@ public class MiniGameController {
      * @throws FileNotFoundException if the file is not found
      */
     public static void looseFight() throws MalformedURLException, FileNotFoundException{
-        Link link1 = passage.getLinks().get(0);
-        for (Action action : link1.getActions()) {
+        fightOutcome(passage.getLinks().get(0));
+    }
+
+    public static void fightOutcome(Link link) throws FileNotFoundException, MalformedURLException{
+        for (Action action : link.getActions()) {
             action.execute(GameManager.getInstance().getGame().getPlayer());
         }
         boolean goalsFulfilled = GameManager.getInstance().getGame().getGoals().stream().allMatch(goal -> goal.isFulfilled(GameManager.getInstance().getGame().getPlayer()));
         if(goalsFulfilled){
             WinAnimation.animation();
-        } else if(link1.getReference().equalsIgnoreCase("game over")){
+        } else if(link.getReference().equalsIgnoreCase("game over")){
             DeathAnimation.animation();
-        } else if (link1.getReference().equalsIgnoreCase("end game")){
+        } else if (link.getReference().equalsIgnoreCase("end game")){
             EndGameAnimation.animation();
         } else { 
-            Passage currentPassage = GameManager.getInstance().getGame().go(link1);
+            Passage currentPassage = GameManager.getInstance().getGame().go(link);
             NextLevelAnimation.animation(currentPassage);
         }
-    }
+    } 
 
-    /**
-     * Performs the action of the enemy attacking the player and the player attacking the enemy.
-     *
-     * @param damageAmount the amount of damage inflicted by the enemy
-     * @param healAmount the amount of health healed by the enemy
-     */
-    public static void enemyAction(float damageAmount, float healAmount){
-        FrontendUtils.delay(2000, () -> {
-            playerHealth = playerHealth - damageAmount;
-            enemyHealth = enemyHealth + healAmount;
-            MiniGamePane.updateHealthEnemy(enemyHealth);
-            MiniGamePane.updateHealthPlayer(playerHealth);
-            if(enemyHealth < 0.00){
-                MiniGamePane.updateHealthEnemy(0.00F);
-                FrontendUtils.delay(1000, () -> {
-                    MiniGamePane.addWinText(getCurrentFightPane());
-                    FrontendUtils.delay(3000, () -> {
-                        try {
-                            winFight();
-                        } catch (MalformedURLException | FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                }); 
-                
-            } else if(playerHealth < 0.00){
-                MiniGamePane.updateHealthPlayer(0.00F);
-                FrontendUtils.delay(1000, () -> {
-                    MiniGamePane.addLooseText(getCurrentFightPane());
-                    FrontendUtils.delay(3000, () -> {
-                        try {
-                            looseFight();
-                        } catch (MalformedURLException | FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                });
-            }   
-        });
-    }
-
-    /**
-     * Performs the action of the player attacking the enemy and healing the player.
-     *
-     * @param damageAmount the amount of damage inflicted by the player
-     * @param healAmount the amount of health healed by the player
-     */
     public static void playerAction(float damageAmount, float healAmount){
-        enemyHealth = enemyHealth - damageAmount;
-        playerHealth = playerHealth + healAmount;
+        applyDamageAndHealingPlayer(damageAmount, healAmount);
         MiniGamePane.updateHealthEnemy(enemyHealth);
         MiniGamePane.updateHealthPlayer(playerHealth);
         if(enemyHealth < 0.00){
@@ -322,6 +262,60 @@ public class MiniGameController {
             MiniGamePane.updateHealthPlayer(0.00F);
         }  
     }
+
+    public static void enemyAction(float damageAmount, float healAmount) {
+        FrontendUtils.delay(1500, () -> {
+            applyDamageAndHealingEnemy(damageAmount, healAmount);
+            MiniGamePane.updateHealthEnemy(enemyHealth);
+            MiniGamePane.updateHealthPlayer(playerHealth);
+    
+            if (enemyHealth < 0.00) {
+                MiniGamePane.updateHealthEnemy(0.00F);
+                FrontendUtils.delay(1000, () -> {
+                    MiniGamePane.addWinText(getCurrentFightPane());
+                    handleWinFight();
+                });
+            } else if (playerHealth < 0.00) {
+                MiniGamePane.updateHealthPlayer(0.00F);
+                FrontendUtils.delay(1000, () -> {
+                    MiniGamePane.addLooseText(getCurrentFightPane());
+                    handleLooseFight();
+                });
+            }
+        });
+    }
+
+    private static void applyDamageAndHealingEnemy(float damageAmount, float healAmount) {
+        playerHealth -= damageAmount;
+        enemyHealth += healAmount;
+    }
+
+    private static void applyDamageAndHealingPlayer(float damageAmount, float healAmount) {
+        enemyHealth -= damageAmount;
+        playerHealth += healAmount;
+    }
+
+    private static void handleWinFight() {
+        FrontendUtils.delay(1500, () -> {
+            try {
+                winFight();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+    
+    private static void handleLooseFight() {
+        FrontendUtils.delay(1500, () -> {
+            try {
+                looseFight();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+
 
     public static String[] getPlayerInventoryItems(){
         List<String> inventoryItems = GameManager.getInstance().getGame().getPlayer().getInventory();
@@ -334,7 +328,6 @@ public class MiniGameController {
                 result[i] = "Missing item";
             }
         }
-    
         return result;
     }
 }
