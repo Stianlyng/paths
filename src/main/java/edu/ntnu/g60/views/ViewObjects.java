@@ -2,6 +2,8 @@ package edu.ntnu.g60.views;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,10 +21,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import edu.ntnu.g60.controllers.SoundController;
+import edu.ntnu.g60.utils.DefaultValues;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
@@ -107,7 +112,7 @@ public class ViewObjects {
     public static ImageView newImage(String foldername, String imagename,
     int x, int y, int width, int height, EventHandler<MouseEvent> action) throws FileNotFoundException{
        ImageView imageview = new ImageView();
-       Image image = new Image(new FileInputStream("src/main/resources/images/" + foldername + "/" + imagename));
+       Image image = new Image(ViewObjects.class.getResourceAsStream("/images/" + foldername + "/" + imagename));
        imageview.setOnMouseClicked(action);
        imageview.setImage(image);
        imageview.setX(x);
@@ -121,7 +126,7 @@ public class ViewObjects {
     public static ImageView newImage(String foldername, String imagename,
     int x, int y, int width, int height) throws FileNotFoundException{
        ImageView imageview = new ImageView();
-       Image image = new Image(new FileInputStream("src/main/resources/images/" + foldername + "/" + imagename));
+       Image image = new Image(ViewObjects.class.getResourceAsStream("/images/" + foldername + "/" + imagename));
        imageview.setImage(image);
        imageview.setX(x);
        imageview.setY(y);
