@@ -19,7 +19,7 @@ import edu.ntnu.g60.views.Animations.EndGameAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.Animations.WinAnimation;
 import edu.ntnu.g60.views.GamePanes.MiniGamePane;
-import edu.ntnu.g60.views.StartMenu.OpeningPane;
+import edu.ntnu.g60.views.StartMenu.MainMenuPane;
 import javafx.event.ActionEvent;
 
 /**
@@ -62,7 +62,7 @@ public class MiniGameController {
         GameManager.getInstance().endGame();
         saveGame(DialogBoxes.dialogBoxWithTextInput("Save Game", "Enter a name for your save file", "Name:"));
         try {
-            GameApp.changeRootPane(new OpeningPane());
+            GameApp.changeRootPane(new MainMenuPane());
         } catch (IOException e1) {
             e1.printStackTrace();
         }
