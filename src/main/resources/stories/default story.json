@@ -57,8 +57,8 @@
     } ]
   }, {
     "title" : "Unleashing Chaos",
-    "isFight":false,
-    "content" : "#isFight:true\n{N}As you recite the forbidden words, an ominous energy fills the room. Shadows dance and swirl, and a vortex of darkness materializes.\n{E}Foolish mortal, you've awakened me. Prepare for your demise.\n[P]What have I done?!\n\n",
+    "isFight":true,
+    "content" : "{N}As you recite the forbidden words, an ominous energy fills the room. Shadows dance and swirl, and a vortex of darkness materializes.\n{E}Foolish mortal, you've awakened me. Prepare for your demise.\n{P}What have I done?!\n\n",
     "links" : [ {
       "text" : "Fight the dark entity",
       "reference" : "The Final Confrontation"
@@ -69,7 +69,7 @@
   }, {
     "title" : "The Final Confrontation",
     "isFight":false,
-    "content" : "{N}With courage in your heart, you face the dark entity head-on. The battle rages, your every move determined to banish the evil that lurks within.\n{E}Your bravery impresses me. But will it be enough?\n[P]I will not falter!\n\n",
+    "content" : "{N}With courage in your heart, you face the dark entity head-on. The battle rages, your every move determined to banish the evil that lurks within.\n{E}Your bravery impresses me. But will it be enough?\n{P}I will not falter!\n\n",
     "links" : [ {
       "text" : "Unleash a powerful spell",
       "reference" : "Triumph of Light"
@@ -80,7 +80,7 @@
   }, {
     "title" : "Triumph of Light",
     "isFight":false,
-    "content" : "{N}Your spell radiates with brilliant light, engulfing the dark entity. It shrieks in agony, its form dissipating into nothingness.\n{E}The darkness is vanquished, and the haunted house is at peace once more.\n[N]Congratulations, hero. You have triumphed!\n\n",
+    "content" : "{N}Your spell radiates with brilliant light, engulfing the dark entity. It shrieks in agony, its form dissipating into nothingness.\n{E}The darkness is vanquished, and the haunted house is at peace once more.\n{N}Congratulations, hero. You have triumphed!\n\n",
     "links" : [ {
       "text" : "Continue your journey",
       "reference" : "Courtyard"
@@ -108,7 +108,7 @@
       "reference" : "game over"
     }, {
       "text" : "Leave the courtyard",
-      "reference" : "game over"
+      "reference" : "end game"
     } ]
   } ]
 }

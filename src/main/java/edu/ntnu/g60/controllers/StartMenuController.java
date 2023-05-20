@@ -43,12 +43,11 @@ public class StartMenuController {
     public static void populateSaveButtons(Button save1Button, Button save2Button, Button save3Button) throws IOException {
         Set<String> playerSavesSet = SaveFileHandler.getPlayerSaves(playerName);
         List<String> playerSaves = new ArrayList<>(playerSavesSet);
-
-        for(int i = 0; i < 3; i++) {
-            if (playerSaves != null) {
-                final int index = i;
-                Button saveButton = i == 0 ? save1Button : i == 1 ? save2Button : save3Button;
-                saveButton.setText(playerSaves.get(i));
+        for(int i = 1; i < 4; i++) {
+            if (i - 1 < playerSaves.size()) {
+                final int index = i - 1;
+                Button saveButton = i == 1 ? save1Button : i == 2 ? save2Button : save3Button;
+                saveButton.setText(playerSaves.get(i - 1));
                 
                 saveButton.setOnAction(e -> {
                      GameManager.getInstance().endGame();
@@ -66,7 +65,7 @@ public class StartMenuController {
                      }
                 });
             } else {
-                Button saveButton = i == 0 ? save1Button : i == 1 ? save2Button : save3Button;
+                Button saveButton = i == 1 ? save1Button : i == 2 ? save2Button : save3Button;
                 saveButton.setText("Empty");
             }
         }
@@ -93,18 +92,20 @@ public class StartMenuController {
     public void ChoosePlayerAction(ActionEvent event){
         SelectPlayerPane.updatePlayerName();
         playerName = SelectPlayerPane.getPlayerChoice();
-        try {
-            GameApp.changeRootPane(new OpeningPane());
-        } catch (IOException e1) {
-            e1.printStackTrace();
+        if(playerName != null && playerName != ""){
+            try {
+                GameApp.changeRootPane(new OpeningPane());
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            initializePlayer(playerName);
         }
-        initializePlayer(playerName);
     }
 
     public void deleteAllPlayerSavesAction(ActionEvent event){
         Set<String> playerSaves = SaveFileHandler.getPlayerSaves(playerName);
         if(!playerSaves.isEmpty()) {
-            if(DialogBoxes.alertBoxChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
+            if(DialogBoxes.alertBoxWithChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
                 ContinueGamePane.addDeleteObjects(getCurreContinuePane());
                 try {
                     SaveFileHandler.deletePlayerSaves(playerName);
@@ -139,7 +140,9 @@ public class StartMenuController {
     
     public void goTocontinueGamePaneAction(ActionEvent event){
         try {
-            GameApp.changeRootPane(new ContinueGamePane());
+            ContinueGamePane pane = new ContinueGamePane();
+            setCurrentContinuePane(pane);
+            GameApp.changeRootPane(pane);
         } catch (IOException | ClassNotFoundException e1) {
             e1.printStackTrace();
         }
@@ -244,7 +247,6 @@ public class StartMenuController {
 
     public String[] getPlayerNames(){
         List<String> availablePlayers = new ArrayList<>(SaveFileHandler.getAvailablePlayers());
-        String[] players = availablePlayers.toArray(new String[availablePlayers.size()]);
-        return players;
+        return availablePlayers.toArray(new String[availablePlayers.size()]);
     }
 }

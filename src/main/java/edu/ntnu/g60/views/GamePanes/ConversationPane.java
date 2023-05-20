@@ -28,7 +28,7 @@ public class ConversationPane extends StackPane{
     //change from static in passage and rename
     public ConversationPane(Passage npassage) throws FileNotFoundException, MalformedURLException{
         passage = npassage;
-        ConversationPane.controller = new ConversationPaneController();
+        ConversationPane.controller = new ConversationPaneController(npassage);
         try{
             SoundController.playSound("mumble");
         } catch (Exception e1){
@@ -50,43 +50,43 @@ public class ConversationPane extends StackPane{
     }
 
     public static Group getConversationPaneObjects() throws FileNotFoundException{
-        ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayer(), 150, 200, 150, 150, controller::paneClickedAction);
-        ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemy(), 700, 200, 150, 150, controller::paneClickedAction);
-        ImageView backgroundImage = ViewObjects.newImage("backgrounds", passage.getBackground(), 0, 0, 1650, 1000, controller::paneClickedAction);
-        ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 309-193, 136-71, 24, 24, controller::paneClickedAction);
-        ImageView healthIcon = ViewObjects.newImage("icons", "heart.png", 488-193, 136-71, 24, 24, controller::paneClickedAction);
-        ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24, controller::paneClickedAction);
+        ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayer(), 150, 200, 150, 150, controller::conversationPaneClickedAction);
+        ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemy(), 700, 200, 150, 150, controller::conversationPaneClickedAction);
+        ImageView backgroundImage = ViewObjects.newImage("backgrounds", passage.getBackground(), 0, 0, 1650, 1000, controller::conversationPaneClickedAction);
+        ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 309-193, 136-71, 24, 24, controller::conversationPaneClickedAction);
+        ImageView healthIcon = ViewObjects.newImage("icons", "heart.png", 488-193, 136-71, 24, 24, controller::conversationPaneClickedAction);
+        ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24, controller::conversationPaneClickedAction);
 
-        MenuButton dropDownMenu = ViewObjects.newMenuButton(controller::goToMenuAction, controller::exitApplicationAction, "menu_button", "menu_hover", 413, 129-71, "Save and go to main menu", "Exit application");
-        Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 342-193, 155-71, controller::paneClickedAction);
-        Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 422-193, 155-71, controller::paneClickedAction);
-        Text healthText = ViewObjects.newText("" + game.getPlayer().getHealth(), 18, false, 520-193, 155-71, controller::paneClickedAction);
+        MenuButton dropDownMenu = ViewObjects.newMenuButton(controller::goToMenuAndSaveAction, controller::exitApplicationAction, "menu_button", "menu_hover", 413, 129-71, "Save and go to main menu", "Exit application");
+        Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 342-193, 155-71, controller::conversationPaneClickedAction);
+        Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 422-193, 155-71, controller::conversationPaneClickedAction);
+        Text healthText = ViewObjects.newText("" + game.getPlayer().getHealth(), 18, false, 520-193, 155-71, controller::conversationPaneClickedAction);
 
-        Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 293, 38, controller::paneClickedAction);
+        Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 293, 38, controller::conversationPaneClickedAction);
         String[] textline = ConversationPaneController.getTextLines();
-        Text conversationTextLineOne = ViewObjects.newText(textline[0], 24, false, 333-193, 520-71, controller::paneClickedAction);
-        Text conversationTextLineTwo = ViewObjects.newText(textline[1], 24, false, 333-193, 555-71, controller::paneClickedAction);
-        Text conversationTextLineThree = ViewObjects.newText(textline[2], 24, false, 333-193, 590-71, controller::paneClickedAction);
-        Text conversationTextLineFour = ViewObjects.newText(textline[3], 24, false, 333-193, 425-71, controller::paneClickedAction);
+        Text conversationTextLineOne = ViewObjects.newText(textline[0], 24, false, 333-193, 520-71, controller::conversationPaneClickedAction);
+        Text conversationTextLineTwo = ViewObjects.newText(textline[1], 24, false, 333-193, 555-71, controller::conversationPaneClickedAction);
+        Text conversationTextLineThree = ViewObjects.newText(textline[2], 24, false, 333-193, 590-71, controller::conversationPaneClickedAction);
+        Text conversationTextLineFour = ViewObjects.newText(textline[3], 24, false, 333-193, 425-71, controller::conversationPaneClickedAction);
 
         Group root = new Group(backgroundImage, infoBoard, enemyImage, playerImage, coinIcon,
         healthIcon, scoreIcon, scoreText, goldText, healthText,
         conversationTextLineOne, conversationTextLineTwo, conversationTextLineThree, conversationTextLineFour, dropDownMenu);
 
-        if(ConversationPaneController.getType().equals("{N}")){
-            ImageView neutralBubble = ViewObjects.newImage("animations", "neutralbubble.png", 327-193, 440-71, 793, 211+511, controller::paneClickedAction);
+        if(ConversationPaneController.getTypeInCurrentConversationPane().equals("{N}")){
+            ImageView neutralBubble = ViewObjects.newImage("animations", "neutralbubble.png", 327-193, 440-71, 793, 211+511, controller::conversationPaneClickedAction);
             root.getChildren().add(neutralBubble);
             neutralBubble.toBack();
-        } else if(ConversationPaneController.getType().equals("{E}")){
-            ImageView rightBubble = ViewObjects.newImage("animations", "righttalkingbubble.png", 327-193, 440-71,793, 211+511, controller::paneClickedAction);
+        } else if(ConversationPaneController.getTypeInCurrentConversationPane().equals("{E}")){
+            ImageView rightBubble = ViewObjects.newImage("animations", "righttalkingbubble.png", 327-193, 440-71,793, 211+511, controller::conversationPaneClickedAction);
             root.getChildren().add(rightBubble);
             rightBubble.toBack();
             playerImage.setFitWidth(175);
             playerImage.setFitHeight(175);
             enemyImage.setFitWidth(125);
             enemyImage.setFitHeight(125);
-        } else if(ConversationPaneController.getType().equals("{P}")){
-            ImageView leftBubble = ViewObjects.newImage("animations", "lefttalkingbubble.png", 327-193, 440-71, 793, 211+511, controller::paneClickedAction);
+        } else if(ConversationPaneController.getTypeInCurrentConversationPane().equals("{P}")){
+            ImageView leftBubble = ViewObjects.newImage("animations", "lefttalkingbubble.png", 327-193, 440-71, 793, 211+511, controller::conversationPaneClickedAction);
             root.getChildren().add(leftBubble);
             leftBubble.toBack();
             playerImage.setFitWidth(125);

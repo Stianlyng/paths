@@ -10,14 +10,15 @@ import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
-import edu.ntnu.g60.utils.FrontendUtils;
 import edu.ntnu.g60.utils.SaveFileHandler;
+import edu.ntnu.g60.utils.frontend.FrontendUtils;
+import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.Animations.DeathAnimation;
 import edu.ntnu.g60.views.Animations.EndGameAnimation;
 import edu.ntnu.g60.views.Animations.NextLevelAnimation;
 import edu.ntnu.g60.views.Animations.WinAnimation;
-import edu.ntnu.g60.views.GamePanes.FightPane;
+import edu.ntnu.g60.views.GamePanes.MiniGamePane;
 import edu.ntnu.g60.views.StartMenu.OpeningPane;
 import javafx.event.ActionEvent;
 
@@ -25,12 +26,12 @@ import javafx.event.ActionEvent;
  * The FightPaneController class is responsible for handling the actions and logic related to the fight pane in the game.
  * It provides methods for managing the fight actions, updating health values, and controlling the flow of the fight.
  */
-public class FightPaneController {
+public class MiniGameController {
     
+    public static Game game = GameManager.getInstance().getGame();
+    private static Passage passage;
     
-    private Passage passage;
-    
-    public FightPaneController(Passage passage){
+    public MiniGameController(Passage passage){
         this.passage = passage;
     }
  
@@ -38,7 +39,7 @@ public class FightPaneController {
     public static float playerHealth;
 
 
-    public static FightPane currentFightPane;
+    public static MiniGamePane currentFightPane;
 
     public static void setDefaultHealthValues(){
         enemyHealth = 1.00F;
@@ -46,11 +47,11 @@ public class FightPaneController {
     }
 
 
-    public static FightPane getCurrentFightPane(){
+    public static MiniGamePane getCurrentFightPane(){
         return currentFightPane;
     }
 
-    public static void setCurrentFightPane(FightPane pane){
+    public static void setCurrentFightPane(MiniGamePane pane){
         currentFightPane = pane;
     }
     
@@ -60,11 +61,21 @@ public class FightPaneController {
     }
 
 
-    public void menuAction(ActionEvent event){
+    public void goToMenuAndSaveAction(ActionEvent event){
+        saveGame(DialogBoxes.dialogBoxWithTextInput("Save Game", "Enter a name for your save file", "Name:"));
         try {
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
             GameApp.changeRootPane(new OpeningPane());
-        } catch (IOException e) {
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    //TODO: kanskje gjøre om savefilehaandler til boolean for å indikere sukse
+    private void saveGame(String saveName) {
+        Game game = GameManager.getInstance().getGame();
+        try {
+            SaveFileHandler.saveGameToFile(game, saveName, passage.getTitle());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -72,7 +83,7 @@ public class FightPaneController {
 
     public void fightAction(ActionEvent event){
         try {
-            FightPane.addFightObjects(getCurrentFightPane());
+            MiniGamePane.addFightObjects(getCurrentFightPane());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -81,7 +92,7 @@ public class FightPaneController {
 
     public void healAction(ActionEvent event){
         try {
-            FightPane.addHealObjects(getCurrentFightPane());
+            MiniGamePane.addHealObjects(getCurrentFightPane());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -90,7 +101,7 @@ public class FightPaneController {
 
     public void inventoryAction(ActionEvent event){
         try {
-            FightPane.addInventoryObjects(getCurrentFightPane());
+            MiniGamePane.addInventoryObjects(getCurrentFightPane());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -103,7 +114,7 @@ public class FightPaneController {
      */
     public void escapeAction(ActionEvent event){
         try {
-            FightPane.addEscapeObjects(getCurrentFightPane());
+            MiniGamePane.addEscapeObjects(getCurrentFightPane());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -200,7 +211,7 @@ public class FightPaneController {
      * @param event the action event
      */
     public void backAction(ActionEvent event){
-        FightPane.addDefaultObjects(getCurrentFightPane());
+        MiniGamePane.addDefaultObjects(getCurrentFightPane());
     }
 
     /**
@@ -226,7 +237,6 @@ public class FightPaneController {
             Passage currentPassage = GameManager.getInstance().getGame().go(link2);
 
             NextLevelAnimation.animation(currentPassage);
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), PassageManager.getInstance().getPassage().getTitle());
         }
     }
     
@@ -251,7 +261,6 @@ public class FightPaneController {
         } else { 
             Passage currentPassage = GameManager.getInstance().getGame().go(link1);
             NextLevelAnimation.animation(currentPassage);
-            SaveFileHandler.saveGameToFile(GameManager.getInstance().getGame(), GameManager.getInstance().getGame().getGameName(), passage.getTitle());
         }
     }
 
@@ -265,12 +274,12 @@ public class FightPaneController {
         FrontendUtils.delay(2000, () -> {
             playerHealth = playerHealth - damageAmount;
             enemyHealth = enemyHealth + healAmount;
-            FightPane.updateHealthEnemy(enemyHealth);
-            FightPane.updateHealthPlayer(playerHealth);
+            MiniGamePane.updateHealthEnemy(enemyHealth);
+            MiniGamePane.updateHealthPlayer(playerHealth);
             if(enemyHealth < 0.00){
-                FightPane.updateHealthEnemy(0.00F);
+                MiniGamePane.updateHealthEnemy(0.00F);
                 FrontendUtils.delay(1000, () -> {
-                    FightPane.addWinText(getCurrentFightPane());
+                    MiniGamePane.addWinText(getCurrentFightPane());
                     FrontendUtils.delay(3000, () -> {
                         try {
                             winFight();
@@ -281,9 +290,9 @@ public class FightPaneController {
                 }); 
                 
             } else if(playerHealth < 0.00){
-                FightPane.updateHealthPlayer(0.00F);
+                MiniGamePane.updateHealthPlayer(0.00F);
                 FrontendUtils.delay(1000, () -> {
-                    FightPane.addLooseText(getCurrentFightPane());
+                    MiniGamePane.addLooseText(getCurrentFightPane());
                     FrontendUtils.delay(3000, () -> {
                         try {
                             looseFight();
@@ -305,12 +314,12 @@ public class FightPaneController {
     public static void playerAction(float damageAmount, float healAmount){
         enemyHealth = enemyHealth - damageAmount;
         playerHealth = playerHealth + healAmount;
-        FightPane.updateHealthEnemy(enemyHealth);
-        FightPane.updateHealthPlayer(playerHealth);
+        MiniGamePane.updateHealthEnemy(enemyHealth);
+        MiniGamePane.updateHealthPlayer(playerHealth);
         if(enemyHealth < 0.00){
-            FightPane.updateHealthEnemy(0.00F);
+            MiniGamePane.updateHealthEnemy(0.00F);
         } else if(playerHealth < 0.00){
-            FightPane.updateHealthPlayer(0.00F);
+            MiniGamePane.updateHealthPlayer(0.00F);
         }  
     }
 
