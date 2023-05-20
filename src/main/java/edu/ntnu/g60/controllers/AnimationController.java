@@ -15,32 +15,11 @@ import edu.ntnu.g60.views.TitlePanes.TxtPane;
  * animations and transitions between panes.
  */
 public class AnimationController {
-    
-    /**
-    * Loads and displays the first frame of the next level sequence.
-    * @throws MalformedURLException if the specified URL is malformed.
-    */
-    public void firstFrame() throws MalformedURLException{
-        try {
-            GameApp.changeRootPane(new TxtPane("Advancing"));
-        } catch (FileNotFoundException e1) {
-            
-            e1.printStackTrace();
-        }
-    }
-
-    /**
-    * Loads and displays the first frame of the death sequence.
-    * @throws FileNotFoundException if the specified file is not found.
-    */
-    public void deathFirstFrame() throws FileNotFoundException{
-        GameApp.changeRootPane(new TxtPane("Game Over"));
-    }
 
     /**
     * Loads and displays the second frame of the next level sequence.
     */
-    public void secondFrame(String passageTitle){
+    public void showPassageTitle(String passageTitle){
         try {
             GameApp.changeRootPane(new TxtPane(passageTitle)); //todo; dont use singleton
         } catch (FileNotFoundException e1) {
@@ -51,7 +30,7 @@ public class AnimationController {
     /**
     * Loads and displays the third frame of the next level sequence.
     */
-    public void thirdFrame(Passage passage){
+    public void beginPassage(Passage passage){
         try {
             ConversationPaneController.setConversationPaneNumber(0);
             ConversationPane pane = new ConversationPane(passage);
@@ -64,16 +43,8 @@ public class AnimationController {
         }
     }
 
-    public void winFirstFrame() throws FileNotFoundException{
-        GameApp.changeRootPane(new TxtPane("You won!"));
-    }
-
-    public void endGameFirstFrame() throws FileNotFoundException{
-        GameApp.changeRootPane(new TxtPane("Goals not reached"));
-    }
-
-    public void endGameSecondFrame() throws FileNotFoundException{
-        GameApp.changeRootPane(new TxtPane("GAME OVER!"));
+    public void showPaneWithText(String text) throws FileNotFoundException{
+        GameApp.changeRootPane(new TxtPane(text));
     }
 
     public void goToOpening(){

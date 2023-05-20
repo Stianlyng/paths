@@ -1,5 +1,6 @@
 package edu.ntnu.g60.views.Animations;
 
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import edu.ntnu.g60.controllers.AnimationController;
 import edu.ntnu.g60.models.passage.Passage;
@@ -16,12 +17,12 @@ public class NextLevelAnimation extends StackPane{
     }
 
     //rename methods
-    public static void animation(Passage passage) throws MalformedURLException{
-        controller.firstFrame();
+    public static void animation(Passage passage) throws MalformedURLException, FileNotFoundException{
+        controller.showPaneWithText("Advancing");
         FrontendUtils.delay(1000, () -> {
-            controller.secondFrame(passage.getTitle());
+            controller.showPassageTitle(passage.getTitle());
             FrontendUtils.delay(1500, () -> {
-                controller.thirdFrame(passage);
+                controller.beginPassage(passage);
             });
         });
     }

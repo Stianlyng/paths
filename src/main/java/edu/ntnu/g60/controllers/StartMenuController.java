@@ -1,6 +1,7 @@
 package edu.ntnu.g60.controllers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -50,7 +51,6 @@ public class StartMenuController {
                 saveButton.setText(playerSaves.get(i - 1));
                 
                 saveButton.setOnAction(e -> {
-                     GameManager.getInstance().endGame();
                      SerializedGameState save = SaveFileHandler.loadGameFromFile(playerSaves.get(index));
                      GameManager.getInstance().setPlayer(save.getGame().getPlayer());
                      GameManager.getInstance().setStory(save.getGame().getStory());
@@ -60,7 +60,7 @@ public class StartMenuController {
                      Passage passage = GameManager.getInstance().getGame().go(save.getCurrentLink()); 
                      try {
                          NextLevelAnimation.animation(passage);
-                     } catch (MalformedURLException e1) {
+                     } catch (MalformedURLException | FileNotFoundException e1) {
                          e1.printStackTrace();
                      }
                 });
@@ -133,7 +133,7 @@ public class StartMenuController {
         try {
             Passage openingPassage = createNewGame(NewGamePane.getStoryChoice());
             NextLevelAnimation.animation(openingPassage);
-        } catch (MalformedURLException | BrokenLinkException e) {
+        } catch (MalformedURLException | BrokenLinkException | FileNotFoundException e) {
             e.printStackTrace();
         }
     }

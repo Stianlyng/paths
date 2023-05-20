@@ -14,7 +14,7 @@ public class DeathAnimation {
     }
 
     public static void animation() throws FileNotFoundException{
-        controller.deathFirstFrame();
+        controller.showPaneWithText("GAME OVER");
         FrontendUtils.delay(1500, () -> {
             controller.goToOpening();
         });

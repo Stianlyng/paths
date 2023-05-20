@@ -16,10 +16,10 @@ public class EndGameAnimation extends StackPane{
     }
 
     public static void animation() throws MalformedURLException, FileNotFoundException{
-        controller.endGameFirstFrame();
+        controller.showPaneWithText("Goals not reached");
         FrontendUtils.delay(1500, () -> {
             try {
-                controller.endGameSecondFrame();
+                controller.showPaneWithText("Game over");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

@@ -14,7 +14,7 @@ public class WinAnimation {
     }
 
     public static void animation() throws FileNotFoundException{
-        controller.winFirstFrame();
+        controller.showPaneWithText("You Won!");
         FrontendUtils.delay(2000, () -> {
             controller.goToOpening();
         });

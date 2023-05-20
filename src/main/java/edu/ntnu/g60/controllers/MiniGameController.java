@@ -59,6 +59,7 @@ public class MiniGameController {
 
 
     public void goToMenuAndSaveAction(ActionEvent event){
+        GameManager.getInstance().endGame();
         saveGame(DialogBoxes.dialogBoxWithTextInput("Save Game", "Enter a name for your save file", "Name:"));
         try {
             GameApp.changeRootPane(new OpeningPane());
