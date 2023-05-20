@@ -89,7 +89,7 @@ public class ConversationPaneController {
                 } else if (passage.hasFightScene()){
                     MiniGamePane pane = new MiniGamePane(passage);
                     MiniGameController.setDefaultHealthValues();
-                    MiniGameController.setCurrentFightPane(pane);
+                    MiniGameController.setCurrentMiniGamePane(pane);
                     GameApp.changeRootPane(pane);
                 } else {
                     clickable = false;

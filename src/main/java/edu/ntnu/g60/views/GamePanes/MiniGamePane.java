@@ -61,7 +61,7 @@ public class MiniGamePane extends StackPane{
         Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 342-193, 155-71);
         Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 422-193, 155-71);
         Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 163, 38);
-        MenuButton dropDown = ViewObjects.newMenuButton(controller::goToMenuAndSaveAction, controller::exitAction, "menu_button", "menu_hover", 283, 129-71, "Save and go to main menu", "Exit application");
+        MenuButton dropDown = ViewObjects.newMenuButton(controller::goToMenuAndSaveAction, controller::exitApplicationAction, "menu_button", "menu_hover", 283, 129-71, "Save and go to main menu", "Exit application");
         playerBar =  ViewObjects.newHealthBar(309-193, 504-71, 1.00F, "progress_bar"); 
         enemyBar = ViewObjects.newHealthBar(704-193, 504-71, 1.00F, "progress_bar");
         return new Group(backgroundImage, infoBoard, enemyImage, playerImage, fightButton, healButton,

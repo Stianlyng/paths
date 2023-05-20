@@ -32,32 +32,49 @@ public class MiniGameController {
     private static Passage passage;
     public static float enemyHealth;
     public static float playerHealth;
-    public static MiniGamePane currentFightPane;
+    public static MiniGamePane currentMiniGamePane;
     
+
+    /**
+     * Creates a MiniGameController object
+     * 
+     * @param passage current passage of the ongoing minigame
+     */
     public MiniGameController(Passage passage){
         this.passage = passage;
     }
 
+    /**
+     * Sets the default health values of both player and enemies to be 1
+     */
     public static void setDefaultHealthValues(){
         enemyHealth = 1.00F;
         playerHealth = 1.00F;
     }
 
-
-    public static MiniGamePane getCurrentFightPane(){
-        return currentFightPane;
-    }
-
-    public static void setCurrentFightPane(MiniGamePane pane){
-        currentFightPane = pane;
+    /**
+     * Sets the current fightPane showing
+     * 
+     * @param current fightPane showing
+     */
+    public static void setCurrentMiniGamePane(MiniGamePane pane){
+        currentMiniGamePane = pane;
     }
     
-
-    public void exitAction(ActionEvent event){
+    /**
+     * Handles the action when the exit application button is clicked.
+     *
+     * @param event the ActionEvent representing the button click event
+     */
+    public void exitApplicationAction(ActionEvent event){
         GameApp.closeApplication();
     }
 
-
+    /**
+     * Handles the action when the go to menu and save button is clicked.
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void goToMenuAndSaveAction(ActionEvent event){
         GameManager.getInstance().endGame();
         saveGame(DialogBoxes.dialogBoxWithTextInput("Save Game", "Enter a name for your save file", "Name:"));
@@ -68,7 +85,11 @@ public class MiniGameController {
         }
     }
 
-    //TODO: kanskje gjøre om savefilehaandler til boolean for å indikere sukse
+    /**
+     * Saves the game with the specified save name.
+     *
+     * @param saveName the name of the save file
+     */
     private void saveGame(String saveName) {
         Game game = GameManager.getInstance().getGame();
         try {
@@ -78,28 +99,40 @@ public class MiniGameController {
         }
     }
 
-
+    /**
+     * Performs the fight action.
+     *
+     * @param event the action event
+     */
     public void fightAction(ActionEvent event){
         try {
-            MiniGamePane.addFightObjects(getCurrentFightPane());
+            MiniGamePane.addFightObjects(currentMiniGamePane);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-
+    /**
+     * Performs the heal action.
+     *
+     * @param event the action event
+     */
     public void healAction(ActionEvent event){
         try {
-            MiniGamePane.addHealObjects(getCurrentFightPane());
+            MiniGamePane.addHealObjects(currentMiniGamePane);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-
+    /**
+     * Performs the inventory action.
+     *
+     * @param event the action event
+     */
     public void inventoryAction(ActionEvent event){
         try {
-            MiniGamePane.addInventoryObjects(getCurrentFightPane());
+            MiniGamePane.addInventoryObjects(currentMiniGamePane);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -112,7 +145,7 @@ public class MiniGameController {
      */
     public void escapeAction(ActionEvent event){
         try {
-            MiniGamePane.addEscapeObjects(getCurrentFightPane());
+            MiniGamePane.addEscapeObjects(currentMiniGamePane);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -213,7 +246,7 @@ public class MiniGameController {
      * @param event the action event
      */
     public void backAction(ActionEvent event){
-        MiniGamePane.addDefaultObjects(getCurrentFightPane());
+        MiniGamePane.addDefaultObjects(currentMiniGamePane);
     }
 
     /**
@@ -236,6 +269,13 @@ public class MiniGameController {
         fightOutcome(passage.getLinks().get(0));
     }
 
+    /**
+     * Handels the outcome of a fight.
+     * 
+     * @param link The link to decide the outcome of the fight
+     * @throws MalformedURLException if a malformed URL is encountered
+     * @throws FileNotFoundException if the file is not found
+     */
     public static void fightOutcome(Link link) throws FileNotFoundException, MalformedURLException{
         for (Action action : link.getActions()) {
             action.execute(GameManager.getInstance().getGame().getPlayer());
@@ -253,6 +293,12 @@ public class MiniGameController {
         }
     } 
 
+    /**
+     * Handles a player action in the minigame.
+     * 
+     * @param damageAmount The amount of damage a player should deal
+     * @param healAmount The amound of healing a player should recieve
+     */
     public static void playerAction(float damageAmount, float healAmount){
         applyDamageAndHealingPlayer(damageAmount, healAmount);
         MiniGamePane.updateHealthEnemy(enemyHealth);
@@ -264,6 +310,12 @@ public class MiniGameController {
         }  
     }
 
+    /**
+     * Handles a enemy action in the minigame.
+     * 
+     * @param damageAmount The amount of damage a enemy should deal
+     * @param healAmount The amound of healing a enemy should recieve
+     */
     public static void enemyAction(float damageAmount, float healAmount) {
         FrontendUtils.delay(1500, () -> {
             applyDamageAndHealingEnemy(damageAmount, healAmount);
@@ -273,29 +325,44 @@ public class MiniGameController {
             if (enemyHealth < 0.00) {
                 MiniGamePane.updateHealthEnemy(0.00F);
                 FrontendUtils.delay(1000, () -> {
-                    MiniGamePane.addWinText(getCurrentFightPane());
+                    MiniGamePane.addWinText(currentMiniGamePane);
                     handleWinFight();
                 });
             } else if (playerHealth < 0.00) {
                 MiniGamePane.updateHealthPlayer(0.00F);
                 FrontendUtils.delay(1000, () -> {
-                    MiniGamePane.addLooseText(getCurrentFightPane());
+                    MiniGamePane.addLooseText(currentMiniGamePane);
                     handleLooseFight();
                 });
             }
         });
     }
 
+    /**
+     * Applies the amount of damage and healing specified in a enemyAction
+     * 
+     * @param damageAmount The amount of damage a enemy should deal
+     * @param healAmount The amound of healing a enemy should recieve
+     */
     private static void applyDamageAndHealingEnemy(float damageAmount, float healAmount) {
         playerHealth -= damageAmount;
         enemyHealth += healAmount;
     }
 
+    /**
+     * Applies the amount of damage and healing specified in a playerAction
+     * 
+     * @param damageAmount The amount of damage a enemy should deal
+     * @param healAmount The amound of healing a enemy should recieve
+     */
     private static void applyDamageAndHealingPlayer(float damageAmount, float healAmount) {
         enemyHealth -= damageAmount;
         playerHealth += healAmount;
     }
 
+    /**
+     * Handles what happens if a fight is won.
+     */
     private static void handleWinFight() {
         FrontendUtils.delay(1500, () -> {
             try {
@@ -306,6 +373,9 @@ public class MiniGameController {
         });
     }
     
+    /**
+     * Handles what happens if a fight is lost
+     */
     private static void handleLooseFight() {
         FrontendUtils.delay(1500, () -> {
             try {
@@ -317,7 +387,12 @@ public class MiniGameController {
     }
 
 
-
+    /**
+     * Retrieves the player's three first inventory items in their inventory list.
+     * This is to make them fit in the three buttons in the minigame
+     *
+     * @return an array of three inventory items.
+     */
     public static String[] getPlayerInventoryItems(){
         List<String> inventoryItems = GameManager.getInstance().getGame().getPlayer().getInventory();
         String[] result = new String[3];
