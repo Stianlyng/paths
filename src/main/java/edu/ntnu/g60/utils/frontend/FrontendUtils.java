@@ -32,11 +32,11 @@ public class FrontendUtils {
 
 
     //TODO: legger til null istedenfor ""
-    public static String[] splitTextIntoFourLines(String[] passages, int conversationPaneNumber) {
-        String[] contents = new String[passages.length];
-        for (int i = 0; i < passages.length; i++) {
-            int braceIndex = passages[i].indexOf('{');
-            contents[i] = (braceIndex >= 0) ? passages[i].substring(braceIndex + 3) : "";
+    public static String[] splitTextIntoFourLines(String[] conversationParts, int conversationPaneNumber) {
+        String[] contents = new String[conversationParts.length];
+        for (int i = 0; i < conversationParts.length; i++) {
+            int braceIndex = conversationParts[i].indexOf('{');
+            contents[i] = (braceIndex >= 0) ? conversationParts[i].substring(braceIndex + 3) : "";
         }
     
         String line = contents[conversationPaneNumber];
