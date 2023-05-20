@@ -1,0 +1,222 @@
+{
+  "title": "Mr. Robot",
+
+  "passages": [
+    {
+      "title": "Begin",
+      "content": "{N}Elliot Alderson, a cybersecurity engineer and hacker, is recruited by a mysterious anarchist known as Mr. Robot.",
+      "background": "elliot-at-pc.jpg",
+      "links": [
+        {
+          "text": "Join Mr. Robot",
+          "reference": "Joining Fsociety",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": 10
+            },
+            {
+              "type": "GOLD",
+              "value": -10
+            }
+          ]
+        },
+        {
+          "text": "Refuse the offer",
+          "reference": "Refusal",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": -10
+            },
+            {
+              "type": "GOLD",
+              "value": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Joining Fsociety",
+      "content": "{N}Elliot joins Mr. Robot's 'fsociety' and they begin planning to destroy the data of the largest conglomerate in the world, E Corp.",
+      "background": "fsociety.png",
+      "links": [
+        {
+          "text": "Start planning the attack",
+          "reference": "Planning",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": 10
+            },
+            {
+              "type": "GOLD",
+              "value": -10
+            }
+          ]
+        },
+        {
+          "text": "Quit fsociety",
+          "reference": "Refusal",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": -20
+            },
+            {
+              "type": "GOLD",
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Refusal",
+      "content": "{N}Elliot decides not to get involved with fsociety. His life continues, but he can't shake off the feeling that he's being watched.",
+      "background": "elliot-at-pc.jpg",
+      "links": [
+        {
+          "text": "Reconsider Mr. Robot's offer",
+          "reference": "Joining Fsociety",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": 10
+            },
+            {
+              "type": "GOLD",
+              "value": -10
+            }
+          ]
+        },
+        {
+          "text": "Keep living normally",
+          "reference": "End Game",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": -10
+            },
+            {
+              "type": "GOLD",
+              "value": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Planning",
+      "content": "{N}Elliot and the fsociety start to plan the attack on E Corp. There's a lot of work to do, and many possible approaches.",
+      "background": "elliot-at-pc.jpg",
+      "links": [
+        {
+          "text": "Plan a direct attack on their servers",
+          "reference": "Direct Attack",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": 10
+            },
+            {
+              "type": "GOLD",
+              "value": -10
+            }
+          ]
+        },
+        {
+          "text": "Use social engineering to infiltrate E Corp",
+          "reference": "Social Engineering",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": -10
+            },
+            {
+              "type": "GOLD",
+              "value": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Direct Attack",
+      "content": "{N}You decide to directly attack E Corp's servers. The risk is high, but so is the potential reward.",
+      "background": "elliot-at-pc.jpg",
+      "links": [
+        {
+          "text": "Continue with the attack",
+          "reference": "End Game",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": 20
+            },
+            {
+              "type": "GOLD",
+              "value": -20
+            }
+          ]
+        },
+        {
+          "text": "Abandon the plan",
+          "reference": "Refusal",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": -20
+            },
+            {
+              "type": "GOLD",
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Social Engineering",
+      "content": "{N}You decide to use social engineering to infiltrate E Corp. It's a slower method, but potentially less risky.",
+      "background": "elliot-at-pc.jpg",
+      "links": [
+        {
+          "text": "Continue with the plan",
+          "reference": "End Game",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": 10
+            },
+            {
+              "type": "GOLD",
+              "value": -10
+            }
+          ]
+        },
+        {
+          "text": "Abandon the plan",
+          "reference": "Refusal",
+          "actions": [
+            {
+              "type": "HEALTH",
+              "value": -20
+            },
+            {
+              "type": "GOLD",
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "End Game",
+      "content": "{N}You've made your choices and your journey has come to an end. Was it worth it?",
+      "background": "elliot-at-pc.jpg",
+      "links": []
+    }
+  ]
+}

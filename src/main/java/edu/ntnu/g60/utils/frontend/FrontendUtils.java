@@ -31,7 +31,7 @@ public class FrontendUtils {
     }
 
 
-    
+    //TODO: legger til null istedenfor ""
     public static String[] splitTextIntoFourLines(String[] passages, int conversationPaneNumber) {
         String[] contents = new String[passages.length];
         for (int i = 0; i < passages.length; i++) {
