@@ -17,9 +17,10 @@ public class DefaultValues {
     public static final Path STORY_PATH = RESOURCE_PATH.resolve("stories/");
     public static final Path SAVE_PATH = RESOURCE_PATH.resolve("saves/");
     // Images:
-    public static final String IMAGE_PATH = "images/";
-    public static final String ICON_PATH = IMAGE_PATH + "icons/";
+    public static final String IMAGE_PATH = "/images/";
+    public static final String ICON_PATH = IMAGE_PATH + "icons/";              // /images/icons/
     
+    public static final String SOUND_PATH = "/sounds/";
     /**
      * PASSAGE:
      */

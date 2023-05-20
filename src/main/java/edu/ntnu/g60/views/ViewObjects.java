@@ -1,9 +1,6 @@
 package edu.ntnu.g60.views;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,7 +19,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -36,6 +32,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class ViewObjects {
+    
 
     public static Button newButton(String text, int x, int y, String id, String hover, EventHandler<ActionEvent> action){
         Button button = new Button(text);
@@ -112,7 +109,8 @@ public class ViewObjects {
     public static ImageView newImage(String foldername, String imagename,
     int x, int y, int width, int height, EventHandler<MouseEvent> action) throws FileNotFoundException{
        ImageView imageview = new ImageView();
-       Image image = new Image(ViewObjects.class.getResourceAsStream("/images/" + foldername + "/" + imagename));
+       String imagePath = DefaultValues.IMAGE_PATH + foldername + "/" + imagename;
+       Image image = new Image(ViewObjects.class.getResourceAsStream(imagePath));
        imageview.setOnMouseClicked(action);
        imageview.setImage(image);
        imageview.setX(x);
@@ -126,7 +124,9 @@ public class ViewObjects {
     public static ImageView newImage(String foldername, String imagename,
     int x, int y, int width, int height) throws FileNotFoundException{
        ImageView imageview = new ImageView();
-       Image image = new Image(ViewObjects.class.getResourceAsStream("/images/" + foldername + "/" + imagename));
+       String imagePath = DefaultValues.IMAGE_PATH + foldername + "/" + imagename;
+       Image image = new Image(ViewObjects.class.getResourceAsStream(imagePath));
+
        imageview.setImage(image);
        imageview.setX(x);
        imageview.setY(y);
@@ -135,6 +135,7 @@ public class ViewObjects {
        imageview.setPreserveRatio(true);
        return imageview;
     }
+
 
     public static Button newBlankButton(String text, int x, int y, String id, String hover){
         Button button = new Button(text);
@@ -176,11 +177,11 @@ public class ViewObjects {
     }
 
     public static MediaPlayer newSound(String soundName) throws MalformedURLException{
-        File mediaFile = new File("src/main/resources/sounds/" + soundName + ".m4a");
-        Media media = new Media(mediaFile.toURI().toURL().toString());
-        MediaPlayer player = new MediaPlayer(media);
-        return player;
+        URL file = ViewObjects.class.getResource(DefaultValues.SOUND_PATH + soundName + ".m4a");
+        Media media = new Media(file.toString());
+        return new MediaPlayer(media);
     }
+
 
     public static ProgressBar newHealthBar(int x, int y, float amount, String id){
         ProgressBar health = new ProgressBar();
