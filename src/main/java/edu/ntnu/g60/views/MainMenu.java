@@ -28,8 +28,6 @@ public class MainMenu extends StackPane{
 
     private GridPane layout;  
 
-
-    
     public MainMenu(String playerName) {
 
         Background background = BackgroundComponent.createBackground("mainMenuScene.png");
@@ -38,8 +36,6 @@ public class MainMenu extends StackPane{
         Button loadGameButton = loadGame(playerName);
         Button importGameFileButton = importGameFile();
 
-
-       
         layout = new GridPane();  
         layout.setAlignment(Pos.CENTER);
         layout.setVgap(10);
@@ -66,6 +62,7 @@ public class MainMenu extends StackPane{
 
         GameManager.getInstance().setPlayer(player);
     }
+
     private Button newGame(String playerName){
         Button newGameButton = new Button("New Game");
         newGameButton.setPrefWidth(BUTTON_WIDTH);
@@ -73,7 +70,6 @@ public class MainMenu extends StackPane{
             switchToSelectStory(playerName);
         });
         return newGameButton;
-
     }
     
     private Button loadGame(String playerName){

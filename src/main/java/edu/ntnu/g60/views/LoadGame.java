@@ -37,6 +37,7 @@ public class LoadGame extends StackPane{
         this.getChildren().add(layout);
     }
 
+
     private Button playGame(ComboBox<String> storySelection){
         Button playButton = new Button("Continue Story");
         playButton.setPrefWidth(BUTTON_WIDTH);

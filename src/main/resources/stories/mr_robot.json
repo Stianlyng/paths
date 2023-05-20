@@ -1,5 +1,14 @@
 {
   "title": "Mr. Robot",
+  "goals": {
+  "score": 100,
+	"gold": 100,
+	"health": 100,
+	"inventory": [
+    		"sword",
+    		"knife"
+  	]
+  },
   "passages": [
     {
       "title": "Begin",

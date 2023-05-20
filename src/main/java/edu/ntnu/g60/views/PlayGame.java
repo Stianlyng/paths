@@ -23,6 +23,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.animation.FadeTransition;
+import javafx.util.Duration;
 
 public class PlayGame extends StackPane{
 
@@ -51,15 +53,35 @@ public class PlayGame extends StackPane{
     }
     
     private VBox passageContent(Passage passage) {
-
+    
         VBox passageContent = new VBox();
         passageContent.setAlignment(Pos.CENTER);
         passageContent.setPadding(new Insets(PADDING, PADDING, PADDING, PADDING));
         passageContent.setSpacing(SPACING);
         
-        passageContent.getChildren().add(new Label(passage.getTitle()));
-        passageContent.getChildren().add(new Label(passage.getContent()));
+        Label titleLabel = new Label(passage.getTitle());
+        Label contentLabel = new Label(passage.getContent());
+    
+        // Set the initial opacity of the labels
+        titleLabel.setOpacity(0.0);
+        contentLabel.setOpacity(0.0);
         
+        // Create FadeTransitions for each label
+        FadeTransition fadeTitle = new FadeTransition(Duration.seconds(2), titleLabel);
+        fadeTitle.setFromValue(0.0);
+        fadeTitle.setToValue(1.0);
+    
+        FadeTransition fadeContent = new FadeTransition(Duration.seconds(2), contentLabel);
+        fadeContent.setFromValue(0.0);
+        fadeContent.setToValue(1.0);
+    
+        // Add labels to the passage content
+        passageContent.getChildren().addAll(titleLabel, contentLabel);
+    
+        // Play the FadeTransitions
+        fadeTitle.play();
+        fadeContent.play();
+    
         return passageContent;
     }
     
@@ -130,7 +152,6 @@ public class PlayGame extends StackPane{
                     GameManager.getInstance().endGame();
                     MainMenu mainMenu = new MainMenu(playerName);  // Change this line
                     App.changeRootPane(mainMenu.getLayout());  // Add this line
-                
                     break;
             }
         });

@@ -63,7 +63,7 @@ public class SelectStory extends StackPane{
 
             StoryParser parser = new StoryParser(storySelection.getValue());
             try {
-                Story story = parser.build();
+                Story story = parser.getStory();
 
                 List<Goal> goals = List.of(
                     new HealthGoal(110),

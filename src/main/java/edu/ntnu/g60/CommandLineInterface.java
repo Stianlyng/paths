@@ -75,7 +75,7 @@ public class CommandLineInterface {
         System.out.println(choice);
         StoryParser parser = new StoryParser(names.get(choice - 1));
         try {
-            return parser.build();
+            return parser.getStory();
         } catch (BrokenLinkException e) {
             System.out.println(e.getMessage());
             return null;
