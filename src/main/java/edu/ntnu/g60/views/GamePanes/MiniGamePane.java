@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 
 import edu.ntnu.g60.controllers.MiniGameController;
 import edu.ntnu.g60.models.game.Game;
-import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.views.ViewObjects;
 import javafx.geometry.Insets;
@@ -18,7 +17,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-
+/**
+ * MiniGamePane represents a pane for a mini-game fight scene
+ */
 public class MiniGamePane extends StackPane{
     
     public static Game game = MiniGameController.game;
@@ -40,14 +41,28 @@ public class MiniGamePane extends StackPane{
         getChildren().addAll(addFightPaneObjects());
     }
 
+    /**
+     * Updates the playerBar to show the specified health
+     * @param playerHealth a players updated health
+     */
     public static void updateHealthPlayer(float playerHealth){
         playerBar.setProgress(playerHealth);
     }
 
+    /**
+     * Updates the enemyBar to show the specified health
+     * @param playerHealth a enemyes updated health
+     */
     public static void updateHealthEnemy(float enemyHealth){
         enemyBar.setProgress(enemyHealth);
     }
 
+    /**
+     * Adds the objects required for the fight pane.
+     *
+     * @return a Group containing the fight pane objects
+     * @throws FileNotFoundException if the file specified is not found
+     */
     public static Group addFightPaneObjects() throws FileNotFoundException{
         ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayer(), 150, 200, 150, 150);
         ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemy(), 700, 200, 150, 150);
@@ -68,16 +83,31 @@ public class MiniGamePane extends StackPane{
         inventoryButton, escapeButton, coinIcon, scoreIcon, scoreText, goldText, playerBar, enemyBar, dropDown);
     }
 
+    /**
+     * Adds the win text to the MiniGamePane.
+     *
+     * @param pane the MiniGamePane object
+     */
     public static void addWinText(MiniGamePane pane){
         Text winText = ViewObjects.newText("You won!", 50, false, 0, 0);
         pane.getChildren().addAll(winText);
     }
 
+    /**
+     * Adds the lose text to the MiniGamePane.
+     *
+     * @param pane the MiniGamePane object
+     */
     public static void addLooseText(MiniGamePane pane){
         Text looseText = ViewObjects.newText("You lost!", 50, false, 0, 0);
         pane.getChildren().addAll(looseText);
     }
 
+    /**
+     * Adds the default buttons to the MiniGamePane.
+     *
+     * @param pane the MiniGamePane object
+     */
     public static void addDefaultObjects(MiniGamePane pane){
         Button fightButton = ViewObjects.newButton("Fight", 309-193, 534-71, "fight_button", "fight_hover", controller::fightAction);
         Button healButton = ViewObjects.newButton("Heal", 704-193, 534-71, "heal_button", "heal_hover",  controller::healAction);
@@ -94,6 +124,12 @@ public class MiniGamePane extends StackPane{
         pane.getChildren().addAll(fightButton, healButton, inventoryButton, escapeButton);
     }
 
+    /**
+     * Adds the fight buttons to the MiniGamePane.
+     *
+     * @param pane the MiniGamePane object
+     * @throws FileNotFoundException if the file specified is not found
+     */
     public static void addFightObjects(MiniGamePane pane) throws FileNotFoundException{
         Button abilityOneButton = ViewObjects.newButton("Insult", 209-193, 484-71, "fight_button", "fight_hover", controller::abilityOneAction);
         Button abilityTwoButton = ViewObjects.newButton("Shame", 604-193, 484-71, "fight_button", "fight_hover", controller::abilityTwoAction);
@@ -110,6 +146,12 @@ public class MiniGamePane extends StackPane{
         pane.getChildren().addAll(abilityOneButton, abilityTwoButton, abilityThreeButton, backButton);
     }
 
+    /**
+     * Adds the heal buttons to the MiniGamePane.
+     *
+     * @param pane the MiniGamePane object
+     * @throws FileNotFoundException if the file specified is not found
+     */
     public static void addHealObjects(MiniGamePane pane) throws FileNotFoundException{
         Button healOneButton = ViewObjects.newButton("Lick wound", 209-193, 484-71, "heal_button", "heal_hover", controller::healOneAction);
         Button healTwoButton = ViewObjects.newButton("Ignore pain", 604-193, 484-71, "heal_button", "heal_hover", controller::healTwoAction);
@@ -126,6 +168,12 @@ public class MiniGamePane extends StackPane{
         pane.getChildren().addAll(healOneButton, healTwoButton, backButton, emptyButton);
     }
 
+    /**
+     * Adds the inventory buttons to the MiniGamePane.
+     *
+     * @param pane the MiniGamePane object
+     * @throws FileNotFoundException if the file specified is not found
+     */
     public static void addInventoryObjects(MiniGamePane pane) throws FileNotFoundException{
         String[] inventoryItems = MiniGameController.getPlayerInventoryItems();
         Button itemOneButton = ViewObjects.newButton(inventoryItems[0], 209-193, 484-71, "inventory_button", "inventory_hover", controller::inventoryOneAction);
@@ -143,6 +191,13 @@ public class MiniGamePane extends StackPane{
         pane.getChildren().addAll(itemOneButton, itemTwoButton, itemThreeButton, backButton);
     }
 
+    
+    /**
+     * Adds the escape buttons to the MiniGamePane.
+     *
+     * @param pane the MiniGamePane object
+     * @throws FileNotFoundException if the file specified is not found
+     */
     public static void addEscapeObjects(MiniGamePane pane) throws FileNotFoundException{
         Button continueButton = ViewObjects.newButton("ESCAPE!", 209-193, 484-71, "escape_button", "escape_hover", controller::escapeTwoAction);
         Button backButton = ViewObjects.newButton("Go back", 604-193, 484-71, "escape_button", "escape_hover", controller::backAction);
