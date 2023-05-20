@@ -12,6 +12,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
+/**
+ * SelectPlayerPane represents the pane in with a user can choose or create a player
+ */
 public class SelectPlayerPane extends StackPane{
     
     private static StartMenuController controller;
@@ -28,6 +31,12 @@ public class SelectPlayerPane extends StackPane{
         getChildren().addAll(SelectPlayerObjects());
     }
 
+    /**
+     * Adds the objects required for the select player pane.
+     *
+     * @return a Group containing the select player pane objects
+     * @throws IOException if the file specified is not found
+     */
     private static Group SelectPlayerObjects() throws FileNotFoundException{
         Text informationTitle = ViewObjects.newText("Select or create a player", 45, false, 285, 50);
         Button startButton = ViewObjects.newButton("Create", 614-193, 475-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::createPlayerAction);
@@ -38,10 +47,18 @@ public class SelectPlayerPane extends StackPane{
         return new Group(background, startButton, playerChoice, playerNameTextField, chooseButton, informationTitle);
     }
 
+    /**
+     * Updates the value of playerName to be equal to the input of playerNameTextField
+     */
     public static void updatePlayerName(){
         playerName = playerNameTextField.getText();
     }
 
+    /**
+     * Returns the choosen player in the playerChoice ChoiceBox.
+     * 
+     * @return the chosen player in the playerChoice ChoiceBox
+     */
     public static String getPlayerChoice(){
         return (String) playerChoice.getValue();
     }

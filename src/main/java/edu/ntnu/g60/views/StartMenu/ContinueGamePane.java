@@ -11,8 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-
-
+/**
+ * ContinueGamePane represents the pane in with a user can choose to continue a game
+ */
 public class ContinueGamePane extends StackPane{
 
     private static StartMenuController controller;
@@ -26,6 +27,12 @@ public class ContinueGamePane extends StackPane{
         getChildren().addAll(getContinueSceneObjects());
     }
 
+    /**
+     * Adds the objects required for the continue game pane.
+     *
+     * @return a Group containing the contiue game pane objects
+     * @throws IOException if the file specified is not found
+     */
     public static Group getContinueSceneObjects() throws IOException{
         Button save1Button = ViewObjects.newBlankButton("", 614-193, 278-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
         Button save2Button = ViewObjects.newBlankButton("", 614-193, 345-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
@@ -37,6 +44,11 @@ public class ContinueGamePane extends StackPane{
         return new Group(background, save1Button, save2Button, save3Button, backButton, deleteSaves);
     }
 
+    /**
+     * Adds buttons with empty text on top of buttons in pane. This is so the player cannot access a
+     * deleted game file.
+     * @param pane The current ContinueGamePane that is showed in the game.
+     */
     public static void addDeleteObjects(ContinueGamePane pane){
         Button save1Button = ViewObjects.newBlankButton("Empty", 614-193, 278-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);
         Button save2Button = ViewObjects.newBlankButton("Empty", 614-193, 345-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID);

@@ -10,6 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
+/**
+ * MainMenuPane represents the pane in with a user can choose wheter to start, continue or import a game
+ */
 public class MainMenuPane extends StackPane{
     
     private static StartMenuController controller;
@@ -24,6 +27,12 @@ public class MainMenuPane extends StackPane{
         getChildren().addAll(getStartMenuObjects());
     }
 
+    /**
+     * Adds the objects required for the start menu pane.
+     *
+     * @return a Group containing the stert menu pane objects
+     * @throws IOException if the file specified is not found
+     */
     private static Group getStartMenuObjects() throws FileNotFoundException{
         Button continueButton = ViewObjects.newButton("Continue", 614-193, 278-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::goTocontinueGamePaneAction, "Press here to continue from a previous save");
         Button newGameButton = ViewObjects.newButton("New game", 614-193, 345-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::goToNewGamePaneAction, "Press here to start a new game");
