@@ -189,7 +189,7 @@ public class StartMenuController {
     }
     
     /**
-     * Switches the current showing pant to the ContinueGamePane
+     * Switches the current showing pane to the ContinueGamePane
      *
      * @param event the ActionEvent representing the button click event
      */
@@ -204,7 +204,7 @@ public class StartMenuController {
     }
 
     /**
-     * Switches the current showing pant to the InformationFileStructurePane
+     * Switches the current showing pane to the InformationFileStructurePane
      *
      * @param event the ActionEvent representing the button click event
      */
@@ -217,7 +217,7 @@ public class StartMenuController {
     }
 
     /**
-     * Switches the current showing pant to the CustomGamePane
+     * Switches the current showing pane to the CustomGamePane
      *
      * @param event the ActionEvent representing the button click event
      */
@@ -230,7 +230,7 @@ public class StartMenuController {
     }
 
     /**
-     * Switches the current showing pant to the InformationPane
+     * Switches the current showing pane to the InformationPane
      *
      * @param event the ActionEvent representing the button click event
      */
@@ -242,6 +242,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Switches the current showing pane to the SettingsPane
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void goToSettingsPaneAction(MouseEvent event){
         try {
             GameApp.changeRootPane(new SettingsPane());
@@ -250,6 +255,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Switches the current showing pane to the NewGamePane
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void goToNewGamePaneAction(ActionEvent event){
         try {
             GameApp.changeRootPane(new NewGamePane());
@@ -258,6 +268,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Switches the current showing pane to the OpeningPane
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void goToOpeningPaneAction(ActionEvent evnet){
         try {
             GameApp.changeRootPane(new MainMenuPane());
@@ -266,6 +281,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Switches the current showing pane to the SelectPlayerPane
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void goToSelectPlayerPaneAction(ActionEvent evnet){
         try {
             GameApp.changeRootPane(new SelectPlayerPane());
@@ -274,6 +294,13 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Creates a new game based on the selected story.
+     *
+     * @param storySelection the selected story for the game
+     * @return the initial Passage of the created game
+     * @throws BrokenLinkException if there is a broken link in the story
+     */
     private static Passage createNewGame(String storySelection) throws BrokenLinkException{
         StoryParser parser = new StoryParser(storySelection);
         try {
@@ -292,6 +319,12 @@ public class StartMenuController {
         return passage;
     }
 
+
+    /**
+     * Initializes the player with the specified player name.
+     *
+     * @param playerName the name of the player
+     */
     private void initializePlayer(String playerName) {
         List<String> inventory = List.of("Sword");
 
@@ -306,11 +339,21 @@ public class StartMenuController {
         GameManager.getInstance().setPlayer(player);
     }
 
+    /**
+     * Retrieves the existing stories.
+     *
+     * @return an array of available story names
+     */
     public String[] getStories(){
         List<String> availableStories = SaveFileHandler.listFilesInFolder();
         return availableStories.toArray(new String[availableStories.size()]);
     }
 
+    /**
+     * Retrieves the existing player names.
+     *
+     * @return an array of available player names
+     */
     public String[] getPlayerNames(){
         List<String> availablePlayers = new ArrayList<>(SaveFileHandler.getAvailablePlayers());
         return availablePlayers.toArray(new String[availablePlayers.size()]);
