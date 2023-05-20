@@ -12,8 +12,8 @@ public class PassageBuilder {
      */
     private String title = "Untitled Passage";
     private String content = "No content";
-    private String player = "beer.png"; // todo; add default img
-    private String enemy = "beer.png"; // todo; add default img
+    private String player = "playerDefault.png"; // todo; add default img
+    private String enemy = "enemyDefault.png"; // todo; add default img
     private String background = "background1.png"; // todo; add default img
     private boolean fightScene = false;
 

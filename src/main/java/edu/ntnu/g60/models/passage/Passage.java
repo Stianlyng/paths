@@ -61,8 +61,8 @@ public class Passage implements Serializable {
       throw new IllegalArgumentException("Content cannot be null or blank.");
     this.title = title;
     this.content = content;
-    this.player = "beer.png";
-    this.enemy = "beer.png";
+    this.player = "playerDefault.png";
+    this.enemy = "enemyDefault.png";
     this.background = "background1.png";
     this.fightScene = false;
     this.links = new ArrayList<>();
