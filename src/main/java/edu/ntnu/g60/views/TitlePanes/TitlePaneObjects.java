@@ -7,6 +7,10 @@ import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+/**
+ * The class provides utility methods for creating and manipulating
+ * objects used in title panes.
+ */
 public class TitlePaneObjects {
 
     private static final int TEXT_SIZE = 40;
@@ -18,6 +22,13 @@ public class TitlePaneObjects {
     private static final int BACKGROUND_WIDTH = 1643;
     private static final int BACKGORUND_HEIGHT = 1006;
 
+    /**
+     * Creates and returns a Group containing objects used in a title pane.
+     *
+     * @param text the text to be displayed in the title pane
+     * @return a group containing the title pane objects
+     * @throws FileNotFoundException if the background image file is not found
+     */
     public static Group getObjects(String text) throws FileNotFoundException{
         Text lvlText = ViewObjects.newText(text, TEXT_SIZE, TEXT_UNDERLINE, X_POSITION, Y_POSTION);
         ImageView background = ViewObjects.newImage(BACKGROUND_FOLDERNAME, BACKGROUND_FILENAME, 0 ,0 ,BACKGROUND_WIDTH ,BACKGORUND_HEIGHT);
