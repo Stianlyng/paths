@@ -16,7 +16,10 @@ public class InformationFileStructurePane extends StackPane{
     
     private static StartMenuController controller;
 
-
+    /**
+     * Constructs a new InformationFileStructurePane object.
+     * @throws FileNotFoundException if the file specified is not found.
+    */
     public InformationFileStructurePane() throws FileNotFoundException, IOException {
         InformationFileStructurePane.controller = new StartMenuController();
         getChildren().addAll(getInformationObjects());

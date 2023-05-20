@@ -13,6 +13,10 @@ import javafx.scene.layout.StackPane;
 public class CustomGamePane extends StackPane{
     private static StartMenuController controller;
 
+    /**
+     * Constructs a new CustomGamePane object.
+     * @throws FileNotFoundException if the file specified is not found.
+    */
     public CustomGamePane() throws IOException, ClassNotFoundException {
         CustomGamePane.controller = new StartMenuController();
         getChildren().addAll(getCustomGameObjects());

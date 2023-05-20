@@ -16,6 +16,10 @@ public class NewGamePane extends StackPane{
     private static StartMenuController controller;
     public static ChoiceBox storyChoice;
     
+    /**
+     * Constructs a new NewGamePane object.
+     * @throws FileNotFoundException if the file specified is not found.
+    */
     public NewGamePane() throws FileNotFoundException{
         NewGamePane.controller = new StartMenuController();
         getChildren().addAll(getNewGameObjects());

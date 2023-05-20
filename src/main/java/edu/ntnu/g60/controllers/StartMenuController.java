@@ -94,7 +94,7 @@ public class StartMenuController {
         playerName = SelectPlayerPane.getPlayerChoice();
         if(playerName != null && playerName != ""){
             try {
-                GameApp.changeRootPane(new OpeningPane());
+                GameApp.changeRootPane(new MainMenuPane());
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -121,7 +121,7 @@ public class StartMenuController {
         if(SelectPlayerPane.playerName != null && !SelectPlayerPane.playerName.equals("")){
             playerName = SelectPlayerPane.playerName;
             try {
-                GameApp.changeRootPane(new OpeningPane());
+                GameApp.changeRootPane(new MainMenuPane());
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
@@ -190,7 +190,7 @@ public class StartMenuController {
 
     public void goToOpeningPaneAction(ActionEvent evnet){
         try {
-            GameApp.changeRootPane(new OpeningPane());
+            GameApp.changeRootPane(new MainMenuPane());
         } catch (IOException e1) {
             e1.printStackTrace();
         }

@@ -16,6 +16,10 @@ import javafx.scene.text.Text;
 public class SettingsPane extends StackPane{
     private static StartMenuController controller;
     
+    /**
+     * Constructs a new SettingsPane object.
+     * @throws FileNotFoundException if the file specified is not found.
+    */
     public SettingsPane() throws FileNotFoundException, IOException {
         SettingsPane.controller = new StartMenuController();
         getChildren().addAll(getSettingObjects());

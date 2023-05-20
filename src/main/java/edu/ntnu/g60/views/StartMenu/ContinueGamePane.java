@@ -17,6 +17,10 @@ public class ContinueGamePane extends StackPane{
 
     private static StartMenuController controller;
 
+    /**
+     * Constructs a new ContinueGamePane object.
+     * @throws FileNotFoundException if the file specified is not found.
+    */
     public ContinueGamePane() throws IOException, ClassNotFoundException {
         ContinueGamePane.controller = new StartMenuController();
         getChildren().addAll(getContinueSceneObjects());

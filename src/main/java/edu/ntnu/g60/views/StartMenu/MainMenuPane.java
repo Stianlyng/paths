@@ -10,13 +10,17 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
-public class OpeningPane extends StackPane{
+public class MainMenuPane extends StackPane{
     
     private static StartMenuController controller;
     public static String saveName;
 
-    public OpeningPane() throws FileNotFoundException, IOException {
-        OpeningPane.controller = new StartMenuController();
+    /**
+     * Constructs a new MainMenuPane object.
+     * @throws FileNotFoundException if the file specified is not found.
+    */
+    public MainMenuPane() throws FileNotFoundException, IOException {
+        MainMenuPane.controller = new StartMenuController();
         getChildren().addAll(getStartMenuObjects());
     }
 

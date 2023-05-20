@@ -26,7 +26,11 @@ public class ConversationPane extends StackPane{
     public static Game game = ConversationPaneController.game;
     private static Passage passage;
 
-    //change from static in passage and rename
+    //TODO: change from static in passage and rename
+    /**
+     * Constructs a new ConversationPane object.
+     * @throws FileNotFoundException if the file specified is not found.
+    */
     public ConversationPane(Passage npassage) throws FileNotFoundException, MalformedURLException{
         passage = npassage;
         ConversationPane.controller = new ConversationPaneController(npassage);

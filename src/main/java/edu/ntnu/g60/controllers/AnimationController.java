@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.GamePanes.ConversationPane;
-import edu.ntnu.g60.views.StartMenu.OpeningPane;
+import edu.ntnu.g60.views.StartMenu.MainMenuPane;
 import edu.ntnu.g60.views.TitlePanes.TxtPane;
 
 /**
@@ -35,7 +35,7 @@ public class AnimationController {
 
     public void goToOpening(){
         try {
-            GameApp.changeRootPane(new OpeningPane());
+            GameApp.changeRootPane(new MainMenuPane());
         } catch (IOException e1) {
             e1.printStackTrace();
         }

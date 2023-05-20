@@ -19,6 +19,10 @@ public class SelectPlayerPane extends StackPane{
     public static String playerName;
     static TextField playerNameTextField;
     
+    /**
+     * Constructs a new SelectPlayerPane object.
+     * @throws FileNotFoundException if the file specified is not found.
+    */
     public SelectPlayerPane() throws FileNotFoundException{
         SelectPlayerPane.controller = new StartMenuController();
         getChildren().addAll(SelectPlayerObjects());

@@ -29,7 +29,11 @@ public class MiniGamePane extends StackPane{
     
     public static MiniGameController controller;
 
-    //change name of passage and fix to private non static
+    //TODO: change name of passage and fix to private non static
+    /**
+     * Constructs a new MiniGamePane object.
+     * @throws FileNotFoundException if the file specified is not found.
+    */
     public MiniGamePane(Passage npassage) throws FileNotFoundException{
         passage = npassage;
         MiniGamePane.controller = new MiniGameController(passage);
