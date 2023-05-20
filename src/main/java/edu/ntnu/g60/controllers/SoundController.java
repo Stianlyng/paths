@@ -10,6 +10,7 @@ import javafx.scene.media.MediaPlayer;
 /**
  * The SoundController class manages the playback of sound effects and background music in the application.
  * It provides methods to play, stop, and adjust the volume of the sound and music.
+ * @author olav sie
 */
 public class SoundController {
     

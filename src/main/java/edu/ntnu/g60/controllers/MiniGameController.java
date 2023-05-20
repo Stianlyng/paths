@@ -25,6 +25,7 @@ import javafx.event.ActionEvent;
 /**
  * The FightPaneController class is responsible for handling the actions and logic related to the fight pane in the game.
  * It provides methods for managing the fight actions, updating health values, and controlling the flow of the fight.
+ * @author olav sie
  */
 public class MiniGameController {
     

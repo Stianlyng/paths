@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 /**
  * The NextLevelAnimation class extends StackPane and provides a static method for playing
  * the animation when advancing to the next "level" or passage.
+ * @author olav sie
  */
 public class NextLevelAnimation extends StackPane{
 

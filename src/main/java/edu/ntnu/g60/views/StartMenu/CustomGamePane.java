@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 
 /**
  * CustomGamePane represents the pane in with a user can choose to import a custom game
+ * @author olav sie
  */
 public class CustomGamePane extends StackPane{
     private static StartMenuController controller;

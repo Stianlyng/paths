@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 
 /**
  * ContinueGamePane represents the pane in with a user can choose to continue a game
+ * @author olav sie
  */
 public class ContinueGamePane extends StackPane{
 

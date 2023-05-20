@@ -8,6 +8,7 @@ import edu.ntnu.g60.utils.frontend.FrontendUtils;
 /**
  * The DeathAnimation class provides a static method for playing the death animation
  * when the game is over.
+ * @author olav sie
 */
 public class DeathAnimation {
 

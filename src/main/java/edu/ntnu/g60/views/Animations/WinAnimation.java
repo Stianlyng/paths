@@ -8,6 +8,7 @@ import edu.ntnu.g60.utils.frontend.FrontendUtils;
 /**
  * The WinAnimation class provides a static method for playing the win animation
  * when the game is won.
+ * @author olav sie
  */
 public class WinAnimation {
 

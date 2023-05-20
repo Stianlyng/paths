@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
  * to initialize and start the game.
  * The game application displays a window with a start menu and handles
  * various game-related operations such as playing music, changing the root pane, and closing the application.
+ * @author olav sie
 */
 public class GameApp extends Application {
     

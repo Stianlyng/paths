@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 
 /**
  * SelectPlayerPane represents the pane in with a user can choose or create a player
+ * @author olav sie
  */
 public class SelectPlayerPane extends StackPane{
     

@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 
 /**
  * GameInformationPane represents a pane for information about the game
+ * @author olav sie
  */
 public class GameInformationPane extends StackPane{
     

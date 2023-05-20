@@ -23,6 +23,7 @@ import javafx.scene.text.Text;
  * The ConversationPane class is responsible for showing the diffrent conversation parts
  * of a passage.
  * The pane has functions to change depending on the type of conversation.
+ * @author olav sie
  */
 public class ConversationPane extends StackPane{
 

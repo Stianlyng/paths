@@ -13,6 +13,7 @@ import edu.ntnu.g60.views.TitlePanes.TxtPane;
 /**
  * The AnimationController class is responsible for controlling the
  * animations and transitions between panes.
+ * @author olav sie
  */
 public class AnimationController {
 

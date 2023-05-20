@@ -10,6 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 /**
  * The DialogBoxes class provides utility methods for displaying dialog boxes.
  * It includes methods for showing alert boxes, alert boxes with choices, and dialog boxes with text input.
+ * @author olav sie
 */
 public class DialogBoxes {
 

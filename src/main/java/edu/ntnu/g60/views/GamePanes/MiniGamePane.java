@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
 
 /**
  * MiniGamePane represents a pane for a mini-game fight scene
+ * @author olav sie
  */
 public class MiniGamePane extends StackPane{
     

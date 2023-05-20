@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 
 /**
  * FileStructureInformationPane represents a pane for a file structure information pane.
+ * @author olav sie
  */
 public class FileStructureInformationPane extends StackPane{
     

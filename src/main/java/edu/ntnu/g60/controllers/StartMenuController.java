@@ -31,6 +31,7 @@ import javafx.stage.FileChooser;
  * The StartMenuController class is responsible for controlling the start menu of the game.
  * It handles actions and interactions related to starting a new game, continuing a saved game,
  * importing game data, selecting players, and navigating to different screens within the game.
+ * @author olav sie, stian lyng
 */
 public class StartMenuController {
 

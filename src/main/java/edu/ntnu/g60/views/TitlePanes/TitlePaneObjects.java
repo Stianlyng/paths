@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 /**
  * The class provides utility methods for creating and manipulating
  * objects used in title panes.
+ * @author olav sie
  */
 public class TitlePaneObjects {
 

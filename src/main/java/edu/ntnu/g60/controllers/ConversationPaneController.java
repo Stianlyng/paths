@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 /**
  * The ConversationPaneController class is responsible for controlling the conversation pane in the game.
  * It handles user interactions and updates the conversation pane accordingly.
+ * @author olav sie, stian lyng
  */
 public class ConversationPaneController {
     

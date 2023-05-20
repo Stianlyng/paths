@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 
 /**
  * GameInformationPane represents a pane for settings in the game
+ * @author olav sie
  */
 public class SettingsPane extends StackPane{
     private static StartMenuController controller;

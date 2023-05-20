@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 
 /**
  * MainMenuPane represents the pane in with a user can choose wheter to start, continue or import a game
+ * @author olav sie
  */
 public class MainMenuPane extends StackPane{
     

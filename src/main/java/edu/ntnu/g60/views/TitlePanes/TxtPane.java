@@ -6,6 +6,7 @@ import javafx.scene.layout.StackPane;
 /**
  * The TxtPane class extends StackPane and represents a custom stack pane
  * used for displaying text in a title pane.
+ * @author olav sie
  */
 public class TxtPane extends StackPane{
     

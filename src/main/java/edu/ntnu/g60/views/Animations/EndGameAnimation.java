@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 /**
  * The EndGameAnimation class provides a static method for playing the end game animation
  * when the game has ended.
+ * @author olav sie
 */
 public class EndGameAnimation extends StackPane{
 

@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 
 /**
  * NewGamePane represents the pane in with a user can choose to start a new game
+ * @author olav sie
  */
 public class NewGamePane extends StackPane{
 
