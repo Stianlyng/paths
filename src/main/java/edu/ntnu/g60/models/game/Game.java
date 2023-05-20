@@ -80,6 +80,7 @@ public class Game implements Serializable {
     return this.goals;
   }
 
+
   /**
    * Starts the game by returning the first passage of the story.
    * 

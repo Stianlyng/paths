@@ -171,7 +171,6 @@ public class Passage implements Serializable {
     if (!(obj instanceof Passage))
       return false;
     Passage passage = (Passage) obj;
-    // TODO: sjekk om disse er riktige
     return passage.getTitle().equals(this.title) && passage.getContent().equals(this.content)
         && passage.getLinks().equals(this.links);
   }

@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class StoryEntity {
     private String title;
+    private GoalEntity goals;
     private List<PassageEntity> passages;
 
     /**
@@ -47,5 +48,23 @@ public class StoryEntity {
      */
     public void setPassages(List<PassageEntity> passages) {
         this.passages = passages;
+    }
+    
+    /**
+     * Gets the goals of the story.
+     * 
+     * @return A GoalEntity object representing the goals of the story.
+     */
+    public GoalEntity getGoals() {
+        return goals;
+    }
+
+    /**
+     * Sets the goals of the story.
+     * 
+     * @param goals A GoalEntity object representing the goals of the story.
+     */
+    public void setGoals(GoalEntity goals) {
+        this.goals = goals;
     }
 }

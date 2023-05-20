@@ -207,14 +207,10 @@ public class StartMenuController {
     private static Passage createNewGame(String storySelection) throws BrokenLinkException{
         StoryParser parser = new StoryParser(storySelection);
         try {
-            Story story = parser.build();
+            
+            Story story = parser.getStory();
+            List<Goal> goals = parser.getGoals();
 
-            List<Goal> goals = List.of(
-                new HealthGoal(110),
-                new GoldGoal(0),
-                new InventoryGoal(List.of("Sword")),
-                new ScoreGoal(100)
-            );
             GameManager.getInstance().setStory(story);
             GameManager.getInstance().setGoals(goals);
             GameManager.getInstance().createGame();

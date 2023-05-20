@@ -64,7 +64,7 @@ public class CommandLineInterface {
         }
     }
           
-    private static Story chooseStory() {
+    private void chooseStory() {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please choose a story:");
@@ -76,10 +76,10 @@ public class CommandLineInterface {
         System.out.println(choice);
         StoryParser parser = new StoryParser(names.get(choice - 1));
         try {
-            return parser.build();
+            gameManager.setStory(parser.getStory());
+            gameManager.setGoals(parser.getGoals());
         } catch (BrokenLinkException e) {
             System.out.println(e.getMessage());
-            return null;
         }
     }
    
@@ -100,17 +100,9 @@ public class CommandLineInterface {
                 .setInventory(inventory)
                 .build();
 
-        Story story = chooseStory();
-        List<Goal> goals = List.of(
-                new HealthGoal(110),
-                new GoldGoal(0),
-                new InventoryGoal(List.of("Sword")),
-                new ScoreGoal(100)
-        );
+        chooseStory();
 
         gameManager.setPlayer(player);
-        gameManager.setStory(story);
-        gameManager.setGoals(goals);
         gameManager.createGame();
 
         return playGame(true);
