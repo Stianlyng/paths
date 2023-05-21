@@ -1,7 +1,5 @@
 package edu.ntnu.g60.models.passage;
 
-import edu.ntnu.g60.utils.DefaultValues;
-
 /**
  * This class is used to build a passage.
  * 
@@ -12,11 +10,15 @@ public class PassageBuilder {
     /**
      * Default values for the passage.
      */
+    public static final String PLAYER_IMAGE = "beer.png"; 
+    public static final String ENEMY_IMAGE = "beer.png"; 
+    public static final String BACKGROUND_IMAGE = "Background1.png"; 
+    
     private String title;
     private String content;
-    private String player = DefaultValues.PLAYER_IMAGE; 
-    private String enemy = DefaultValues.ENEMY_IMAGE; 
-    private String background = DefaultValues.BACKGROUND_IMAGE; 
+    private String player = PLAYER_IMAGE; 
+    private String enemy = ENEMY_IMAGE; 
+    private String background = BACKGROUND_IMAGE; 
     private boolean fightScene = false;
 
     public PassageBuilder() {

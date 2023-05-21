@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import edu.ntnu.g60.controllers.SoundController;
 import edu.ntnu.g60.exceptions.MusicControllerException;
-import edu.ntnu.g60.utils.DefaultValues;
 import edu.ntnu.g60.views.StartMenu.SelectPlayerPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
