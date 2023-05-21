@@ -46,29 +46,6 @@ public class Passage implements Serializable {
   }
 
   /**
-   * Constructor for the Passage class.
-   * 
-   * @param title   The title of the passage.
-   * @param content The content of the passage.
-   * @param links   The links to other passages from this passage.
-   * @throws IllegalArgumentException if title or content is null or blank.
-   */
-  Passage(String title, String content) throws IllegalArgumentException {
-
-    if (title == null || title.isBlank())
-      throw new IllegalArgumentException("Title cannot be null or blank.");
-    if (content == null || content.isBlank())
-      throw new IllegalArgumentException("Content cannot be null or blank.");
-    this.title = title;
-    this.content = content;
-    this.player = "beer.png";
-    this.enemy = "beer.png";
-    this.background = "background1.png";
-    this.fightScene = false;
-    this.links = new ArrayList<>();
-  }
-
-  /**
    * Copy constructor for the Passage class.
    * 
    * @param other The other passage to copy.
@@ -84,30 +61,65 @@ public class Passage implements Serializable {
     this.links = new ArrayList<>(other.links); // Assuming Link has a suitable copy constructor or is immutable
   }
 
-  public String getPlayer() {
+  /**
+   * The player image file
+   *
+   * @return the name of the player image file
+   */
+  public String getPlayerImage() {
     return player;
   }
 
-  public String getEnemy() {
+  /**
+   * The enemy image file
+   *
+   * @return the name of the enemy image file
+   */
+  public String getEnemyImage() {
     return enemy;
   }
 
-  public String getBackground() {
+  /**
+   * The background image file
+   *
+   * @return the name of the background image file
+   */
+  public String getBackgroundImage() {
     return background;
   }
 
-  public boolean hasFightScene() {
+  /**
+   * Checks if the passage is a fight scene.
+   * 
+   * @return True if the passage is a fight scene, false otherwise.
+   */
+  public boolean isFightScene() {
     return fightScene;
   }
 
+  /**
+   * Gets the title of the passage.
+   * 
+   * @return The title of the passage.
+   */
   public String getTitle() {
     return this.title;
   }
 
+  /**
+   * Gets the content of the passage.
+   * 
+   * @return The content of the passage.
+   */
   public String getContent() {
     return this.content;
   }
 
+  /**
+   * Gets the links of the passage.
+   * 
+   * @return The links of the passage.
+   */
   public List<Link> getLinks() {
     return this.links;
   }
@@ -150,13 +162,6 @@ public class Passage implements Serializable {
         ", links=" + links +
         '}';
   }
-  /*
-   * @Override
-   * public String toString() {
-   * return "Passage: " + title + ", Content: " + content + ",\nLinks to: " +
-   * links.size() + " passages.";
-   * }
-   */
 
   /**
    * Compares this passage to another object.
@@ -175,6 +180,11 @@ public class Passage implements Serializable {
         && passage.getLinks().equals(this.links);
   }
 
+  /**
+   * The hash code of this passage.
+   * 
+   * @return The hash code of this passage.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(title, content, links);

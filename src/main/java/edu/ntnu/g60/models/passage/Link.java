@@ -33,25 +33,49 @@ public class Link implements Serializable {
     this.text = text;
     this.reference = reference;
     this.actions = new ArrayList<>();
-
   }
 
+  /**
+   * Adds an action to the link.
+   * 
+   * @param action The action to add.
+   */
   public void addAction(Action action) {
     this.actions.add(action);
   }
 
+  /**
+   * The actions of the link.
+   * 
+   * @return A list of actions.
+   */
   public List<Action> getActions() {
     return this.actions;
   }
 
+  /**
+   * The description of the link, visible to the player. 
+   * 
+   * @return The text of the link.
+   */
   public String getText() {
     return this.text;
   }
 
+  /**
+   * The reference for the passage to link to.
+   * 
+   * @return The reference to the passage.
+   */
   public String getReference() {
     return this.reference;
   }
 
+  /**
+   * Returns a string representation of the link.
+   * 
+   * @return A string representation of the link.
+   */
   @Override
   public String toString() {
     return "Link: " + getText() + ", reference: " + getReference();
