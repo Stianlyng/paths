@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.game.GameManager;
@@ -75,18 +76,24 @@ public class StartMenuController {
                 saveButton.setText(playerSaves.get(i - 1));
                 
                 saveButton.setOnAction(e -> {
-                     SerializedGameState save = SaveFileHandler.loadGameFromFile(playerSaves.get(index));
-                     GameManager.getInstance().setPlayer(save.getGame().getPlayer());
-                     GameManager.getInstance().setStory(save.getGame().getStory());
-                     GameManager.getInstance().setGoals(save.getGame().getGoals());
-                     GameManager.getInstance().createGame();
- 
-                     Passage passage = GameManager.getInstance().getGame().go(save.getCurrentLink()); 
-                     try {
+
+                Optional<SerializedGameState> saveOpt = SaveFileHandler.loadGameFromFile(playerSaves.get(index));
+                if (saveOpt.isPresent()) {
+                    SerializedGameState save = saveOpt.get();
+                    GameManager.getInstance().setPlayer(save.getGame().getPlayer());
+                    GameManager.getInstance().setStory(save.getGame().getStory());
+                    GameManager.getInstance().setGoals(save.getGame().getGoals());
+                    GameManager.getInstance().createGame();
+                    
+                    Passage passage = GameManager.getInstance().getGame().go(save.getCurrentLink()); 
+                    try {
                          NextLevelAnimation.animation(passage);
                      } catch (MalformedURLException | FileNotFoundException e1) {
                          e1.printStackTrace();
                      }
+                } else {
+                    DialogBoxes.alertBox("Load failed", "Your load was not saved", "");
+                }
                 });
             } else {
                 Button saveButton = i == 1 ? save1Button : i == 2 ? save2Button : save3Button;

@@ -1,6 +1,5 @@
 package edu.ntnu.g60.views;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import edu.ntnu.g60.controllers.SoundController;
@@ -28,7 +27,7 @@ public class GameApp extends Application {
     private static final int WIDTH = 600;
     private static final Color backgound = Color.WHITE;
     private static final String TITLE = "Half life 3";
-    private static final String ICON = "icon.png";
+    private static final String ICON_PATH = "/images/icons/icon.png";
     private static final String STYLESHEET = "StyleSheet.css";
 
     private static Stage stage;
@@ -46,7 +45,7 @@ public class GameApp extends Application {
     public void start(Stage stage) throws IOException, InterruptedException {
         GameApp.stage = stage;
         stage.setTitle(TITLE);
-        stage.getIcons().add(new Image(GameApp.class.getResourceAsStream(DefaultValues.ICON_PATH + ICON)));
+        stage.getIcons().add(new Image(GameApp.class.getResourceAsStream(ICON_PATH)));
 
         stage.setResizable(false);
         SelectPlayerPane startMenu = new SelectPlayerPane();

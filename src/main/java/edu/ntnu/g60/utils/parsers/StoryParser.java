@@ -1,8 +1,7 @@
 package edu.ntnu.g60.utils.parsers;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,6 @@ import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.passage.PassageBuilder;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.models.story.StoryBuilder;
-import edu.ntnu.g60.utils.DefaultValues;
 
 /**
  * StoryParser is a class that parses a JSON file into a Story object.
@@ -39,7 +37,7 @@ public class StoryParser {
     /**
      * The JSON file to be parsed.
      */
-    private final File jsonFile;
+    private final InputStream jsonFile;
 
     /**
      * The ObjectMapper used to parse the JSON file.
@@ -57,12 +55,21 @@ public class StoryParser {
     private List<Goal> goals;
     
     /**
+     * The path to the JSON file.
+     */
+    public static final String STORY_PATH = "/stories/";
+    
+
+    /**
      * Constructs a StoryParser object.
      * 
      * @param jsonFileName the name the JSON file to be parsed.
      */
-    public StoryParser(String jsonFileName) {
-        this.jsonFile = DefaultValues.STORY_PATH.resolve(jsonFileName + ".json").toFile();
+    public StoryParser(String jsonFilename) {
+        this.jsonFile = StoryParser.class.getResourceAsStream(STORY_PATH + jsonFilename + ".json");
+        if (this.jsonFile == null) {
+            // todo; Handle missing resource
+        }
         this.objectMapper = new ObjectMapper();
         build();
     }
@@ -145,6 +152,7 @@ public class StoryParser {
             throw new RuntimeException("Error reading JSON file", e);
         }
     }  
+
 
     /**
      * Builds a list of goals from a GoalEntity object.
