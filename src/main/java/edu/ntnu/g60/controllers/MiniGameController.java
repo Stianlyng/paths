@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import edu.ntnu.g60.exceptions.InvalidLinkException;
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
@@ -321,8 +322,13 @@ public class MiniGameController {
         } else if (link.getReference().equalsIgnoreCase("end game")){
             EndGameAnimation.animation();
         } else { 
-            Passage currentPassage = GameManager.getInstance().getGame().go(link);
-            NextLevelAnimation.animation(currentPassage);
+            Passage currentPassage;
+            try {
+                currentPassage = GameManager.getInstance().getGame().go(link);
+                NextLevelAnimation.animation(currentPassage);
+            } catch (InvalidLinkException e) {
+                e.getMessage();
+            }
         }
     } 
 

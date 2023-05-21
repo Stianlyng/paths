@@ -1,5 +1,6 @@
 package edu.ntnu.g60.models.game;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -47,6 +48,11 @@ public class GameManagerTest {
         goals = List.of(new HealthGoal(0), new GoldGoal(0));
     }
 
+    @AfterEach
+    public void tearDown() {
+        gameManager.endGame();
+    }
+
     /**
      * Tests that the GameManager class is a singleton.
      */
@@ -70,6 +76,28 @@ public class GameManagerTest {
         assertSame(player, game.getPlayer(), "Player should be the same");
         assertSame(story, game.getStory(), "Story should be the same");
         assertSame(goals, game.getGoals(), "Goals should be the same");
+    }
+
+    @Test
+    public void testCreateGameInProgress() {
+        gameManager.setPlayer(player);
+        gameManager.setStory(story);
+        gameManager.setGoals(goals);
+        gameManager.createGame();
+        assertThrows(IllegalStateException.class, () -> gameManager.createGame(), "Should throw exception when a game is already in progress");
+    }
+    
+    @Test
+    public void testCreateGameNotSet() {
+        gameManager.setPlayer(null);
+        gameManager.setStory(null);
+        gameManager.setGoals(null);
+        assertThrows(IllegalStateException.class, () -> gameManager.createGame(), "Should throw exception when Player, Story, and Goals have not been set");
+    }
+    
+    @Test
+    public void testGetGameNotCreated() {
+        assertThrows(IllegalStateException.class, () -> gameManager.getGame(), "Should throw exception when no game has been created");
     }
 
     /**

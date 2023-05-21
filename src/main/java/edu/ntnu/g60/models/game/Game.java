@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ntnu.g60.exceptions.InvalidLinkException;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
@@ -42,10 +43,8 @@ public class Game implements Serializable {
   }
 
   /**
-   * Constructor for the Game class.
+   * Deep Copy constructor for the Game class.
    * 
-   * Shallow copy of the goals is fine because Goal objects are immutable
-   * todo; finish the java doc
    */
   public Game(Game other) {
     this.player = new Player(other.player);
@@ -96,10 +95,11 @@ public class Game implements Serializable {
    * @param link The link to the passage.
    * @return The passage that the link points to.
    */
-  public Passage go(Link link) {
-    System.out.println("Going to: " + link.getReference());
-    System.out.println(this.story.getPassage(link).getTitle());
+  public Passage go(Link link)  throws InvalidLinkException{
+    Passage passage = this.story.getPassage(link);
+    if (passage == null) {
+        throw new InvalidLinkException("The link does not have an existing passage in the story.");
+    }
     return this.story.getPassage(link);
-
   }
 }

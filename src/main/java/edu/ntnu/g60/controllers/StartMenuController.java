@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
 import edu.ntnu.g60.exceptions.BrokenLinkException;
+import edu.ntnu.g60.exceptions.InvalidLinkException;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.goals.*;
 import edu.ntnu.g60.models.passage.Passage;
@@ -91,10 +92,10 @@ public class StartMenuController {
                         GameManager.getInstance().setGoals(save.getGame().getGoals());
                         GameManager.getInstance().createGame();
                         
-                        Passage passage = GameManager.getInstance().getGame().go(save.getCurrentLink()); 
                         try {
+                            Passage passage = GameManager.getInstance().getGame().go(save.getCurrentLink()); 
                              NextLevelAnimation.animation(passage);
-                         } catch (MalformedURLException | FileNotFoundException e1) {
+                         } catch (MalformedURLException | FileNotFoundException | InvalidLinkException e1) {
                              e1.printStackTrace();
                          }
                     } else {

@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -45,8 +44,8 @@ public class TextfileParser {
                 filename = filename.substring(0, pos);
             }
 
-            String resourcePath = TextfileParser.class.getClassLoader().getResource("").getPath();
-            Path outputPath = Paths.get(resourcePath + STORY_PATH + filename + ".json");
+            String resourcePath = TextfileParser.class.getResource(STORY_PATH).getPath();
+            Path outputPath = Paths.get(resourcePath + filename + ".json");
             List<String> lines = Files.readAllLines(inputPath);
             ObjectMapper mapper = new ObjectMapper();
             JsonNodeFactory nodeFactory = JsonNodeFactory.instance;

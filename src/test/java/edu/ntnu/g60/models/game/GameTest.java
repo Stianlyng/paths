@@ -1,5 +1,6 @@
 package edu.ntnu.g60.models.game;
 
+import edu.ntnu.g60.exceptions.InvalidLinkException;
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
@@ -56,6 +57,28 @@ class GameTest {
         game = new Game(player, story, goals);
     }
 
+    
+    @Test
+    void testConstructorNullPlayer() {
+        assertThrows(IllegalArgumentException.class, () -> new Game(null, story, goals));
+    }
+    
+    @Test
+    void testConstructorNullStory() {
+        assertThrows(IllegalArgumentException.class, () -> new Game(player, null, goals));
+    }
+    
+    @Test
+    void testConstructorNullGoals() {
+        assertThrows(IllegalArgumentException.class, () -> new Game(player, story, null));
+    }
+
+    @Test
+    void testGoNonexistentLink() {
+        Link nonexistentLink = new Link("Nonexistent Passage", "Nonexistent Passage");
+        assertThrows(InvalidLinkException.class, () -> game.go(nonexistentLink));
+    }
+    
     @Test
     void testGetPlayer() {
         assertEquals(player, game.getPlayer());
@@ -77,7 +100,7 @@ class GameTest {
     }
 
     @Test
-    void testGo() {
+    void testGo() throws InvalidLinkException {
         assertEquals(additionalPassage, game.go(link));
     }
 }

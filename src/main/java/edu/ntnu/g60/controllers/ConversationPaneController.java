@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import edu.ntnu.g60.exceptions.InvalidLinkException;
 import edu.ntnu.g60.exceptions.MusicControllerException;
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.game.Game;
@@ -146,7 +147,7 @@ public class ConversationPaneController {
                 Passage passage = game.go(link);
                 NextLevelAnimation.animation(passage);
             }
-        } catch (IOException e1) {
+        } catch (IOException | InvalidLinkException e1) {
             e1.printStackTrace();
         }
     }
