@@ -46,15 +46,9 @@ public class ViewObjects {
     }
 
     public static Button newButton(String text, int x, int y, String id, String hover, EventHandler<ActionEvent> action, String altText){
-        Button button = new Button(text);
-        button.setAccessibleText(altText);
-        button.setId(id);
-        button.setLayoutX(x);
-        button.setLayoutY(y);
-        button.setOnAction(action);
-        button.setOnMouseEntered(e -> button.setId(hover));
-        button.setOnMouseExited(e -> button.setId(id));
+        Button button = newButton(text, x, y, id, hover, action, altText);
         Tooltip tooltip = new Tooltip();
+        button.setAccessibleText(altText);
         tooltip.setText(button.getAccessibleText());
         button.setTooltip(tooltip);
         return button;
@@ -106,16 +100,8 @@ public class ViewObjects {
 
     public static ImageView newImage(String foldername, String imagename,
     int x, int y, int width, int height, EventHandler<MouseEvent> action) throws FileNotFoundException{
-       ImageView imageview = new ImageView();
-       String imagePath = DefaultValues.IMAGE_PATH + foldername + "/" + imagename;
-       Image image = new Image(ViewObjects.class.getResourceAsStream(imagePath));
+       ImageView imageview = newImage(foldername, imagename, x, y, width, height);
        imageview.setOnMouseClicked(action);
-       imageview.setImage(image);
-       imageview.setX(x);
-       imageview.setY(y);
-       imageview.setFitHeight(width);
-       imageview.setFitWidth(height);
-       imageview.setPreserveRatio(true);
        return imageview;
     }
 
@@ -156,12 +142,8 @@ public class ViewObjects {
 
     public static Text newText(String title, int size, boolean underline, int x, int y,
         EventHandler<MouseEvent> action){
-        Text text = new Text(title);
+        Text text = newText(title, size, underline, x, y);
         text.setOnMouseClicked(action);
-        text.setFont(Font.font("Times New Roman", FontWeight.BOLD, size));
-        text.setUnderline(underline);
-        text.setX(x);
-        text.setY(y);
         return text;
     }
 
@@ -192,15 +174,8 @@ public class ViewObjects {
 
     public static Rectangle newRectangle(int x, int y, int width, int height,
     EventHandler<MouseEvent> action){
-        Rectangle rectangle = new Rectangle();
+        Rectangle rectangle = newRectangle(x, y, width, height);
         rectangle.setOnMouseClicked(action);
-        rectangle.setX(x);
-        rectangle.setY(y);
-        rectangle.setWidth(width);
-        rectangle.setHeight(height);
-        rectangle.setStroke(Color.BLACK);
-        rectangle.setFill(Color.rgb(150, 111, 51));
-        rectangle.setOpacity(30);
         return rectangle;
     }
 
