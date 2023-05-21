@@ -222,6 +222,7 @@ public class ConversationPaneController {
         int braceIndexx = text.indexOf('{');
         String output = text.substring(braceIndexx);
         String[] conversationParts = output.split("\\n");
+        System.out.println(conversationParts[0]);
         return conversationParts;
     }
 
