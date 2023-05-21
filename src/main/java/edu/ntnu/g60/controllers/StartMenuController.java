@@ -132,7 +132,7 @@ public class StartMenuController {
                 DialogBoxes.alertBox("Import failed", "Your import was not saved", "");
             }
         } else {
-            DialogBoxes.alertBox("Import failed", "Please choose a file", "");
+            DialogBoxes.alertBox("Import failed", "Please choose a diffrent file", "");
         }
     }
 
@@ -210,7 +210,7 @@ public class StartMenuController {
             Passage openingPassage = createNewGame(NewGamePane.getStoryChoice());
             NextLevelAnimation.animation(openingPassage);
         } catch (MalformedURLException | BrokenLinkException | FileNotFoundException e) {
-            e.printStackTrace();
+            DialogBoxes.alertBox("ERROR", "", e.getMessage());
         }
     }
     
