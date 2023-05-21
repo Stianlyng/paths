@@ -41,6 +41,7 @@ public class SettingsPane extends StackPane{
         Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToOpeningPaneAction);
         Text volumeText = ViewObjects.newText("Volume:", 25, false, 130, 100);
         Slider volumeSlider = ViewObjects.newSlider(130, 120);
-        return new Group(background, backButton, informationText, volumeSlider, volumeText);
+        Button textEditorButton = ViewObjects.newButton("Edit story", 730, 100, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::goToTextEditorPaneAction);
+        return new Group(background, backButton, informationText, volumeSlider, volumeText, textEditorButton);
     }
 }

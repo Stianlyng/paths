@@ -2,12 +2,15 @@ package edu.ntnu.g60.controllers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.Set;
 import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.game.GameManager;
@@ -270,7 +273,33 @@ public class StartMenuController {
      *
      * @param event the ActionEvent representing the button click event
      */
+    public void goToTextEditorPaneAction(ActionEvent event){
+        try {
+            GameApp.changeRootPane(new TextEditorPane());
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    /**
+     * Switches the current showing pane to the SettingsPane
+     *
+     * @param event the ActionEvent representing the button click event
+     */
     public void goToSettingsPaneAction(MouseEvent event){
+        try {
+            GameApp.changeRootPane(new SettingsPane());
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    /**
+     * Switches the current showing pane to the SettingsPane
+     *
+     * @param event the ActionEvent representing the button click event
+     */
+    public void goToSettingsPaneAction(ActionEvent event){
         try {
             GameApp.changeRootPane(new SettingsPane());
         } catch (IOException e1) {
@@ -296,7 +325,7 @@ public class StartMenuController {
      *
      * @param event the ActionEvent representing the button click event
      */
-    public void goToOpeningPaneAction(ActionEvent evnet){
+    public void goToOpeningPaneAction(ActionEvent event){
         try {
             GameApp.changeRootPane(new MainMenuPane());
         } catch (IOException e1) {
@@ -340,6 +369,46 @@ public class StartMenuController {
         }
         Passage passage = GameManager.getInstance().getGame().begin();
         return passage;
+    }
+
+    public File openedFile;
+
+    public void openFileInEditorAction(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Text File");
+        URL resourceUrl = getClass().getResource("/stories");
+        if (resourceUrl != null) {
+            String resourcePath = resourceUrl.getPath();
+            File initialDirectory = new File(resourcePath);
+            fileChooser.setInitialDirectory(initialDirectory);
+        }
+        File file = fileChooser.showOpenDialog(GameApp.getStage());
+        if (file != null) {
+            try {
+                Scanner scanner = new Scanner(file);
+                StringBuilder content = new StringBuilder();
+                while (scanner.hasNextLine()) {
+                    content.append(scanner.nextLine()).append("\n");
+                }
+                scanner.close();
+                TextEditorPane.getTextArea().setText(content.toString());
+                openedFile = file;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void saveFileInEditorAction(ActionEvent event) {
+        if (openedFile != null) {
+            try {
+                FileWriter writer = new FileWriter(openedFile);
+                writer.write(TextEditorPane.getTextArea().getText());
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

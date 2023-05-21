@@ -77,7 +77,7 @@ public class ViewObjects {
      * @return          the created button
     */
     public static Button newButton(String text, int x, int y, String id, String hover, EventHandler<ActionEvent> action, String altText){
-        Button button = newButton(text, x, y, id, hover, action, altText);
+        Button button = newButton(text, x, y, id, hover, action);
         Tooltip tooltip = new Tooltip();
         button.setAccessibleText(altText);
         tooltip.setText(button.getAccessibleText());
