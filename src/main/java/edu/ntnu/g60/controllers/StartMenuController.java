@@ -80,7 +80,7 @@ public class StartMenuController {
                 if (i - 1 < playerSaves.size()) {
                     final int index = i - 1;
                     Button saveButton = i == 1 ? save1Button : i == 2 ? save2Button : save3Button;
-                    saveButton.setText(playerSaves.get(i - 1));
+                    saveButton.setText("Save " + i);
                     
                     saveButton.setOnAction(e -> {
 
@@ -176,7 +176,6 @@ public class StartMenuController {
                 }
             }
         } catch (URISyntaxException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         
@@ -429,7 +428,7 @@ public class StartMenuController {
      * @param playerName the name of the player
      */
     private void initializePlayer(String playerName) {
-        List<String> inventory = List.of();
+        List<String> inventory = List.of("Blaster", "Lightsaber");
 
         Player player = new PlayerBuilder()
             .setName(playerName)

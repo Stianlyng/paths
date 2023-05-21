@@ -78,11 +78,11 @@ public class ConversationPane extends StackPane{
         ImageView healthIcon = ViewObjects.newImage("icons", "heart.png", 295, 65, 24, 24, controller::conversationPaneClickedAction);
         ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 196, 65, 24, 24, controller::conversationPaneClickedAction);
 
-        MenuButton dropDownMenu = ViewObjects.newMenuButton(controller::goToMenuAndSaveAction, controller::exitApplicationAction, "menu_button", "menu_hover", 413, 129-71, "Save and go to main menu", "Exit application");
+        MenuButton dropDownMenu = ViewObjects.newMenuButton(controller::goToMenuAndSaveAction, controller::exitApplicationAction, "menu_button", "menu_hover", 413, 58, "Save and go to main menu", "Exit application");
         Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 229, 84, controller::conversationPaneClickedAction);
         Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 149, 84, controller::conversationPaneClickedAction);
         Text healthText = ViewObjects.newText("" + game.getPlayer().getHealth(), 18, false, 327, 84, controller::conversationPaneClickedAction);
-        ChoiceBox inventory = ViewObjects.newChoiceBox(ConversationPaneController.getPlayerInventoryItems(), 724, 84, "inventory_choicebox");
+        ChoiceBox inventory = ViewObjects.newChoiceBox(ConversationPaneController.getPlayerInventoryItems(), 724, 58, "inventory_choicebox");
 
         Rectangle infoBoard = ViewObjects.newRectangle(110, 58, 293, 38, controller::conversationPaneClickedAction);
         String[] textline = ConversationPaneController.getTextLines();

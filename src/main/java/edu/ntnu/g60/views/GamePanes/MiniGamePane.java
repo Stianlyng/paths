@@ -68,18 +68,18 @@ public class MiniGamePane extends StackPane{
         ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayerImage(), 150, 200, 150, 150);
         ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemyImage(), 700, 200, 150, 150);
         ImageView backgroundImage = ViewObjects.newImage("backgrounds", passage.getBackgroundImage(), 0, 0, 1650, 1000);
-        Button fightButton = ViewObjects.newButton("Fight", 116, 463, "fight_button", "fight_hover", controller::fightAction);
-        Button healButton = ViewObjects.newButton("Heal", 511, 463, "heal_button", "heal_hover", controller::healAction);
-        Button inventoryButton = ViewObjects.newButton("Inventory", 116, 554, "inventory_button", "inventory_hover", controller::inventoryAction);
-        Button escapeButton = ViewObjects.newButton("Escape", 511, 554, "escape_button", "escape_hover", controller::escapeAction);
+        Button fightButton = ViewObjects.newButton("Fight", 116, 454, "fight_button", "fight_hover", controller::fightAction);
+        Button healButton = ViewObjects.newButton("Heal", 511, 454, "heal_button", "heal_hover", controller::healAction);
+        Button inventoryButton = ViewObjects.newButton("Inventory", 116, 545, "inventory_button", "inventory_hover", controller::inventoryAction);
+        Button escapeButton = ViewObjects.newButton("Escape", 511, 545, "escape_button", "escape_hover", controller::escapeAction);
         ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 116, 65, 24, 24);
         ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 196, 65, 24, 24);
         Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 229, 84);
         Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 149, 84);
         Rectangle infoBoard = ViewObjects.newRectangle(110, 58, 163, 38);
         MenuButton dropDown = ViewObjects.newMenuButton(controller::goToMenuAndSaveAction, controller::exitApplicationAction, "menu_button", "menu_hover", 283, 129-71, "Save and go to main menu", "Exit application");
-        playerBar =  ViewObjects.newHealthBar(116, 433, 1.00F, "progress_bar"); 
-        enemyBar = ViewObjects.newHealthBar(511, 433, 1.00F, "progress_bar");
+        playerBar =  ViewObjects.newHealthBar(116, 427, 1.00F, "progress_bar"); 
+        enemyBar = ViewObjects.newHealthBar(511, 427, 1.00F, "progress_bar");
         return new Group(backgroundImage, infoBoard, enemyImage, playerImage, fightButton, healButton,
         inventoryButton, escapeButton, coinIcon, scoreIcon, scoreText, goldText, playerBar, enemyBar, dropDown);
     }
