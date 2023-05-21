@@ -47,7 +47,7 @@ public class Player implements Serializable {
     this.health = health;
     this.score = score;
     this.gold = gold;
-    this.inventory = inventory;
+    this.inventory = new ArrayList<>(inventory);
   }
 
   /**

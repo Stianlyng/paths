@@ -74,8 +74,8 @@ public class MiniGamePane extends StackPane{
         Button escapeButton = ViewObjects.newButton("Escape", 704-193, 625-71, "escape_button", "escape_hover", controller::escapeAction);
         ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 309-193, 136-71, 24, 24);
         ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24);
-        Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 342-193, 155-71);
-        Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 422-193, 155-71);
+        Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 422-193, 155-71);
+        Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 342-193, 155-71);
         Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 163, 38);
         MenuButton dropDown = ViewObjects.newMenuButton(controller::goToMenuAndSaveAction, controller::exitApplicationAction, "menu_button", "menu_hover", 283, 129-71, "Save and go to main menu", "Exit application");
         playerBar =  ViewObjects.newHealthBar(309-193, 504-71, 1.00F, "progress_bar"); 

@@ -202,22 +202,54 @@ public class MiniGameController {
         enemyAction(0.1F, 0.0F);
     }
 
-    public void inventoryOneAction(ActionEvent event){
-        //TODO: ADD functionality
-        //remove item from inventory
-        //do something in fight
+    /**
+     * Performs the inventory action for the first item slot.
+     * 
+     * @param event The ActionEvent associated with the action.
+    */
+    public void inventoryOneAction(ActionEvent event) {
+        inventoryAction(0);
     }
 
+    /**
+     * Performs the inventory action for the second item slot.
+     * 
+     * @param event The ActionEvent associated with the action.
+    */
     public void inventoryTwoAction(ActionEvent event){
-        //TODO: ADD functionality
-        //remove item from inventory
-        //do something in fight
+        inventoryAction(1);
     }
 
+    /**
+     * Performs the inventory action for the third item slot.
+     * 
+     * @param event The ActionEvent associated with the action.
+    */
     public void inventoryThreeAction(ActionEvent event){
-        //TODO: ADD functionality
-        //remove item from inventory
-        //do something in fight
+        inventoryAction(2);
+    }
+
+    /**
+     * Performs the inventory action for the specified item slot.
+     * 
+     * @param itemNumber the number of the item slot.
+     */
+    public void inventoryAction(int itemNumber){
+        List<String> playerInventory = game.getPlayer().getInventory();
+        if (playerInventory.size() > itemNumber) {
+            String[] playerInventoryItems = getPlayerInventoryItems();
+            String itemToBeRemoved = playerInventoryItems[itemNumber];
+            if (!itemToBeRemoved.equals("Missing item")) {
+                game.getPlayer().removeFromInventory(itemToBeRemoved);
+                try {
+                    MiniGamePane.addInventoryObjects(currentMiniGamePane);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                playerAction(0.9F, 0.9F);
+                enemyAction(0.0F, 0.0F);
+            }
+        }
     }
 
     /**

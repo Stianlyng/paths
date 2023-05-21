@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javafx.concurrent.Task;
+import javafx.scene.media.AudioTrack;
 
 public class FrontendUtils {
     
@@ -44,16 +45,19 @@ public class FrontendUtils {
         int numGroups = (int) Math.ceil(words.length / 10.0);
     
         List<String[]> wordGroups = IntStream.range(0, numGroups)
-                .mapToObj(i -> {
-                    int startIndex = i * 10;
-                    int endIndex = Math.min(startIndex + 10, words.length);
-                    String[] group = Arrays.copyOfRange(words, startIndex, endIndex);
-                    if (group.length < 10) {
-                        group = Arrays.copyOf(group, 10);
-                    }
-                    return group;
-                })
-                .collect(Collectors.toList());
+        .mapToObj(i -> {
+            int startIndex = i * 10;
+            int endIndex = Math.min(startIndex + 10, words.length);
+            String[] group = Arrays.copyOfRange(words, startIndex, endIndex);
+            if (group.length < 10) {
+                String[] paddedGroup = new String[10];
+                System.arraycopy(group, 0, paddedGroup, 0, group.length);
+                Arrays.fill(paddedGroup, group.length, 10, "");
+                group = paddedGroup;
+            }
+            return group;
+        })
+        .collect(Collectors.toList());
     
         String[] textLines = IntStream.range(0, Math.min(numGroups, 4))
                 .mapToObj(i -> String.join(" ", wordGroups.get(i)))
@@ -61,7 +65,16 @@ public class FrontendUtils {
     
         if (textLines.length < 4) {
             textLines = Arrays.copyOf(textLines, 4);
+            for (int i = textLines.length - 1; i >= 0; i--) {
+                if (textLines[i] == null) {
+                    textLines[i] = "";
+                } else {
+                    break;
+                }
+            }
         }
         return textLines;
     }
+    
+    
 }

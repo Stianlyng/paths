@@ -100,11 +100,9 @@ public class ViewObjects {
         choiceBox.getItems().addAll(choices);
         choiceBox.setLayoutX(x);
         choiceBox.setLayoutY(y);
-
         if (choices.length != 0) {
             choiceBox.setValue(choices[0]);
         }
-
         return choiceBox;
     }
 
