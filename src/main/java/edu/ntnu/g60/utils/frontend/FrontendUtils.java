@@ -60,7 +60,10 @@ public class FrontendUtils {
                 .toArray(String[]::new);
     
         if (textLines.length < 4) {
-            textLines = Arrays.copyOf(textLines, 4);
+            String[] paddedTextLines = new String[4];
+            System.arraycopy(textLines, 0, paddedTextLines, 0, textLines.length);
+            Arrays.fill(paddedTextLines, textLines.length, 4, "");
+            textLines = paddedTextLines;
         }
         return textLines;
     }

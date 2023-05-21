@@ -82,7 +82,7 @@ public class ConversationPane extends StackPane{
         Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 422-193, 155-71, controller::conversationPaneClickedAction);
         Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 342-193, 155-71, controller::conversationPaneClickedAction);
         Text healthText = ViewObjects.newText("" + game.getPlayer().getHealth(), 18, false, 520-193, 155-71, controller::conversationPaneClickedAction);
-        ChoiceBox inventory = ViewObjects.newChoiceBox(ConversationPaneController.getPlayerInventoryItems(), 724, 129-71, "inventory_choicebox");
+        ChoiceBox inventory = ViewObjects.newChoiceBox(ConversationPaneController.getPlayerInventoryItems(), 724, 129-71, "inventory_choicebox", "Inventory");
 
         Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 293, 38, controller::conversationPaneClickedAction);
         String[] textline = ConversationPaneController.getTextLines();
