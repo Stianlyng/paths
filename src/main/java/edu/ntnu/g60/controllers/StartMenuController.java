@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.game.GameManager;
@@ -66,33 +68,46 @@ public class StartMenuController {
      * @throws IOException If an I/O error occurs while retrieving save data.
     */
     public static void populateSaveButtons(Button save1Button, Button save2Button, Button save3Button) throws IOException {
-        Set<String> playerSavesSet = SaveFileHandler.getPlayerSaves(playerName);
-        List<String> playerSaves = new ArrayList<>(playerSavesSet);
-        for(int i = 1; i < 4; i++) {
-            if (i - 1 < playerSaves.size()) {
-                final int index = i - 1;
-                Button saveButton = i == 1 ? save1Button : i == 2 ? save2Button : save3Button;
-                saveButton.setText(playerSaves.get(i - 1));
-                
-                saveButton.setOnAction(e -> {
-                     SerializedGameState save = SaveFileHandler.loadGameFromFile(playerSaves.get(index));
-                     GameManager.getInstance().setPlayer(save.getGame().getPlayer());
-                     GameManager.getInstance().setStory(save.getGame().getStory());
-                     GameManager.getInstance().setGoals(save.getGame().getGoals());
-                     GameManager.getInstance().createGame();
- 
-                     Passage passage = GameManager.getInstance().getGame().go(save.getCurrentLink()); 
-                     try {
-                         NextLevelAnimation.animation(passage);
-                     } catch (MalformedURLException | FileNotFoundException e1) {
-                         e1.printStackTrace();
-                     }
-                });
-            } else {
-                Button saveButton = i == 1 ? save1Button : i == 2 ? save2Button : save3Button;
-                saveButton.setText("Empty");
+        Set<String> playerSavesSet;
+        try {
+            playerSavesSet = SaveFileHandler.getPlayerSaves(playerName);
+            List<String> playerSaves = new ArrayList<>(playerSavesSet);
+            for(int i = 1; i < 4; i++) {
+                if (i - 1 < playerSaves.size()) {
+                    final int index = i - 1;
+                    Button saveButton = i == 1 ? save1Button : i == 2 ? save2Button : save3Button;
+                    saveButton.setText(playerSaves.get(i - 1));
+                    
+                    saveButton.setOnAction(e -> {
+
+                    Optional<SerializedGameState> saveOpt = SaveFileHandler.loadGameFromFile(playerSaves.get(index));
+                    if (saveOpt.isPresent()) {
+                        SerializedGameState save = saveOpt.get();
+                        GameManager.getInstance().setPlayer(save.getGame().getPlayer());
+                        GameManager.getInstance().setStory(save.getGame().getStory());
+                        GameManager.getInstance().setGoals(save.getGame().getGoals());
+                        GameManager.getInstance().createGame();
+                        
+                        Passage passage = GameManager.getInstance().getGame().go(save.getCurrentLink()); 
+                        try {
+                             NextLevelAnimation.animation(passage);
+                         } catch (MalformedURLException | FileNotFoundException e1) {
+                             e1.printStackTrace();
+                         }
+                    } else {
+                        DialogBoxes.alertBox("Load failed", "Your load was not saved", "");
+                    }
+                    });
+                } else {
+                    Button saveButton = i == 1 ? save1Button : i == 2 ? save2Button : save3Button;
+                    saveButton.setText("Empty");
+                }
             }
+        } catch (URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+        
      }
 
     /**
@@ -143,17 +158,24 @@ public class StartMenuController {
      * @param event the ActionEvent representing the button click event
      */
     public void deleteAllPlayerSavesAction(ActionEvent event){
-        Set<String> playerSaves = SaveFileHandler.getPlayerSaves(playerName);
-        if(!playerSaves.isEmpty()) {
-            if(DialogBoxes.alertBoxWithChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
-                ContinueGamePane.addDeleteObjects(getCurreContinuePane());
-                try {
-                    SaveFileHandler.deletePlayerSaves(playerName);
-                } catch (IOException e) {
-                e.printStackTrace();
+        Set<String> playerSaves;
+        try {
+            playerSaves = SaveFileHandler.getPlayerSaves(playerName);
+            if(!playerSaves.isEmpty()) {
+                if(DialogBoxes.alertBoxWithChoices("CAUTION", "This will delete all progress", "Are you sure you want to continue?")){
+                    ContinueGamePane.addDeleteObjects(getCurreContinuePane());
+                    try {
+                        SaveFileHandler.deletePlayerSaves(playerName);
+                    } catch (IOException e) {
+                    e.printStackTrace();
+                    }
                 }
             }
+        } catch (URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+        
     }
 
     /**
@@ -346,8 +368,14 @@ public class StartMenuController {
      * @return an array of available story names
      */
     public String[] getStories(){
-        List<String> availableStories = SaveFileHandler.listFilesInFolder();
-        return availableStories.toArray(new String[availableStories.size()]);
+        List<String> availableStories;
+        try {
+            availableStories = SaveFileHandler.listFilesInFolder();
+            return availableStories.toArray(new String[availableStories.size()]);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -356,7 +384,13 @@ public class StartMenuController {
      * @return an array of available player names
      */
     public String[] getPlayerNames(){
-        List<String> availablePlayers = new ArrayList<>(SaveFileHandler.getAvailablePlayers());
-        return availablePlayers.toArray(new String[availablePlayers.size()]);
+        List<String> availablePlayers;
+        try {
+            availablePlayers = new ArrayList<>(SaveFileHandler.getAvailablePlayers());
+            return availablePlayers.toArray(new String[availablePlayers.size()]);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -1,20 +1,23 @@
 package edu.ntnu.g60.utils.parsers;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import edu.ntnu.g60.utils.DefaultValues;
 
 /**
  * A utility class for parsing text stories and converting them to JSON format.
@@ -24,6 +27,8 @@ import edu.ntnu.g60.utils.DefaultValues;
 public class TextfileParser {
 
     private static final Pattern LINK_PATTERN = Pattern.compile("\\[(.+?)\\]\\((.+?)\\)");
+
+    public static final String STORY_PATH = "/stories/";
 
     /**
      * Parses a text story and saves it in JSON format.
@@ -39,9 +44,9 @@ public class TextfileParser {
             if (pos > 0) {
                 filename = filename.substring(0, pos);
             }
-    
-            Path outputPath = DefaultValues.STORY_PATH.resolve(filename + ".json");
-    
+
+            String resourcePath = TextfileParser.class.getClassLoader().getResource("").getPath();
+            Path outputPath = Paths.get(resourcePath + STORY_PATH + filename + ".json");
             List<String> lines = Files.readAllLines(inputPath);
             ObjectMapper mapper = new ObjectMapper();
             JsonNodeFactory nodeFactory = JsonNodeFactory.instance;

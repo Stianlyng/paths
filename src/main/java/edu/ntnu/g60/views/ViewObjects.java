@@ -23,7 +23,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import edu.ntnu.g60.controllers.SoundController;
-import edu.ntnu.g60.utils.DefaultValues;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
@@ -33,6 +32,9 @@ import javafx.scene.shape.Rectangle;
 
 public class ViewObjects {
     
+
+    public static final String SOUND_PATH = "/sounds/";
+    public static final String IMAGE_PATH = "/images/";
 
     public static Button newButton(String text, int x, int y, String id, String hover, EventHandler<ActionEvent> action){
         Button button = new Button(text);
@@ -108,7 +110,7 @@ public class ViewObjects {
     public static ImageView newImage(String foldername, String imagename,
     int x, int y, int width, int height) throws FileNotFoundException{
        ImageView imageview = new ImageView();
-       String imagePath = DefaultValues.IMAGE_PATH + foldername + "/" + imagename;
+       String imagePath = IMAGE_PATH + foldername + "/" + imagename;
        Image image = new Image(ViewObjects.class.getResourceAsStream(imagePath));
 
        imageview.setImage(image);
@@ -157,7 +159,7 @@ public class ViewObjects {
     }
 
     public static MediaPlayer newSound(String soundName) throws MalformedURLException{
-        URL file = ViewObjects.class.getResource(DefaultValues.SOUND_PATH + soundName + ".m4a");
+        URL file = ViewObjects.class.getResource(SOUND_PATH + soundName + ".m4a");
         Media media = new Media(file.toString());
         return new MediaPlayer(media);
     }
