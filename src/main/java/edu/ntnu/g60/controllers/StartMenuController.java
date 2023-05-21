@@ -373,6 +373,11 @@ public class StartMenuController {
 
     public File openedFile;
 
+    /**
+     * Opens a story file in the text editor.
+     * 
+     * @param event the ActionEvent representing the button click event
+     */
     public void openFileInEditorAction(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Text File");
@@ -399,6 +404,11 @@ public class StartMenuController {
         }
     }
 
+    /**
+     * Saves the file opend in the text editor.
+     * 
+     * @param event the ActionEvent representing the button click event
+     */
     public void saveFileInEditorAction(ActionEvent event) {
         if (openedFile != null) {
             try {
