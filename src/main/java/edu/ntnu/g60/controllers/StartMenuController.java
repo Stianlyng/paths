@@ -428,7 +428,7 @@ public class StartMenuController {
      * @param playerName the name of the player
      */
     private void initializePlayer(String playerName) {
-        List<String> inventory = List.of("Sword");
+        List<String> inventory = List.of();
 
         Player player = new PlayerBuilder()
             .setName(playerName)

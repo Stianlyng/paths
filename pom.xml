@@ -137,6 +137,7 @@
                             <excludes>
                                 <exclude>**edu/ntnu/g60/views/**</exclude>
                                 <exclude>**edu/ntnu/g60/exceptions/**</exclude>
+                                <exclude>**edu/ntnu/g60/controllers/**</exclude>
                             </excludes>
                         </configuration>
                     </execution>

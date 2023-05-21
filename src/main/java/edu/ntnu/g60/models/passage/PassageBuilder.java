@@ -13,8 +13,8 @@ public class PassageBuilder {
      * Default values for the passage.
      */
     public static final String PLAYER_IMAGE = "playerDefault.png"; 
-    public static final String ENEMY_IMAGE = "EnemyDefault.png"; 
-    public static final String BACKGROUND_IMAGE = "defaultBackground.jpeg"; 
+    public static final String ENEMY_IMAGE = "enemyDefault.png"; 
+    public static final String BACKGROUND_IMAGE = "backgroundDefault.jpeg"; 
     
     /**
      * The title of the passage.
@@ -55,7 +55,6 @@ public class PassageBuilder {
         this.enemyImage = ENEMY_IMAGE;
         this.backgroundImage = BACKGROUND_IMAGE;
         this.isFightScene = false;
-    
     }
 
     /**

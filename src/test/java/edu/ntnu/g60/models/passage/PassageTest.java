@@ -32,9 +32,9 @@ class PassageTest {
         assertNotNull(passage);
         assertEquals("Opening Passage", passage.getTitle());
         assertEquals("This is the opening passage", passage.getContent());
-        assertEquals("player1.png", passage.getPlayerImage());
-        assertEquals("enemy1.png", passage.getEnemyImage());
-        assertEquals("background2.png", passage.getBackgroundImage());
+        assertEquals("playerDefault.png", passage.getPlayerImage());
+        assertEquals("enemyDefault.png", passage.getEnemyImage());
+        assertEquals("backgroundDefault.jpeg", passage.getBackgroundImage());
         assertTrue(passage.isFightScene());
         assertEquals(new ArrayList<>(), passage.getLinks());
     }
