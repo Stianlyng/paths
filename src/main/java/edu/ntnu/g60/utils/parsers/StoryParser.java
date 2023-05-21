@@ -84,9 +84,9 @@ public class StoryParser {
         Passage passage = new PassageBuilder()
                 .setTitle(passageEntity.getTitle())
                 .setContent(passageEntity.getContent())
-                .setBackground(passageEntity.getBackground())
-                .setPlayer(passageEntity.getPlayer())
-                .setEnemy(passageEntity.getEnemy())
+                .setBackgroundImage(passageEntity.getBackground())
+                .setPlayerImage(passageEntity.getPlayer())
+                .setEnemyImage(passageEntity.getEnemy())
                 .isFightScene(passageEntity.getIsFight())
                 .build();
 
@@ -152,7 +152,6 @@ public class StoryParser {
             throw new RuntimeException("Error reading JSON file", e);
         }
     }  
-
 
     /**
      * Builds a list of goals from a GoalEntity object.

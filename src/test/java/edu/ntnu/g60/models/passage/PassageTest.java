@@ -19,9 +19,9 @@ class PassageTest {
         passage = new PassageBuilder()
                 .setTitle("Opening Passage")
                 .setContent("This is the opening passage")
-                .setPlayer("player1.png")
-                .setEnemy("enemy1.png")
-                .setBackground("background2.png")
+                .setPlayerImage("player1.png")
+                .setEnemyImage("enemy1.png")
+                .setBackgroundImage("background2.png")
                 .isFightScene(true)
                 .build();
 
@@ -32,10 +32,10 @@ class PassageTest {
         assertNotNull(passage);
         assertEquals("Opening Passage", passage.getTitle());
         assertEquals("This is the opening passage", passage.getContent());
-        assertEquals("player1.png", passage.getPlayer());
-        assertEquals("enemy1.png", passage.getEnemy());
-        assertEquals("background2.png", passage.getBackground());
-        assertTrue(passage.hasFightScene());
+        assertEquals("player1.png", passage.getPlayerImage());
+        assertEquals("enemy1.png", passage.getEnemyImage());
+        assertEquals("background2.png", passage.getBackgroundImage());
+        assertTrue(passage.isFightScene());
         assertEquals(new ArrayList<>(), passage.getLinks());
     }
 
@@ -71,9 +71,9 @@ class PassageTest {
         Passage theOtherPassage = new PassageBuilder()
                 .setTitle("Opening Passage")
                 .setContent("This is the opening passage")
-                .setPlayer("player1.png")
-                .setEnemy("enemy1.png")
-                .setBackground("background2.png")
+                .setPlayerImage("player1.png")
+                .setEnemyImage("enemy1.png")
+                .setBackgroundImage("background2.png")
                 .isFightScene(true)
                 .build();
 
@@ -94,9 +94,9 @@ class PassageTest {
         Passage theOtherPassage = new PassageBuilder()
                 .setTitle("Opening Passage")
                 .setContent("This is the opening passage")
-                .setPlayer("player1.png")
-                .setEnemy("enemy1.png")
-                .setBackground("background2.png")
+                .setPlayerImage("player1.png")
+                .setEnemyImage("enemy1.png")
+                .setBackgroundImage("background2.png")
                 .isFightScene(true)
                 .build();
 

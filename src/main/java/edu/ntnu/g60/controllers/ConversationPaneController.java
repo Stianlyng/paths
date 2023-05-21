@@ -89,7 +89,7 @@ public class ConversationPaneController {
                     ConversationPaneController.setCurrentConversationPane(pane);
                     GameApp.changeRootPane(pane);
                     SoundController.playSound("mumble");
-                } else if (passage.hasFightScene()){
+                } else if (passage.isFightScene()){
                     MiniGamePane pane = new MiniGamePane(passage);
                     MiniGameController.setDefaultHealthValues();
                     MiniGameController.setCurrentMiniGamePane(pane);
