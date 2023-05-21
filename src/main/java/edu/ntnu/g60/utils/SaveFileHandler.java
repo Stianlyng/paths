@@ -4,12 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -27,8 +28,12 @@ import edu.ntnu.g60.models.passage.Link;
  */
 public class SaveFileHandler{
     
-    private static final String SAVE_PATH = "/saves/";
-    private static final String STORY_PATH = "/stories/";
+
+    private static final URL SAVE_PATH1 = SaveFileHandler.class.getResource("/saves/");
+    private static final Path SAVE_PATH = Paths.get("src/main/resources/saves/");
+    private static final Path STORY_PATH = Paths.get("src/main/resources/stories/");
+    private static final URL STORY_PATH1 = SaveFileHandler.class.getResource("/stories/");
+
     
  /**
   * Saves the current state of the Game to a .ser file. The filename is based on the player's name, the story's title, and the provided save name.
@@ -49,12 +54,12 @@ public class SaveFileHandler{
             game.getStory().getTitle(),
             saveName
       );
-      // what is the best way to define the filepath? I want to save it in the reources folder. i use maven
-      String resourcePath = SaveFileHandler.class.getResource(SAVE_PATH).getPath();
-
+      System.out.println(fileName);
+      String filePath = SAVE_PATH.resolve(fileName).toString();
+        System.out.println(filePath);   
       Link link = new Link(currentPassage, currentPassage);
       SerializedGameState save = new SerializedGameState(game, link);
-      try (FileOutputStream fileOut = new FileOutputStream(resourcePath + fileName);
+      try (FileOutputStream fileOut = new FileOutputStream(filePath);
            ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
           out.writeObject(save);
       } catch (IOException e) {
@@ -81,13 +86,9 @@ public class SaveFileHandler{
   * @return The SerializedGameState object representing the saved game state, or null if the file could not be read or does not represent a SerializedGameState.
   */
   public static Optional<SerializedGameState> loadGameFromFile(String fileName) {
-      URL resourceUrl = SaveFileHandler.class.getResource(SAVE_PATH + fileName);
-      if (resourceUrl == null) {
-          System.err.println("Could not find file " + fileName);
-          return Optional.empty();
-      }
-      try (InputStream resourceStream = resourceUrl.openStream();
-           ObjectInputStream in = new ObjectInputStream(resourceStream)) {
+      File file = SAVE_PATH.resolve(fileName).toFile();
+      try (FileInputStream fileIn = new FileInputStream(file);
+           ObjectInputStream in = new ObjectInputStream(fileIn)) {
           SerializedGameState save = (SerializedGameState) in.readObject();
           return Optional.of(save);
       } catch (IOException | ClassNotFoundException e) {
@@ -101,9 +102,13 @@ public class SaveFileHandler{
    *
    * @param playerIdentifier The identifier of the player.
    * @return A list of save names.
+ * @throws URISyntaxException
    */
-  public static Set<String> getPlayerSaves(String playerIdentifier) {
-      try (Stream<Path> paths = Files.walk(DefaultValues.SAVE_PATH)) {
+  public static Set<String> getPlayerSaves(String playerIdentifier) throws URISyntaxException {
+
+    Path path = Paths.get(SAVE_PATH1.toURI());
+
+      try (Stream<Path> paths = Files.walk(path)) {
           return paths
               .filter(Files::isRegularFile)
               .map(Path::getFileName)
@@ -121,11 +126,12 @@ public class SaveFileHandler{
    *
    * @param playerIdentifier The identifier of the player.
    * @throws IOException If an I/O error occurs.
+ * @throws URISyntaxException
    */
-  public static void deletePlayerSaves(String playerIdentifier) throws IOException {
+  public static void deletePlayerSaves(String playerIdentifier) throws IOException, URISyntaxException {
       Set<String> playerSaves = getPlayerSaves(playerIdentifier);
       for (String save : playerSaves) {
-          Files.deleteIfExists(DefaultValues.SAVE_PATH.resolve(save));
+          Files.deleteIfExists(SAVE_PATH.resolve(save));
       }
   }
 
@@ -137,7 +143,7 @@ public class SaveFileHandler{
    */
   public static void deleteSave(String playerIdentifier, String storyName, String saveName) throws IOException {
       String fileName = createFormattedSaveFileName(playerIdentifier, storyName, saveName);
-      Files.deleteIfExists(DefaultValues.SAVE_PATH.resolve(fileName));
+      Files.deleteIfExists(SAVE_PATH.resolve(fileName));
   }
 
   
@@ -145,10 +151,13 @@ public class SaveFileHandler{
   * Lists the files in the "src/main/resources/stories" folder.
   *
   * @return a list of file names without extensions
+ * @throws URISyntaxException
   */
-  public static List<String> listFilesInFolder() {
+  public static List<String> listFilesInFolder() throws URISyntaxException {
 
-      try (Stream<Path> paths = Files.list(DefaultValues.STORY_PATH)) {
+    Path path = Paths.get(STORY_PATH1.toURI());
+
+      try (Stream<Path> paths = Files.list(path)) {
           return paths.filter(Files::isRegularFile)
                       .map(Path::getFileName)
                       .map(Path::toString)
@@ -164,10 +173,13 @@ public class SaveFileHandler{
   * Returns a set of the available players.
   *
   * @return A set of player identifiers.
+ * @throws URISyntaxException
   */
-  public static Set<String> getAvailablePlayers() {
+  public static Set<String> getAvailablePlayers() throws URISyntaxException {
+      
+    Path path = Paths.get(SAVE_PATH1.toURI());
 
-     try (Stream<Path> paths = Files.walk(DefaultValues.SAVE_PATH)) {
+     try (Stream<Path> paths = Files.walk(path)) {
          return paths
              .filter(Files::isRegularFile)
              .map(Path::getFileName)
