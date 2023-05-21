@@ -71,9 +71,9 @@ public class ConversationPane extends StackPane{
      * @throws FileNotFoundException if the specified text file is not found.
      */
     public static Group getConversationPaneObjects() throws FileNotFoundException{
-        ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayer(), 150, 200, 150, 150, controller::conversationPaneClickedAction);
-        ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemy(), 700, 200, 150, 150, controller::conversationPaneClickedAction);
-        ImageView backgroundImage = ViewObjects.newImage("backgrounds", passage.getBackground(), 0, 0, 1650, 1000, controller::conversationPaneClickedAction);
+        ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayerImage(), 150, 200, 150, 150, controller::conversationPaneClickedAction);
+        ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemyImage(), 700, 200, 150, 150, controller::conversationPaneClickedAction);
+        ImageView backgroundImage = ViewObjects.newImage("backgrounds", passage.getBackgroundImage(), 0, 0, 1650, 1000, controller::conversationPaneClickedAction);
         ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 309-193, 136-71, 24, 24, controller::conversationPaneClickedAction);
         ImageView healthIcon = ViewObjects.newImage("icons", "heart.png", 488-193, 136-71, 24, 24, controller::conversationPaneClickedAction);
         ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24, controller::conversationPaneClickedAction);

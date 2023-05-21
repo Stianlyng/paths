@@ -1,6 +1,5 @@
 package edu.ntnu.g60.utils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,10 +28,8 @@ import edu.ntnu.g60.models.passage.Link;
 public class SaveFileHandler{
     
 
-    private static final URL SAVE_PATH1 = SaveFileHandler.class.getResource("/saves/");
-    private static final Path SAVE_PATH = Paths.get("src/main/resources/saves/");
-    private static final Path STORY_PATH = Paths.get("src/main/resources/stories/");
-    private static final URL STORY_PATH1 = SaveFileHandler.class.getResource("/stories/");
+    private static final URL SAVE_PATH = SaveFileHandler.class.getResource("/saves/");
+    private static final URL STORY_PATH = SaveFileHandler.class.getResource("/stories/");
 
     
  /**
@@ -54,12 +51,10 @@ public class SaveFileHandler{
             game.getStory().getTitle(),
             saveName
       );
-      System.out.println(fileName);
-      String filePath = SAVE_PATH.resolve(fileName).toString();
-        System.out.println(filePath);   
+      String path = SAVE_PATH.getPath() + fileName;
       Link link = new Link(currentPassage, currentPassage);
       SerializedGameState save = new SerializedGameState(game, link);
-      try (FileOutputStream fileOut = new FileOutputStream(filePath);
+      try (FileOutputStream fileOut = new FileOutputStream(path);
            ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
           out.writeObject(save);
       } catch (IOException e) {
@@ -86,8 +81,8 @@ public class SaveFileHandler{
   * @return The SerializedGameState object representing the saved game state, or null if the file could not be read or does not represent a SerializedGameState.
   */
   public static Optional<SerializedGameState> loadGameFromFile(String fileName) {
-      File file = SAVE_PATH.resolve(fileName).toFile();
-      try (FileInputStream fileIn = new FileInputStream(file);
+      String path = SAVE_PATH.getPath() + fileName;
+      try (FileInputStream fileIn = new FileInputStream(path);
            ObjectInputStream in = new ObjectInputStream(fileIn)) {
           SerializedGameState save = (SerializedGameState) in.readObject();
           return Optional.of(save);
@@ -106,7 +101,7 @@ public class SaveFileHandler{
    */
   public static Set<String> getPlayerSaves(String playerIdentifier) throws URISyntaxException {
 
-    Path path = Paths.get(SAVE_PATH1.toURI());
+    Path path = Paths.get(SAVE_PATH.toURI());
 
       try (Stream<Path> paths = Files.walk(path)) {
           return paths
@@ -131,19 +126,10 @@ public class SaveFileHandler{
   public static void deletePlayerSaves(String playerIdentifier) throws IOException, URISyntaxException {
       Set<String> playerSaves = getPlayerSaves(playerIdentifier);
       for (String save : playerSaves) {
-          Files.deleteIfExists(SAVE_PATH.resolve(save));
+          Path path = Paths.get(SAVE_PATH.getPath() + save);
+          System.out.println(path);
+          Files.deleteIfExists(path);
       }
-  }
-
-  /**
-   * Deletes a specific save.
-   * 
-   * @param saveName
-   * @throws IOException
-   */
-  public static void deleteSave(String playerIdentifier, String storyName, String saveName) throws IOException {
-      String fileName = createFormattedSaveFileName(playerIdentifier, storyName, saveName);
-      Files.deleteIfExists(SAVE_PATH.resolve(fileName));
   }
 
   
@@ -155,7 +141,7 @@ public class SaveFileHandler{
   */
   public static List<String> listFilesInFolder() throws URISyntaxException {
 
-    Path path = Paths.get(STORY_PATH1.toURI());
+    Path path = Paths.get(STORY_PATH.toURI());
 
       try (Stream<Path> paths = Files.list(path)) {
           return paths.filter(Files::isRegularFile)
@@ -177,7 +163,7 @@ public class SaveFileHandler{
   */
   public static Set<String> getAvailablePlayers() throws URISyntaxException {
       
-    Path path = Paths.get(SAVE_PATH1.toURI());
+    Path path = Paths.get(SAVE_PATH.toURI());
 
      try (Stream<Path> paths = Files.walk(path)) {
          return paths

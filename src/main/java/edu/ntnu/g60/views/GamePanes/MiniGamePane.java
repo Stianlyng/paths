@@ -65,9 +65,9 @@ public class MiniGamePane extends StackPane{
      * @throws FileNotFoundException if the file specified is not found
      */
     public static Group addFightPaneObjects() throws FileNotFoundException{
-        ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayer(), 150, 200, 150, 150);
-        ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemy(), 700, 200, 150, 150);
-        ImageView backgroundImage = ViewObjects.newImage("backgrounds", passage.getBackground(), 0, 0, 1650, 1000);
+        ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayerImage(), 150, 200, 150, 150);
+        ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemyImage(), 700, 200, 150, 150);
+        ImageView backgroundImage = ViewObjects.newImage("backgrounds", passage.getBackgroundImage(), 0, 0, 1650, 1000);
         Button fightButton = ViewObjects.newButton("Fight", 309-193, 534-71, "fight_button", "fight_hover", controller::fightAction);
         Button healButton = ViewObjects.newButton("Heal", 704-193, 534-71, "heal_button", "heal_hover", controller::healAction);
         Button inventoryButton = ViewObjects.newButton("Inventory", 309-193, 625-71, "inventory_button", "inventory_hover", controller::inventoryAction);
