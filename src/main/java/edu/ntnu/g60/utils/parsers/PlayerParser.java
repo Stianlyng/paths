@@ -1,7 +1,7 @@
 package edu.ntnu.g60.utils.parsers;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +11,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import edu.ntnu.g60.entities.PlayerEntity;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.player.PlayerBuilder;
-import edu.ntnu.g60.utils.DefaultValues;
 
 /**
  * This class is responsible for parsing a player from a JSON file.
@@ -23,7 +22,7 @@ public class PlayerParser {
     /**
      * The JSON file to parse.
      */
-    private final File jsonFile;
+    private final InputStream jsonStream;
 
     /**
      * The object mapper used to parse the JSON file.
@@ -31,12 +30,20 @@ public class PlayerParser {
     private final ObjectMapper objectMapper;
 
     /**
+     * The path to the JSON file.
+     */
+    public static final String SAVE_PATH = "/saves/";
+    
+    /**
      * Creates a new PlayerParser object.
      * 
      * @param jsonFilename The name of the JSON file to parse.
      */
     public PlayerParser(String jsonFilename) {
-        this.jsonFile = DefaultValues.SAVE_PATH.resolve(jsonFilename + ".json").toFile();
+        this.jsonStream = PlayerParser.class.getResourceAsStream(SAVE_PATH + jsonFilename + ".json");
+        if (this.jsonStream == null) {
+            // todo; Handle missing resource
+        }
         this.objectMapper = new ObjectMapper();
     }
 
@@ -44,13 +51,11 @@ public class PlayerParser {
      * Parses the JSON file and returns a Player object.
      * 
      * @return A Player object.
+     * @throws IOException if an I/O error occurs
      */
-    public List<Player> parse() {
-        try {
-            List<PlayerEntity> playerEntities = objectMapper.readValue(jsonFile,
-                    new TypeReference<List<PlayerEntity>>() {
-                    });
-
+    public List<Player> parse() throws IOException {
+        try (InputStream is = this.jsonStream) {
+            List<PlayerEntity> playerEntities = objectMapper.readValue(is, new TypeReference<List<PlayerEntity>>() {});
             return playerEntities.stream()
                     .map(playerEntity -> new PlayerBuilder()
                             .setName(playerEntity.getName())
@@ -60,9 +65,6 @@ public class PlayerParser {
                             .setInventory(playerEntity.getInventory())
                             .build())
                     .collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return null;
     }
 }
