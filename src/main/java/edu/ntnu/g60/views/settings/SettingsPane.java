@@ -38,7 +38,7 @@ public class SettingsPane extends StackPane{
     private static Group getSettingObjects() throws FileNotFoundException{
         Text informationText = ViewObjects.newText("Settings", 45, false, 415, 50);
         ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
-        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToOpeningPaneAction);
+        Button backButton = ViewObjects.newButton("Back", 760, 524, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToOpeningPaneAction);
         Text volumeText = ViewObjects.newText("Volume:", 25, false, 130, 100);
         Slider volumeSlider = ViewObjects.newSlider(130, 120);
         Button textEditorButton = ViewObjects.newButton("Edit story", 730, 100, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::goToTextEditorPaneAction);

@@ -196,7 +196,6 @@ public class ViewObjects {
        ImageView imageview = new ImageView();
        String imagePath = IMAGE_PATH + foldername + "/" + imagename;
        Image image = new Image(ViewObjects.class.getResourceAsStream(imagePath));
-
        imageview.setImage(image);
        imageview.setX(x);
        imageview.setY(y);

@@ -33,9 +33,9 @@ public class CustomGamePane extends StackPane{
      * @throws IOException if the file specified is not found
      */
     private static Group getCustomGameObjects() throws FileNotFoundException{
-        Button startButton = ViewObjects.newButton("Start", 614-193, 385-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::goToNewGamePaneAction);
-        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToOpeningPaneAction);
-        Button importButton = ViewObjects.newButton("Import", 614-193, 327-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::importNewFileAction);
+        Button startButton = ViewObjects.newButton("Start", 421, 314, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::goToNewGamePaneAction);
+        Button backButton = ViewObjects.newButton("Back", 760, 524, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToOpeningPaneAction);
+        Button importButton = ViewObjects.newButton("Import", 421, 256, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::importNewFileAction);        
         ImageView background = ViewObjects.newImage(ViewValues.MENU_BACKGROUND_FOLDERNAME, ViewValues.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,ViewValues.BACKGROUND_WIDTH ,ViewValues.BACKGROUND_HEIGHT);
         ImageView information = ViewObjects.newImage("icons", "information.png", 830 ,20 ,35 ,35, controller::goToInformationFileStructurePaneAction);
         return new Group(background, startButton, backButton, importButton, information);

@@ -38,7 +38,7 @@ public class FileStructureInformationPane extends StackPane{
     private static Group getInformationObjects() throws FileNotFoundException {
         Text informationTitle = ViewObjects.newText("File format", 45, false, 415, 50);
         ImageView background = ViewObjects.newImage("backgrounds", "Background2.jpg", 0 ,0 ,1643 ,1006);
-        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToCustomGamePaneAction);
+        Button backButton = ViewObjects.newButton("Back", 760, 524, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToCustomGamePaneAction);
         Text informationText = ViewObjects.newText(
             "Haunted House\n" +
             "::Beginnings \n" +

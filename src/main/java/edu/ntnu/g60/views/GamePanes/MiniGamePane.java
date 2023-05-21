@@ -68,18 +68,18 @@ public class MiniGamePane extends StackPane{
         ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayerImage(), 150, 200, 150, 150);
         ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemyImage(), 700, 200, 150, 150);
         ImageView backgroundImage = ViewObjects.newImage("backgrounds", passage.getBackgroundImage(), 0, 0, 1650, 1000);
-        Button fightButton = ViewObjects.newButton("Fight", 309-193, 534-71, "fight_button", "fight_hover", controller::fightAction);
-        Button healButton = ViewObjects.newButton("Heal", 704-193, 534-71, "heal_button", "heal_hover", controller::healAction);
-        Button inventoryButton = ViewObjects.newButton("Inventory", 309-193, 625-71, "inventory_button", "inventory_hover", controller::inventoryAction);
-        Button escapeButton = ViewObjects.newButton("Escape", 704-193, 625-71, "escape_button", "escape_hover", controller::escapeAction);
-        ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 309-193, 136-71, 24, 24);
-        ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24);
-        Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 422-193, 155-71);
-        Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 342-193, 155-71);
-        Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 163, 38);
+        Button fightButton = ViewObjects.newButton("Fight", 116, 463, "fight_button", "fight_hover", controller::fightAction);
+        Button healButton = ViewObjects.newButton("Heal", 511, 463, "heal_button", "heal_hover", controller::healAction);
+        Button inventoryButton = ViewObjects.newButton("Inventory", 116, 554, "inventory_button", "inventory_hover", controller::inventoryAction);
+        Button escapeButton = ViewObjects.newButton("Escape", 511, 554, "escape_button", "escape_hover", controller::escapeAction);
+        ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 116, 65, 24, 24);
+        ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 196, 65, 24, 24);
+        Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 229, 84);
+        Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 149, 84);
+        Rectangle infoBoard = ViewObjects.newRectangle(110, 58, 163, 38);
         MenuButton dropDown = ViewObjects.newMenuButton(controller::goToMenuAndSaveAction, controller::exitApplicationAction, "menu_button", "menu_hover", 283, 129-71, "Save and go to main menu", "Exit application");
-        playerBar =  ViewObjects.newHealthBar(309-193, 504-71, 1.00F, "progress_bar"); 
-        enemyBar = ViewObjects.newHealthBar(704-193, 504-71, 1.00F, "progress_bar");
+        playerBar =  ViewObjects.newHealthBar(116, 433, 1.00F, "progress_bar"); 
+        enemyBar = ViewObjects.newHealthBar(511, 433, 1.00F, "progress_bar");
         return new Group(backgroundImage, infoBoard, enemyImage, playerImage, fightButton, healButton,
         inventoryButton, escapeButton, coinIcon, scoreIcon, scoreText, goldText, playerBar, enemyBar, dropDown);
     }
@@ -110,10 +110,10 @@ public class MiniGamePane extends StackPane{
      * @param pane the MiniGamePane object
      */
     public static void addDefaultObjects(MiniGamePane pane){
-        Button fightButton = ViewObjects.newButton("Fight", 309-193, 534-71, "fight_button", "fight_hover", controller::fightAction);
-        Button healButton = ViewObjects.newButton("Heal", 704-193, 534-71, "heal_button", "heal_hover",  controller::healAction);
-        Button inventoryButton = ViewObjects.newButton("Inventory", 309-193, 625-71, "inventory_button", "inventory_hover", controller::inventoryAction);
-        Button escapeButton = ViewObjects.newButton("Escape", 704-193, 625-71, "escape_button", "escape_hover", controller::escapeAction);
+        Button fightButton = ViewObjects.newButton("Fight", 116, 463, "fight_button", "fight_hover", controller::fightAction);
+        Button healButton = ViewObjects.newButton("Heal", 511, 463, "heal_button", "heal_hover", controller::healAction);
+        Button inventoryButton = ViewObjects.newButton("Inventory", 116, 554, "inventory_button", "inventory_hover", controller::inventoryAction);
+        Button escapeButton = ViewObjects.newButton("Escape", 511, 554, "escape_button", "escape_hover", controller::escapeAction);
         StackPane.setAlignment(fightButton, Pos.BOTTOM_LEFT);
         StackPane.setMargin(fightButton, new Insets(50, 16, 109, 16)); 
         StackPane.setAlignment(healButton, Pos.BOTTOM_RIGHT);
@@ -132,10 +132,10 @@ public class MiniGamePane extends StackPane{
      * @throws FileNotFoundException if the file specified is not found
      */
     public static void addFightObjects(MiniGamePane pane) throws FileNotFoundException{
-        Button abilityOneButton = ViewObjects.newButton("Insult", 209-193, 484-71, "fight_button", "fight_hover", controller::abilityOneAction);
-        Button abilityTwoButton = ViewObjects.newButton("Shame", 604-193, 484-71, "fight_button", "fight_hover", controller::abilityTwoAction);
-        Button abilityThreeButton = ViewObjects.newButton("Hit", 209-193, 575-71, "fight_button", "fight_hover", controller::abilityThreeAction);
-        Button backButton = ViewObjects.newButton("Back", 604-193, 575-71, "fight_button", "fight_hover", controller::backAction);
+        Button abilityOneButton = ViewObjects.newButton("Insult", 16, 413, "fight_button", "fight_hover", controller::abilityOneAction);
+        Button abilityTwoButton = ViewObjects.newButton("Shame", 411, 413, "fight_button", "fight_hover", controller::abilityTwoAction);
+        Button abilityThreeButton = ViewObjects.newButton("Hit", 16, 504, "fight_button", "fight_hover", controller::abilityThreeAction);
+        Button backButton = ViewObjects.newButton("Back", 411, 504, "fight_button", "fight_hover", controller::backAction);        
         StackPane.setAlignment(abilityOneButton, Pos.BOTTOM_LEFT);
         StackPane.setMargin(abilityOneButton, new Insets(50, 16, 109, 16)); 
         StackPane.setAlignment(abilityTwoButton, Pos.BOTTOM_RIGHT);
@@ -154,10 +154,10 @@ public class MiniGamePane extends StackPane{
      * @throws FileNotFoundException if the file specified is not found
      */
     public static void addHealObjects(MiniGamePane pane) throws FileNotFoundException{
-        Button healOneButton = ViewObjects.newButton("Lick wound", 209-193, 484-71, "heal_button", "heal_hover", controller::healOneAction);
-        Button healTwoButton = ViewObjects.newButton("Ignore pain", 604-193, 484-71, "heal_button", "heal_hover", controller::healTwoAction);
-        Button backButton = ViewObjects.newButton("Back", 604-193, 575-71, "heal_button", "heal_hover", controller::backAction);
-        Button emptyButton = ViewObjects.newButton("", 604-193, 575-71, "heal_button", "heal_hover", controller::emptyAction);
+        Button healOneButton = ViewObjects.newButton("Lick wound", 16, 413, "heal_button", "heal_hover", controller::healOneAction);
+        Button healTwoButton = ViewObjects.newButton("Ignore pain", 411, 413, "heal_button", "heal_hover", controller::healTwoAction);
+        Button backButton = ViewObjects.newButton("Back", 411, 504, "heal_button", "heal_hover", controller::backAction);
+        Button emptyButton = ViewObjects.newButton("", 411, 504, "heal_button", "heal_hover", controller::emptyAction);        
         StackPane.setAlignment(healOneButton, Pos.BOTTOM_LEFT);
         StackPane.setMargin(healOneButton, new Insets(50, 16, 109, 16)); 
         StackPane.setAlignment(healTwoButton, Pos.BOTTOM_RIGHT);
@@ -177,10 +177,10 @@ public class MiniGamePane extends StackPane{
      */
     public static void addInventoryObjects(MiniGamePane pane) throws FileNotFoundException{
         String[] inventoryItems = MiniGameController.getPlayerInventoryItems();
-        Button itemOneButton = ViewObjects.newButton(inventoryItems[0], 209-193, 484-71, "inventory_button", "inventory_hover", controller::inventoryOneAction);
-        Button itemTwoButton = ViewObjects.newButton(inventoryItems[1], 604-193, 484-71, "inventory_button", "inventory_hover", controller::inventoryTwoAction);
-        Button itemThreeButton = ViewObjects.newButton(inventoryItems[2], 209-193, 575-71, "inventory_button", "inventory_hover", controller::inventoryThreeAction);
-        Button backButton = ViewObjects.newButton("Back", 604-193, 575-71, "inventory_button", "inventory_hover", controller::backAction);
+        Button itemOneButton = ViewObjects.newButton(inventoryItems[0], 16, 413, "inventory_button", "inventory_hover", controller::inventoryOneAction);
+        Button itemTwoButton = ViewObjects.newButton(inventoryItems[1], 411, 413, "inventory_button", "inventory_hover", controller::inventoryTwoAction);
+        Button itemThreeButton = ViewObjects.newButton(inventoryItems[2], 16, 504, "inventory_button", "inventory_hover", controller::inventoryThreeAction);
+        Button backButton = ViewObjects.newButton("Back", 411, 504, "inventory_button", "inventory_hover", controller::backAction);        
         StackPane.setAlignment(itemOneButton, Pos.BOTTOM_LEFT);
         StackPane.setMargin(itemOneButton, new Insets(50, 16, 109, 16)); 
         StackPane.setAlignment(itemTwoButton, Pos.BOTTOM_RIGHT);
@@ -200,10 +200,10 @@ public class MiniGamePane extends StackPane{
      * @throws FileNotFoundException if the file specified is not found
      */
     public static void addEscapeObjects(MiniGamePane pane) throws FileNotFoundException{
-        Button continueButton = ViewObjects.newButton("ESCAPE!", 209-193, 484-71, "escape_button", "escape_hover", controller::escapeTwoAction);
-        Button backButton = ViewObjects.newButton("Go back", 604-193, 484-71, "escape_button", "escape_hover", controller::backAction);
-        Button emptyOneButton = ViewObjects.newButton("", 209-193, 575-71, "escape_button", "escape_hover", controller::emptyAction);
-        Button emptyTwoButton = ViewObjects.newButton("", 604-193, 575-71, "escape_button", "escape_hover", controller::emptyAction);
+        Button continueButton = ViewObjects.newButton("ESCAPE!", 16, 413, "escape_button", "escape_hover", controller::escapeTwoAction);
+        Button backButton = ViewObjects.newButton("Go back", 411, 413, "escape_button", "escape_hover", controller::backAction);
+        Button emptyOneButton = ViewObjects.newButton("", 16, 504, "escape_button", "escape_hover", controller::emptyAction);
+        Button emptyTwoButton = ViewObjects.newButton("", 411, 504, "escape_button", "escape_hover", controller::emptyAction);        
         StackPane.setAlignment(continueButton, Pos.BOTTOM_LEFT);
         StackPane.setMargin(continueButton, new Insets(50, 16, 109, 16)); 
         StackPane.setAlignment(backButton, Pos.BOTTOM_RIGHT);

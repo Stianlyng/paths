@@ -35,9 +35,9 @@ public class NewGamePane extends StackPane{
      * @throws IOException if the file specified is not found
      */
     private static Group getNewGameObjects() throws FileNotFoundException{
-        Button startButton = ViewObjects.newButton("Start", 614-193, 375-71, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::startGameAction);
-        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToOpeningPaneAction);
-        storyChoice = ViewObjects.newChoiceBox(controller.getStories(), 614-193, 269-71, "launch_choicebox");
+        Button startButton = ViewObjects.newButton("Start", 421, 304, ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::startGameAction);
+        Button backButton = ViewObjects.newButton("Back", 760, 524, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToOpeningPaneAction);
+        storyChoice = ViewObjects.newChoiceBox(controller.getStories(), 421, 198, "launch_choicebox");        
         ImageView background = ViewObjects.newImage(ViewValues.MENU_BACKGROUND_FOLDERNAME, ViewValues.MENU_BACKGROUND_IMAGENAME, 0 ,0 ,ViewValues.BACKGROUND_WIDTH ,ViewValues.BACKGROUND_HEIGHT);
         return new Group(background, startButton, backButton, storyChoice);
     }

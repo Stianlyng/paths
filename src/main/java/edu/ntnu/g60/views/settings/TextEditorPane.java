@@ -35,7 +35,7 @@ public class TextEditorPane extends StackPane{
      * @throws FileNotFoundException if the file specified is not found
      */
     private Group getTextEditorObjects() throws FileNotFoundException {
-        Button backButton = ViewObjects.newButton("Back", 953-193, 595-71, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToSettingsPaneAction);
+        Button backButton = ViewObjects.newButton("Back", 760, 524, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToSettingsPaneAction);
 
         Button openButton = ViewObjects.newButton("Open", 600, 200,  ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::openFileInEditorAction);
         Button saveButton = ViewObjects.newButton("Save", 600, 275,  ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::saveFileInEditorAction);

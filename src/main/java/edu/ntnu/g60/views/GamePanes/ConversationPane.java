@@ -74,33 +74,33 @@ public class ConversationPane extends StackPane{
         ImageView enemyImage = ViewObjects.newImage("characters", passage.getPlayerImage(), 150, 200, 150, 150, controller::conversationPaneClickedAction);
         ImageView playerImage = ViewObjects.newImage("characters", passage.getEnemyImage(), 700, 200, 150, 150, controller::conversationPaneClickedAction);
         ImageView backgroundImage = ViewObjects.newImage("backgrounds", passage.getBackgroundImage(), 0, 0, 1650, 1000, controller::conversationPaneClickedAction);
-        ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 309-193, 136-71, 24, 24, controller::conversationPaneClickedAction);
-        ImageView healthIcon = ViewObjects.newImage("icons", "heart.png", 488-193, 136-71, 24, 24, controller::conversationPaneClickedAction);
-        ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 389-193, 136-71, 24, 24, controller::conversationPaneClickedAction);
+        ImageView coinIcon = ViewObjects.newImage("icons", "coin.png", 116, 65, 24, 24, controller::conversationPaneClickedAction);
+        ImageView healthIcon = ViewObjects.newImage("icons", "heart.png", 295, 65, 24, 24, controller::conversationPaneClickedAction);
+        ImageView scoreIcon = ViewObjects.newImage("icons", "star.png", 196, 65, 24, 24, controller::conversationPaneClickedAction);
 
         MenuButton dropDownMenu = ViewObjects.newMenuButton(controller::goToMenuAndSaveAction, controller::exitApplicationAction, "menu_button", "menu_hover", 413, 129-71, "Save and go to main menu", "Exit application");
-        Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 422-193, 155-71, controller::conversationPaneClickedAction);
-        Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 342-193, 155-71, controller::conversationPaneClickedAction);
-        Text healthText = ViewObjects.newText("" + game.getPlayer().getHealth(), 18, false, 520-193, 155-71, controller::conversationPaneClickedAction);
-        ChoiceBox inventory = ViewObjects.newChoiceBox(ConversationPaneController.getPlayerInventoryItems(), 724, 129-71, "inventory_choicebox");
+        Text scoreText = ViewObjects.newText("" + game.getPlayer().getScore(), 18, false, 229, 84, controller::conversationPaneClickedAction);
+        Text goldText = ViewObjects.newText("" + game.getPlayer().getGold(), 18, false, 149, 84, controller::conversationPaneClickedAction);
+        Text healthText = ViewObjects.newText("" + game.getPlayer().getHealth(), 18, false, 327, 84, controller::conversationPaneClickedAction);
+        ChoiceBox inventory = ViewObjects.newChoiceBox(ConversationPaneController.getPlayerInventoryItems(), 724, 84, "inventory_choicebox");
 
-        Rectangle infoBoard = ViewObjects.newRectangle(303-193, 129-71, 293, 38, controller::conversationPaneClickedAction);
+        Rectangle infoBoard = ViewObjects.newRectangle(110, 58, 293, 38, controller::conversationPaneClickedAction);
         String[] textline = ConversationPaneController.getTextLines();
-        Text conversationTextLineOne = ViewObjects.newText(textline[0], 24, false, 333-193, 520-71, controller::conversationPaneClickedAction);
-        Text conversationTextLineTwo = ViewObjects.newText(textline[1], 24, false, 333-193, 555-71, controller::conversationPaneClickedAction);
-        Text conversationTextLineThree = ViewObjects.newText(textline[2], 24, false, 333-193, 590-71, controller::conversationPaneClickedAction);
-        Text conversationTextLineFour = ViewObjects.newText(textline[3], 24, false, 333-193, 425-71, controller::conversationPaneClickedAction);
+        Text conversationTextLineOne = ViewObjects.newText(textline[0], 24, false, 140, 449, controller::conversationPaneClickedAction);
+        Text conversationTextLineTwo = ViewObjects.newText(textline[1], 24, false, 140, 484, controller::conversationPaneClickedAction);
+        Text conversationTextLineThree = ViewObjects.newText(textline[2], 24, false, 140, 519, controller::conversationPaneClickedAction);
+        Text conversationTextLineFour = ViewObjects.newText(textline[3], 24, false, 140, 354, controller::conversationPaneClickedAction);
 
         Group root = new Group(backgroundImage, infoBoard, enemyImage, playerImage, coinIcon,
         healthIcon, scoreIcon, scoreText, goldText, healthText,
         conversationTextLineOne, conversationTextLineTwo, conversationTextLineThree, conversationTextLineFour, dropDownMenu, inventory);
 
         if(ConversationPaneController.getTypeInCurrentConversationPane().equals("{N}")){
-            ImageView neutralBubble = ViewObjects.newImage("animations", "neutralbubble.png", 327-193, 440-71, 793, 211+511, controller::conversationPaneClickedAction);
+            ImageView neutralBubble = ViewObjects.newImage("animations", "neutralbubble.png", 134, 369, 793, 722, controller::conversationPaneClickedAction);
             root.getChildren().add(neutralBubble);
             neutralBubble.toBack();
         } else if(ConversationPaneController.getTypeInCurrentConversationPane().equals("{E}")){
-            ImageView rightBubble = ViewObjects.newImage("animations", "righttalkingbubble.png", 327-193, 440-71,793, 211+511, controller::conversationPaneClickedAction);
+            ImageView rightBubble = ViewObjects.newImage("animations", "righttalkingbubble.png", 134, 369,793, 722, controller::conversationPaneClickedAction);
             root.getChildren().add(rightBubble);
             rightBubble.toBack();
             playerImage.setFitWidth(175);
@@ -108,7 +108,7 @@ public class ConversationPane extends StackPane{
             enemyImage.setFitWidth(125);
             enemyImage.setFitHeight(125);
         } else if(ConversationPaneController.getTypeInCurrentConversationPane().equals("{P}")){
-            ImageView leftBubble = ViewObjects.newImage("animations", "lefttalkingbubble.png", 327-193, 440-71, 793, 211+511, controller::conversationPaneClickedAction);
+            ImageView leftBubble = ViewObjects.newImage("animations", "lefttalkingbubble.png", 134, 369, 793, 722, controller::conversationPaneClickedAction);
             root.getChildren().add(leftBubble);
             leftBubble.toBack();
             playerImage.setFitWidth(125);
