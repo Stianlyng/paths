@@ -47,4 +47,15 @@ public class StoryEntityTest {
         storyEntity.setPassages(passages);
         assertEquals(passages, storyEntity.getPassages());
     }
+
+    @Test
+    public void testGetAndSetGoals() {
+        GoalEntity goals = new GoalEntity();
+        goals.setGold(100);
+        goals.setHealth(100);
+        goals.setScore(100);
+        storyEntity.setGoals(goals);
+        assertEquals(goals, storyEntity.getGoals());
+    }
+    
 }

@@ -52,7 +52,12 @@ public class LinkEntityTest {
         linkEntity.setActions(actions);
         assertEquals(actions, linkEntity.getActions());
     }
-
+    
+    @Test
+    void testGetActionsWhenNull() {
+        assertTrue(linkEntity.getActions().isEmpty(), "Should return an empty list when actions is null");
+    }
+    
     @Test
     public void testSetActions() {
         List<ActionEntity> actions = new ArrayList<>();

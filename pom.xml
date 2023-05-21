@@ -139,6 +139,9 @@
                                 <exclude>**edu/ntnu/g60/exceptions/**</exclude>
                                 <exclude>**edu/ntnu/g60/controllers/**</exclude>
                             </excludes>
+                            <excludePackageNames>
+                                edu.ntnu.g60.GameAppLauncher
+                            </excludePackageNames>
                         </configuration>
                     </execution>
                 </executions>
