@@ -92,9 +92,8 @@ public class ViewObjects {
     }
 
 
-    public static ChoiceBox<String> newChoiceBox(String[] choices, int x, int y, String id, String title) {
+    public static ChoiceBox<String> newChoiceBox(String[] choices, int x, int y, String id) {
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().add(title);
         choiceBox.setId(id);
         choiceBox.getItems().addAll(choices);
         choiceBox.setLayoutX(x);
