@@ -73,6 +73,16 @@ public class StoryParser {
         this.objectMapper = new ObjectMapper();
         build();
     }
+    
+    
+    public StoryParser(InputStream jsonStream) {
+        this.jsonFile = jsonStream;
+        if (this.jsonFile == null) {
+            // todo; Handle missing resource
+        }
+        this.objectMapper = new ObjectMapper();
+        build();
+    }
 
     /**
      * Builds a Passage object from a PassageEntity object.

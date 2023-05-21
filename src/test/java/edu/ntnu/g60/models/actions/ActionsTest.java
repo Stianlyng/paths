@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
+
 
 /**
  * Test class for all the actionis.
@@ -39,7 +41,7 @@ public class ActionsTest {
      * @throws IllegalActionException if the player is null.
      */
     @Test
-    public void test_gold_action() throws IllegalActionException {
+    public void testGoldAction() throws IllegalActionException {
         GoldAction goldAction = new GoldAction(50);
         goldAction.execute(player);
         assertEquals(50, player.getGold());
@@ -51,7 +53,7 @@ public class ActionsTest {
      * @throws IllegalActionException if the player is null.
      */
     @Test
-    public void test_health_action() throws IllegalActionException {
+    public void testHealthAction() throws IllegalActionException {
         HealthAction healthAction = new HealthAction(10);
         healthAction.execute(player);
         assertEquals(10, player.getHealth());
@@ -63,7 +65,7 @@ public class ActionsTest {
      * @throws IllegalActionException if the player is null.
      */
     @Test
-    public void test_inventory_action() throws IllegalActionException {
+    public void testInventoryAction() throws IllegalActionException {
         InventoryAction inventoryAction = new InventoryAction("Sword");
         inventoryAction.execute(player);
         assertEquals(1, player.getInventory().size());
@@ -76,10 +78,11 @@ public class ActionsTest {
      * @throws IllegalActionException if the player is null.
      */
     @Test
-    public void test_score_action() throws IllegalActionException {
+    public void testScoreAction() throws IllegalActionException {
         ScoreAction scoreAction = new ScoreAction(100);
         scoreAction.execute(player);
         assertEquals(100, player.getScore());
         assertThrows(IllegalActionException.class, () -> scoreAction.execute(null));
     }
+    
 }
