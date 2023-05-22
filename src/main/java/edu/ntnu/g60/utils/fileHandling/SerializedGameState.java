@@ -1,4 +1,4 @@
-package edu.ntnu.g60.utils;
+package edu.ntnu.g60.utils.fileHandling;
 
 import java.io.Serializable;
 
@@ -16,7 +16,7 @@ public class SerializedGameState implements Serializable {
     private Link currentLink;
 
     public SerializedGameState(Game game, Link currentLink) {
-        this.game = new Game(game); // Create a deep copy of the Game instance
+        this.game = new Game(game); 
         this.currentLink = currentLink;
     }
 

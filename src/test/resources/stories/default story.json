@@ -1,0 +1,321 @@
+{
+  "title" : "Default story",
+  "goals": {
+    "score": 0,
+	  "gold": 100,
+	  "health": 80,
+	  "inventory": [
+    ]
+  },
+  "passages" : [ {
+    "title" : "Beginnings",
+    "content" : "{N}To continue, click anywhere on the screen\n{N}You find yourself standing in front of a dilapidated, old haunted house. The wind howls eerily, and the moon casts long shadows on the creaky porch.\n{E}Greetings, adventurer. Will you dare to enter?\n\n",
+    "isFight":false,
+    "links" : [ {
+      "text" : "Enter the haunted house",
+      "reference" : "Dark Foyer",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 0
+        },
+        {
+          "type": "GOLD",
+          "value": 20
+        }
+      ]
+    }, {
+      "text" : "Turn back",
+      "reference" : "Dark Foyer",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 0
+        },
+        {
+          "type": "GOLD",
+          "value": -10
+        }
+      ]
+    } ]
+  }, {
+    "title" : "Dark Foyer",
+    "content" : "{N}As you step inside, the musty air fills your nostrils. A flickering candle on a dusty table illuminates a dimly lit foyer.\n{E}Welcome, traveler. Your journey begins here. First you will have to prove yourself in combat\n{P}Combat??? what do you mean combat?\n\n",
+    "isFight":true,
+    "links" : [ {
+      "text" : "Search for an exit",
+      "reference" : "Dark Foyer",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": -10
+        },
+        {
+          "type": "GOLD",
+          "value": 0
+        }
+      ]
+    }, {
+      "text" : "Inspect the candle",
+      "reference" : "Glowing Passage",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 10
+        },
+        {
+          "type": "GOLD",
+          "value": 20
+        }
+      ]
+    } ]
+  }, {
+    "title" : "Glowing Passage",
+    "isFight":false,
+    "content" : "{N}You follow the soft glow of the candle down a narrow passage. The walls are covered in cobwebs, and the floorboards creak beneath your feet.\n{E}Intriguing, isn't it? What will you do next?\n\n",
+    "links" : [ {
+      "text" : "Continue down the passage",
+      "reference" : "Dusty Library",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 0
+        },
+        {
+          "type": "GOLD",
+          "value": 10
+        }
+      ]
+    }, {
+      "text" : "Turn back",
+      "reference" : "Dark Foyer",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 10
+        },
+        {
+          "type": "GOLD",
+          "value": 10
+        }
+      ]
+    } ]
+  }, {
+    "title" : "Dusty Library",
+    "isFight":false,
+    "content" : "{N}You enter a dusty library, filled with ancient tomes and tattered scrolls. The shelves tower above you, their contents shrouded in mystery.\n{E}Books hold knowledge untold. What shall you explore?\n\n",
+    "links" : [ {
+      "text" : "Pick up an old book",
+      "reference" : "The Forbidden Tome",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 10
+        },
+        {
+          "type": "GOLD",
+          "value": 20
+        }
+      ]
+    }, {
+      "text" : "Leave the library",
+      "reference" : "Dark Foyer",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": -10
+        },
+        {
+          "type": "GOLD",
+          "value": -10
+        }
+      ]
+    } ]
+  }, {
+    "title" : "The Forbidden Tome",
+    "isFight":false,
+    "content" : "{N}You carefully open the ancient book, its pages brittle with age. Strange symbols and incantations fill the worn parchment.\n{E}Ancient secrets lie within. Choose your path.\n\n",
+    "links" : [ {
+      "text" : "Attempt a forbidden spell",
+      "reference" : "Unleashing Chaos",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": -30
+        },
+        {
+          "type": "GOLD",
+          "value": -20
+        }
+      ]
+    }, {
+      "text" : "Close the book",
+      "reference" : "Dusty Library",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 30
+        },
+        {
+          "type": "GOLD",
+          "value": 10
+        }
+      ]
+    } ]
+  }, {
+    "title" : "Unleashing Chaos",
+    "isFight":true,
+    "content" : "{N}As you recite the forbidden words, an ominous energy fills the room. Shadows dance and swirl, and a vortex of darkness materializes.\n{E}Foolish mortal, you've awakened me. Prepare for your demise.\n{P}What have I done?!\n\n",
+    "links" : [ {
+      "text" : "Accept your fate",
+      "reference" : "game over",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 0
+        },
+        {
+          "type": "GOLD",
+          "value": 0
+        }
+      ]
+    }, {
+      "text" : "Fight the dark entity",
+      "reference" : "The Final Confrontation",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": -20
+        },
+        {
+          "type": "GOLD",
+          "value": 10
+        }
+      ]
+    } ]
+  }, {
+    "title" : "The Final Confrontation",
+    "isFight":false,
+    "content" : "{N}With courage in your heart, you face the dark entity head-on. The battle rages, your every move determined to banish the evil that lurks within.\n{E}Your bravery impresses me. But will it be enough?\n{P}I will not falter!\n\n",
+    "links" : [ {
+      "text" : "Unleash a powerful spell",
+      "reference" : "Triumph of Light",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 0
+        },
+        {
+          "type": "GOLD",
+          "value": 0
+        }
+      ]
+    }, {
+      "text" : "Defend yourself",
+      "reference" : "game Over",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 0
+        },
+        {
+          "type": "GOLD",
+          "value": 0
+        }
+      ]
+    } ]
+  }, {
+    "title" : "Triumph of Light",
+    "isFight":false,
+    "content" : "{N}Your spell radiates with brilliant light, engulfing the dark entity. It shrieks in agony, its form dissipating into nothingness.\n{E}The darkness is vanquished, and the haunted house is at peace once more.\n{N}Congratulations, hero. You have triumphed!\n\n",
+    "links" : [ {
+      "text" : "Continue your journey",
+      "reference" : "Courtyard",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 20
+        },
+        {
+          "type": "GOLD",
+          "value": 0
+        }
+      ]
+    }, {
+      "text" : "End your adventure",
+      "reference" : "end game",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 0
+        },
+        {
+          "type": "GOLD",
+          "value": 0
+        }
+      ]
+    } ]
+  }, {
+    "title" : "Courtyard",
+    "isFight":false,
+    "content" : "{N}You step into a moonlit courtyard, adorned with overgrown vines and statues of forgotten souls. A sense of tranquility fills the air.\n{E}The spirits here are restless. How will you proceed?\n\n",
+    "links" : [ {
+      "text" : "Explore the statues",
+      "reference" : "Enigmatic Statues",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 10
+        },
+        {
+          "type": "GOLD",
+          "value": 10
+        }
+      ]
+    }, {
+      "text" : "Rest on a stone bench",
+      "reference" : "Enigmatic Statues",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 10
+        },
+        {
+          "type": "GOLD",
+          "value": -10
+        }
+      ]
+    } ]
+  }, {
+    "title" : "Enigmatic Statues",
+    "isFight":false,
+    "content" : "{N}As you approach the statues, their eyes seem to follow your every move. Symbols etched into their pedestals hold a cryptic message.\n{E}The past whispers its secrets. What will you decipher?\n{N}Remeber thought that symbols are deadly.\n",
+    "links" : [ {
+      "text" : "Decipher the symbols",
+      "reference" : "game over",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 0
+        },
+        {
+          "type": "GOLD",
+          "value": -10
+        }
+      ]
+    }, {
+      "text" : "Leave the courtyard",
+      "reference" : "end game",
+      "actions": [
+        {
+          "type": "HEALTH",
+          "value": 10
+        },
+        {
+          "type": "GOLD",
+          "value": 10
+        }
+      ]
+    } ]
+  } ]
+}

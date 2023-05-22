@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import edu.ntnu.g60.entities.StoryNotFoundException;
-import edu.ntnu.g60.entities.StoryParsingException;
+import edu.ntnu.g60.exceptions.StoryParsingException;
 
 
 /**
@@ -41,12 +41,13 @@ public class TextfileParser {
         if (file == null) {
             throw new IllegalArgumentException("File cannot be null");
         }
+
+        if (file.isDirectory()) {
+            throw new IllegalArgumentException("File cannot be a directory: " + file.getAbsolutePath());
+        }
         if (!file.exists() || !file.isFile()) {
             LOGGER.severe("Story file not found: " + file.getAbsolutePath());
             throw new StoryNotFoundException("Story file not found: " + file.getAbsolutePath());
-        }
-        if (file.isDirectory()) {
-            throw new IllegalArgumentException("File cannot be a directory: " + file.getAbsolutePath());
         }
 
         String fileName = file.getName();
@@ -96,7 +97,8 @@ public class TextfileParser {
      */
     private static ObjectNode createStoryNode(List<String> lines, JsonNodeFactory nodeFactory) {
         String  title = lines.get(0);
-        if (title.isEmpty()) {
+
+        if (title.isEmpty() || title.startsWith(PASSAGE_IDENTIFIER)) {
             throw new IllegalArgumentException("Story title cannot be empty");
         }
         if (title.length() > 30) {

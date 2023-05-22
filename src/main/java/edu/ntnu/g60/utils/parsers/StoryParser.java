@@ -202,4 +202,10 @@ public class StoryParser {
     public List<Goal> getGoals() {
         return this.goals;
     }
+    
+    public static void main(String[] args) throws BrokenLinkException {
+        StoryParser storyParser = new StoryParser(" s   /testStory");
+        Story story = storyParser.getStory();
+        System.out.println(story.getTitle());
+    }
 }

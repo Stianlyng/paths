@@ -1,8 +1,6 @@
-package edu.ntnu.g60.utils.fileHandling;
+package edu.ntnu.g60.utils.frontend;
 
 import org.junit.jupiter.api.Test;
-
-import edu.ntnu.g60.utils.frontend.FrontendUtils;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -11,7 +11,7 @@ import edu.ntnu.g60.models.game.Game;
 import edu.ntnu.g60.models.game.GameManager;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
-import edu.ntnu.g60.utils.SaveFileHandler;
+import edu.ntnu.g60.utils.fileHandling.SaveFileHandler;
 import edu.ntnu.g60.utils.frontend.FrontendUtils;
 import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;

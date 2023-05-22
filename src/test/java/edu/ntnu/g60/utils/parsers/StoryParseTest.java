@@ -1,4 +1,4 @@
-package edu.ntnu.g60.utils.fileHandling;
+package edu.ntnu.g60.utils.parsers;
 
 import edu.ntnu.g60.exceptions.BrokenLinkException;
 import edu.ntnu.g60.models.goals.Goal;

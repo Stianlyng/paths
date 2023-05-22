@@ -14,13 +14,15 @@ public class GoalEntity {
     public static final int MINIMUM_HEALTH = 100;
     public static final int MINIMUM_SCORE = 100;
 
+    /**
+     * Constructor for the GoalEntity class.
+     * Contains the default values for the goal of the game.
+     */
     public GoalEntity() {
-        // Set default values
         this.score = MINIMUM_SCORE;
         this.gold = MINIMUM_GOLD;
         this.health = MINIMUM_HEALTH;
         this.inventory = new ArrayList<>(); 
-
     }
 
     /**
@@ -94,5 +96,4 @@ public class GoalEntity {
     public void setInventory(List<String> inventory) {
         this.inventory = inventory;
     }
-    
 }

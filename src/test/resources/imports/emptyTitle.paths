@@ -1,0 +1,13 @@
+:: First Passage
+This is the first passage, and this is the text the player has to base the answer of.
+[Go to the second passage](Second Passage)
+[Go to the third passsage](Third Passage)
+
+:: Second Passage
+This is the second passage
+[Go to the third passage](Third Passage)
+[Go back](First Passage)
+
+:: Third Passage
+This is the third passage
+[End Game](end game)

@@ -1,4 +1,4 @@
-package edu.ntnu.g60.utils;
+package edu.ntnu.g60.utils.fileHandling;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
