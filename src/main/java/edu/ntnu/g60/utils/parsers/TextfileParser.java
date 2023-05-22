@@ -38,6 +38,24 @@ public class TextfileParser {
      * @throws IOException If there is a problem reading or writing the files
      */
     public static boolean parseStory(File file) {
+        if (file == null) {
+            throw new IllegalArgumentException("File cannot be null");
+        }
+
+        if (file.isDirectory()) {
+            throw new IllegalArgumentException("File cannot be a directory: " + file.getAbsolutePath());
+        }
+
+        String fileName = file.getName();
+
+        if (!fileName.endsWith(".paths") || !fileName.endsWith(".txt")) {
+            throw new IllegalArgumentException("File must be a .paths or .txt file: " + file.getAbsolutePath());
+        }
+
+        if (file.length() == 0) {
+            throw new IllegalArgumentException("File is empty: " + file.getAbsolutePath());
+        }
+
         if (!file.exists() || !file.isFile()) {
             logger.severe("Story file not found: " + file.getAbsolutePath());
             throw new StoryNotFoundException("Story file not found: " + file.getAbsolutePath());
@@ -45,13 +63,12 @@ public class TextfileParser {
     
         try {
             Path inputPath = Paths.get(file.getAbsolutePath());
-            String filename = file.getName();
-            int pos = filename.lastIndexOf(".");
+            int pos = fileName.lastIndexOf(".");
             if (pos > 0) {
-                filename = filename.substring(0, pos);
+                fileName = fileName.substring(0, pos);
             }
     
-            Path outputPath = STORY_PATH.resolve(filename + ".json");
+            Path outputPath = STORY_PATH.resolve(fileName + ".json");
     
             if (Files.notExists(STORY_PATH)) {
                 Files.createDirectories(STORY_PATH);
@@ -103,7 +120,13 @@ public class TextfileParser {
      */
     private static ObjectNode createPassageNode(List<String> lines, JsonNodeFactory nodeFactory, int currentIndex) {
         ObjectNode passageNode = nodeFactory.objectNode();
-        passageNode.put("title", lines.get(currentIndex).substring(2).trim());
+
+        String title = lines.get(currentIndex).substring(2).trim();
+
+        if (title.isEmpty()) {
+            throw new IllegalArgumentException("Passage title cannot be empty");
+        }
+        passageNode.put("title", title);
         StringBuilder contentBuilder = new StringBuilder();
         ArrayNode linksNode = nodeFactory.arrayNode();
 
@@ -113,8 +136,15 @@ public class TextfileParser {
 
             if (matcher.find()) {
                 ObjectNode linkNode = nodeFactory.objectNode();
-                linkNode.put("text", matcher.group(1));
-                linkNode.put("reference", matcher.group(2));
+                String text = matcher.group(1);
+                String reference = matcher.group(2);
+                
+                if (text.isEmpty() || reference.isEmpty()) {
+                    throw new IllegalArgumentException("Link text and reference cannot be empty");
+                }
+
+                linkNode.put("text", text);
+                linkNode.put("reference", reference);
                 linksNode.add(linkNode);
             } else {
                 contentBuilder.append(lines.get(currentIndex)).append("\n");
