@@ -1,9 +1,8 @@
 package edu.ntnu.g60.models.story;
 
-import java.util.HashMap;
-
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
+import java.util.HashMap;
 
 /**
  * The StoryBuilder class is used to build a story.
@@ -17,12 +16,12 @@ public class StoryBuilder {
    * The title of the story.
    */
   private String title;
-  
+
   /**
    * The opening passage of the story.
    */
   private Passage openingPassage;
-  
+
   /**
    * The passages of the story.
    */
@@ -51,7 +50,7 @@ public class StoryBuilder {
   /**
    * Adds a passage to the story.
    * For adding single passages.
-   * 
+   *
    * @param passage The passage to add.
    * @return The StoryBuilder object.
    */
@@ -63,7 +62,7 @@ public class StoryBuilder {
 
   /**
    * Builds the story.
-   * 
+   *
    * @throws IllegalArgumentException if title is null or blank.
    * @throws IllegalArgumentException if openingPassage is null.
    * @return The Story object.
@@ -80,5 +79,4 @@ public class StoryBuilder {
     story.addAllPassages(passages);
     return story;
   }
-
 }

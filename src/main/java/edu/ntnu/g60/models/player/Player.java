@@ -16,22 +16,22 @@ public class Player implements Serializable {
    * The name of the player.
    */
   private String name;
-  
+
   /**
    * The health of the player.
    */
   private int health;
-  
+
   /**
    * The score of the player.
    */
   private int score;
-  
+
   /**
    * The gold of the player.
    */
   private int gold;
-  
+
   /**
    * The inventory of the player.
    */
@@ -39,7 +39,7 @@ public class Player implements Serializable {
 
   /**
    * Constructor for the Player class.
-   * 
+   *
    * @param name      The name of the player.
    * @param health    The health of the player.
    * @param score     The score of the player.
@@ -51,17 +51,15 @@ public class Player implements Serializable {
    * @throws IllegalArgumentException if gold is less than 0
    * @throws IllegalArgumentException if inventory is null
    */
-  Player(String name, int health, int score, int gold, List<String> inventory) throws IllegalArgumentException {
-    if (name == null || name.isBlank())
-      throw new IllegalArgumentException("Name cannot be null or blank.");
-    if (health < 0)
-      throw new IllegalArgumentException("Health cannot be less than 0.");
-    if (score < 0)
-      throw new IllegalArgumentException("Score cannot be less than 0.");
-    if (gold < 0)
-      throw new IllegalArgumentException("Gold cannot be less than 0.");
-    if (inventory == null)
-      throw new IllegalArgumentException("Inventory cannot be null.");
+  Player(String name, int health, int score, int gold, List<String> inventory)
+    throws IllegalArgumentException {
+    if (name == null || name.isBlank()) throw new IllegalArgumentException(
+      "Name cannot be null or blank."
+    );
+    if (health < 0) throw new IllegalArgumentException("Health cannot be less than 0.");
+    if (score < 0) throw new IllegalArgumentException("Score cannot be less than 0.");
+    if (gold < 0) throw new IllegalArgumentException("Gold cannot be less than 0.");
+    if (inventory == null) throw new IllegalArgumentException("Inventory cannot be null.");
     this.name = name;
     this.health = health;
     this.score = score;
@@ -71,7 +69,7 @@ public class Player implements Serializable {
 
   /**
    * Copy constructor for the Player class.
-   * 
+   *
    * @param other The Player object to copy.
    */
   public Player(Player other) {
@@ -147,25 +145,27 @@ public class Player implements Serializable {
 
   /**
    * Adds an item to the inventory.
-   * 
+   *
    * @param item The item to add.
    * @throws IllegalArgumentException if item is null or blank.
    */
   public void addToInventory(String item) throws IllegalArgumentException {
-    if (item == null || item.isBlank())
-      throw new IllegalArgumentException("Item cannot be null or blank.");
+    if (item == null || item.isBlank()) throw new IllegalArgumentException(
+      "Item cannot be null or blank."
+    );
     inventory.add(item);
   }
 
   /**
    * Removes an item from the inventory.
-   * 
+   *
    * @param item The item to remove.
    * @throws IllegalArgumentException if item is null or blank.
    */
   public void removeFromInventory(String item) throws IllegalArgumentException {
-    if (item == null || item.isBlank())
-      throw new IllegalArgumentException("Item cannot be null or blank.");
+    if (item == null || item.isBlank()) throw new IllegalArgumentException(
+      "Item cannot be null or blank."
+    );
     this.inventory.remove(item);
   }
 
@@ -175,10 +175,17 @@ public class Player implements Serializable {
 
   @Override
   public String toString() {
-    return "Name: " + name
-        + ", Health: " + health
-        + ", Score: " + score
-        + ", Gold: " + gold
-        + ", Inventory: " + inventory;
+    return (
+      "Name: " +
+      name +
+      ", Health: " +
+      health +
+      ", Score: " +
+      score +
+      ", Gold: " +
+      gold +
+      ", Inventory: " +
+      inventory
+    );
   }
 }

@@ -1,43 +1,44 @@
 package edu.ntnu.g60.utils.frontend;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for FrontendUtils
- * 
- * @author Olav 
+ *
+ * @author Olav
  */
 class FrontendUtilsTest {
 
-    @Test
-    void delayTest() {
-        long delayMillis = 1000;
-        boolean[] continuationExecuted = { false };
-        FrontendUtils.delay(delayMillis, () -> continuationExecuted[0] = true);
-        assertFalse(continuationExecuted[0]);
-        try {
-            Thread.sleep(delayMillis + 500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        assertFalse(continuationExecuted[0]);
+  @Test
+  void delayTest() {
+    long delayMillis = 1000;
+    boolean[] continuationExecuted = { false };
+    FrontendUtils.delay(delayMillis, () -> continuationExecuted[0] = true);
+    assertFalse(continuationExecuted[0]);
+    try {
+      Thread.sleep(delayMillis + 500);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
     }
+    assertFalse(continuationExecuted[0]);
+  }
 
-    @Test
-    void splitTextIntoFourLinesTest() {
-        String[] conversationParts = {
-            "{N}Trial text",
-            "{P}More Trial text"
-        };
-        int conversationPaneNumber = 1;
-        String passageContent = "This is text";
-        String[] result = FrontendUtils.splitTextIntoFourLines(conversationParts, conversationPaneNumber, passageContent);
-        assertEquals(4, result.length);
-        assertEquals("More Trial text       ", result[0]);
-        assertEquals("", result[1]);
-        assertEquals("", result[2]);
-        assertEquals("", result[3]);
-    }
+  @Test
+  void splitTextIntoFourLinesTest() {
+    String[] conversationParts = { "{N}Trial text", "{P}More Trial text" };
+    int conversationPaneNumber = 1;
+    String passageContent = "This is text";
+    String[] result = FrontendUtils.splitTextIntoFourLines(
+      conversationParts,
+      conversationPaneNumber,
+      passageContent
+    );
+    assertEquals(4, result.length);
+    assertEquals("More Trial text       ", result[0]);
+    assertEquals("", result[1]);
+    assertEquals("", result[2]);
+    assertEquals("", result[3]);
+  }
 }

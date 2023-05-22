@@ -1,15 +1,13 @@
 package edu.ntnu.g60.models.story;
 
-import java.util.Map;
-
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
-
-import java.util.HashMap;
-import java.util.List;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The Story class represents the story of the game.
@@ -25,17 +23,19 @@ public class Story implements Serializable {
 
   /**
    * Constructor for the Story class.
-   * 
+   *
    * @param title          The title of the story.
    * @param openingPassage The opening passage of the story.
    * @throws IllegalArgumentException if title is null or blank.
    * @throws IllegalArgumentException if openingPassage is null.
    */
   Story(String title, Passage openingPassage) throws IllegalArgumentException {
-    if (title == null || title.isBlank())
-      throw new IllegalArgumentException("Title cannot be null or blank.");
-    if (openingPassage == null)
-      throw new IllegalArgumentException("Opening passage cannot be null.");
+    if (title == null || title.isBlank()) throw new IllegalArgumentException(
+      "Title cannot be null or blank."
+    );
+    if (openingPassage == null) throw new IllegalArgumentException(
+      "Opening passage cannot be null."
+    );
     this.title = title;
     this.openingPassage = openingPassage;
     this.passages = new HashMap<Link, Passage>();
@@ -57,7 +57,7 @@ public class Story implements Serializable {
 
   /**
    * The title of the story.
-   * 
+   *
    * @return The title of the story.
    */
   public String getTitle() {
@@ -66,7 +66,7 @@ public class Story implements Serializable {
 
   /**
    * The opening passage of the story.
-   * 
+   *
    * @return The opening passage of the story.
    */
   public Passage getOpeningPassage() {
@@ -75,7 +75,7 @@ public class Story implements Serializable {
 
   /**
    * Gets the passage of the story with the given link
-   * 
+   *
    * @param link The link of the passage to get.
    * @return The passage with the given link.
    */
@@ -85,7 +85,7 @@ public class Story implements Serializable {
 
   /**
    * Gets all the passages of the story.
-   * 
+   *
    * @return All the passages of the story.
    */
   public Collection<Passage> getPassages() {
@@ -94,21 +94,20 @@ public class Story implements Serializable {
 
   /**
    * Adds a passage to the story.
-   * 
+   *
    * @param passage The passage to add.
    * @throws IllegalArgumentException if passage is null.
    */
 
   public void addPassage(Passage passage) throws IllegalArgumentException {
-    if (passage == null)
-      throw new IllegalArgumentException("Passage cannot be null.");
+    if (passage == null) throw new IllegalArgumentException("Passage cannot be null.");
     Link link = new Link(passage.getTitle(), passage.getTitle());
     this.passages.put(link, passage);
   }
 
   /**
    * Adds all the passages to the story.
-   * 
+   *
    * @param passages The passages to add.
    * @throws IllegalArgumentException if passages is null.
    */
@@ -139,14 +138,16 @@ public class Story implements Serializable {
    * Deletes a passage from the story.
    * It should not be possible to remove the passage if there are other passages
    * that link to it.
-   * 
+   *
    * @param link The link of the passage to delete.
    * @throws IllegalArgumentException if the passage cannot be removed.
    */
   public void deletePassage(Link link) {
     Passage passage = getPassage(link);
     if (passageHasLink(passage)) {
-      throw new IllegalArgumentException("Cannot delete a passage that is linked to by other passages.");
+      throw new IllegalArgumentException(
+        "Cannot delete a passage that is linked to by other passages."
+      );
     }
     passages.remove(link);
   }
@@ -162,36 +163,45 @@ public class Story implements Serializable {
     List<Link> brokenLinks = new ArrayList<>();
 
     for (Passage passage : passages.values()) {
-        for (Link link : passage.getLinks()) {
-            if (link.getReference().equalsIgnoreCase("End Game")) {
-                continue;
-            }
-            if (link.getReference().equalsIgnoreCase("Game Over")) {
-                continue;
-            }
-            boolean linkExists = passages.keySet().stream()
-                .anyMatch(mapLink -> mapLink.getReference().equals(link.getReference()));
-
-            if (!linkExists) {
-                brokenLinks.add(link);
-            }
+      for (Link link : passage.getLinks()) {
+        if (link.getReference().equalsIgnoreCase("End Game")) {
+          continue;
         }
+        if (link.getReference().equalsIgnoreCase("Game Over")) {
+          continue;
+        }
+        boolean linkExists = passages
+          .keySet()
+          .stream()
+          .anyMatch(mapLink -> mapLink.getReference().equals(link.getReference()));
+
+        if (!linkExists) {
+          brokenLinks.add(link);
+        }
+      }
     }
     return brokenLinks;
   }
 
   /**
    * Overrides the toString method.
-   * 
+   *
    * @return A string representation of the story.
    */
   @Override
   public String toString() {
-    return "Story{" +
-        " title='" + getTitle() + "'" +
-        ", openingPassage='" + getOpeningPassage() + "'" +
-        ", passages='" + getPassages() + "'" +
-        "}";
+    return (
+      "Story{" +
+      " title='" +
+      getTitle() +
+      "'" +
+      ", openingPassage='" +
+      getOpeningPassage() +
+      "'" +
+      ", passages='" +
+      getPassages() +
+      "'" +
+      "}"
+    );
   }
-
 }

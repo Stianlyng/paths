@@ -1,12 +1,6 @@
 package edu.ntnu.g60.utils.parsers;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import edu.ntnu.g60.entities.ActionEntity;
 import edu.ntnu.g60.entities.GoalEntity;
 import edu.ntnu.g60.entities.LinkEntity;
@@ -25,6 +19,10 @@ import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.passage.PassageBuilder;
 import edu.ntnu.g60.models.story.Story;
 import edu.ntnu.g60.models.story.StoryBuilder;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * StoryParser is a class that parses a JSON file into a Story object.
@@ -33,174 +31,174 @@ import edu.ntnu.g60.models.story.StoryBuilder;
  */
 public class StoryParser {
 
+  /**
+   * The JSON file to be parsed.
+   */
+  private final InputStream jsonFile;
 
-    /**
-     * The JSON file to be parsed.
-     */
-    private final InputStream jsonFile;
+  /**
+   * The ObjectMapper used to parse the JSON file.
+   */
+  private final ObjectMapper objectMapper;
 
-    /**
-     * The ObjectMapper used to parse the JSON file.
-     */
-    private final ObjectMapper objectMapper;
+  /**
+   * The Story object that is being built.
+   */
+  private Story story;
 
-    /**
-     * The Story object that is being built.
-     */
-    private Story story;
-    
-    /**
-     * The list of goals to be fulfilled in the story.
-     */
-    private List<Goal> goals;
-    
-    /**
-     * The path to the JSON file.
-     */
-    public static final String STORY_PATH = "/stories/";
-    
+  /**
+   * The list of goals to be fulfilled in the story.
+   */
+  private List<Goal> goals;
 
-    /**
-     * Constructs a StoryParser object.
-     * 
-     * @param jsonFileName the name the JSON file to be parsed.
-     */
-    public StoryParser(String jsonFilename) {
-        this.jsonFile = StoryParser.class.getResourceAsStream(STORY_PATH + jsonFilename + ".json");
-        if (this.jsonFile == null) {
-            // todo; Handle missing resource
-        }
-        this.objectMapper = new ObjectMapper();
-        build();
+  /**
+   * The path to the JSON file.
+   */
+  public static final String STORY_PATH = "/stories/";
+
+  /**
+   * Constructs a StoryParser object.
+   *
+   * @param jsonFileName the name the JSON file to be parsed.
+   */
+  public StoryParser(String jsonFilename) {
+    this.jsonFile = StoryParser.class.getResourceAsStream(STORY_PATH + jsonFilename + ".json");
+    if (this.jsonFile == null) {
+      // todo; Handle missing resource
     }
-    
-    
-    public StoryParser(InputStream jsonStream) {
-        this.jsonFile = jsonStream;
-        if (this.jsonFile == null) {
-            // todo; Handle missing resource
-        }
-        this.objectMapper = new ObjectMapper();
-        build();
+    this.objectMapper = new ObjectMapper();
+    build();
+  }
+
+  public StoryParser(InputStream jsonStream) {
+    this.jsonFile = jsonStream;
+    if (this.jsonFile == null) {
+      // todo; Handle missing resource
     }
+    this.objectMapper = new ObjectMapper();
+    build();
+  }
 
-    /**
-     * Builds a Passage object from a PassageEntity object.
-     *
-     * @param passageEntity the PassageEntity object to be parsed.
-     * @return a Passage object.
-     */
-    private Passage buildPassage(PassageEntity passageEntity) {
-        Passage passage = new PassageBuilder()
-                .setTitle(passageEntity.getTitle())
-                .setContent(passageEntity.getContent())
-                .setBackgroundImage(passageEntity.getBackground())
-                .setPlayerImage(passageEntity.getPlayer())
-                .setEnemyImage(passageEntity.getEnemy())
-                .isFightScene(passageEntity.getIsFight())
-                .build();
+  /**
+   * Builds a Passage object from a PassageEntity object.
+   *
+   * @param passageEntity the PassageEntity object to be parsed.
+   * @return a Passage object.
+   */
+  private Passage buildPassage(PassageEntity passageEntity) {
+    Passage passage = new PassageBuilder()
+      .setTitle(passageEntity.getTitle())
+      .setContent(passageEntity.getContent())
+      .setBackgroundImage(passageEntity.getBackground())
+      .setPlayerImage(passageEntity.getPlayer())
+      .setEnemyImage(passageEntity.getEnemy())
+      .isFightScene(passageEntity.getIsFight())
+      .build();
 
-        passageEntity.getLinks().forEach(linkEntity -> {
-            passage.addLink(buildLink(linkEntity));
+    passageEntity
+      .getLinks()
+      .forEach(linkEntity -> {
+        passage.addLink(buildLink(linkEntity));
+      });
+
+    return passage;
+  }
+
+  /**
+   * Builds a Link object from a LinkEntity object.
+   *
+   * @param linkEntity the LinkEntity object to be parsed.
+   * @return a Link object.
+   */
+  private Link buildLink(LinkEntity linkEntity) {
+    Link link = new Link(linkEntity.getText(), linkEntity.getReference());
+
+    linkEntity
+      .getActions()
+      .forEach(actionEntity -> {
+        Action action = buildAction(actionEntity);
+        link.addAction(action);
+      });
+
+    return link;
+  }
+
+  /**
+   * Builds an Action object from an ActionEntity object.
+   * @param actionEntity the ActionEntity object to be parsed.
+   * @return an Action object.
+   */
+  private Action buildAction(ActionEntity actionEntity) {
+    Action action = ActionFactory.createAction(actionEntity);
+    return action;
+  }
+
+  /**
+   * Builds the Story object from the JSON file.
+   *
+   * @return a Story object.
+   */
+  private void build() {
+    try {
+      StoryEntity storyEntity = objectMapper.readValue(jsonFile, StoryEntity.class);
+      StoryBuilder storyBuilder = new StoryBuilder().setTitle(storyEntity.getTitle());
+
+      storyEntity
+        .getPassages()
+        .forEach(passageEntity -> {
+          Passage passage = buildPassage(passageEntity);
+          storyBuilder.addPassage(passage);
+          if (storyEntity.getPassages().indexOf(passageEntity) == 0) {
+            storyBuilder.setOpeningPassage(passage);
+          }
         });
+      this.story = storyBuilder.build();
 
-        return passage;
+      GoalEntity goalEntity = storyEntity.getGoals();
+      this.goals = buildGoals(goalEntity);
+
+      System.out.println("Goals: " + this.goals.toString());
+    } catch (IOException e) {
+      throw new RuntimeException("Error reading JSON file", e);
     }
+  }
 
-    /**
-     * Builds a Link object from a LinkEntity object.
-     *
-     * @param linkEntity the LinkEntity object to be parsed.
-     * @return a Link object.
-     */
-    private Link buildLink(LinkEntity linkEntity) {
-        Link link = new Link(linkEntity.getText(), linkEntity.getReference());
+  /**
+   * Builds a list of goals from a GoalEntity object.
+   * @param goalEntity the GoalEntity object to be parsed.
+   * @return a list of goals.
+   */
+  private List<Goal> buildGoals(GoalEntity goalEntity) {
+    if (goalEntity == null) goalEntity = new GoalEntity();
 
-        linkEntity.getActions().forEach(actionEntity -> {
-            Action action = buildAction(actionEntity);
-            link.addAction(action);
-        });
+    return List.of(
+      new GoldGoal(goalEntity.getGold()),
+      new HealthGoal(goalEntity.getHealth()),
+      new InventoryGoal(goalEntity.getInventory()),
+      new ScoreGoal(goalEntity.getScore())
+    );
+  }
 
-        return link;
+  /**
+   * Returns the story object, and checks if there are any broken links in the story.
+   *
+   * @return the story object.
+   * @throws BrokenLinkException if there are any broken links in the story.
+   */
+  public Story getStory() throws BrokenLinkException {
+    List<Link> brokenLinks = story.getBrokenLinks();
+    if (!brokenLinks.isEmpty()) {
+      String brokenLinkTitles = brokenLinks
+        .stream()
+        .map(Link::getText)
+        .distinct()
+        .collect(Collectors.joining(", \n"));
+      throw new BrokenLinkException("There are broken links in the story: " + brokenLinkTitles);
     }
+    return this.story;
+  }
 
-    /**
-     * Builds an Action object from an ActionEntity object.
-     * @param actionEntity the ActionEntity object to be parsed.
-     * @return an Action object.
-     */
-    private Action buildAction(ActionEntity actionEntity) {
-        Action action = ActionFactory.createAction(actionEntity);
-        return action;
-    }
-
-    /**
-     * Builds the Story object from the JSON file.
-     *
-     * @return a Story object.
-     */
-    private void build()  {
-        try {
-            StoryEntity storyEntity = objectMapper.readValue(jsonFile, StoryEntity.class);
-            StoryBuilder storyBuilder = new StoryBuilder().setTitle(storyEntity.getTitle());
-    
-            storyEntity.getPassages().forEach(passageEntity -> {
-                Passage passage = buildPassage(passageEntity);
-                storyBuilder.addPassage(passage);
-                if (storyEntity.getPassages().indexOf(passageEntity) == 0) {
-                    storyBuilder.setOpeningPassage(passage);
-                }
-            });
-            this.story = storyBuilder.build();
-            
-            GoalEntity goalEntity = storyEntity.getGoals();
-            this.goals = buildGoals(goalEntity);
-
-            System.out.println("Goals: " + this.goals.toString());
-            
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading JSON file", e);
-        }
-    }  
-
-    /**
-     * Builds a list of goals from a GoalEntity object.
-     * @param goalEntity the GoalEntity object to be parsed.
-     * @return a list of goals.
-     */
-    private List<Goal> buildGoals(GoalEntity goalEntity) {
-
-        if (goalEntity == null) goalEntity = new GoalEntity();
-        
-        return List.of(
-                new GoldGoal(goalEntity.getGold()),
-                new HealthGoal(goalEntity.getHealth()),
-                new InventoryGoal(goalEntity.getInventory()),
-                new ScoreGoal(goalEntity.getScore())
-        );
-    }
-    
-    /**
-     * Returns the story object, and checks if there are any broken links in the story.
-     *
-     * @return the story object.
-     * @throws BrokenLinkException if there are any broken links in the story.
-     */
-    public Story getStory() throws BrokenLinkException{
-
-        List<Link> brokenLinks = story.getBrokenLinks();
-        if (!brokenLinks.isEmpty()) {
-            String brokenLinkTitles = brokenLinks.stream()
-                    .map(Link::getText)
-                    .distinct()
-                    .collect(Collectors.joining(", \n"));
-            throw new BrokenLinkException("There are broken links in the story: " + brokenLinkTitles);
-        }
-        return this.story;
-    }
-    
-    public List<Goal> getGoals() {
-        return this.goals;
-    }
-    
+  public List<Goal> getGoals() {
+    return this.goals;
+  }
 }

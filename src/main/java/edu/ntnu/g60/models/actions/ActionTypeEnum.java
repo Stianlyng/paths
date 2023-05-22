@@ -11,36 +11,36 @@ import edu.ntnu.g60.exceptions.model.actions.InvalidActionTypeException;
  * @author Stian Lyng
  */
 enum ActionTypeEnum {
-    HEALTH("health"),
-    GOLD("gold"),
-    SCORE("score"),
-    INVENTORY("inventory");
+  HEALTH("health"),
+  GOLD("gold"),
+  SCORE("score"),
+  INVENTORY("inventory");
 
-    private final String type;
+  private final String type;
 
-    /**
-     * Creates a new ActionTypeEnum.
-     * 
-     * @param type The type of action.
-     */
-    ActionTypeEnum(String type) {
-        this.type = type;
+  /**
+   * Creates a new ActionTypeEnum.
+   *
+   * @param type The type of action.
+   */
+  ActionTypeEnum(String type) {
+    this.type = type;
+  }
+
+  /**
+   * Returns the ActionTypeEnum that corresponds to the specified string.
+   *
+   * @param type The type of the action.
+   * @return The ActionTypeEnum that corresponds to the specified string.
+   * @throws InvalidActionTypeException if the specified string does not
+   *                                    correspond to a valid ActionTypeEnum.
+   */
+  public static ActionTypeEnum fromString(String type) throws InvalidActionTypeException {
+    for (ActionTypeEnum actionType : ActionTypeEnum.values()) {
+      if (actionType.type.equalsIgnoreCase(type)) {
+        return actionType;
+      }
     }
-
-    /**
-     * Returns the ActionTypeEnum that corresponds to the specified string.
-     * 
-     * @param type The type of the action.
-     * @return The ActionTypeEnum that corresponds to the specified string.
-     * @throws InvalidActionTypeException if the specified string does not
-     *                                    correspond to a valid ActionTypeEnum.
-     */
-    public static ActionTypeEnum fromString(String type) throws InvalidActionTypeException {
-        for (ActionTypeEnum actionType : ActionTypeEnum.values()) {
-            if (actionType.type.equalsIgnoreCase(type)) {
-                return actionType;
-            }
-        }
-        throw new InvalidActionTypeException("Invalid action type: " + type);
-    }
+    throw new InvalidActionTypeException("Invalid action type: " + type);
+  }
 }

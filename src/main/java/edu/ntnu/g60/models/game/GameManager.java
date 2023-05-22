@@ -1,10 +1,9 @@
 package edu.ntnu.g60.models.game;
 
-import java.util.List;
-
 import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.story.Story;
+import java.util.List;
 
 /**
  * The GameManager class is a singleton class that manages the creation,
@@ -13,6 +12,7 @@ import edu.ntnu.g60.models.story.Story;
  * @author Stian Lyng
  */
 public class GameManager {
+
   private static GameManager instance;
   private Game game;
   private Player player;
@@ -22,8 +22,7 @@ public class GameManager {
   /**
    * Private constructor to prevent instantiation.
    */
-  private GameManager() {
-  }
+  private GameManager() {}
 
   /**
    * Returns the single instance of the GameManager class, creating it if
@@ -64,7 +63,7 @@ public class GameManager {
   public void setGoals(List<Goal> goals) {
     this.goals = goals;
   }
-  
+
   /**
    * Creates a new Game instance with the previously set Player, Story, and Goals.
    * Throws an IllegalStateException if a game is already in progress or if the
@@ -75,7 +74,9 @@ public class GameManager {
       throw new IllegalStateException("A game is already in progress.");
     }
     if (player == null || story == null || goals == null) {
-      throw new IllegalStateException("Player, story, and goals must be set before creating a game.");
+      throw new IllegalStateException(
+        "Player, story, and goals must be set before creating a game."
+      );
     }
     game = new Game(player, story, goals);
   }
@@ -99,5 +100,4 @@ public class GameManager {
   public void endGame() {
     game = null;
   }
-
 }

@@ -1,11 +1,10 @@
 package edu.ntnu.g60.models.passage;
 
+import edu.ntnu.g60.models.actions.Action;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import edu.ntnu.g60.models.actions.Action;
 
 /**
  * The Link class represents a link between two passages.
@@ -19,12 +18,12 @@ public class Link implements Serializable {
    * The text of the link.
    */
   private String text;
-  
+
   /**
    * The reference to the passage title.
    */
   private String reference;
-  
+
   /**
    * The actions accosiated with executing the link.
    */
@@ -32,15 +31,13 @@ public class Link implements Serializable {
 
   /**
    * Constructor for the Link class.
-   * 
+   *
    * @param text      The text of the link.
    * @param reference The reference to the passage.
    */
   public Link(String text, String reference) throws IllegalArgumentException {
-    if (text == null)
-      throw new IllegalArgumentException("Text cannot be null.");
-    if (reference == null)
-      throw new IllegalArgumentException("Reference cannot be null.");
+    if (text == null) throw new IllegalArgumentException("Text cannot be null.");
+    if (reference == null) throw new IllegalArgumentException("Reference cannot be null.");
     this.text = text;
     this.reference = reference;
     this.actions = new ArrayList<>();
@@ -48,7 +45,7 @@ public class Link implements Serializable {
 
   /**
    * Adds an action to the link.
-   * 
+   *
    * @param action The action to add.
    */
   public void addAction(Action action) {
@@ -57,7 +54,7 @@ public class Link implements Serializable {
 
   /**
    * The actions of the link.
-   * 
+   *
    * @return A list of actions.
    */
   public List<Action> getActions() {
@@ -65,8 +62,8 @@ public class Link implements Serializable {
   }
 
   /**
-   * The description of the link, visible to the player. 
-   * 
+   * The description of the link, visible to the player.
+   *
    * @return The text of the link.
    */
   public String getText() {
@@ -75,7 +72,7 @@ public class Link implements Serializable {
 
   /**
    * The reference for the passage to link to.
-   * 
+   *
    * @return The reference to the passage.
    */
   public String getReference() {
@@ -84,7 +81,7 @@ public class Link implements Serializable {
 
   /**
    * Returns a string representation of the link.
-   * 
+   *
    * @return A string representation of the link.
    */
   @Override
@@ -94,7 +91,7 @@ public class Link implements Serializable {
 
   /**
    * Checks if two links are equal.
-   * 
+   *
    * @param obj The object to compare with.
    * @return True if the reference in the links are equal, false otherwise.
    */
@@ -112,12 +109,11 @@ public class Link implements Serializable {
 
   /**
    * Returns the hash code of the link.
-   * 
+   *
    * @return The hash code of the link.
    */
   @Override
   public int hashCode() {
     return Objects.hash(reference);
   }
-
 }

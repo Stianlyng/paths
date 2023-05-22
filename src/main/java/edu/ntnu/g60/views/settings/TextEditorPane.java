@@ -1,10 +1,9 @@
 package edu.ntnu.g60.views.settings;
 
-import java.io.FileNotFoundException;
-
 import edu.ntnu.g60.controllers.StartMenuController;
 import edu.ntnu.g60.views.ViewObjects;
 import edu.ntnu.g60.views.ViewValues;
+import java.io.FileNotFoundException;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -15,45 +14,67 @@ import javafx.scene.layout.StackPane;
  * TextEditorPane represents a pane for editing text in the game
  * @author olav sie
  */
-public class TextEditorPane extends StackPane{
-    static TextArea textArea;
-    private static StartMenuController controller;
+public class TextEditorPane extends StackPane {
 
-    /**
-     * Constructs a new TextEditorPane object.
-     * @throws FileNotFoundException if the file specified is not found.
-    */
-    public TextEditorPane() throws FileNotFoundException{
-        TextEditorPane.controller = new StartMenuController();
-        getChildren().addAll(getTextEditorObjects());
-    }
+  static TextArea textArea;
+  private static StartMenuController controller;
 
-    /**
-     * Adds the objects required for the text editor pane pane.
-     *
-     * @return a Group containing the text editor pane objects
-     * @throws FileNotFoundException if the file specified is not found
-     */
-    private Group getTextEditorObjects() throws FileNotFoundException {
-        Button backButton = ViewObjects.newButton("Back", 760, 524, ViewValues.BACK_BUTTON_ID, ViewValues.BACK_BUTTON_HOVER_ID, controller::goToSettingsPaneAction);
+  /**
+   * Constructs a new TextEditorPane object.
+   * @throws FileNotFoundException if the file specified is not found.
+   */
+  public TextEditorPane() throws FileNotFoundException {
+    TextEditorPane.controller = new StartMenuController();
+    getChildren().addAll(getTextEditorObjects());
+  }
 
-        Button openButton = ViewObjects.newButton("Open", 600, 200,  ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::openFileInEditorAction);
-        Button saveButton = ViewObjects.newButton("Save", 600, 275,  ViewValues.MENU_BUTTON_ID, ViewValues.MENU_BUTTON_HOVER_ID, controller::saveFileInEditorAction);
+  /**
+   * Adds the objects required for the text editor pane pane.
+   *
+   * @return a Group containing the text editor pane objects
+   * @throws FileNotFoundException if the file specified is not found
+   */
+  private Group getTextEditorObjects() throws FileNotFoundException {
+    Button backButton = ViewObjects.newButton(
+      "Back",
+      760,
+      524,
+      ViewValues.BACK_BUTTON_ID,
+      ViewValues.BACK_BUTTON_HOVER_ID,
+      controller::goToSettingsPaneAction
+    );
 
-        textArea = new TextArea();
-        textArea.setPrefSize(400, 400);
-        textArea.setLayoutX(120);
-        textArea.setLayoutY(100);
+    Button openButton = ViewObjects.newButton(
+      "Open",
+      600,
+      200,
+      ViewValues.MENU_BUTTON_ID,
+      ViewValues.MENU_BUTTON_HOVER_ID,
+      controller::openFileInEditorAction
+    );
+    Button saveButton = ViewObjects.newButton(
+      "Save",
+      600,
+      275,
+      ViewValues.MENU_BUTTON_ID,
+      ViewValues.MENU_BUTTON_HOVER_ID,
+      controller::saveFileInEditorAction
+    );
 
-        return new Group(backButton, openButton, saveButton, textArea);
-    }
+    textArea = new TextArea();
+    textArea.setPrefSize(400, 400);
+    textArea.setLayoutX(120);
+    textArea.setLayoutY(100);
 
-    /**
-     * returns the value of the text area in the text editor
-     * 
-     * @return value of the text area in the text editor
-     */
-    public static TextArea getTextArea(){
-        return textArea;
-    }
+    return new Group(backButton, openButton, saveButton, textArea);
+  }
+
+  /**
+   * returns the value of the text area in the text editor
+   *
+   * @return value of the text area in the text editor
+   */
+  public static TextArea getTextArea() {
+    return textArea;
+  }
 }

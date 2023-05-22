@@ -8,15 +8,15 @@ import javafx.scene.layout.StackPane;
  * used for displaying text in a title pane.
  * @author olav sie
  */
-public class TxtPane extends StackPane{
-    
-    /**
-     * Constructs a new TxtPane object with the specified text.
-     *
-     * @param text the text to be displayed in the title pane
-     * @throws FileNotFoundException if the background image file is not found
-     */
-    public TxtPane(String text) throws FileNotFoundException{
-        getChildren().addAll(TitlePaneObjects.getObjects(text));
-    }
+public class TxtPane extends StackPane {
+
+  /**
+   * Constructs a new TxtPane object with the specified text.
+   *
+   * @param text the text to be displayed in the title pane
+   * @throws FileNotFoundException if the background image file is not found
+   */
+  public TxtPane(String text) throws FileNotFoundException {
+    getChildren().addAll(TitlePaneObjects.getObjects(text));
+  }
 }
