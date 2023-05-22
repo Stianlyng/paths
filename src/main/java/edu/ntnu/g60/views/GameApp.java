@@ -25,7 +25,7 @@ public class GameApp extends Application {
     private static final int HEIGHT = 800;
     private static final int WIDTH = 600;
     private static final Color backgound = Color.WHITE;
-    private static final String TITLE = "Half life 3";
+    private static final String TITLE = "Paths";
     private static final String ICON_PATH = "/images/icons/icon.png";
     private static final String STYLESHEET = "StyleSheet.css";
 
