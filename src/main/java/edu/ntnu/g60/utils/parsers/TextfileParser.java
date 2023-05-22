@@ -6,14 +6,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import edu.ntnu.g60.entities.StoryNotFoundException;
+import edu.ntnu.g60.entities.StoryParsingException;
 
 
 /**
@@ -23,16 +26,23 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class TextfileParser {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TextfileParser.class);
+
+    private static final Logger logger = Logger.getLogger(TextfileParser.class.getName());
     private static final Pattern LINK_PATTERN = Pattern.compile("\\[(.+?)\\]\\((.+?)\\)");
     private static final Path  STORY_PATH = Paths.get("src/main/resources/stories/");
 
+    /**
+     * Parses a text story and saves it in JSON format.
+     *
+     * @param filename The name of the input text file (without the extension)
+     * @throws IOException If there is a problem reading or writing the files
+     */
     public static boolean parseStory(File file) {
-        // Validate inputs
-        if (file == null || !file.exists() || !file.isFile() || !file.canRead()) {
-            throw new IllegalArgumentException("Invalid file: " + file);
+        if (!file.exists() || !file.isFile()) {
+            logger.severe("Story file not found: " + file.getAbsolutePath());
+            throw new StoryNotFoundException("Story file not found: " + file.getAbsolutePath());
         }
-  
+    
         try {
             Path inputPath = Paths.get(file.getAbsolutePath());
             String filename = file.getName();
@@ -43,6 +53,10 @@ public class TextfileParser {
     
             Path outputPath = STORY_PATH.resolve(filename + ".json");
     
+            if (Files.notExists(STORY_PATH)) {
+                Files.createDirectories(STORY_PATH);
+            }
+    
             List<String> lines = Files.readAllLines(inputPath);
             ObjectMapper mapper = new ObjectMapper();
             JsonNodeFactory nodeFactory = JsonNodeFactory.instance;
@@ -51,12 +65,8 @@ public class TextfileParser {
             mapper.writerWithDefaultPrettyPrinter().writeValue(outputPath.toFile(), storyNode);
             return true;
         } catch (IOException e) {
-            // Log the error instead of just printing the stack trace
-            LOGGER.error("Error parsing file: {}", file, e);
-            return false;
-        } catch (RuntimeException e) {
-            LOGGER.error("Unexpected error parsing file: {}", file, e);
-            throw e;
+            logger.severe("Error occurred while parsing the story: " + e.getMessage());
+            throw new StoryParsingException("Error occurred while parsing the story: " + file.getName(), e);
         }
     }
 

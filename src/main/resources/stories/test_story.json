@@ -1,0 +1,31 @@
+{
+  "title" : "Title Of the Story",
+  "passages" : [ {
+    "title" : "First Passage",
+    "content" : "This is the first passage, and this is the text the player has to base the answer of.\n\n",
+    "links" : [ {
+      "text" : "Go to the second passage",
+      "reference" : "Second Passage"
+    }, {
+      "text" : "Go to the third passsage",
+      "reference" : "Third Passage"
+    } ]
+  }, {
+    "title" : "Second Passage",
+    "content" : "This is the second passage\n\n",
+    "links" : [ {
+      "text" : "Go to the third passage",
+      "reference" : "Third Passage"
+    }, {
+      "text" : "Go back",
+      "reference" : "First Passage"
+    } ]
+  }, {
+    "title" : "Third Passage",
+    "content" : "This is the third passage\n",
+    "links" : [ {
+      "text" : "End Game",
+      "reference" : "end game"
+    } ]
+  } ]
+}
