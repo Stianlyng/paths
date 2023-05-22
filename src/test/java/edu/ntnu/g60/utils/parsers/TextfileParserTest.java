@@ -15,14 +15,12 @@ import edu.ntnu.g60.exceptions.StoryNotFoundException;
  */
 public class TextfileParserTest {
     
-    private File validFile;
     private File invalidFile;
     private File nonExistentFile;
     private File directory;
 
     @BeforeEach
     void setUp() {
-        validFile = new File("src/test/resources/imports/testStory.paths");
         invalidFile = new File("src/test/resources/imports/incorrectFileName.jpg");
         nonExistentFile = new File("src/test/resources/imports/nonExistentFileName.txt");
         directory = new File("src/test/resources/imports/");
