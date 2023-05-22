@@ -47,6 +47,16 @@ public class PlayerParser {
         this.objectMapper = new ObjectMapper();
     }
 
+    public PlayerParser(InputStream jsonStream) {
+        this.jsonStream = jsonStream;
+        if (this.jsonStream == null) {
+            // todo; Handle missing resource
+        }
+        this.objectMapper = new ObjectMapper();
+    }
+
+
+
     /**
      * Parses the JSON file and returns a Player object.
      * 
