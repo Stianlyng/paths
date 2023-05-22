@@ -9,7 +9,6 @@
   <version>0.0.2</version>
 
   <name>paths</name>
-  <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
@@ -138,10 +137,8 @@
                                 <exclude>**edu/ntnu/g60/views/**</exclude>
                                 <exclude>**edu/ntnu/g60/exceptions/**</exclude>
                                 <exclude>**edu/ntnu/g60/controllers/**</exclude>
+                                <exclude>**/edu/ntnu/g60/GameAppLauncher.*</exclude>
                             </excludes>
-                            <excludePackageNames>
-                                edu.ntnu.g60.GameAppLauncher
-                            </excludePackageNames>
                         </configuration>
                     </execution>
                 </executions>
