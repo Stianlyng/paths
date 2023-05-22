@@ -26,10 +26,12 @@ import edu.ntnu.g60.entities.StoryParsingException;
  */
 public class TextfileParser {
 
-
-    private static final Logger logger = Logger.getLogger(TextfileParser.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TextfileParser.class.getName());
     private static final Pattern LINK_PATTERN = Pattern.compile("\\[(.+?)\\]\\((.+?)\\)");
-    private static final Path  STORY_PATH = Paths.get("src/main/resources/stories/");
+    private static final Path STORY_PATH = Paths.get("src/main/resources/stories/");
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final JsonNodeFactory NODE_FACTORY = JsonNodeFactory.instance;
+    private static final String PASSAGE_IDENTIFIER = "::";
 
     /**
      * Parses a text story and saves it in JSON format.
@@ -41,14 +43,17 @@ public class TextfileParser {
         if (file == null) {
             throw new IllegalArgumentException("File cannot be null");
         }
-
+        if (!file.exists() || !file.isFile()) {
+            LOGGER.severe("Story file not found: " + file.getAbsolutePath());
+            throw new StoryNotFoundException("Story file not found: " + file.getAbsolutePath());
+        }
         if (file.isDirectory()) {
             throw new IllegalArgumentException("File cannot be a directory: " + file.getAbsolutePath());
         }
 
         String fileName = file.getName();
 
-        if (!fileName.endsWith(".paths") || !fileName.endsWith(".txt")) {
+        if (!fileName.endsWith(".paths") && !fileName.endsWith(".txt")) {
             throw new IllegalArgumentException("File must be a .paths or .txt file: " + file.getAbsolutePath());
         }
 
@@ -56,12 +61,10 @@ public class TextfileParser {
             throw new IllegalArgumentException("File is empty: " + file.getAbsolutePath());
         }
 
-        if (!file.exists() || !file.isFile()) {
-            logger.severe("Story file not found: " + file.getAbsolutePath());
-            throw new StoryNotFoundException("Story file not found: " + file.getAbsolutePath());
-        }
+        
     
         try {
+            LOGGER.info("Parsing story: " + file.getAbsolutePath());
             Path inputPath = Paths.get(file.getAbsolutePath());
             int pos = fileName.lastIndexOf(".");
             if (pos > 0) {
@@ -82,7 +85,7 @@ public class TextfileParser {
             mapper.writerWithDefaultPrettyPrinter().writeValue(outputPath.toFile(), storyNode);
             return true;
         } catch (IOException e) {
-            logger.severe("Error occurred while parsing the story: " + e.getMessage());
+            LOGGER.severe("Error occurred while parsing the story: " + e.getMessage());
             throw new StoryParsingException("Error occurred while parsing the story: " + file.getName(), e);
         }
     }
@@ -94,8 +97,19 @@ public class TextfileParser {
      * passage node and added to the "passages" array in the story node.
      */
     private static ObjectNode createStoryNode(List<String> lines, JsonNodeFactory nodeFactory) {
+        String  title = lines.get(0);
+        if (title.isEmpty()) {
+            throw new IllegalArgumentException("Story title cannot be empty");
+        }
+        if (title.length() > 30) {
+            throw new IllegalArgumentException("Story title cannot be longer than 60 characters");
+        }
+        if (title.length() < 3) {
+            throw new IllegalArgumentException("Story title must be at least 3 characters long");
+        }
+
         ObjectNode storyNode = nodeFactory.objectNode();
-        storyNode.put("title", lines.get(0));
+        storyNode.put("title", title);
 
         ArrayNode passagesNode = nodeFactory.arrayNode();
         storyNode.set("passages", passagesNode);
@@ -131,7 +145,7 @@ public class TextfileParser {
         ArrayNode linksNode = nodeFactory.arrayNode();
 
         currentIndex++;
-        while (currentIndex < lines.size() && !lines.get(currentIndex).startsWith("::")) {
+        while (currentIndex < lines.size() && !lines.get(currentIndex).startsWith(PASSAGE_IDENTIFIER)) {
             Matcher matcher = LINK_PATTERN.matcher(lines.get(currentIndex));
 
             if (matcher.find()) {
@@ -157,6 +171,11 @@ public class TextfileParser {
         passageNode.set("links", linksNode);
 
         return passageNode;
+    }
+   
+    public static void main(String[] args) {
+       File file = new File("/home/stian/test_story.paths"); 
+       TextfileParser.parseStory(file);
     }
 
 }
