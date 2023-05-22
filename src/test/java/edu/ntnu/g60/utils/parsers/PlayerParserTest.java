@@ -1,8 +1,6 @@
 package edu.ntnu.g60.utils.parsers;
 
 import edu.ntnu.g60.models.player.Player;
-import edu.ntnu.g60.utils.parsers.PlayerParser;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +13,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class tests the functionality of the PlayerParser class.
+ * @author Stian Lyng
+ */
 class PlayerParserTest {
 
     private static final String PLAYER_JSON = """
@@ -44,12 +46,20 @@ class PlayerParserTest {
 
     private PlayerParser parser;
 
+    /**
+     * Creates PlayerParser object with the JSON string stream as input.
+     */
     @BeforeEach
     void setUp() {
         InputStream stream = new ByteArrayInputStream(PLAYER_JSON.getBytes(StandardCharsets.UTF_8));
         parser = new PlayerParser(stream);
     }
 
+    /**
+     * Ensures that the parse method correctly parses player data from a JSON string into a list of Player objects
+     * with accurate properties.
+     * @throws IOException if an I/O error occurs
+     */
     @Test
     void testParsePlayers() throws IOException {
         List<Player> players = parser.parse();
@@ -71,6 +81,10 @@ class PlayerParserTest {
         assertEquals(Arrays.asList("gun", "bazookah"), player2.getInventory());
     }
 
+    /**
+     * Tests if the PlayerParser correctly throws an IllegalArgumentException
+     * when attempting to parse data from a nonexistent file.
+     */
     @Test
     void testIOException() {
         assertThrows(IllegalArgumentException.class, () -> {

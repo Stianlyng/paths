@@ -15,8 +15,19 @@ import edu.ntnu.g60.models.actions.Action;
  */
 public class Link implements Serializable {
 
+  /**
+   * The text of the link.
+   */
   private String text;
+  
+  /**
+   * The reference to the passage title.
+   */
   private String reference;
+  
+  /**
+   * The actions accosiated with executing the link.
+   */
   private List<Action> actions;
 
   /**

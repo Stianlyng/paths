@@ -22,13 +22,20 @@ import edu.ntnu.g60.models.passage.Link;
 
 /**
  * This class is responsible for saving and loading games to and from files.
+ * The paths to the save files are relative to the resources folder using the getResource() method.;w
  * 
  * @author Stian Lyng
  */
 public class SaveFileHandler{
-    
 
+    /**
+     * The relative path to the save files.
+     */
     private static final URL SAVE_PATH = SaveFileHandler.class.getResource("/saves/");
+    
+    /**
+     * The relative path to the story files.
+     */
     private static final URL STORY_PATH = SaveFileHandler.class.getResource("/stories/");
 
     
@@ -64,7 +71,7 @@ public class SaveFileHandler{
   
 
   /**
-   * Creates a formatted save file name based on the player's name, the story's title, and the provided save name.
+   * Creates a formatted file name based on the player's name, the story's title, and the provided save name.
    * @param player The player's name.
    * @param story The story's title.
    * @param saveName The save name.
@@ -94,10 +101,11 @@ public class SaveFileHandler{
 
   /**
    * Returns a list of the current active player's available saves.
+   * The saves are represented as the save file names
    *
-   * @param playerIdentifier The identifier of the player.
-   * @return A list of save names.
- * @throws URISyntaxException
+   * @param playerIdentifier The name of the player.
+   * @return A set of save names for the given player.
+   * @throws URISyntaxException If the path to the save files is invalid.
    */
   public static Set<String> getPlayerSaves(String playerIdentifier) throws URISyntaxException {
 
@@ -119,9 +127,9 @@ public class SaveFileHandler{
   /**
    * Deletes all saves for a specific player.
    *
-   * @param playerIdentifier The identifier of the player.
+   * @param playerIdentifier The name of the player.
    * @throws IOException If an I/O error occurs.
- * @throws URISyntaxException
+   * @throws URISyntaxException if the path to the save files is invalid.
    */
   public static void deletePlayerSaves(String playerIdentifier) throws IOException, URISyntaxException {
       Set<String> playerSaves = getPlayerSaves(playerIdentifier);
@@ -134,10 +142,10 @@ public class SaveFileHandler{
 
   
   /**
-  * Lists the files in the "src/main/resources/stories" folder.
+  * Lists the files in the "/resources/stories" folder.
   *
-  * @return a list of file names without extensions
- * @throws URISyntaxException
+  * @return a list of file names without extensions.
+  * @throws URISyntaxException if the path to the story files is invalid.
   */
   public static List<String> listFilesInFolder() throws URISyntaxException {
 
@@ -158,8 +166,8 @@ public class SaveFileHandler{
   /**
   * Returns a set of the available players.
   *
-  * @return A set of player identifiers.
- * @throws URISyntaxException
+  * @return A set of playernames.
+  * @throws URISyntaxException if the path to the save files is invalid.
   */
   public static Set<String> getAvailablePlayers() throws URISyntaxException {
       

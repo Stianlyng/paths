@@ -11,12 +11,39 @@ import java.util.List;
  */
 public class PassageEntity {
 
+    /**
+     * This holds the title of the passage
+     */
     private String title;
+    
+    /**
+     * This holds the content of the passage
+     */
     private String content;
-    private String background;
-    private String player;
-    private String enemy;
+    
+    /**
+     * This holds the name of the background image
+     */
+    private String backgroundImage;
+    
+    /**
+     * This holds the name of the player image
+     */
+    private String playerImage;
+    
+    /**
+     * This holds the name of the enemy image
+     */
+    private String enemyImage;
+    
+    /**
+     * This holds the fight status of the passage
+     */
     private boolean isFight;
+    
+    /**
+     * This holds the list of links associated with the passage
+     */
     private List<LinkEntity> links;
 
     /**
@@ -74,57 +101,57 @@ public class PassageEntity {
     }
     
     /**
-     * Gets the background of the passage.
+     * Gets the backgroundImage of the passage.
      *
-     * @return A string representing the background of the passage.
+     * @return A string representing the backgroundImage of the passage.
      */
     public String getBackground() {
-        return background;
+        return backgroundImage;
     }
 
     /**
-     * Sets the background of the passage.
+     * Sets the backgroundImage of the passage.
      *
-     * @param background A string representing the background of the passage.
+     * @param backgroundImage A string representing the backgroundImage of the passage.
      */
-    public void setBackground(String background) {
-        this.background = background;
+    public void setBackground(String backgroundImage) {
+        this.backgroundImage = backgroundImage;
     }
 
     /**
-     * Gets the player associated with the passage.
+     * Gets the playerImage associated with the passage.
      *
-     * @return A string representing the player associated with the passage.
+     * @return A string representing the playerImage associated with the passage.
      */
     public String getPlayer() {
-        return player;
+        return playerImage;
     }
 
     /**
-     * Sets the player associated with the passage.
+     * Sets the playerImage associated with the passage.
      *
-     * @param player A string representing the player associated with the passage.
+     * @param playerImage A string representing the playerImage associated with the passage.
      */
-    public void setPlayer(String player) {
-        this.player = player;
+    public void setPlayer(String playerImage) {
+        this.playerImage = playerImage;
     }
 
     /**
-     * Gets the enemy associated with the passage.
+     * Gets the enemyImage associated with the passage.
      *
-     * @return A string representing the enemy associated with the passage.
+     * @return A string representing the enemyImage associated with the passage.
      */
     public String getEnemy() {
-        return enemy;
+        return enemyImage;
     }
 
     /**
-     * Sets the enemy associated with the passage.
+     * Sets the enemyImage associated with the passage.
      *
-     * @param enemy A string representing the enemy associated with the passage.
+     * @param enemyImage A string representing the enemyImage associated with the passage.
      */
-    public void setEnemy(String enemy) {
-        this.enemy = enemy;
+    public void setEnemy(String enemyImage) {
+        this.enemyImage = enemyImage;
     }
 
     /**

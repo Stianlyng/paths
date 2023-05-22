@@ -11,12 +11,26 @@ import edu.ntnu.g60.models.player.Player;
  * @author Stian Lyng
  */
 public class InventoryGoal implements Goal, Serializable {
+
+    /**
+     * This holds the mandatory items required to fulfill the goal
+     */
     List<String> mandatoryItems;
 
+    /**
+     * Creates a new InventoryGoal with the given mandatory items.
+     * 
+     * @param mandatoryItems The mandatory items required to fulfill the goal.
+     */
     public InventoryGoal(List<String> mandatoryItems) {
         this.mandatoryItems = mandatoryItems;
     }
 
+    /**
+     * Gets the mandatory items required to fulfill the goal.
+     * 
+     * @return A list of strings representing the mandatory items required to fulfill the goal.
+     */
     public boolean isFulfilled(Player player) {
         for (String item : mandatoryItems) {
             if (!player.getInventory().contains(item)) {
@@ -26,6 +40,11 @@ public class InventoryGoal implements Goal, Serializable {
         return true;
     }
 
+    /**
+     * Gets the mandatory items required to fulfill the goal.
+     * 
+     * @return A list of strings representing the mandatory items required to fulfill the goal.
+     */
     @Override
     public String toString() {
         return "InventoryGoal: " + this.mandatoryItems;

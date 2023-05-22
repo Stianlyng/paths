@@ -10,12 +10,26 @@ import edu.ntnu.g60.models.player.Player;
  * @author Stian Lyng
  */
 public class HealthGoal implements Goal, Serializable {
+
+    /**
+     * This holds the minimum health required to fulfill the goal
+     */
     int minimumHealth;
 
+    /**
+     * Creates a new HealthGoal with the given minimum health.
+     * 
+     * @param minimumHealth The minimum health required to fulfill the goal.
+     */
     public HealthGoal(int minimumHealth) {
         this.minimumHealth = minimumHealth;
     }
 
+    /**
+     * Gets the minimum health required to fulfill the goal.
+     * 
+     * @return An integer representing the minimum health required to fulfill the goal.
+     */
     public boolean isFulfilled(Player player) {
         if (player.getHealth() >= this.minimumHealth) {
             return true;
@@ -24,6 +38,11 @@ public class HealthGoal implements Goal, Serializable {
         }
     }
 
+    /**
+     * Gets the minimum health required to fulfill the goal.
+     * 
+     * @return An integer representing the minimum health required to fulfill the goal.
+     */
     @Override
     public String toString() {
         return "HealthGoal: " + this.minimumHealth;

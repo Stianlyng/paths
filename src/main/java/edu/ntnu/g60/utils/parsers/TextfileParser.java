@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import edu.ntnu.g60.entities.StoryNotFoundException;
+import edu.ntnu.g60.exceptions.StoryNotFoundException;
 import edu.ntnu.g60.exceptions.StoryParsingException;
 
 
@@ -36,12 +36,15 @@ public class TextfileParser {
      *
      * @param filename The name of the input text file (without the extension)
      * @throws IOException If there is a problem reading or writing the files
+     * @throws StoryNotFoundException If the story file is not found
+     * @throws IllegalArgumentException If the file is not a .txt or .paths file,
+     *                                  if the file is empty, if the path is a directory,
+     *                                  or if the file does not exist
      */
     public static boolean parseStory(File file) {
         if (file == null) {
             throw new IllegalArgumentException("File cannot be null");
         }
-
         if (file.isDirectory()) {
             throw new IllegalArgumentException("File cannot be a directory: " + file.getAbsolutePath());
         }
@@ -49,9 +52,7 @@ public class TextfileParser {
             LOGGER.severe("Story file not found: " + file.getAbsolutePath());
             throw new StoryNotFoundException("Story file not found: " + file.getAbsolutePath());
         }
-
         String fileName = file.getName();
-
         if (!fileName.endsWith(".paths") && !fileName.endsWith(".txt")) {
             throw new IllegalArgumentException("File must be a .paths or .txt file: " + file.getAbsolutePath());
         }
@@ -59,8 +60,6 @@ public class TextfileParser {
         if (file.length() == 0) {
             throw new IllegalArgumentException("File is empty: " + file.getAbsolutePath());
         }
-
-        
     
         try {
             LOGGER.info("Parsing story: " + file.getAbsolutePath());
@@ -172,9 +171,4 @@ public class TextfileParser {
         return passageNode;
     }
    
-    public static void main(String[] args) {
-       File file = new File("/home/stian/test_story.paths"); 
-       TextfileParser.parseStory(file);
-    }
-
 }

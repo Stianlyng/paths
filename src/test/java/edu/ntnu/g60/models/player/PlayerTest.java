@@ -9,6 +9,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ * Tests for the player class and player builder class.
+ * 
+ * @author Stian Lyng
+ */
 class PlayerTest {
     private Player player;
 
@@ -17,6 +23,9 @@ class PlayerTest {
         player = new PlayerBuilder().setName("John").build();
     }
 
+    /**
+     * Tests if PlayerBuilder correctly sets all fields of Player object.
+     */
     @Test
     void testConstructorsetInventory() {
         List<String> inventory = Arrays.asList("sword", "shield");
@@ -34,24 +43,36 @@ class PlayerTest {
         assertEquals(inventory, playersetInventory.getInventory());
     }
 
+    /**
+     * Tests if method addHealth correctly increases player's health.
+     */
     @Test
     void testAddHealth() {
         player.addHealth(20);
         assertEquals(120, player.getHealth());
     }
 
+    /**
+     * Tests if method addScore correctly increases player's score.
+     */
     @Test
     void testAddScore() {
         player.addScore(10);
         assertEquals(10, player.getScore());
     }
 
+    /**
+     * Tests if method addGold correctly increases player's gold.
+     */
     @Test
     void testAddGold() {
         player.addGold(5);
         assertEquals(5, player.getGold());
     }
 
+    /**
+     * Tests if method addToInventory correctly adds item to player's inventory and if it correctly handles invalid inputs.
+     */
     @Test
     void testAddToInventory() {
         player.addToInventory("sword");
@@ -61,6 +82,9 @@ class PlayerTest {
         assertThrows(IllegalArgumentException.class, () -> player.addToInventory(null));
     }
 
+    /**
+     * Tests the toString method.
+     */
     @Test
     void testToString() {
         player.addHealth(20);

@@ -19,11 +19,20 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * Tests the functionality of the SerializedGameState class.
+ * 
+ * @author Stian Lyng
+ */
 public class SerializedGameStateTest {
     private Game game;
     private Link link;
     private SerializedGameState serializedGameState;
     
+    /**
+     * Creates a game with a player, a story with passages and links, and
+     * a SerializedGameState object with the game and link.
+     */
     @BeforeEach
     public void setUp() {
 
@@ -55,6 +64,10 @@ public class SerializedGameStateTest {
         serializedGameState = new SerializedGameState(game, link);
     }
     
+    /**
+     * Ensures that the SerializedGameState is correctly initialized with the 
+     * provided game and link during its construction.
+     */
     @Test
     public void testConstructor() {
         assertNotNull(serializedGameState, "Should be instantiated.");
@@ -63,12 +76,20 @@ public class SerializedGameStateTest {
         assertNotNull(serializedGameState.getCurrentLink(), "Should contain a Link object.");
     }
 
+    /**
+     * Verifies that the getCurrentLink method of SerializedGameState
+     * correctly returns the current Link.
+     */
     @Test
     public void testCurrentLink() {
         Link currentLink = serializedGameState.getCurrentLink();
         assertEquals(link, currentLink, "getCurrentLink should return the correct Link target.");
     }
 
+    /**
+     * Ensures that the getGame method of SerializedGameState
+     * correctly returns the Game object with the correct Player information.
+     */
     @Test
     public void testGetGame() {
         Game gameFromSerialized = serializedGameState.getGame();

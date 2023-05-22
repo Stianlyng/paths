@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import edu.ntnu.g60.models.passage.Passage;
 import javafx.concurrent.Task;
 
 public class FrontendUtils {

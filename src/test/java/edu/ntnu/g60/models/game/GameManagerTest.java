@@ -19,7 +19,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 /**
- * The GameManagerTest class contains unit tests for the GameManager class.
+ * Tests for the GameManager class.
+ *
+ * @author Stian Lyng
  */
 public class GameManagerTest {
     private GameManager gameManager;

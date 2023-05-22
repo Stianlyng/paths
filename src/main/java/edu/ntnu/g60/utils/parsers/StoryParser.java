@@ -165,7 +165,7 @@ public class StoryParser {
 
     /**
      * Builds a list of goals from a GoalEntity object.
-     * @param goalEntity
+     * @param goalEntity the GoalEntity object to be parsed.
      * @return a list of goals.
      */
     private List<Goal> buildGoals(GoalEntity goalEntity) {
@@ -203,9 +203,4 @@ public class StoryParser {
         return this.goals;
     }
     
-    public static void main(String[] args) throws BrokenLinkException {
-        StoryParser storyParser = new StoryParser(" s   /testStory");
-        Story story = storyParser.getStory();
-        System.out.println(story.getTitle());
-    }
 }

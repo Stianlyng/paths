@@ -11,11 +11,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.List;
-
-
 /**
- * Test class for all the actionis.
+ * Test class for all the actions.
  * 
  * @author Stian Lyng
  */

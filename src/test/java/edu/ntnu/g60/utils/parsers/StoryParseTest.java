@@ -5,7 +5,6 @@ import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.passage.Link;
 import edu.ntnu.g60.models.passage.Passage;
 import edu.ntnu.g60.models.story.Story;
-import edu.ntnu.g60.utils.parsers.StoryParser;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +16,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test wether the story parser correctly parse JSON-formatted stories, 
+ * 
+ * @author Stian Lyng
+ */
 class StoryParseTest {
     
     private static final String STORY_JSON = """
@@ -93,30 +97,45 @@ class StoryParseTest {
         }
     }
     
+    /**
+     * Tests that the story title is correctly parsed from the JSON.
+     */
     @Test
     void testStoryTitle() {
         String storyTitle = story.getTitle();
         assertEquals("Test Story", storyTitle);
     }
 
+    /**
+     * Tests that the count of passages in the story is correctly parsed from the JSON.
+     */
     @Test
     void testPassageCount() {
         int passageCount = story.getPassages().size();
         assertEquals(2, passageCount);
     }
     
+    /**
+     * Tests that the title of the opening passage is correctly parsed from the JSON.
+     */
     @Test
     void testPassageTitle() {
         String passageTitle = story.getOpeningPassage().getTitle();
         assertEquals("The First Passage", passageTitle);
     }
     
+    /**
+     * Tests that the content of the opening passage is correctly parsed from the JSON.
+     */
     @Test
     void testPassageContent() {
         String passageContent = story.getOpeningPassage().getContent();
         assertEquals("This is the first passage", passageContent);
     }
 
+    /**
+     * Tests that the default images are assigned when no image is specified in the JSON.
+     */
     @Test
     void testDefaultImage() {
         Passage openingPassage = story.getOpeningPassage();
@@ -129,6 +148,9 @@ class StoryParseTest {
         assertEquals("enemyDefault.png", defaultEnemy);
     }
 
+    /**
+     * Tests that a BrokenLinkException is thrown when the JSON contains a broken link.
+     */
     @Test
     void testStoryWithBrokenLink() {
     String JsonWithBrokenLink = """
@@ -157,12 +179,18 @@ class StoryParseTest {
         assertThrows(BrokenLinkException.class, storyParser::getStory);
     }
    
+    /**
+     * Tests that the actions associated with the links are correctly parsed from the JSON.
+     */
     @Test
     void testActions() {
         Passage openingPassage = story.getOpeningPassage();
         assertEquals(2, openingPassage.getLinks().get(0).getActions().size());    
     } 
     
+    /**
+     * Tests that no actions are assigned when none are specified in the JSON.
+     */
     @Test
     void testActionsNotInJSON(){
         Link link = story.getOpeningPassage().getLinks().get(0);
@@ -170,13 +198,18 @@ class StoryParseTest {
         assertEquals(0, secondPassage);
     }
     
-
+    /**
+     * Tests that the goals are correctly parsed from the JSON.
+     */
     @Test
     void testWithGoals() {
         List<Goal> goals = storyParser.getGoals();
         assertEquals(4, goals.size()); 
     }
     
+    /**
+     * Tests that default goals are assigned when none are specified in the JSON.
+     */
     @Test
     void testWitoutGoals() {
         String JsonWithoutGoals = """
@@ -206,7 +239,9 @@ class StoryParseTest {
         assertEquals(4, goals.size()); 
     }
     
-    
+   /**
+    * Tests that a RuntimeException is thrown when trying to parse from a non-existent file.
+    */   
     @Test
     void testIOException() {
         assertThrows(RuntimeException.class, () -> {

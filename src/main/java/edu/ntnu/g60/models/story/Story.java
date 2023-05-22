@@ -177,10 +177,14 @@ public class Story implements Serializable {
             }
         }
     }
-
     return brokenLinks;
-}
+  }
 
+  /**
+   * Overrides the toString method.
+   * 
+   * @return A string representation of the story.
+   */
   @Override
   public String toString() {
     return "Story{" +

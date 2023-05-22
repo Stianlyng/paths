@@ -10,12 +10,26 @@ import edu.ntnu.g60.models.player.Player;
  * @author Stian Lyng
  */
 public class ScoreGoal implements Goal, Serializable {
+    
+    /**
+     * This holds the minimum points required to fulfill the goal
+     */
     int minimumPoints;
 
+    /**
+     * Creates a new ScoreGoal with the given minimum points.
+     * 
+     * @param minimumPoints The minimum points required to fulfill the goal.
+     */
     public ScoreGoal(int minimumPoints) {
         this.minimumPoints = minimumPoints;
     }
 
+    /**
+     * Gets the minimum points required to fulfill the goal.
+     * 
+     * @return An integer representing the minimum points required to fulfill the goal.
+     */
     public boolean isFulfilled(Player player) {
 
         if (player.getScore() >= this.minimumPoints) {
@@ -25,6 +39,11 @@ public class ScoreGoal implements Goal, Serializable {
         }
     }
 
+    /**
+     * Gets the minimum points required to fulfill the goal.
+     * 
+     * @return An integer representing the minimum points required to fulfill the goal.
+     */
     @Override
     public String toString() {
         return "ScoreGoal: " + this.minimumPoints;

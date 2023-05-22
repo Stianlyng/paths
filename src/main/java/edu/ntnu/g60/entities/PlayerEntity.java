@@ -10,10 +10,30 @@ import java.util.List;
  * @author Stian Lyng
  */
 public class PlayerEntity {
+    
+    /**
+     * This holds the name of the player
+     */
     private String name;
+    
+    /**
+     * This holds the health of the player
+     */
     private int health;
+    
+    /**
+     * This holds the score of the player
+     */
     private int score;
+    
+    /**
+     * This holds the gold of the player
+     */
     private int gold;
+    
+    /**
+     * This holds the inventory of the player
+     */
     private List<String> inventory;
     
     /**

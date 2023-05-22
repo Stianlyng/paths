@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for FrontendUtils
+ * 
+ * @author Olav 
+ */
 class FrontendUtilsTest {
 
     @Test

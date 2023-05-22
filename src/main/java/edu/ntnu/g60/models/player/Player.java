@@ -12,10 +12,29 @@ import java.util.List;
  */
 public class Player implements Serializable {
 
+  /**
+   * The name of the player.
+   */
   private String name;
+  
+  /**
+   * The health of the player.
+   */
   private int health;
+  
+  /**
+   * The score of the player.
+   */
   private int score;
+  
+  /**
+   * The gold of the player.
+   */
   private int gold;
+  
+  /**
+   * The inventory of the player.
+   */
   private List<String> inventory;
 
   /**
@@ -63,30 +82,65 @@ public class Player implements Serializable {
     this.inventory = new ArrayList<>(other.inventory);
   }
 
+  /**
+   * Gets the name of the player.
+   *
+   * @return the name of the player.
+   */
   public String getName() {
     return this.name;
   }
 
+  /**
+   * Adds health to the player.
+   *
+   * @param health the amount of health to add or subtract.
+   */
   public void addHealth(int health) {
     this.health += health;
   }
 
+  /**
+   * Gets the health of the player.
+   *
+   * @return the health of the player.
+   */
   public int getHealth() {
     return this.health;
   }
 
+  /**
+   * Adds score to the player.
+   *
+   * @param points amount of score to add or subtract.
+   */
   public void addScore(int points) {
     this.score += points;
   }
 
+  /**
+   * Gets the score of the player.
+   *
+   * @return the score of the player.
+   */
   public int getScore() {
     return this.score;
   }
 
+  /**
+   * Adds gold to the player.
+   *
+   * @param gold the amount of gold to add or subtract.
+   */
   public void addGold(int gold) {
     this.gold += gold;
   }
 
+  /**
+   * Gets the gold of the player.
+   *
+   * @return the gold of the player.
+   */
   public int getGold() {
     return this.gold;
   }

@@ -18,6 +18,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests for the Game class.
+ * 
+ * @Author Stian Lyng
+ */
 class GameTest {
 
     private Game game;
@@ -57,48 +62,60 @@ class GameTest {
         game = new Game(player, story, goals);
     }
 
-    
+    /**
+     * checks that the  constructor throws an IllegalArgumentException when a null player, goal or story is passed.
+     */   
     @Test
     void testConstructorNullPlayer() {
         assertThrows(IllegalArgumentException.class, () -> new Game(null, story, goals));
-    }
-    
-    @Test
-    void testConstructorNullStory() {
         assertThrows(IllegalArgumentException.class, () -> new Game(player, null, goals));
-    }
-    
-    @Test
-    void testConstructorNullGoals() {
         assertThrows(IllegalArgumentException.class, () -> new Game(player, story, null));
     }
-
+   
+    /**
+     * verifies that method throws an InvalidLinkException when a non-existent link is passed.
+     */
     @Test
     void testGoNonexistentLink() {
         Link nonexistentLink = new Link("Nonexistent Passage", "Nonexistent Passage");
         assertThrows(InvalidLinkException.class, () -> game.go(nonexistentLink));
     }
     
+    /**
+     * verifies that the getPlayer method returns the correct player object.
+     */
     @Test
     void testGetPlayer() {
         assertEquals(player, game.getPlayer());
     }
 
+    /**
+     * verifies thath getStory method returns the correct story object.
+     */
     @Test
     void testGetStory() {
         assertEquals(story, game.getStory());
     }
 
+    /**
+     * checks wether getGoals method returns the correct goal list.
+     */
     @Test
     void testGetGoals() {
         assertEquals(goals, game.getGoals());
     }
 
+    /**
+     * checks whether begin method returns the correct opening passage.
+     */
     @Test
     void testBegin() {
         assertEquals(openingPassage, game.begin());
     }
 
+    /**
+     * Tests that the go method in the game class correctly navigates to the linked passage.
+     */
     @Test
     void testGo() throws InvalidLinkException {
         assertEquals(additionalPassage, game.go(link));

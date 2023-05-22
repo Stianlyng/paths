@@ -12,6 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Tests for the Story class.
+ * 
+ * @author Stian Lyng
+ */
 class StoryTest {
 
     private Story story;
@@ -44,6 +49,9 @@ class StoryTest {
         additionaLink = new Link("Go to Opening Passage", "Opening Passage");
     }
 
+    /**
+     * Tests adding a new passage to the story.
+     */
     @Test
     void testAddPassage() {
         Passage newPassage = new PassageBuilder()
@@ -56,44 +64,68 @@ class StoryTest {
         assertEquals(newPassage, story.getPassage(new Link("go to", "New Passage")));
     }
 
+    /**
+     * Tests the addPassage method with null input.
+     */
     @Test
     void testAddPassageNull() {
         assertThrows(IllegalArgumentException.class, () -> story.addPassage(null));
     }
 
+    /**
+     * Tests the getTitle method.
+     */
     @Test
     void testGetTitle() {
         assertEquals("Test Story", story.getTitle());
     }
 
+    /**
+     * Tests the getOpeningPassage method.
+     */
     @Test
     void testGetOpeningPassage() {
         assertEquals(openingPassage, story.getOpeningPassage());
     }
 
+    /**
+     * Tests the getPassage method with valid Link.
+     */
     @Test
     void testGetPassage() {
         assertEquals(additionalPassage, story.getPassage(link));
     }
 
+    /**
+     * Tests the getPassages method.
+     */
     @Test
     void testGetPassages() {
         assertEquals(1, story.getPassages().size());
         assertTrue(story.getPassages().contains(additionalPassage));
     }
 
+    /**
+     * Tests the deletePassage method.
+     */
     @Test
     void testDeletePassage() {
         story.deletePassage(link);
         assertNull(story.getPassage(link));
     }
 
+    /**
+     * Tests the getBrokenLinks method with valid inpur.
+     */
     @Test
     void testGetBrokenLinks() {
         List<Link> brokenLinks = story.getBrokenLinks();
         assertTrue(brokenLinks.isEmpty());
     }
 
+    /**
+     * Tests the constructor of the Story class with various invalid inputs.
+     */
     @Test
     void testStoryConstructor() {
         assertThrows(IllegalArgumentException.class, () -> new Story(null, openingPassage));
@@ -101,6 +133,9 @@ class StoryTest {
         assertThrows(IllegalArgumentException.class, () -> new Story("Test Story", null));
     }
 
+    /**
+     * Tests the copy constructor. 
+     */
     @Test
     void testStoryCopyConstructor() {
         Story copyStory = new Story(story);
@@ -109,6 +144,9 @@ class StoryTest {
         assertEquals(story.getPassages(), copyStory.getPassages());
     }
 
+    /**
+     * Tests the addAllPassages method with a collection of passages.
+     */
     @Test
     void testAddAllPassages() {
         Map<Link, Passage> passages = new HashMap<>();
@@ -124,6 +162,9 @@ class StoryTest {
         assertTrue(story.getPassages().contains(anotherPassage));
     }
 
+    /**
+     * Tests the deletePassage method with an invalid link.
+     */
     @Test
     void testDeletePassageWithLink() {
         Passage linkedPassage = new PassageBuilder()
@@ -137,6 +178,9 @@ class StoryTest {
         assertThrows(IllegalArgumentException.class, () -> story.deletePassage(link));
     }
 
+    /**
+     * Tests the getBrokenLinks method under special cases, such as game end scenarios.
+     */
     @Test
     void testGetBrokenLinksSpecialCases() {
         Passage endGamePassage = new PassageBuilder()
@@ -169,6 +213,9 @@ class StoryTest {
         assertEquals("Non-existent Passage", brokenLinks.get(0).getReference());
     }
 
+    /**
+     * Tests the toString method.
+     */
     @Test
     void testToString() {
         String expectedString = "Story{" +

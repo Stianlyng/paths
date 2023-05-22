@@ -10,8 +10,20 @@ import java.util.List;
  * @author Stian Lyng
  */
 public class StoryEntity {
+    
+    /**
+     * This holds the title of the story
+     */
     private String title;
+    
+    /**
+     * This holds the goals of the story
+     */
     private GoalEntity goals;
+    
+    /**
+     * This holds the list of passages in the story
+     */
     private List<PassageEntity> passages;
 
     /**

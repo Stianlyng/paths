@@ -11,9 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Test class for ActionFactory.
- * Checks that the correct Action objects are created based on the ActionEntity provided.
- * Also checks that an InvalidActionTypeException is thrown if the type or value is invalid.
+ * Tests for the ActionFactory class.
  * 
  * @author Stian Lyng
  * @version 1.0

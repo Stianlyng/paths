@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests for the story builder class.
+ * 
+ * @author Stian Lyng
+ */
 class StoryBuilderTest {
 
     private Passage openingPassage;
@@ -25,6 +30,9 @@ class StoryBuilderTest {
                 .build();
     }
 
+    /**
+     * Tests the setTitle method with a valid title.
+     */
     @Test
     void testSetTitle() {
         StoryBuilder builder = new StoryBuilder();
@@ -33,18 +41,27 @@ class StoryBuilderTest {
         assertEquals("Test Story", story.getTitle());
     }
 
+    /**
+     * Tests the setTitle method with a null title. 
+     */
     @Test
     void testSetTitleNull() {
         StoryBuilder builder = new StoryBuilder();
         assertThrows(IllegalArgumentException.class, () -> builder.setTitle(null).setOpeningPassage(openingPassage).build());
     }
 
+    /**
+     * Tests the setTitle method with a blank title.
+     */
     @Test
     void testSetTitleBlank() {
         StoryBuilder builder = new StoryBuilder();
         assertThrows(IllegalArgumentException.class, () -> builder.setTitle("").setOpeningPassage(openingPassage).build());
     }
 
+    /**
+     * Tests the setOpeningPassage method with a valid passage.
+     */
     @Test
     void testSetOpeningPassage() {
         StoryBuilder builder = new StoryBuilder();
@@ -53,12 +70,18 @@ class StoryBuilderTest {
         assertEquals(openingPassage, story.getOpeningPassage());
     }
 
+    /**
+     * Tests the setOpeningPassage method with a null passage.
+     */
     @Test
     void testSetOpeningPassageNull() {
         StoryBuilder builder = new StoryBuilder();
         assertThrows(IllegalArgumentException.class, () -> builder.setOpeningPassage(null).setTitle("Test Story").build());
     }
 
+    /**
+     * Tests the addPassage method, checking if the additional passage is successfully added to the Story object.
+     */
     @Test
     void testAddPassage() {
         StoryBuilder builder = new StoryBuilder();
@@ -67,6 +90,9 @@ class StoryBuilderTest {
         assertTrue(story.getPassages().contains(additionalPassage));
     }
 
+    /**
+     * Tests the build method to validate that all the set and added elements are correctly incorporated in the final Story object.
+     */
     @Test
     void testBuild() {
         StoryBuilder builder = new StoryBuilder();

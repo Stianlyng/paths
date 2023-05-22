@@ -22,10 +22,18 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the functionality of the saving and filehandling utilities.
+ *
+ * @author Stian Lyng
+ */
 class SaveFileHandlerTest {
    
     private Game game;
 
+    /**
+     * The setup includes a Player, Passage, Story and a list of Goals.
+     */
     @BeforeEach
     void setUp() {
 
@@ -45,27 +53,36 @@ class SaveFileHandlerTest {
         game = new Game(player, story, goals);
     }
     
+    /**
+     * Tests whether the game can be saved to a file without throwing an exception.
+     * Also tests if saving a null game results in an IllegalStateException.
+     */
     @Test
     public void testSaveGameToFile() {
         String saveName = "TestSave";
         String currentPassage = "Intro";
-
         assertDoesNotThrow(() -> SaveFileHandler.saveGameToFile(game, saveName, currentPassage));
         assertThrows(IllegalStateException.class, () -> SaveFileHandler.saveGameToFile(null, saveName, currentPassage));
     }
 
+    /**
+     * Tests if a game can be successfully loaded from a file.
+     * Also checks if loading from an invalid file correctly returns an empty Optional.
+     */
     @Test
     public void testLoadGameFromFile() {
         String fileName = "TestPlayer_TestStory_TestSave.ser";
-
         SaveFileHandler.saveGameToFile(game, "TestSave", "Intro");
-
         Optional<SerializedGameState> loadedGame = SaveFileHandler.loadGameFromFile(fileName);
         assertTrue(loadedGame.isPresent());
         loadedGame = SaveFileHandler.loadGameFromFile("invalid_file.ser");
         assertFalse(loadedGame.isPresent());
     }
 
+    /**
+     * Tests whether the correct saves associated with a specific player are retrieved.
+     * Also tests if querying saves of a non-existent player returns an empty set.
+     */
     @Test
     public void testGetPlayerSaves() throws URISyntaxException {
         String playerIdentifier = "TestPlayer";
@@ -79,6 +96,10 @@ class SaveFileHandlerTest {
         assertTrue(playerSaves.isEmpty());
     }
 
+    /**
+     * Tests whether the saved files associated with a specific player can be deleted.
+     * Verifies that after deletion, querying the player's saves returns an empty set.
+     */
     @Test
     public void testDeletePlayerSaves() throws IOException, URISyntaxException {
         String playerIdentifier = "TestPlayer";
@@ -88,11 +109,18 @@ class SaveFileHandlerTest {
         assertTrue(playerSaves.isEmpty());
     }
 
+    /**
+     * Tests if listFilesInFolder method works without throwing an exception.
+     */
     @Test
     public void testListFilesInFolder() throws URISyntaxException {
         assertDoesNotThrow(() -> SaveFileHandler.listFilesInFolder());
     }
 
+    /**
+     * Tests whether the correct players who have saves are returned.
+     * Also checks if a player with a save is correctly included in the returned set.
+     */
     @Test
     public void testGetAvailablePlayers() throws URISyntaxException {
         String playerIdentifier = "TestPlayer";

@@ -6,8 +6,13 @@ import java.io.File;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.ntnu.g60.entities.StoryNotFoundException;
+import edu.ntnu.g60.exceptions.StoryNotFoundException;
 
+/**
+ * Class for testing the TextfileParser.
+ * 
+ * @author Stian Lyng
+ */
 public class TextfileParserTest {
     
     private File validFile;
@@ -23,27 +28,41 @@ public class TextfileParserTest {
         directory = new File("src/test/resources/imports/");
     }
 
-
-
+    /**
+     * Tests the parsing on an invalid file.
+     */
     void testParseStoryInvalidFile() {
         assertThrows(IllegalArgumentException.class, () -> TextfileParser.parseStory(invalidFile));
     }
 
+
+    /**
+     * Tests the parsing on a non-existent file.
+     */
     @Test
     void testParseStoryNonExistentFile() {
         assertThrows(StoryNotFoundException.class, () -> TextfileParser.parseStory(nonExistentFile));
     }
 
+    /**
+     * Tests the parsing when a null file is passed.
+     */
     @Test
     void testParseStoryNullFile() {
         assertThrows(IllegalArgumentException.class, () -> TextfileParser.parseStory(null));
     }
 
+    /**
+     * Tests the parsing when a directory is passed instead of a file.
+     */
     @Test
     void testParseStoryDirectory() {
         assertThrows(IllegalArgumentException.class, () -> TextfileParser.parseStory(directory));
     }
 
+    /**
+     * Tests the when an empty story title is encountered.
+     */
     @Test
     void emptyStoryTitleShouldThrow() {
         // Setup a file that would result in an error while parsing, for example by having invalid characters

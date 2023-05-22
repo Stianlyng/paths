@@ -13,13 +13,40 @@ import java.util.Objects;
  */
 public class Passage implements Serializable {
 
+  /**
+   * The title of the passage.
+   */
   private String title;
+  
+  /**
+   * The content of the passage.
+   */
   private String content;
+  
+  /**
+   * The links to other passages.
+   */
   private List<Link> links;
-  private String player;
-  private String enemy;
-  private String background;
-  private boolean fightScene;
+
+  /**
+   * The player image of the passage.
+   */
+  private String playerImage;
+  
+  /**
+   * The enemy image of the passage.
+   */
+  private String enemyImage;
+  
+  /**
+   * The background image of the passage.
+   */
+  private String backgroundImage;
+  
+  /**
+   * The fight status of the passage.
+   */
+  private boolean isFightScene;
 
   /**
    * Constructor for the Passage class.
@@ -29,7 +56,7 @@ public class Passage implements Serializable {
    * @param links   The links to other passages from this passage.
    * @throws IllegalArgumentException if title or content is null or blank.
    */
-  Passage(String title, String content, String player, String enemy, String background, boolean isFightScene)
+  Passage(String title, String content, String playerImage, String enemyImage, String backgroundImage, boolean isFightScene)
       throws IllegalArgumentException {
 
     if (title == null || title.isBlank())
@@ -38,10 +65,10 @@ public class Passage implements Serializable {
       throw new IllegalArgumentException("Content cannot be null or blank.");
     this.title = title;
     this.content = content;
-    this.player = player;
-    this.enemy = enemy;
-    this.background = background;
-    this.fightScene = isFightScene;
+    this.playerImage = playerImage;
+    this.enemyImage = enemyImage;
+    this.backgroundImage = backgroundImage;
+    this.isFightScene = isFightScene;
     this.links = new ArrayList<>();
   }
 
@@ -54,38 +81,38 @@ public class Passage implements Serializable {
   public Passage(Passage other) {
     this.title = other.title;
     this.content = other.content;
-    this.player = other.player;
-    this.enemy = other.enemy;
-    this.background = other.background;
-    this.fightScene = other.fightScene;
+    this.playerImage = other.playerImage;
+    this.enemyImage = other.enemyImage;
+    this.backgroundImage = other.backgroundImage;
+    this.isFightScene = other.isFightScene;
     this.links = new ArrayList<>(other.links); // Assuming Link has a suitable copy constructor or is immutable
   }
 
   /**
-   * The player image file
+   * The playerImage image file
    *
-   * @return the name of the player image file
+   * @return the name of the playerImage image file
    */
   public String getPlayerImage() {
-    return player;
+    return playerImage;
   }
 
   /**
-   * The enemy image file
+   * The enemyImage image file
    *
-   * @return the name of the enemy image file
+   * @return the name of the enemyImage image file
    */
   public String getEnemyImage() {
-    return enemy;
+    return enemyImage;
   }
 
   /**
-   * The background image file
+   * The backgroundImage image file
    *
-   * @return the name of the background image file
+   * @return the name of the backgroundImage image file
    */
   public String getBackgroundImage() {
-    return background;
+    return backgroundImage;
   }
 
   /**
@@ -94,7 +121,7 @@ public class Passage implements Serializable {
    * @return True if the passage is a fight scene, false otherwise.
    */
   public boolean isFightScene() {
-    return fightScene;
+    return isFightScene;
   }
 
   /**

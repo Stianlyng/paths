@@ -14,10 +14,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class LinkEntity {
 
+    /**
+     * This holds the text of the link
+     */
     private String text;
     
+    /**
+     * This holds the reference to another passage
+     */
     private String reference;
     
+
+    /**
+     * This holds the list of actions associated with the link
+     */
     @JsonProperty("actions") 
     private List<ActionEntity> actions;
 
