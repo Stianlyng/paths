@@ -29,8 +29,6 @@ public class TextfileParser {
     private static final Logger LOGGER = Logger.getLogger(TextfileParser.class.getName());
     private static final Pattern LINK_PATTERN = Pattern.compile("\\[(.+?)\\]\\((.+?)\\)");
     private static final Path STORY_PATH = Paths.get("src/main/resources/stories/");
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-    private static final JsonNodeFactory NODE_FACTORY = JsonNodeFactory.instance;
     private static final String PASSAGE_IDENTIFIER = "::";
 
     /**
@@ -134,7 +132,6 @@ public class TextfileParser {
      */
     private static ObjectNode createPassageNode(List<String> lines, JsonNodeFactory nodeFactory, int currentIndex) {
         ObjectNode passageNode = nodeFactory.objectNode();
-
         String title = lines.get(currentIndex).substring(2).trim();
 
         if (title.isEmpty()) {
