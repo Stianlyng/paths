@@ -29,7 +29,8 @@ class FrontendUtilsTest {
             "{P}More Trial text"
         };
         int conversationPaneNumber = 1;
-        String[] result = FrontendUtils.splitTextIntoFourLines(conversationParts, conversationPaneNumber);
+        String passageContent = "This is text";
+        String[] result = FrontendUtils.splitTextIntoFourLines(conversationParts, conversationPaneNumber, passageContent);
         assertEquals(4, result.length);
         assertEquals("More Trial text       ", result[0]);
         assertEquals("", result[1]);

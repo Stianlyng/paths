@@ -95,7 +95,7 @@ public class ConversationPane extends StackPane{
         healthIcon, scoreIcon, scoreText, goldText, healthText,
         conversationTextLineOne, conversationTextLineTwo, conversationTextLineThree, conversationTextLineFour, dropDownMenu, inventory);
 
-        if(ConversationPaneController.getTypeInCurrentConversationPane().equals("{N}")){
+        if(ConversationPaneController.getTypeInCurrentConversationPane() == null || ConversationPaneController.getTypeInCurrentConversationPane().equals("{N}")){
             ImageView neutralBubble = ViewObjects.newImage("animations", "neutralbubble.png", 134, 369, 793, 722, controller::conversationPaneClickedAction);
             root.getChildren().add(neutralBubble);
             neutralBubble.toBack();

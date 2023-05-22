@@ -197,8 +197,8 @@ public class ConversationPaneController {
      * @return an array of text lines
      */
     public static String[] getTextLines(){
-        //TODO: make less manual
-        return FrontendUtils.splitTextIntoFourLines(conversationParts(), ConversationPaneController.conversationPaneNumber);
+        String[] lines = FrontendUtils.splitTextIntoFourLines(conversationParts(), ConversationPaneController.conversationPaneNumber, passage.getContent());
+        return lines;
     }
 
     /**
@@ -207,9 +207,13 @@ public class ConversationPaneController {
      * @return the type in the current conversation pane
      */
     public static String getTypeInCurrentConversationPane(){
-        String[] types = typesInCurrentPassage();
-        String type = types[conversationPaneNumber];
-        return type;
+        try{
+            String[] types = typesInCurrentPassage();
+            String type = types[conversationPaneNumber];
+            return type;
+        } catch (Exception e){
+            return "{N}";
+        }
     }
 
     /**
@@ -218,11 +222,25 @@ public class ConversationPaneController {
      * @return an array of types
      */
     public static String[] conversationParts(){
-        String text = passage.getContent();
-        int braceIndexx = text.indexOf('{');
-        String output = text.substring(braceIndexx);
-        String[] conversationParts = output.split("\\n");
-        return conversationParts;
+        try{
+            String text = passage.getContent();
+            int braceIndexx = text.indexOf('{');
+            String output = text.substring(braceIndexx);
+            String[] conversationParts = output.split("\\n");
+            return conversationParts;
+        } catch(Exception e) {
+            try{
+                String text = passage.getContent();
+                int braceIndexx = text.indexOf('\\');
+                String output = text.substring(braceIndexx);
+                String[] conversationParts = output.split("\\n");
+                return conversationParts;
+            } catch(Exception e1){
+                String[] conversationParts = new String[1];
+                conversationParts[0] = passage.getContent();
+                return conversationParts;  
+            }
+        }
     }
 
     /**
@@ -231,15 +249,25 @@ public class ConversationPaneController {
      * @return an array of types
      */
     public static String[] typesInCurrentPassage(){
-        String[] conversationParts = conversationParts();
-        String[] types = new String[conversationParts.length];
-        for (int i = 0; i < conversationParts.length; i++) {
-            int braceIndex = conversationParts[i].indexOf('{');
-            if (braceIndex >= 0) {
-                types[i] = conversationParts[i].substring(braceIndex, braceIndex + 3);
+        try{
+            String[] conversationParts = conversationParts();
+            String[] types = new String[conversationParts.length];
+            for (int i = 0; i < conversationParts.length; i++) {
+                int braceIndex = conversationParts[i].indexOf('{');
+                if (braceIndex >= 0) {
+                    types[i] = conversationParts[i].substring(braceIndex, braceIndex + 3);
+                }
             }
+            return types;
+        } catch (Exception e){
+            String[] conversationParts = conversationParts();
+            String[] types = new String[conversationParts.length];
+            for (int i = 0; i < conversationParts.length; i++) {
+                types[i] = "{N}";
+            }
+            return types;
         }
-        return types;
+
     }
 
     /**

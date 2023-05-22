@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import edu.ntnu.g60.models.passage.Passage;
 import javafx.concurrent.Task;
 
 public class FrontendUtils {
@@ -31,12 +32,15 @@ public class FrontendUtils {
     }
 
 
-    //TODO: legger til null istedenfor ""
-    public static String[] splitTextIntoFourLines(String[] conversationParts, int conversationPaneNumber) {
+    public static String[] splitTextIntoFourLines(String[] conversationParts, int conversationPaneNumber, String passageContent) {
         String[] contents = new String[conversationParts.length];
-        for (int i = 0; i < conversationParts.length; i++) {
-            int braceIndex = conversationParts[i].indexOf('{');
-            contents[i] = (braceIndex >= 0) ? conversationParts[i].substring(braceIndex + 3) : "";
+        if(conversationParts.length == 1){
+            contents[0] = passageContent;
+        } else{
+            for (int i = 0; i < conversationParts.length; i++) {
+                int braceIndex = conversationParts[i].indexOf('{');
+                contents[i] = (braceIndex >= 0) ? conversationParts[i].substring(braceIndex + 3) : "";
+            }
         }
     
         String line = contents[conversationPaneNumber];
