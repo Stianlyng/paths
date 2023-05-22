@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -22,16 +23,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class TextfileParser {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TextfileParser.class);
     private static final Pattern LINK_PATTERN = Pattern.compile("\\[(.+?)\\]\\((.+?)\\)");
     private static final Path  STORY_PATH = Paths.get("src/main/resources/stories/");
 
-    /**
-     * Parses a text story and saves it in JSON format.
-     *
-     * @param filename The name of the input text file (without the extension)
-     * @throws IOException If there is a problem reading or writing the files
-     */
     public static boolean parseStory(File file) {
+        // Validate inputs
+        if (file == null || !file.exists() || !file.isFile() || !file.canRead()) {
+            throw new IllegalArgumentException("Invalid file: " + file);
+        }
+  
         try {
             Path inputPath = Paths.get(file.getAbsolutePath());
             String filename = file.getName();
@@ -50,8 +51,12 @@ public class TextfileParser {
             mapper.writerWithDefaultPrettyPrinter().writeValue(outputPath.toFile(), storyNode);
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            // Log the error instead of just printing the stack trace
+            LOGGER.error("Error parsing file: {}", file, e);
             return false;
+        } catch (RuntimeException e) {
+            LOGGER.error("Unexpected error parsing file: {}", file, e);
+            throw e;
         }
     }
 
