@@ -4,6 +4,7 @@ import edu.ntnu.g60.models.goals.Goal;
 import edu.ntnu.g60.models.player.Player;
 import edu.ntnu.g60.models.story.Story;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * The GameManager class is a singleton class that manages the creation,
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public class GameManager {
 
+  private static final Logger LOGGER = Logger.getLogger(GameManager.class.getName());
   private static GameManager instance;
   private Game game;
   private Player player;
@@ -33,6 +35,7 @@ public class GameManager {
   public static GameManager getInstance() {
     if (instance == null) {
       instance = new GameManager();
+      LOGGER.info("Game Manager instance created.");
     }
     return instance;
   }
@@ -44,6 +47,7 @@ public class GameManager {
    */
   public void setPlayer(Player player) {
     this.player = player;
+    LOGGER.info("Player set for the game.");
   }
 
   /**
@@ -53,6 +57,7 @@ public class GameManager {
    */
   public void setStory(Story story) {
     this.story = story;
+    LOGGER.info("Story set for the game.");
   }
 
   /**
@@ -62,6 +67,7 @@ public class GameManager {
    */
   public void setGoals(List<Goal> goals) {
     this.goals = goals;
+    LOGGER.info("Goals set for the game.");
   }
 
   /**
@@ -71,14 +77,17 @@ public class GameManager {
    */
   public void createGame() {
     if (game != null) {
+      LOGGER.severe("Attempted to create a new game while a game is already in progress.");
       throw new IllegalStateException("A game is already in progress.");
     }
     if (player == null || story == null || goals == null) {
+      LOGGER.severe("Attempted to create a game without setting player, story, and goals.");
       throw new IllegalStateException(
         "Player, story, and goals must be set before creating a game."
       );
     }
     game = new Game(player, story, goals);
+    LOGGER.info("A new game instance has been created.");
   }
 
   /**
@@ -89,6 +98,7 @@ public class GameManager {
    */
   public Game getGame() {
     if (game == null) {
+      LOGGER.severe("Attempted to get the game instance before it was created.");
       throw new IllegalStateException("No game has been created yet.");
     }
     return game;
@@ -98,6 +108,7 @@ public class GameManager {
    * Ends the current game, setting the Game instance to null.
    */
   public void endGame() {
+    LOGGER.info("The current game instance has been ended.");
     game = null;
   }
 }

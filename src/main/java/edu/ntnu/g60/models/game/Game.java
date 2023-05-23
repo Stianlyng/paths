@@ -9,6 +9,7 @@ import edu.ntnu.g60.models.story.Story;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * The Game class is the main class of the game.
@@ -18,6 +19,8 @@ import java.util.List;
  */
 public class Game implements Serializable {
 
+
+  private static final Logger LOGGER = Logger.getLogger(Game.class.getName());
   private final Player player;
   private final Story story;
   private final List<Goal> goals;
@@ -36,6 +39,7 @@ public class Game implements Serializable {
     this.player = player;
     this.story = story;
     this.goals = goals;
+    LOGGER.info("Game instantiated with a player, a story, and goals.");
   }
 
   /**
@@ -46,6 +50,7 @@ public class Game implements Serializable {
     this.player = new Player(other.player);
     this.story = new Story(other.story);
     this.goals = new ArrayList<>(other.goals);
+    LOGGER.info("Game deep copied.");
   }
 
   /**
@@ -81,6 +86,7 @@ public class Game implements Serializable {
    * @return The first passage of the story.
    */
   public Passage begin() {
+    LOGGER.info("Game started. Opening passage is returned.");
     return this.story.getOpeningPassage();
   }
 
@@ -93,8 +99,10 @@ public class Game implements Serializable {
   public Passage go(Link link) throws InvalidLinkException {
     Passage passage = this.story.getPassage(link);
     if (passage == null) {
+      LOGGER.severe("Invalid link: The link does not have an existing passage in the story.");
       throw new InvalidLinkException("The link does not have an existing passage in the story.");
     }
+    LOGGER.info("Player moved to the " + link.getReference() + " passage.");
     return this.story.getPassage(link);
   }
 }

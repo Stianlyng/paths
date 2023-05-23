@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
  * The Passage class represents a passage in the story.
@@ -12,6 +13,11 @@ import java.util.Objects;
  * @author Stian Lyng
  */
 public class Passage implements Serializable {
+  
+  /**
+   * The logger for the Passage class.
+   */ 
+  private static final Logger LOGGER = Logger.getLogger(Passage.class.getName());
 
   /**
    * The title of the passage.
@@ -77,13 +83,13 @@ public class Passage implements Serializable {
     this.backgroundImage = backgroundImage;
     this.isFightScene = isFightScene;
     this.links = new ArrayList<>();
+    LOGGER.info("Passage instantiated with a title, content, and images.");
   }
 
   /**
    * Copy constructor for the Passage class.
    *
    * @param other The other passage to copy.
-   *              todo; add exception
    */
   public Passage(Passage other) {
     this.title = other.title;
@@ -92,7 +98,8 @@ public class Passage implements Serializable {
     this.enemyImage = other.enemyImage;
     this.backgroundImage = other.backgroundImage;
     this.isFightScene = other.isFightScene;
-    this.links = new ArrayList<>(other.links); // Assuming Link has a suitable copy constructor or is immutable
+    this.links = new ArrayList<>(other.links); 
+    LOGGER.info("Passage deep copied.");
   }
 
   /**
@@ -170,6 +177,7 @@ public class Passage implements Serializable {
    */
   public boolean addLink(Link link) throws IllegalArgumentException {
     if (link == null) throw new IllegalArgumentException("Link cannot be null.");
+    LOGGER.info("Link added to the passage.");
     return this.links.add(link);
   }
 
@@ -179,6 +187,7 @@ public class Passage implements Serializable {
    * @return True if the passage has links, false otherwise.
    */
   public boolean hasLinks() {
+    LOGGER.info(this.links.isEmpty() ? "Passage has no links." : "Passage has links.");
     return !this.links.isEmpty();
   }
 

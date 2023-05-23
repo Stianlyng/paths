@@ -178,7 +178,6 @@ public class StoryParser {
       GoalEntity goalEntity = storyEntity.getGoals();
       this.goals = buildGoals(goalEntity);
 
-      System.out.println("Goals: " + this.goals.toString());
     } catch (IOException e) {
       LOGGER.severe("Error reading JSON file: " + e.getMessage());
       throw new RuntimeException("Error reading JSON file", e);
