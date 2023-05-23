@@ -19,7 +19,7 @@ test:
 pages:
   stage: deploy
   script:
-    - mvn clean install jacoco:report javadoc:javadoc -Dmaven.javadoc.failOnError=false
+    - mvn clean install jacoco:prepare-agent javadoc:javadoc -Dmaven.javadoc.failOnError=false
     - mvn site
     - mkdir -p public
     - cp -r target/site/jacoco public/
