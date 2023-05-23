@@ -19,6 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.Null;
 
 /**
  * Tests the functionality of the saving and filehandling utilities.
@@ -58,7 +59,7 @@ class SaveFileHandlerTest {
     String currentPassage = "Intro";
     assertDoesNotThrow(() -> SaveFileHandler.saveGameToFile(game, saveName, currentPassage));
     assertThrows(
-      IllegalStateException.class,
+      NullPointerException.class,
       () -> SaveFileHandler.saveGameToFile(null, saveName, currentPassage)
     );
   }
