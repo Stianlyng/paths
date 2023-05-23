@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,6 +27,12 @@ import java.util.stream.Stream;
  * @author Stian Lyng
  */
 public class SaveFileHandler {
+  
+  
+  /**
+   * The logger for this class.
+   */
+  private static final Logger LOGGER = Logger.getLogger(SaveFileHandler.class.getName());
 
   /**
    * The relative path to the save files.
@@ -62,9 +69,10 @@ public class SaveFileHandler {
       FileOutputStream fileOut = new FileOutputStream(path);
       ObjectOutputStream out = new ObjectOutputStream(fileOut)
     ) {
+      LOGGER.info("Saving game to file: " + path);
       out.writeObject(save);
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.severe("Could not save game to file: " + path + "\n" + e.getStackTrace());
     }
   }
 
@@ -92,9 +100,10 @@ public class SaveFileHandler {
       ObjectInputStream in = new ObjectInputStream(fileIn)
     ) {
       SerializedGameState save = (SerializedGameState) in.readObject();
+      LOGGER.info("Loaded game from file: " + path);
       return Optional.of(save);
     } catch (IOException | ClassNotFoundException e) {
-      e.printStackTrace();
+      LOGGER.severe("Could not load game from file: " + path + "\n" + e.getStackTrace());
       return Optional.empty();
     }
   }
@@ -114,6 +123,7 @@ public class SaveFileHandler {
     Path path = Paths.get(SAVE_PATH.toURI());
 
     try (Stream<Path> paths = Files.walk(path)) {
+      LOGGER.info("Getting player saves for: " + playerIdentifier);
       return paths
         .filter(Files::isRegularFile)
         .map(Path::getFileName)
@@ -121,7 +131,7 @@ public class SaveFileHandler {
         .filter(filename -> filename.startsWith(playerIdentifier + "_") && filename.endsWith(".ser"))
         .collect(Collectors.toSet());
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.severe("Could not get player saves: " + e.getStackTrace());
       return Collections.emptySet();
     }
   }
@@ -140,7 +150,7 @@ public class SaveFileHandler {
         if (save.endsWith(".ser")) {
           Path savePath = Paths.get(SAVE_PATH.toURI());
           Path path = savePath.resolve(save);
-          System.out.println(path);
+          LOGGER.info("Deleting save: " + path);
           Files.deleteIfExists(path);
         }
       }
@@ -156,6 +166,7 @@ public class SaveFileHandler {
     Path path = Paths.get(STORY_PATH.toURI());
 
     try (Stream<Path> paths = Files.list(path)) {
+      LOGGER.info("Listing files in folder: " + path);
       return paths
         .filter(Files::isRegularFile)
         .map(Path::getFileName)
@@ -163,7 +174,7 @@ public class SaveFileHandler {
         .map(name -> name.substring(0, name.lastIndexOf('.')))
         .collect(Collectors.toList());
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.severe("Could not list files in folder: " + path + "\n" + e.getStackTrace());
       return null;
     }
   }
@@ -176,11 +187,13 @@ public class SaveFileHandler {
    */
   public static Set<String> getAvailablePlayers() throws URISyntaxException {
     if (SAVE_PATH == null) {
+      LOGGER.severe("Could not get available players: save path is null");
       return Collections.emptySet();
     }
     Path path = Paths.get(SAVE_PATH.toURI());
 
     try (Stream<Path> paths = Files.walk(path)) {
+      LOGGER.info("Getting available players");
       return paths
         .filter(Files::isRegularFile)
         .map(Path::getFileName)
@@ -189,7 +202,7 @@ public class SaveFileHandler {
         .map(filename -> filename.split("_")[0])
         .collect(Collectors.toSet());
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.severe("Could not get available players: " + e.getStackTrace());
       return Collections.emptySet();
     }
   }

@@ -8,6 +8,7 @@ import edu.ntnu.g60.models.player.PlayerBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -16,6 +17,11 @@ import java.util.stream.Collectors;
  * @author Stian Lyng
  */
 public class PlayerParser {
+  
+  /**
+   * The logger for this class.
+   */
+  private static final Logger LOGGER = Logger.getLogger(PlayerParser.class.getName());
 
   /**
    * The JSON file to parse.
@@ -40,7 +46,7 @@ public class PlayerParser {
   public PlayerParser(String jsonFilename) {
     this.jsonStream = PlayerParser.class.getResourceAsStream(SAVE_PATH + jsonFilename + ".json");
     if (this.jsonStream == null) {
-      // todo; Handle missing resource
+      LOGGER.severe("Could not find file: " + jsonFilename);
     }
     this.objectMapper = new ObjectMapper();
   }
@@ -48,7 +54,7 @@ public class PlayerParser {
   public PlayerParser(InputStream jsonStream) {
     this.jsonStream = jsonStream;
     if (this.jsonStream == null) {
-      // todo; Handle missing resource
+      LOGGER.severe("Could not find file: " + jsonStream);
     }
     this.objectMapper = new ObjectMapper();
   }

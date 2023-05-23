@@ -7,6 +7,7 @@ import edu.ntnu.g60.entities.LinkEntity;
 import edu.ntnu.g60.entities.PassageEntity;
 import edu.ntnu.g60.entities.StoryEntity;
 import edu.ntnu.g60.exceptions.BrokenLinkException;
+import edu.ntnu.g60.exceptions.StoryNotFoundException;
 import edu.ntnu.g60.models.actions.Action;
 import edu.ntnu.g60.models.actions.ActionFactory;
 import edu.ntnu.g60.models.goals.Goal;
@@ -22,6 +23,7 @@ import edu.ntnu.g60.models.story.StoryBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -30,6 +32,11 @@ import java.util.stream.Collectors;
  * @author Stian Lyng
  */
 public class StoryParser {
+  
+  /**
+   * The logger for this class.
+   */
+  private static final Logger LOGGER = Logger.getLogger(StoryParser.class.getName());
 
   /**
    * The JSON file to be parsed.
@@ -60,22 +67,32 @@ public class StoryParser {
    * Constructs a StoryParser object.
    *
    * @param jsonFileName the name the JSON file to be parsed.
+   * @throws StoryNotFoundException if the JSON file is not found.
    */
   public StoryParser(String jsonFilename) {
     this.jsonFile = StoryParser.class.getResourceAsStream(STORY_PATH + jsonFilename + ".json");
     if (this.jsonFile == null) {
-      // todo; Handle missing resource
+      LOGGER.severe("Could not find file: " + jsonFilename);
+      throw new StoryNotFoundException("Could not find file: " + jsonFilename);
     }
     this.objectMapper = new ObjectMapper();
+    LOGGER.info("Building story from JSON file");
     build();
   }
 
+  /**
+   * Builds a Story object from a JSON file.
+   *
+   * @param jsonStream
+   */
   public StoryParser(InputStream jsonStream) {
     this.jsonFile = jsonStream;
     if (this.jsonFile == null) {
-      // todo; Handle missing resource
+      LOGGER.severe("Could not find file: " + jsonStream);
+      throw new StoryNotFoundException("inputstream is null: " + jsonStream);
     }
     this.objectMapper = new ObjectMapper();
+    LOGGER.info("Building story from inputstream");
     build();
   }
 
@@ -86,6 +103,7 @@ public class StoryParser {
    * @return a Passage object.
    */
   private Passage buildPassage(PassageEntity passageEntity) {
+    LOGGER.info("Building passage: " + passageEntity.getTitle());
     Passage passage = new PassageBuilder()
       .setTitle(passageEntity.getTitle())
       .setContent(passageEntity.getContent())
@@ -111,6 +129,7 @@ public class StoryParser {
    * @return a Link object.
    */
   private Link buildLink(LinkEntity linkEntity) {
+    LOGGER.info("Building link: " + linkEntity.getText());
     Link link = new Link(linkEntity.getText(), linkEntity.getReference());
 
     linkEntity
@@ -130,6 +149,7 @@ public class StoryParser {
    */
   private Action buildAction(ActionEntity actionEntity) {
     Action action = ActionFactory.createAction(actionEntity);
+    LOGGER.info("Building action: " + action.getClass().getSimpleName());
     return action;
   }
 
@@ -142,6 +162,7 @@ public class StoryParser {
     try {
       StoryEntity storyEntity = objectMapper.readValue(jsonFile, StoryEntity.class);
       StoryBuilder storyBuilder = new StoryBuilder().setTitle(storyEntity.getTitle());
+      LOGGER.info("Building story: " + storyEntity.getTitle());
 
       storyEntity
         .getPassages()
@@ -159,6 +180,7 @@ public class StoryParser {
 
       System.out.println("Goals: " + this.goals.toString());
     } catch (IOException e) {
+      LOGGER.severe("Error reading JSON file: " + e.getMessage());
       throw new RuntimeException("Error reading JSON file", e);
     }
   }
@@ -170,6 +192,7 @@ public class StoryParser {
    */
   private List<Goal> buildGoals(GoalEntity goalEntity) {
     if (goalEntity == null) goalEntity = new GoalEntity();
+    LOGGER.info("Building goals");
 
     return List.of(
       new GoldGoal(goalEntity.getGold()),
@@ -193,6 +216,7 @@ public class StoryParser {
         .map(Link::getText)
         .distinct()
         .collect(Collectors.joining(", \n"));
+      LOGGER.warning("There are broken links in the story: " + brokenLinkTitles);
       throw new BrokenLinkException("There are broken links in the story: " + brokenLinkTitles);
     }
     return this.story;
