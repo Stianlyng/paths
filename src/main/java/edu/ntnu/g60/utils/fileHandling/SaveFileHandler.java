@@ -46,10 +46,10 @@ public class SaveFileHandler {
    * @throws IllegalStateException if the game parameter is null.
    */
   public static void saveGameToFile(Game game, String saveName, String currentPassage) {
-    if (game == null) {
-      throw new IllegalStateException("No game to save.");
-    }
 
+    if (SAVE_PATH == null) {
+      // create 
+    }
     String fileName = createFormattedSaveFileName(
       game.getPlayer().getName(),
       game.getStory().getTitle(),
@@ -108,7 +108,6 @@ public class SaveFileHandler {
    * @throws URISyntaxException If the path to the save files is invalid.
    */
   public static Set<String> getPlayerSaves(String playerIdentifier) throws URISyntaxException {
-    
     if (SAVE_PATH == null) {
       return Collections.emptySet();
     }
@@ -119,7 +118,7 @@ public class SaveFileHandler {
         .filter(Files::isRegularFile)
         .map(Path::getFileName)
         .map(Path::toString)
-        .filter(filename -> filename.startsWith(playerIdentifier + "_"))
+        .filter(filename -> filename.startsWith(playerIdentifier + "_") && filename.endsWith(".ser"))
         .collect(Collectors.toSet());
     } catch (IOException e) {
       e.printStackTrace();
@@ -138,10 +137,12 @@ public class SaveFileHandler {
     throws IOException, URISyntaxException {
       Set<String> playerSaves = getPlayerSaves(playerIdentifier);
       for (String save : playerSaves) {
-        Path savePath = Paths.get(SAVE_PATH.toURI());
-        Path path = savePath.resolve(save);
-        System.out.println(path);
-        Files.deleteIfExists(path);
+        if (save.endsWith(".ser")) {
+          Path savePath = Paths.get(SAVE_PATH.toURI());
+          Path path = savePath.resolve(save);
+          System.out.println(path);
+          Files.deleteIfExists(path);
+        }
       }
   }
 
@@ -184,6 +185,7 @@ public class SaveFileHandler {
         .filter(Files::isRegularFile)
         .map(Path::getFileName)
         .map(Path::toString)
+        .filter(filename -> filename.endsWith(".ser"))
         .map(filename -> filename.split("_")[0])
         .collect(Collectors.toSet());
     } catch (IOException e) {
