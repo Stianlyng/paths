@@ -132,12 +132,13 @@ public class SaveFileHandler {
    */
   public static void deletePlayerSaves(String playerIdentifier)
     throws IOException, URISyntaxException {
-    Set<String> playerSaves = getPlayerSaves(playerIdentifier);
-    for (String save : playerSaves) {
-      Path path = Paths.get(SAVE_PATH.getPath() + save);
-      System.out.println(path);
-      Files.deleteIfExists(path);
-    }
+      Set<String> playerSaves = getPlayerSaves(playerIdentifier);
+      for (String save : playerSaves) {
+        Path savePath = Paths.get(SAVE_PATH.toURI());
+        Path path = savePath.resolve(save);
+        System.out.println(path);
+        Files.deleteIfExists(path);
+      }
   }
 
   /**
