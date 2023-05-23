@@ -16,6 +16,8 @@ import edu.ntnu.g60.views.DialogBoxes;
 import edu.ntnu.g60.views.GameApp;
 import edu.ntnu.g60.views.GamePanes.MiniGamePane;
 import edu.ntnu.g60.views.StartMenu.MainMenuPane;
+import edu.ntnu.g60.views.StartMenu.SelectPlayerPane;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -81,7 +83,8 @@ public class MiniGameController {
     );
     try {
       GameManager.getInstance().endGame();
-      GameApp.changeRootPane(new MainMenuPane());
+      GameApp.changeRootPane(new SelectPlayerPane());
+      GameManager.getInstance().endGame();
     } catch (IOException e1) {
       e1.printStackTrace();
     }
