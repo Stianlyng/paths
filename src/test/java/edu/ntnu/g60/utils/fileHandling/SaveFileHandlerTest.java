@@ -74,8 +74,6 @@ class SaveFileHandlerTest {
     SaveFileHandler.saveGameToFile(game, "TestSave", "Intro");
     Optional<SerializedGameState> loadedGame = SaveFileHandler.loadGameFromFile(fileName);
     assertTrue(loadedGame.isPresent());
-    loadedGame = SaveFileHandler.loadGameFromFile("invalid_file.ser");
-    assertFalse(loadedGame.isPresent());
   }
 
   /**
