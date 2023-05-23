@@ -108,6 +108,10 @@ public class SaveFileHandler {
    * @throws URISyntaxException If the path to the save files is invalid.
    */
   public static Set<String> getPlayerSaves(String playerIdentifier) throws URISyntaxException {
+    
+    if (SAVE_PATH == null) {
+      return Collections.emptySet();
+    }
     Path path = Paths.get(SAVE_PATH.toURI());
 
     try (Stream<Path> paths = Files.walk(path)) {
